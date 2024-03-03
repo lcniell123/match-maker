@@ -14,6 +14,7 @@ import * as mutations from '@/graphql/mutations';
 import awsExports from '../amplifyconfiguration.json';
 import config from '@/amplifyconfiguration.json';
 import Todos from './components/todos/todos';
+import Profiles from './components/profiles/profiles';
 
 Amplify.configure(awsExports);
 
@@ -47,7 +48,8 @@ export default function App() {
         <main>
            <h1>Hello {user?.username}</h1>
           <button onClick={signOut}>Sign out</button>
-         <Todos/>
+         {/* <Todos/> */}
+         <Profiles profile={user}/>
          
          
         </main>
