@@ -20,6 +20,9 @@
           "appId": "d29iiengqzu0n",
           "type": "cicd"
         }
+      },
+      "auth": {
+        "matchmaker6124ab6d": {}
       }
     }
   }
