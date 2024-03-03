@@ -10,6 +10,11 @@
       "StackName": "amplify-matchmaker-dev-183647",
       "StackId": "arn:aws:cloudformation:us-east-2:467400507381:stack/amplify-matchmaker-dev-183647/e3fc7bb0-d906-11ee-81b6-0a403497bb07",
       "AmplifyAppId": "d29iiengqzu0n"
+    },
+    "categories": {
+      "api": {
+        "matchmaker": {}
+      }
     }
   }
 }
