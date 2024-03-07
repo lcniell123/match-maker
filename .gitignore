@@ -157,7 +157,7 @@ dist
 .bsb.lock
 
 # OS
-*.DS_STORE
+*.DS_STORgiE
 .DS_STORE
 # graphql-ppx
 graphql_schema.json
