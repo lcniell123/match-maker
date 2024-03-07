@@ -11,13 +11,13 @@ exports.id = "vendor-chunks/upper-case-first";
 exports.ids = ["vendor-chunks/upper-case-first"];
 exports.modules = {
 
-/***/ "(ssr)/./node_modules/upper-case-first/dist.es2015/index.js":
-/*!************************************************************!*\
-  !*** ./node_modules/upper-case-first/dist.es2015/index.js ***!
-  \************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "(ssr)/./node_modules/upper-case-first/dist/index.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/upper-case-first/dist/index.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   upperCaseFirst: () => (/* binding */ upperCaseFirst)\n/* harmony export */ });\n/**\n * Upper case the first character of an input string.\n */ function upperCaseFirst(input) {\n    return input.charAt(0).toUpperCase() + input.substr(1);\n} //# sourceMappingURL=index.js.map\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHNzcikvLi9ub2RlX21vZHVsZXMvdXBwZXItY2FzZS1maXJzdC9kaXN0LmVzMjAxNS9pbmRleC5qcyIsIm1hcHBpbmdzIjoiOzs7O0FBQUE7O0NBRUMsR0FDTSxTQUFTQSxlQUFlQyxLQUFLO0lBQ2hDLE9BQU9BLE1BQU1DLE1BQU0sQ0FBQyxHQUFHQyxXQUFXLEtBQUtGLE1BQU1HLE1BQU0sQ0FBQztBQUN4RCxFQUNBLGlDQUFpQyIsInNvdXJjZXMiOlsid2VicGFjazovL21hdGNoLW1ha2VyLy4vbm9kZV9tb2R1bGVzL3VwcGVyLWNhc2UtZmlyc3QvZGlzdC5lczIwMTUvaW5kZXguanM/ODMxOCJdLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIFVwcGVyIGNhc2UgdGhlIGZpcnN0IGNoYXJhY3RlciBvZiBhbiBpbnB1dCBzdHJpbmcuXG4gKi9cbmV4cG9ydCBmdW5jdGlvbiB1cHBlckNhc2VGaXJzdChpbnB1dCkge1xuICAgIHJldHVybiBpbnB1dC5jaGFyQXQoMCkudG9VcHBlckNhc2UoKSArIGlucHV0LnN1YnN0cigxKTtcbn1cbi8vIyBzb3VyY2VNYXBwaW5nVVJMPWluZGV4LmpzLm1hcCJdLCJuYW1lcyI6WyJ1cHBlckNhc2VGaXJzdCIsImlucHV0IiwiY2hhckF0IiwidG9VcHBlckNhc2UiLCJzdWJzdHIiXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///(ssr)/./node_modules/upper-case-first/dist.es2015/index.js\n");
+eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexports.upperCaseFirst = void 0;\n/**\n * Upper case the first character of an input string.\n */\nfunction upperCaseFirst(input) {\n    return input.charAt(0).toUpperCase() + input.substr(1);\n}\nexports.upperCaseFirst = upperCaseFirst;\n//# sourceMappingURL=index.js.map//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHNzcikvLi9ub2RlX21vZHVsZXMvdXBwZXItY2FzZS1maXJzdC9kaXN0L2luZGV4LmpzIiwibWFwcGluZ3MiOiJBQUFhO0FBQ2IsOENBQTZDLEVBQUUsYUFBYSxFQUFDO0FBQzdELHNCQUFzQjtBQUN0QjtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQSxzQkFBc0I7QUFDdEIiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9tYXRjaC1tYWtlci8uL25vZGVfbW9kdWxlcy91cHBlci1jYXNlLWZpcnN0L2Rpc3QvaW5kZXguanM/OTU0ZiJdLCJzb3VyY2VzQ29udGVudCI6WyJcInVzZSBzdHJpY3RcIjtcbk9iamVjdC5kZWZpbmVQcm9wZXJ0eShleHBvcnRzLCBcIl9fZXNNb2R1bGVcIiwgeyB2YWx1ZTogdHJ1ZSB9KTtcbmV4cG9ydHMudXBwZXJDYXNlRmlyc3QgPSB2b2lkIDA7XG4vKipcbiAqIFVwcGVyIGNhc2UgdGhlIGZpcnN0IGNoYXJhY3RlciBvZiBhbiBpbnB1dCBzdHJpbmcuXG4gKi9cbmZ1bmN0aW9uIHVwcGVyQ2FzZUZpcnN0KGlucHV0KSB7XG4gICAgcmV0dXJuIGlucHV0LmNoYXJBdCgwKS50b1VwcGVyQ2FzZSgpICsgaW5wdXQuc3Vic3RyKDEpO1xufVxuZXhwb3J0cy51cHBlckNhc2VGaXJzdCA9IHVwcGVyQ2FzZUZpcnN0O1xuLy8jIHNvdXJjZU1hcHBpbmdVUkw9aW5kZXguanMubWFwIl0sIm5hbWVzIjpbXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///(ssr)/./node_modules/upper-case-first/dist/index.js\n");
 
 /***/ })
 
