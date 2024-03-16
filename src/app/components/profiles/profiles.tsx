@@ -13,18 +13,19 @@ const client = generateClient();
 
 
 
-export default  function Profiles(profile: any) {
+export default  function Profiles(profile:any) {
   const router = useRouter()
   
   const [allProfiles,setAllProfiles]= useState<any>([])
   const [newProfiles, setNewProfiles]=useState<any>([])
 
 
-
+console.log("profile:", profile)
 async function updateProfile (formData:FormData){
     const profileDetails = {
         id: '1f3cbde9-e3bb-471e-8c75-1175a8c21dcd',
-        description:formData.get('description')?.toString() ?? ''
+        description:formData.get('description')?.toString() ?? '',
+        name: profile.profile
       };
 
     const {data} = await client.graphql({
@@ -36,6 +37,7 @@ async function updateProfile (formData:FormData){
   // console.log("data",data.data)
   const  data = client.graphql({
     query: queries.listProfiles
+    
   });
   useEffect(()=>{
     
