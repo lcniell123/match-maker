@@ -25,20 +25,32 @@ export default function ProfileCreateForm(props) {
   const initialValues = {
     name: "",
     description: "",
+    age: "",
+    location: "",
+    occupation: "",
   };
   const [name, setName] = React.useState(initialValues.name);
   const [description, setDescription] = React.useState(
     initialValues.description
   );
+  const [age, setAge] = React.useState(initialValues.age);
+  const [location, setLocation] = React.useState(initialValues.location);
+  const [occupation, setOccupation] = React.useState(initialValues.occupation);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setName(initialValues.name);
     setDescription(initialValues.description);
+    setAge(initialValues.age);
+    setLocation(initialValues.location);
+    setOccupation(initialValues.occupation);
     setErrors({});
   };
   const validations = {
     name: [{ type: "Required" }],
     description: [],
+    age: [],
+    location: [],
+    occupation: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -68,6 +80,9 @@ export default function ProfileCreateForm(props) {
         let modelFields = {
           name,
           description,
+          age,
+          location,
+          occupation,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -132,6 +147,9 @@ export default function ProfileCreateForm(props) {
             const modelFields = {
               name: value,
               description,
+              age,
+              location,
+              occupation,
             };
             const result = onChange(modelFields);
             value = result?.name ?? value;
@@ -157,6 +175,9 @@ export default function ProfileCreateForm(props) {
             const modelFields = {
               name,
               description: value,
+              age,
+              location,
+              occupation,
             };
             const result = onChange(modelFields);
             value = result?.description ?? value;
@@ -170,6 +191,90 @@ export default function ProfileCreateForm(props) {
         errorMessage={errors.description?.errorMessage}
         hasError={errors.description?.hasError}
         {...getOverrideProps(overrides, "description")}
+      ></TextField>
+      <TextField
+        label="Age"
+        isRequired={false}
+        isReadOnly={false}
+        value={age}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              name,
+              description,
+              age: value,
+              location,
+              occupation,
+            };
+            const result = onChange(modelFields);
+            value = result?.age ?? value;
+          }
+          if (errors.age?.hasError) {
+            runValidationTasks("age", value);
+          }
+          setAge(value);
+        }}
+        onBlur={() => runValidationTasks("age", age)}
+        errorMessage={errors.age?.errorMessage}
+        hasError={errors.age?.hasError}
+        {...getOverrideProps(overrides, "age")}
+      ></TextField>
+      <TextField
+        label="Location"
+        isRequired={false}
+        isReadOnly={false}
+        value={location}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              name,
+              description,
+              age,
+              location: value,
+              occupation,
+            };
+            const result = onChange(modelFields);
+            value = result?.location ?? value;
+          }
+          if (errors.location?.hasError) {
+            runValidationTasks("location", value);
+          }
+          setLocation(value);
+        }}
+        onBlur={() => runValidationTasks("location", location)}
+        errorMessage={errors.location?.errorMessage}
+        hasError={errors.location?.hasError}
+        {...getOverrideProps(overrides, "location")}
+      ></TextField>
+      <TextField
+        label="Occupation"
+        isRequired={false}
+        isReadOnly={false}
+        value={occupation}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              name,
+              description,
+              age,
+              location,
+              occupation: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.occupation ?? value;
+          }
+          if (errors.occupation?.hasError) {
+            runValidationTasks("occupation", value);
+          }
+          setOccupation(value);
+        }}
+        onBlur={() => runValidationTasks("occupation", occupation)}
+        errorMessage={errors.occupation?.errorMessage}
+        hasError={errors.occupation?.hasError}
+        {...getOverrideProps(overrides, "occupation")}
       ></TextField>
       <Flex
         justifyContent="space-between"

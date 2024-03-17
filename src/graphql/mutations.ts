@@ -67,6 +67,9 @@ export const createProfile = /* GraphQL */ `mutation CreateProfile(
     id
     name
     description
+    age
+    location
+    occupation
     createdAt
     updatedAt
     __typename
@@ -84,6 +87,9 @@ export const updateProfile = /* GraphQL */ `mutation UpdateProfile(
     id
     name
     description
+    age
+    location
+    occupation
     createdAt
     updatedAt
     __typename
@@ -101,6 +107,9 @@ export const deleteProfile = /* GraphQL */ `mutation DeleteProfile(
     id
     name
     description
+    age
+    location
+    occupation
     createdAt
     updatedAt
     __typename

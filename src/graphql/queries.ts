@@ -43,6 +43,9 @@ export const getProfile = /* GraphQL */ `query GetProfile($id: ID!) {
     id
     name
     description
+    age
+    location
+    occupation
     createdAt
     updatedAt
     __typename
@@ -62,6 +65,9 @@ export const listProfiles = /* GraphQL */ `query ListProfiles(
       id
       name
       description
+      age
+      location
+      occupation
       createdAt
       updatedAt
       __typename

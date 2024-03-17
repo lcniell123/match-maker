@@ -55,6 +55,9 @@ export const onCreateProfile = /* GraphQL */ `subscription OnCreateProfile($filt
     id
     name
     description
+    age
+    location
+    occupation
     createdAt
     updatedAt
     __typename
@@ -69,6 +72,9 @@ export const onUpdateProfile = /* GraphQL */ `subscription OnUpdateProfile($filt
     id
     name
     description
+    age
+    location
+    occupation
     createdAt
     updatedAt
     __typename
@@ -83,6 +89,9 @@ export const onDeleteProfile = /* GraphQL */ `subscription OnDeleteProfile($filt
     id
     name
     description
+    age
+    location
+    occupation
     createdAt
     updatedAt
     __typename

@@ -1,36 +1,16 @@
+"use client";
 
-'use client';
+import React from "react";
+import { Amplify } from "aws-amplify";
 
-import React from 'react';
-import { Amplify } from 'aws-amplify';
+import { Authenticator } from "@aws-amplify/ui-react";
+import "@aws-amplify/ui-react/styles.css";
 
-import { Authenticator } from '@aws-amplify/ui-react';
-import '@aws-amplify/ui-react/styles.css';
-
-import awsExports from '../amplifyconfiguration.json';
-import Profiles from './components/profiles/profiles';
+import awsExports from "../amplifyconfiguration.json";
+import Layout from "./components/layout/layout";
 
 Amplify.configure(awsExports);
 
-
-
-
-
 export default function App() {
-
-  
-
-  return (
-    <Authenticator>
-      {({ signOut, user }) => (
-        <main>
-           <h1>Hello {user?.username}</h1>
-          <button onClick={signOut}>Sign out</button>
-         {user && <Profiles profile={user?.username}/>}
-        </main>
-      )}
-    </Authenticator>
-  );
+  return <Layout />;
 }
-
-
