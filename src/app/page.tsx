@@ -7,7 +7,7 @@ import { Amplify } from 'aws-amplify';
 import { Authenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 
-import awsExports from '../amplifyconfiguration.json';
+import awsExports from '/Users/samo/Desktop/match-maker/amplifyconfiguration 1.json';
 import Profiles from './components/profiles/profiles';
 
 Amplify.configure(awsExports);
