@@ -37,33 +37,23 @@ const ProfilePicture = ({ handleEditPicture, userProfilePicture }) => {
         {image ? (
           <img
             src={image}
-            alt="Profile"
-            style={{
-              width: 100,
-              height: 100,
-              borderRadius: "50%",
-              objectFit: "cover",
-              marginTop: 10,
-            }}
+             alt="Profile Photo"
+             className="w-32 h-32 rounded-full border-4 border-white"
           />
         ) : (
-          <div
-            style={{
-              width: 100,
-              height: 100,
-              borderRadius: "50%",
-              backgroundColor: "#ccc",
-              marginTop: 10,
-            }}
-          ></div>
+            <img
+                src={"/placeholder_avatar.jpg"}
+                alt="Profile Photo"
+                className="w-32 h-32 rounded-full border-4 border-white"
+            />
         )}
       </label>
       <input
-        type="file"
-        accept="image/*"
-        id="profile-image"
-        className="hidden"
-        onChange={handleImageChange}
+          type="file"
+          accept="image/*"
+          id="profile-image"
+          className="hidden"
+          onChange={handleImageChange}
       />
     </div>
     

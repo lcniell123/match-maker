@@ -24,7 +24,7 @@ describe("ProfileDescription component", () => {
   });
 
   it("Should display user's information", () => {
-    // Assert that various elements containing profile information exist
+    // Assert that various elements containing profile-form-form information exist
     cy.get('.flex-col > :nth-child(1)').should("exist");
     cy.get('.flex-col > .mb-6 > :nth-child(1)').should("exist");
     cy.get('.flex-col > .mb-6 > :nth-child(2)').should("exist");
@@ -32,13 +32,13 @@ describe("ProfileDescription component", () => {
     cy.get(':nth-child(4) > :nth-child(2)').should("exist");
   });
 
-  it("should trigger edit profile action when 'Edit' button is clicked", () => {
+  it("should trigger edit profile-form-form action when 'Edit' button is clicked", () => {
     // Click on the 'Edit' button
     cy.get('button').click();
 
-    // Assert that the edit profile action is triggered
+    // Assert that the edit profile-form-form action is triggered
     // Logging a message to indicate that the action is triggered
-    cy.log("Edit profile action triggered.");
+    cy.log("Edit profile-form-form action triggered.");
   });
 
   it("should display the user's name correctly", () => {

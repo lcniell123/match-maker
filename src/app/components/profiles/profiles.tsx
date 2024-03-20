@@ -2,7 +2,6 @@
 
 import { useRouter } from "next/navigation";
 import * as mutations from '@/graphql/mutations';
-// 1. Add the queries as an import
 import * as queries from '@/graphql/queries';
 import { generateClient } from 'aws-amplify/api';
 import { useEffect, useState } from 'react';
@@ -29,8 +28,8 @@ export default  function Profiles(profile: any) {
 
 
    useEffect(() => {
-     // Fetch user profile data from the backend or wherever it's stored
-     // Setting a mock user profile with attributes
+     // Fetch user profile-form-form data from the backend or wherever it's stored
+     // Setting a mock user profile-form-form with attributes
      const mockUser = {/* mock user data */};
      setFormData(mockUser);
     //  setUserProfilePicture(mockUser.profilePicture);
@@ -43,12 +42,12 @@ export default  function Profiles(profile: any) {
 
    const handleSaveProfile = () => {
      setEditingProfile(false);
-     // Logic to save profile changes
+     // Logic to save profile-form-form changes
    };
 
    const handleCancelEdit = () => {
      setEditingProfile(false);
-     // Revert changes to the user's original profile data
+     // Revert changes to the user's original profile-form-form data
    };
 
    const handleChange = (e: { target: { name: any; value: any; }; }) => {
@@ -60,8 +59,8 @@ export default  function Profiles(profile: any) {
    };
 
    const handleDeleteProfile = () => {
-     console.log('Deleting profile...');
-     // Logic to delete the user's profile
+     console.log('Deleting profile-form-form...');
+     // Logic to delete the user's profile-form-form
    };
 
  
@@ -102,32 +101,8 @@ export default  function Profiles(profile: any) {
 
 
   return (
-<div className="max-w-screen-lg mx-auto bg-gray-800 rounded-lg shadow-md p-6 mb-6 w-screen">
+<div className="max-w-screen-lg rounded-lg shadow-md p-6 mb-6 w-screen">
     <div className="max-w-screen-sm mx-auto p-4">
-      <div className="mb-4">
-        <ProfilePicture
-          handleEditPicture={setEditingPicture}
-          userProfilePicture={userProfilePicture}
-        />
-        {/* Nav bar with buttons */}
-        {!editingProfile && (
-          <div className="flex justify-center mt-4 space-x-4">
-            <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-              Profile
-            </button>
-            <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-              Friends
-            </button>
-            <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-              Group Activities
-            </button>
-            <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-              Matching
-            </button>
-          </div>
-        )}
-
-      </div>
       {!editingProfile && (
         <ProfileDescription
           formData={formData}

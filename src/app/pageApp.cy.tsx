@@ -18,7 +18,7 @@ describe('User Forgot Password', () => {
     cy.get('[data-amplify-footer=""]').within(() => {
     cy.get('.amplify-button').click()
     })
-    
+
     cy.get('input').eq(0).type('test@example.com')
     cy.get('.amplify-button--primary').click()
 
@@ -28,7 +28,7 @@ describe('User Forgot Password', () => {
 
 describe('<App />', () => {
   it('should render Sign In page without error', () => {
-    
+
     cy.mount(<App />)
     cy.get('#signIn-tab')
     cy.get('form').should('be.visible')
@@ -54,7 +54,7 @@ describe('<App />', () => {
     // Fill in required fields
     cy.get("input").eq(0).type("ploypawachot33@gmail.com")
     cy.get("input").eq(1).type("test1234!")
-  
+
     // Click the submit button
     cy.get('.amplify-button--primary').click()
   })
@@ -67,7 +67,7 @@ describe('<App />', () => {
     // Fill in required fields
     cy.get("input").eq(0).type("test@example.com")
     cy.get("input").eq(1).type("password1234")
-  
+
     // Assert that the button is enabled
     cy.get('.amplify-button--primary').should('not.be.disabled')
   })
@@ -82,7 +82,7 @@ describe('<App />', () => {
     cy.get('.amplify-button--link').click()
   })
 
-  
+
   it('should navigate to signup page when "Create Account" button is clicked', () => {
   // Mount the component containing the signup button
     cy.mount(<App />)
@@ -130,6 +130,6 @@ describe('<App />', () => {
     cy.get('.amplify-button').click()
     })
   })
-  
-  
+
+
 })
