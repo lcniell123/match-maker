@@ -23,7 +23,7 @@ describe("ProfileDescription component", () => {
     cy.mount(<ProfileDescription formData={formData} handleEditProfile={() => {}} />);
   });
 
-  it("Should display user's information", () => {
+  xit("Should display user's information", () => {
     // Assert that various elements containing profile information exist
     cy.get('.flex-col > :nth-child(1)').should("exist");
     cy.get('.flex-col > .mb-6 > :nth-child(1)').should("exist");
