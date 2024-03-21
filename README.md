@@ -94,7 +94,7 @@ Screenshot:
 
 # Sprint 2
 ## Daily Scrum
-Date - 3/19/2024
+Date - 3/19/2024\
 What did you do in the last 24 hours that helped the Development Team meet the Sprint Goal?\
 - Ploynapas: I created a profile page and did unit test cases for the profile page, edit profile component, and profile picture component. All test cases passed.
 - Ayo: I tested the navigation components to see if they were rendering correctly.
