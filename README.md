@@ -93,7 +93,7 @@ Screenshot:
 
 
 # Sprint 2
-## Daily Scrum:
+## Daily Scrum
 Date - 3/19/2024
 What did you do in the last 24 hours that helped the Development Team meet the Sprint Goal?\
 - Ploynapas: I created a profile page and did unit test cases for the profile page, edit profile component, and profile picture component. All test cases passed.
@@ -143,17 +143,18 @@ Screenshot:
 ![image](https://github.com/lcniell123/match-maker/assets/95537416/0919b8b5-6006-4e2a-b850-1c2417afedbf)
 
 
-#Sprint Burndown Chart
+## Sprint Burndown Chart
 ![image](https://github.com/lcniell123/match-maker/assets/95537416/927268e9-933a-4429-a8b7-b3289e4014c1)
 
 
-#Mobbed Programming
+## Mobbed Programming
 - During our mobbed programming session, we encountered a roadblock while attempting to run our CI/CD tests. Our tests failed because of a conflict in the code when we merged our code into the main branch. Fortunately, we were able to resolve the dispute and fix the issue.
 
 Screenshot:
 ![image](https://github.com/lcniell123/match-maker/assets/95537416/22b5a202-732a-4f49-9b8c-ff8b72766b35)
 
-#Test Suite
+
+## Test Suite
 - We built our product test-first with Cypress. We added 2 BDD and 11 unit test cases across 3 test suites for this sprint.
 
 Screenshot:
@@ -163,7 +164,8 @@ Screenshot:
 
 ![image](https://github.com/lcniell123/match-maker/assets/95537416/5d148d1a-655b-48f6-9e82-e41e2314c48b)
 
-#CI & CD System with Cypress
+
+## CI/CD System with Cypress
 Document:
 https://kennesawedu-my.sharepoint.com/personal/lniell_students_kennesaw_edu/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Flniell%5Fstudents%5Fkennesaw%5Fedu%2FDocuments%2FMicrosoft%20Teams%20Chat%20Files%2Funitetests%2Etxt&parent=%2Fpersonal%2Flniell%5Fstudents%5Fkennesaw%5Fedu%2FDocuments%2FMicrosoft%20Teams%20Chat%20Files&ga=1
 
