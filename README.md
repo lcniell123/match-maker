@@ -115,7 +115,7 @@ Do you see any impediment that prevents you or the Development Team from meeting
 
   
 ## Sprint Review and Retrospective
-Date - 03/4/2024\
+Date - 02/22/2024 - 03/20/2024\
 Document:
 https://docs.google.com/document/d/1nEYnb4iEgyX5POOXPpf5rG2LX9U9B-Jkdm2pihtuY_k/edit
 
