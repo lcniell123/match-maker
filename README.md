@@ -165,7 +165,7 @@ Screenshot:
 ![image](https://github.com/lcniell123/match-maker/assets/95537416/5d148d1a-655b-48f6-9e82-e41e2314c48b)
 
 
-## CI/CD System with Cypress
+## CI/CD System
 Document:
 https://kennesawedu-my.sharepoint.com/personal/lniell_students_kennesaw_edu/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Flniell%5Fstudents%5Fkennesaw%5Fedu%2FDocuments%2FMicrosoft%20Teams%20Chat%20Files%2Funitetests%2Etxt&parent=%2Fpersonal%2Flniell%5Fstudents%5Fkennesaw%5Fedu%2FDocuments%2FMicrosoft%20Teams%20Chat%20Files&ga=1
 
