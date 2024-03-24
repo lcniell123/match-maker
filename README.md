@@ -21,7 +21,7 @@ Development Team:
 
 ## Relevant Links
 1. Trello Board - https://trello.com/b/alK9Ozv9/ksu-swe6813-agile-board
-2. Working prototype - https://main.d29iiengqzu0n.amplifyapp.com/
+2. Working prototype - [https://main.d29iiengqzu0n.amplifyapp.com/](https://main.d35p1rrpim2uyo.amplifyapp.com/)
 
 # Sprint 1
 ## Daily Scrum
