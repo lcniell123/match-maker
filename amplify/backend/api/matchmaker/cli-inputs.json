@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "matchmaker",
+    "serviceName": "AppSync",
+    "defaultAuthType": {
+      "mode": "AMAZON_COGNITO_USER_POOLS",
+      "cognitoUserPoolId": "authmatchmakera431c571"
+    },
+    "conflictResolution": {},
+    "additionalAuthTypes": []
+  }
+}

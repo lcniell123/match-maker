@@ -2,18 +2,38 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreateTodoInput = {
+export type CreateProfileInput = {
   id?: string | null,
   name: string,
   description?: string | null,
+  age?: number | null,
+  languages?: string | null,
+  bio?: string | null,
+  country?: string | null,
+  zipCode?: number | null,
+  timeZone?: number | null,
+  gamePreference?: string | null,
+  behaviour?: string | null,
+  skillLevel?: string | null,
+  playStyle?: string | null,
 };
 
-export type ModelTodoConditionInput = {
+export type ModelProfileConditionInput = {
   name?: ModelStringInput | null,
   description?: ModelStringInput | null,
-  and?: Array< ModelTodoConditionInput | null > | null,
-  or?: Array< ModelTodoConditionInput | null > | null,
-  not?: ModelTodoConditionInput | null,
+  age?: ModelIntInput | null,
+  languages?: ModelStringInput | null,
+  bio?: ModelStringInput | null,
+  country?: ModelStringInput | null,
+  zipCode?: ModelIntInput | null,
+  timeZone?: ModelIntInput | null,
+  gamePreference?: ModelStringInput | null,
+  behaviour?: ModelStringInput | null,
+  skillLevel?: ModelStringInput | null,
+  playStyle?: ModelStringInput | null,
+  and?: Array< ModelProfileConditionInput | null > | null,
+  or?: Array< ModelProfileConditionInput | null > | null,
+  not?: ModelProfileConditionInput | null,
 };
 
 export type ModelStringInput = {
@@ -56,37 +76,16 @@ export type ModelSizeInput = {
   between?: Array< number | null > | null,
 };
 
-export type Todo = {
-  __typename: "Todo",
-  id: string,
-  name: string,
-  description?: string | null,
-  createdAt: string,
-  updatedAt: string,
-};
-
-export type UpdateTodoInput = {
-  id: string,
-  name?: string | null,
-  description?: string | null,
-};
-
-export type DeleteTodoInput = {
-  id: string,
-};
-
-export type CreateProfileInput = {
-  id?: string | null,
-  name: string,
-  description?: string | null,
-};
-
-export type ModelProfileConditionInput = {
-  name?: ModelStringInput | null,
-  description?: ModelStringInput | null,
-  and?: Array< ModelProfileConditionInput | null > | null,
-  or?: Array< ModelProfileConditionInput | null > | null,
-  not?: ModelProfileConditionInput | null,
+export type ModelIntInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
 };
 
 export type Profile = {
@@ -94,6 +93,16 @@ export type Profile = {
   id: string,
   name: string,
   description?: string | null,
+  age?: number | null,
+  languages?: string | null,
+  bio?: string | null,
+  country?: string | null,
+  zipCode?: number | null,
+  timeZone?: number | null,
+  gamePreference?: string | null,
+  behaviour?: string | null,
+  skillLevel?: string | null,
+  playStyle?: string | null,
   createdAt: string,
   updatedAt: string,
 };
@@ -102,19 +111,39 @@ export type UpdateProfileInput = {
   id: string,
   name?: string | null,
   description?: string | null,
+  age?: number | null,
+  languages?: string | null,
+  bio?: string | null,
+  country?: string | null,
+  zipCode?: number | null,
+  timeZone?: number | null,
+  gamePreference?: string | null,
+  behaviour?: string | null,
+  skillLevel?: string | null,
+  playStyle?: string | null,
 };
 
 export type DeleteProfileInput = {
   id: string,
 };
 
-export type ModelTodoFilterInput = {
+export type ModelProfileFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
   description?: ModelStringInput | null,
-  and?: Array< ModelTodoFilterInput | null > | null,
-  or?: Array< ModelTodoFilterInput | null > | null,
-  not?: ModelTodoFilterInput | null,
+  age?: ModelIntInput | null,
+  languages?: ModelStringInput | null,
+  bio?: ModelStringInput | null,
+  country?: ModelStringInput | null,
+  zipCode?: ModelIntInput | null,
+  timeZone?: ModelIntInput | null,
+  gamePreference?: ModelStringInput | null,
+  behaviour?: ModelStringInput | null,
+  skillLevel?: ModelStringInput | null,
+  playStyle?: ModelStringInput | null,
+  and?: Array< ModelProfileFilterInput | null > | null,
+  or?: Array< ModelProfileFilterInput | null > | null,
+  not?: ModelProfileFilterInput | null,
 };
 
 export type ModelIDInput = {
@@ -133,33 +162,28 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null,
 };
 
-export type ModelTodoConnection = {
-  __typename: "ModelTodoConnection",
-  items:  Array<Todo | null >,
-  nextToken?: string | null,
-};
-
-export type ModelProfileFilterInput = {
-  id?: ModelIDInput | null,
-  name?: ModelStringInput | null,
-  description?: ModelStringInput | null,
-  and?: Array< ModelProfileFilterInput | null > | null,
-  or?: Array< ModelProfileFilterInput | null > | null,
-  not?: ModelProfileFilterInput | null,
-};
-
 export type ModelProfileConnection = {
   __typename: "ModelProfileConnection",
   items:  Array<Profile | null >,
   nextToken?: string | null,
 };
 
-export type ModelSubscriptionTodoFilterInput = {
+export type ModelSubscriptionProfileFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   name?: ModelSubscriptionStringInput | null,
   description?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionTodoFilterInput | null > | null,
-  or?: Array< ModelSubscriptionTodoFilterInput | null > | null,
+  age?: ModelSubscriptionIntInput | null,
+  languages?: ModelSubscriptionStringInput | null,
+  bio?: ModelSubscriptionStringInput | null,
+  country?: ModelSubscriptionStringInput | null,
+  zipCode?: ModelSubscriptionIntInput | null,
+  timeZone?: ModelSubscriptionIntInput | null,
+  gamePreference?: ModelSubscriptionStringInput | null,
+  behaviour?: ModelSubscriptionStringInput | null,
+  skillLevel?: ModelSubscriptionStringInput | null,
+  playStyle?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionProfileFilterInput | null > | null,
+  or?: Array< ModelSubscriptionProfileFilterInput | null > | null,
 };
 
 export type ModelSubscriptionIDInput = {
@@ -192,60 +216,16 @@ export type ModelSubscriptionStringInput = {
   notIn?: Array< string | null > | null,
 };
 
-export type ModelSubscriptionProfileFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  name?: ModelSubscriptionStringInput | null,
-  description?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionProfileFilterInput | null > | null,
-  or?: Array< ModelSubscriptionProfileFilterInput | null > | null,
-};
-
-export type CreateTodoMutationVariables = {
-  input: CreateTodoInput,
-  condition?: ModelTodoConditionInput | null,
-};
-
-export type CreateTodoMutation = {
-  createTodo?:  {
-    __typename: "Todo",
-    id: string,
-    name: string,
-    description?: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type UpdateTodoMutationVariables = {
-  input: UpdateTodoInput,
-  condition?: ModelTodoConditionInput | null,
-};
-
-export type UpdateTodoMutation = {
-  updateTodo?:  {
-    __typename: "Todo",
-    id: string,
-    name: string,
-    description?: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type DeleteTodoMutationVariables = {
-  input: DeleteTodoInput,
-  condition?: ModelTodoConditionInput | null,
-};
-
-export type DeleteTodoMutation = {
-  deleteTodo?:  {
-    __typename: "Todo",
-    id: string,
-    name: string,
-    description?: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
+export type ModelSubscriptionIntInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  in?: Array< number | null > | null,
+  notIn?: Array< number | null > | null,
 };
 
 export type CreateProfileMutationVariables = {
@@ -259,6 +239,16 @@ export type CreateProfileMutation = {
     id: string,
     name: string,
     description?: string | null,
+    age?: number | null,
+    languages?: string | null,
+    bio?: string | null,
+    country?: string | null,
+    zipCode?: number | null,
+    timeZone?: number | null,
+    gamePreference?: string | null,
+    behaviour?: string | null,
+    skillLevel?: string | null,
+    playStyle?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -275,6 +265,16 @@ export type UpdateProfileMutation = {
     id: string,
     name: string,
     description?: string | null,
+    age?: number | null,
+    languages?: string | null,
+    bio?: string | null,
+    country?: string | null,
+    zipCode?: number | null,
+    timeZone?: number | null,
+    gamePreference?: string | null,
+    behaviour?: string | null,
+    skillLevel?: string | null,
+    playStyle?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -291,44 +291,18 @@ export type DeleteProfileMutation = {
     id: string,
     name: string,
     description?: string | null,
+    age?: number | null,
+    languages?: string | null,
+    bio?: string | null,
+    country?: string | null,
+    zipCode?: number | null,
+    timeZone?: number | null,
+    gamePreference?: string | null,
+    behaviour?: string | null,
+    skillLevel?: string | null,
+    playStyle?: string | null,
     createdAt: string,
     updatedAt: string,
-  } | null,
-};
-
-export type GetTodoQueryVariables = {
-  id: string,
-};
-
-export type GetTodoQuery = {
-  getTodo?:  {
-    __typename: "Todo",
-    id: string,
-    name: string,
-    description?: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type ListTodosQueryVariables = {
-  filter?: ModelTodoFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListTodosQuery = {
-  listTodos?:  {
-    __typename: "ModelTodoConnection",
-    items:  Array< {
-      __typename: "Todo",
-      id: string,
-      name: string,
-      description?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
   } | null,
 };
 
@@ -342,6 +316,16 @@ export type GetProfileQuery = {
     id: string,
     name: string,
     description?: string | null,
+    age?: number | null,
+    languages?: string | null,
+    bio?: string | null,
+    country?: string | null,
+    zipCode?: number | null,
+    timeZone?: number | null,
+    gamePreference?: string | null,
+    behaviour?: string | null,
+    skillLevel?: string | null,
+    playStyle?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -361,55 +345,20 @@ export type ListProfilesQuery = {
       id: string,
       name: string,
       description?: string | null,
+      age?: number | null,
+      languages?: string | null,
+      bio?: string | null,
+      country?: string | null,
+      zipCode?: number | null,
+      timeZone?: number | null,
+      gamePreference?: string | null,
+      behaviour?: string | null,
+      skillLevel?: string | null,
+      playStyle?: string | null,
       createdAt: string,
       updatedAt: string,
     } | null >,
     nextToken?: string | null,
-  } | null,
-};
-
-export type OnCreateTodoSubscriptionVariables = {
-  filter?: ModelSubscriptionTodoFilterInput | null,
-};
-
-export type OnCreateTodoSubscription = {
-  onCreateTodo?:  {
-    __typename: "Todo",
-    id: string,
-    name: string,
-    description?: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnUpdateTodoSubscriptionVariables = {
-  filter?: ModelSubscriptionTodoFilterInput | null,
-};
-
-export type OnUpdateTodoSubscription = {
-  onUpdateTodo?:  {
-    __typename: "Todo",
-    id: string,
-    name: string,
-    description?: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnDeleteTodoSubscriptionVariables = {
-  filter?: ModelSubscriptionTodoFilterInput | null,
-};
-
-export type OnDeleteTodoSubscription = {
-  onDeleteTodo?:  {
-    __typename: "Todo",
-    id: string,
-    name: string,
-    description?: string | null,
-    createdAt: string,
-    updatedAt: string,
   } | null,
 };
 
@@ -423,6 +372,16 @@ export type OnCreateProfileSubscription = {
     id: string,
     name: string,
     description?: string | null,
+    age?: number | null,
+    languages?: string | null,
+    bio?: string | null,
+    country?: string | null,
+    zipCode?: number | null,
+    timeZone?: number | null,
+    gamePreference?: string | null,
+    behaviour?: string | null,
+    skillLevel?: string | null,
+    playStyle?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -438,6 +397,16 @@ export type OnUpdateProfileSubscription = {
     id: string,
     name: string,
     description?: string | null,
+    age?: number | null,
+    languages?: string | null,
+    bio?: string | null,
+    country?: string | null,
+    zipCode?: number | null,
+    timeZone?: number | null,
+    gamePreference?: string | null,
+    behaviour?: string | null,
+    skillLevel?: string | null,
+    playStyle?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -453,6 +422,16 @@ export type OnDeleteProfileSubscription = {
     id: string,
     name: string,
     description?: string | null,
+    age?: number | null,
+    languages?: string | null,
+    bio?: string | null,
+    country?: string | null,
+    zipCode?: number | null,
+    timeZone?: number | null,
+    gamePreference?: string | null,
+    behaviour?: string | null,
+    skillLevel?: string | null,
+    playStyle?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,

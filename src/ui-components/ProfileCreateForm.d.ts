@@ -24,16 +24,46 @@ export declare type ValidationFunction<T> = (value: T, validationResponse: Valid
 export declare type ProfileCreateFormInputValues = {
     name?: string;
     description?: string;
+    age?: number;
+    languages?: string;
+    bio?: string;
+    country?: string;
+    zipCode?: number;
+    timeZone?: number;
+    gamePreference?: string;
+    behaviour?: string;
+    skillLevel?: string;
+    playStyle?: string;
 };
 export declare type ProfileCreateFormValidationValues = {
     name?: ValidationFunction<string>;
     description?: ValidationFunction<string>;
+    age?: ValidationFunction<number>;
+    languages?: ValidationFunction<string>;
+    bio?: ValidationFunction<string>;
+    country?: ValidationFunction<string>;
+    zipCode?: ValidationFunction<number>;
+    timeZone?: ValidationFunction<number>;
+    gamePreference?: ValidationFunction<string>;
+    behaviour?: ValidationFunction<string>;
+    skillLevel?: ValidationFunction<string>;
+    playStyle?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type ProfileCreateFormOverridesProps = {
     ProfileCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
     name?: PrimitiveOverrideProps<TextFieldProps>;
     description?: PrimitiveOverrideProps<TextFieldProps>;
+    age?: PrimitiveOverrideProps<TextFieldProps>;
+    languages?: PrimitiveOverrideProps<TextFieldProps>;
+    bio?: PrimitiveOverrideProps<TextFieldProps>;
+    country?: PrimitiveOverrideProps<TextFieldProps>;
+    zipCode?: PrimitiveOverrideProps<TextFieldProps>;
+    timeZone?: PrimitiveOverrideProps<TextFieldProps>;
+    gamePreference?: PrimitiveOverrideProps<TextFieldProps>;
+    behaviour?: PrimitiveOverrideProps<TextFieldProps>;
+    skillLevel?: PrimitiveOverrideProps<TextFieldProps>;
+    playStyle?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type ProfileCreateFormProps = React.PropsWithChildren<{
     overrides?: ProfileCreateFormOverridesProps | undefined | null;
