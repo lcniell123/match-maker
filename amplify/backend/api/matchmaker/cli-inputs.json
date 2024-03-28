@@ -8,6 +8,13 @@
       "cognitoUserPoolId": "authmatchmakera431c571"
     },
     "conflictResolution": {},
-    "additionalAuthTypes": []
+    "additionalAuthTypes": [
+      {
+        "mode": "API_KEY",
+        "expirationTime": 7,
+        "apiKeyExpirationDate": "2024-04-04T04:39:28.055Z",
+        "keyDescription": ""
+      }
+    ]
   }
 }

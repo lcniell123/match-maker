@@ -30,7 +30,7 @@ const client = generateClient();
 export default function Profiles(profile: any) {
   const router = useRouter();
 
-  const [profiles, setProfiles] = useState<any>([]);
+  const [profiles, setProfiles] = useState<Profile | any>([]);
   const [singleProfile, setSingleProfile] = useState({});
 
   const [editingProfile, setEditingProfile] = useState(false);
@@ -63,21 +63,6 @@ export default function Profiles(profile: any) {
   //   }));
   // };
 
-  // function createProfile(profile: Profile) {
-  //   console.log("profile: ", profile);
-  //   const create = client.graphql({
-  //     query: mutations.createProfile,
-  //     variables: {
-  //       input: {
-  //         name: profile.name,
-  //         id: profile.id,
-  //       },
-  //     },
-  //   });
-
-  //   create;
-  // }
-
   const listProfile = client.graphql({
     query: queries.listProfiles,
   });
@@ -91,6 +76,18 @@ export default function Profiles(profile: any) {
   }, []);
 
   useEffect(() => {
+    if (profiles && profiles.length === 0) {
+      client.graphql({
+        query: mutations.createProfile,
+        variables: {
+          input: {
+            name: profile.profile.username,
+            id: profile.profile.userId,
+          },
+        },
+      });
+    }
+
     profiles.forEach((p: any) => {
       if (profile.profile.userId == p.id) {
         const p1 = {
@@ -112,10 +109,6 @@ export default function Profiles(profile: any) {
           });
 
           create;
-          setSingleProfile({
-            name: profile.profile.username,
-            id: profile.profile.userId,
-          });
         }
       }
     });
