@@ -2,10 +2,41 @@ import React, { useEffect, useState } from "react";
 import * as mutations from "@/graphql/mutations";
 import { generateClient } from "aws-amplify/api";
 
-const EditProfile = ({ formData }) => {
-  const [profileInfo, setProfileInfo] = useState();
+const EditProfile = ({ formData, handleCancelProfile }) => {
+  const [profileInfo, setProfileInfo] = useState({});
   const [showInfo, setShowInfo] = useState(true);
   const client = generateClient();
+
+  //const [formData, setFormData] = useState({
+  /* initial form data */
+  //});
+  const [editingPicture, setEditingPicture] = useState(false);
+
+  // const handleEditProfile = () => {
+  //   setEditingProfile(true);
+  // };
+
+  // const handleSaveProfile = () => {
+  //   setEditingProfile(false);
+  //   //updateProfile();
+  //   // Logic to save profile changes
+  // };
+
+  const handleCancelEdit = () => {
+    // setShowInfo(false);
+    // setProfileInfo({});
+    handleEditProfile;
+
+    // Revert changes to the user's original profile data
+  };
+
+  // const handleChange = (e: { target: { name: any; value: any } }) => {
+  //   const { name, value } = e.target;
+  //   setFormData((prevData) => ({
+  //     ...prevData,
+  //     [name]: value,
+  //   }));
+  // };
 
   useEffect(() => {
     setProfileInfo(formData);
@@ -308,7 +339,8 @@ const EditProfile = ({ formData }) => {
                     Save
                   </button>
                   <button
-                    // onClick={handleCancelEdit}
+                    //onClick={handleCancelEdit}
+                    onClick={handleCancelProfile}
                     className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 mr-2"
                   >
                     Cancel

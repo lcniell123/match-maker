@@ -1,6 +1,7 @@
 import React from "react";
 
 const ProfileDescription = ({ formData, handleEditProfile }) => {
+  console.log("FFFFF", formData);
   return (
     <div className="max-w-screen-lg mx-auto bg-white rounded-lg shadow-md p-6 mb-6 w-full">
       {formData && (
