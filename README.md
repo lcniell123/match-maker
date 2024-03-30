@@ -21,7 +21,7 @@ Development Team:
 
 ## Relevant Links
 1. Trello Board - https://trello.com/b/alK9Ozv9/ksu-swe6813-agile-board
-2. Working prototype - https://main.d29iiengqzu0n.amplifyapp.com/
+2. Working prototype - [https://main.d29iiengqzu0n.amplifyapp.com/](https://main.d35p1rrpim2uyo.amplifyapp.com/)
 
 # Sprint 1
 ## Daily Scrum
@@ -174,3 +174,10 @@ Screenshot:
 
 Screenshot:
 ![image](https://github.com/lcniell123/match-maker/assets/95537416/aa98335f-9456-44a0-8555-e98343767e39)
+
+## DBase Connection
+GraphQL Table:
+<img width="1440" alt="Screenshot 2024-03-27 at 2 39 55 PM" src="https://github.com/lcniell123/match-maker/assets/14323809/c1421fd0-78d5-42e5-925e-f2f7d2de986e">
+Queried Data:
+<img width="1440" alt="Screenshot 2024-03-27 at 2 39 18 PM" src="https://github.com/lcniell123/match-maker/assets/14323809/0e802ee0-a039-4d17-9030-2c3d60b6f7f9">
+
