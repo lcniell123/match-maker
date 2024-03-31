@@ -13,16 +13,37 @@ export const getProfile = /* GraphQL */ `query GetProfile($id: ID!) {
     id
     name
     description
-    age
     languages
-    bio
-    country
     zipCode
-    timeZone
     gamePreference
     behaviour
+    username
+    bio
+    photo
+    coverPhoto
+    firstName
+    lastName
+    age
+    country
+    timeZone
+    city
+    region
+    postalCode
+    language
+    favoriteGame
+    preferredGenre
+    timeAvailability
+    preferredTeammateAgeRange
     skillLevel
+    preferredGameMode
+    preferredRole
     playStyle
+    flexibility
+    behavior
+    communicationPreference
+    toleranceLevel
+    teamworkLevel
+    competitivenessLevel
     createdAt
     updatedAt
     __typename
@@ -42,16 +63,37 @@ export const listProfiles = /* GraphQL */ `query ListProfiles(
       id
       name
       description
-      age
       languages
-      bio
-      country
       zipCode
-      timeZone
       gamePreference
       behaviour
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      postalCode
+      language
+      favoriteGame
+      preferredGenre
+      timeAvailability
+      preferredTeammateAgeRange
       skillLevel
+      preferredGameMode
+      preferredRole
       playStyle
+      flexibility
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
       createdAt
       updatedAt
       __typename

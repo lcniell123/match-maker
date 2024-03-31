@@ -13,16 +13,37 @@ export const onCreateProfile = /* GraphQL */ `subscription OnCreateProfile($filt
     id
     name
     description
-    age
     languages
-    bio
-    country
     zipCode
-    timeZone
     gamePreference
     behaviour
+    username
+    bio
+    photo
+    coverPhoto
+    firstName
+    lastName
+    age
+    country
+    timeZone
+    city
+    region
+    postalCode
+    language
+    favoriteGame
+    preferredGenre
+    timeAvailability
+    preferredTeammateAgeRange
     skillLevel
+    preferredGameMode
+    preferredRole
     playStyle
+    flexibility
+    behavior
+    communicationPreference
+    toleranceLevel
+    teamworkLevel
+    competitivenessLevel
     createdAt
     updatedAt
     __typename
@@ -37,16 +58,37 @@ export const onUpdateProfile = /* GraphQL */ `subscription OnUpdateProfile($filt
     id
     name
     description
-    age
     languages
-    bio
-    country
     zipCode
-    timeZone
     gamePreference
     behaviour
+    username
+    bio
+    photo
+    coverPhoto
+    firstName
+    lastName
+    age
+    country
+    timeZone
+    city
+    region
+    postalCode
+    language
+    favoriteGame
+    preferredGenre
+    timeAvailability
+    preferredTeammateAgeRange
     skillLevel
+    preferredGameMode
+    preferredRole
     playStyle
+    flexibility
+    behavior
+    communicationPreference
+    toleranceLevel
+    teamworkLevel
+    competitivenessLevel
     createdAt
     updatedAt
     __typename
@@ -61,16 +103,37 @@ export const onDeleteProfile = /* GraphQL */ `subscription OnDeleteProfile($filt
     id
     name
     description
-    age
     languages
-    bio
-    country
     zipCode
-    timeZone
     gamePreference
     behaviour
+    username
+    bio
+    photo
+    coverPhoto
+    firstName
+    lastName
+    age
+    country
+    timeZone
+    city
+    region
+    postalCode
+    language
+    favoriteGame
+    preferredGenre
+    timeAvailability
+    preferredTeammateAgeRange
     skillLevel
+    preferredGameMode
+    preferredRole
     playStyle
+    flexibility
+    behavior
+    communicationPreference
+    toleranceLevel
+    teamworkLevel
+    competitivenessLevel
     createdAt
     updatedAt
     __typename

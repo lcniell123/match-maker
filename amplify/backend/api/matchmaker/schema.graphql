@@ -6,6 +6,11 @@ input AMPLIFY {
 type Profile @model @auth(rules: [{ allow: private }]) {
   id: ID!
   name: String!
+  description: String
+  languages: String
+  zipCode: String
+  gamePreference: String
+  behaviour: String
   username: String
   bio: String
   photo: String

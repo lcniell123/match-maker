@@ -3,6 +3,7 @@ import * as mutations from "@/graphql/mutations";
 import { generateClient } from "aws-amplify/api";
 
 const EditProfile = ({ formData, handleCancelProfile }) => {
+  console.log("FD:", formData);
   const [profileInfo, setProfileInfo] = useState({});
   const [showInfo, setShowInfo] = useState(true);
   const client = generateClient();
@@ -42,27 +43,30 @@ const EditProfile = ({ formData, handleCancelProfile }) => {
     setProfileInfo(formData);
   }, []);
 
-  function updateData() {
-    const raw = client.graphql({
+  async function updateData() {
+    console.log("RERERERs");
+    const raw = await client.graphql({
       query: mutations.updateProfile,
       variables: {
         input: {
-          id: profileInfo.id,
-          name: profileInfo.name,
-          age: profileInfo.age,
-          behaviour: profileInfo.behaviour,
-          bio: profileInfo.bio,
-          country: profileInfo.country,
-          gamePreference: profileInfo.gamePreference,
-          languages: profileInfo.languages,
-          description: profileInfo.description,
-          playStyle: profileInfo.playStyle,
-          skillLevel: profileInfo.skillLevel,
-          timeZone: profileInfo.timeZone,
-          zipCode: profileInfo.zipCode,
+          id: profileInfo.id ?? "",
+          // name: profileInfo.name,
+          // age: profileInfo.age,
+          // behaviour: profileInfo.behaviour,
+          // bio: profileInfo.bio,
+          // country: profileInfo.country,
+          // // gamePreference: profileInfo.gamePreference,
+          // // languages: profileInfo.languages,
+          // // description: profileInfo.description,
+          // playStyle: profileInfo.playStyle,
+          // skillLevel: profileInfo.skillLevel,
+          // timeZone: profileInfo.timeZone,
+          // zipCode: profileInfo.zipCode,
         },
       },
     });
+    console.log("EEEEE", raw);
+
     raw.then((value) => {
       console.log("this is raw", value);
     });
@@ -87,7 +91,7 @@ const EditProfile = ({ formData, handleCancelProfile }) => {
                   type="text"
                   name="name"
                   placeholder={profileInfo.name ?? "-"}
-                  value={profileInfo.name}
+                  value={profileInfo.name ?? "-"}
                   onChange={(e) => {
                     setProfileInfo((prevState) => ({
                       ...prevState,
@@ -108,7 +112,7 @@ const EditProfile = ({ formData, handleCancelProfile }) => {
                     type="text"
                     name="age"
                     placeholder={profileInfo.age ?? "-"}
-                    value={profileInfo.age}
+                    value={profileInfo.age ?? ""}
                     onChange={(e) => {
                       setProfileInfo((prevState) => ({
                         ...prevState,
@@ -130,7 +134,7 @@ const EditProfile = ({ formData, handleCancelProfile }) => {
                     type="text"
                     name="language"
                     placeholder={profileInfo.languages ?? "-"}
-                    value={profileInfo.languages}
+                    value={profileInfo.languages ?? ""}
                     onChange={(e) => {
                       setProfileInfo((prevState) => ({
                         ...prevState,
@@ -151,7 +155,7 @@ const EditProfile = ({ formData, handleCancelProfile }) => {
                     id="bio"
                     type="text"
                     name="bio"
-                    value={profileInfo.bio}
+                    value={profileInfo.bio ?? ""}
                     onChange={(e) => {
                       setProfileInfo((prevState) => ({
                         ...prevState,
@@ -172,7 +176,7 @@ const EditProfile = ({ formData, handleCancelProfile }) => {
                     id="country"
                     type="text"
                     name="country"
-                    value={profileInfo.country}
+                    value={profileInfo.country ?? ""}
                     onChange={(e) => {
                       setProfileInfo((prevState) => ({
                         ...prevState,
@@ -193,7 +197,7 @@ const EditProfile = ({ formData, handleCancelProfile }) => {
                     id="zipCode"
                     type="text"
                     name="zipCode"
-                    value={profileInfo.zipCode}
+                    value={profileInfo.zipCode ?? ""}
                     onChange={(e) => {
                       setProfileInfo((prevState) => ({
                         ...prevState,
@@ -214,7 +218,7 @@ const EditProfile = ({ formData, handleCancelProfile }) => {
                     id="timeZone"
                     type="text"
                     name="timeZone"
-                    value={profileInfo.timeZone}
+                    value={profileInfo.timeZone ?? ""}
                     onChange={(e) => {
                       setProfileInfo((prevState) => ({
                         ...prevState,
@@ -235,7 +239,7 @@ const EditProfile = ({ formData, handleCancelProfile }) => {
                     id="gamePreference"
                     type="text"
                     name="gamePreference"
-                    value={profileInfo.gamePreference}
+                    value={profileInfo.gamePreference ?? ""}
                     onChange={(e) => {
                       setProfileInfo((prevState) => ({
                         ...prevState,
@@ -255,7 +259,7 @@ const EditProfile = ({ formData, handleCancelProfile }) => {
                   <select
                     id="behavior"
                     name="behavior"
-                    value={profileInfo.behaviour}
+                    value={profileInfo.behaviour ?? ""}
                     onChange={(e) => {
                       setProfileInfo((prevState) => ({
                         ...prevState,

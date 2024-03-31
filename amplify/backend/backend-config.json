@@ -15,7 +15,7 @@
           "additionalAuthenticationProviders": [
             {
               "apiKeyConfig": {
-                "apiKeyExpirationDate": "2024-04-04T04:39:28.055Z",
+                "apiKeyExpirationDate": "2024-04-06T23:40:09.494Z",
                 "apiKeyExpirationDays": 7,
                 "description": ""
               },

@@ -13,7 +13,7 @@ import { AuthUser } from "aws-amplify/auth";
 
 export interface Profile {
   id: string;
-  description: string;
+  description?: string;
   username?: string;
   bio?: string;
   photo?: string;
@@ -95,6 +95,7 @@ export default function Profiles(profile: AuthUser | any) {
 
   useEffect(() => {
     if (profiles && profiles.length === 0) {
+      console.log("####", profiles);
       client.graphql({
         query: mutations.createProfile,
         variables: {
@@ -107,8 +108,10 @@ export default function Profiles(profile: AuthUser | any) {
     }
 
     profiles.forEach((p: Profile) => {
+      //console.log("profile", profile);
       console.log("Compate", profile.profile.userId, p.id);
       if (profile.profile.userId == p.id) {
+        console.log("a");
         const p1 = {
           ...p,
           name: profile.username,
@@ -117,6 +120,7 @@ export default function Profiles(profile: AuthUser | any) {
         setSingleProfile(p1);
       } else {
         if (profile.username && profile.userId) {
+          console.log("b");
           const create = client.graphql({
             query: mutations.createProfile,
             variables: {
@@ -131,6 +135,8 @@ export default function Profiles(profile: AuthUser | any) {
         }
       }
     });
+
+    //console.log("SingleProgil: ", singleProfile);
   }, [profiles, profile]);
 
   return (

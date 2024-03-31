@@ -11,7 +11,7 @@ const ProfileDescription = ({ formData, handleEditProfile }) => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
             <div>
               <p className="text-sm font-medium flex items-center mb-2">
-                <span className="text-gray-600 mr-2">👤</span> Name:{" "}
+                <span className="text-gray-600 mr-2">👤</span> Name: name{" "}
                 {formData.name}
               </p>
 
