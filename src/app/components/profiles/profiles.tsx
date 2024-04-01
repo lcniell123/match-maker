@@ -10,51 +10,56 @@ import ProfileDescription from "./profileDescription";
 import EditProfile from "./editProfile";
 import ProfilePicture from "./profilePicture";
 import { AuthUser } from "aws-amplify/auth";
+import { ListProfilesQuery } from "@/API";
 
 export interface Profile {
   id: string;
-  description?: string;
-  username?: string;
-  bio?: string;
-  photo?: string;
-  coverPhoto?: string;
-  firstName?: string;
-  lastName?: string;
-  age?: number;
-  country?: string;
-  timeZone?: string;
-  city?: string;
-  region?: string;
-  postalCode?: string;
-  language?: string;
-  favoriteGame?: string;
-  preferredGenre?: string;
-  timeAvailability?: string;
-  preferredTeammateAgeRange?: string;
-  skillLevel?: string;
-  preferredGameMode?: string;
-  preferredRole?: string;
-  playStyle?: string;
-  flexibility?: Boolean;
-  behavior?: string;
-  communicationPreference?: string;
-  toleranceLevel?: string;
-  teamworkLevel?: string;
-  competitivenessLevel?: string;
+  name: string;
+  updatedAt: string | null | undefined;
+  description?: string | null | undefined;
+  languages?: string | null | undefined;
+  zipCode?: string | null | undefined;
+  gamePreference?: string | null | undefined;
+  username?: string | null | undefined;
+  bio?: string | null | undefined;
+  photo?: string | null | undefined;
+  coverPhoto?: string | null | undefined;
+  firstName?: string | null | undefined;
+  lastName?: string | null | undefined;
+  age?: number | null | undefined;
+  country?: string | null | undefined;
+  timeZone?: string | null | undefined;
+  city?: string | null | undefined;
+  region?: string | null | undefined;
+  postalCode?: string | null | undefined;
+  language?: string | null | undefined;
+  favoriteGame?: string | null | undefined;
+  preferredGenre?: string | null | undefined;
+  timeAvailability?: string | null | undefined;
+  preferredTeammateAgeRange?: string | null | undefined;
+  skillLevel?: string | null | undefined;
+  preferredGameMode?: string | null | undefined;
+  preferredRole?: string | null | undefined;
+  playStyle?: string | null | undefined;
+  flexibility?: Boolean | null | undefined;
+  behavior?: string | null | undefined;
+  communicationPreference?: string | null | undefined;
+  toleranceLevel?: string | null | undefined;
+  teamworkLevel?: string | null | undefined;
+  competitivenessLevel?: string | null | undefined;
 }
 const client = generateClient();
 
 export default function Profiles(profile: AuthUser | any) {
-  const router = useRouter();
-  console.log("PPPPP", profile);
-  const [profiles, setProfiles] = useState<Profile | any>([]);
-  const [singleProfile, setSingleProfile] = useState({});
+  //const router = useRouter();
+  const [profiles, setProfiles] = useState<Profile[]>([]);
+  const [singleProfile, setSingleProfile] = useState<Profile>();
 
   const [editingProfile, setEditingProfile] = useState(false);
   const [userProfilePicture, setUserProfilePicture] = useState(null);
-  const [formData, setFormData] = useState({
-    /* initial form data */
-  });
+  //const [formData, setFormData] = useState({
+  /* initial form data */
+  //s});
   const [editingPicture, setEditingPicture] = useState(false);
 
   // const handleEditProfile = () => {
@@ -80,6 +85,7 @@ export default function Profiles(profile: AuthUser | any) {
   //   }));
   // };
 
+  // Load list of profiles
   const listProfile = client.graphql({
     query: queries.listProfiles,
   });
@@ -87,89 +93,82 @@ export default function Profiles(profile: AuthUser | any) {
   useEffect(() => {
     listProfile.then((d) => {
       if (d.data.listProfiles.items) {
-        console.log("!!!!!DATA: ", d.data.listProfiles.items);
         setProfiles(d.data.listProfiles.items);
       }
     });
   }, []);
 
   useEffect(() => {
+    // if no profiles create a profile with name and id
     if (profiles && profiles.length === 0) {
-      console.log("####", profiles);
       client.graphql({
         query: mutations.createProfile,
         variables: {
           input: {
-            name: profile.username ?? "",
-            id: profile.userId ?? "",
+            name: profile.profile.username,
+            id: profile.profile.userId,
           },
         },
       });
     }
-
-    profiles.forEach((p: Profile) => {
-      //console.log("profile", profile);
-      console.log("Compate", profile.profile.userId, p.id);
+    profiles?.forEach((p) => {
+      //if profile name matches profile list show that profile
       if (profile.profile.userId == p.id) {
-        console.log("a");
-        const p1 = {
+        const single = {
           ...p,
-          name: profile.username,
-          id: profile.userId,
+          name: profile.profile.username,
+          id: profile.profile.userId,
         };
-        setSingleProfile(p1);
+        setSingleProfile(single);
       } else {
-        if (profile.username && profile.userId) {
-          console.log("b");
+        if (profile.profile.username && profile.profile.userId) {
+          console.log("4");
           const create = client.graphql({
             query: mutations.createProfile,
             variables: {
               input: {
-                name: profile.username,
-                id: profile.userId,
+                name: profile.profile.username,
+                id: profile.profile.userId,
               },
             },
           });
-
           create;
         }
       }
     });
-
-    //console.log("SingleProgil: ", singleProfile);
-  }, [profiles, profile]);
+  }, [profiles]);
 
   return (
     <div className="max-w-screen-lg mx-auto bg-gray-800 rounded-lg shadow-md p-6 mb-6 w-screen">
       <div className="max-w-screen-sm mx-auto p-4">
-        <div className="mb-4">
-          <ProfilePicture
-            handleEditPicture={setEditingPicture}
-            userProfilePicture={userProfilePicture}
-          />
-          {/* Nav bar with buttons */}
-          {!editingProfile && (
-            <div className="flex justify-center mt-4 space-x-4">
-              <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-                Profile
-              </button>
-              <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-                Friends
-              </button>
-              <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-                Group Activities
-              </button>
-              <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-                Matching
-              </button>
-            </div>
-          )}
-        </div>
         {!editingProfile && (
-          <ProfileDescription
-            formData={singleProfile}
-            handleEditProfile={() => setEditingProfile(true)}
-          />
+          <>
+            <div className="mb-4">
+              <ProfilePicture
+                handleEditPicture={setEditingPicture}
+                userProfilePicture={userProfilePicture}
+              />
+
+              <div className="flex justify-center mt-4 space-x-4">
+                <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                  Profile
+                </button>
+                <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                  Friends
+                </button>
+                <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                  Group Activities
+                </button>
+                <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                  Matching
+                </button>
+              </div>
+            </div>
+            <ProfileDescription
+              formData={singleProfile}
+              handleEditProfile={() => setEditingProfile(true)}
+            />
+          </>
         )}
         {editingProfile && (
           <EditProfile

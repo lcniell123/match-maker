@@ -3,71 +3,38 @@ import * as mutations from "@/graphql/mutations";
 import { generateClient } from "aws-amplify/api";
 
 const EditProfile = ({ formData, handleCancelProfile }) => {
-  console.log("FD:", formData);
   const [profileInfo, setProfileInfo] = useState({});
   const [showInfo, setShowInfo] = useState(true);
   const client = generateClient();
 
-  //const [formData, setFormData] = useState({
-  /* initial form data */
-  //});
-  const [editingPicture, setEditingPicture] = useState(false);
-
-  // const handleEditProfile = () => {
-  //   setEditingProfile(true);
-  // };
-
-  // const handleSaveProfile = () => {
-  //   setEditingProfile(false);
-  //   //updateProfile();
-  //   // Logic to save profile changes
-  // };
-
-  const handleCancelEdit = () => {
-    // setShowInfo(false);
-    // setProfileInfo({});
-    handleEditProfile;
-
-    // Revert changes to the user's original profile data
-  };
-
-  // const handleChange = (e: { target: { name: any; value: any } }) => {
-  //   const { name, value } = e.target;
-  //   setFormData((prevData) => ({
-  //     ...prevData,
-  //     [name]: value,
-  //   }));
-  // };
-
+  // convert prop to state
   useEffect(() => {
     setProfileInfo(formData);
   }, []);
 
-  async function updateData() {
-    console.log("RERERERs");
-    const raw = await client.graphql({
+  // update Handler
+  function updateData() {
+    const values = {
+      id: profileInfo.id ?? "",
+      name: profileInfo.name ?? "",
+      age: profileInfo.age ?? "",
+      languages: profileInfo.languages ?? "",
+      bio: profileInfo.bio ?? "",
+      country: profileInfo.country ?? "",
+      zipCode: profileInfo.zipCode ?? "",
+      timeZone: profileInfo.timeZone ?? "",
+      gamePreference: profileInfo.gamePreference ?? "",
+      skillLevel: profileInfo.skillLevel ?? "",
+      playStyle: profileInfo.playStyle ?? "",
+      behaviour: profileInfo.behaviour ?? "",
+    };
+    const raw = client.graphql({
       query: mutations.updateProfile,
-      variables: {
-        input: {
-          id: profileInfo.id ?? "",
-          // name: profileInfo.name,
-          // age: profileInfo.age,
-          // behaviour: profileInfo.behaviour,
-          // bio: profileInfo.bio,
-          // country: profileInfo.country,
-          // // gamePreference: profileInfo.gamePreference,
-          // // languages: profileInfo.languages,
-          // // description: profileInfo.description,
-          // playStyle: profileInfo.playStyle,
-          // skillLevel: profileInfo.skillLevel,
-          // timeZone: profileInfo.timeZone,
-          // zipCode: profileInfo.zipCode,
-        },
-      },
+      variables: { input: values },
     });
-    console.log("EEEEE", raw);
 
     raw.then((value) => {
+      handleCancelProfile;
       console.log("this is raw", value);
     });
   }
