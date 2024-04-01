@@ -91,6 +91,7 @@ export default function Profiles(profile: AuthUser | any) {
   });
 
   useEffect(() => {
+    // add profile list to profiles state
     listProfile.then((d) => {
       if (d.data.listProfiles.items) {
         setProfiles(d.data.listProfiles.items);
@@ -112,7 +113,7 @@ export default function Profiles(profile: AuthUser | any) {
       });
     }
     profiles?.forEach((p) => {
-      //if profile name matches profile list show that profile
+      //when profile name matches profile list show that profile
       if (profile.profile.userId == p.id) {
         const single = {
           ...p,

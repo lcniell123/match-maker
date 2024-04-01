@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import * as mutations from "@/graphql/mutations";
 import { generateClient } from "aws-amplify/api";
+// import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 
 const EditProfile = ({ formData, handleCancelProfile }) => {
+  // const router = useRouter();
+
   const [profileInfo, setProfileInfo] = useState({});
   const [showInfo, setShowInfo] = useState(true);
   const client = generateClient();
@@ -34,8 +38,8 @@ const EditProfile = ({ formData, handleCancelProfile }) => {
     });
 
     raw.then((value) => {
-      handleCancelProfile;
       console.log("this is raw", value);
+      // handleCancelProfile();
     });
   }
 
@@ -168,7 +172,7 @@ const EditProfile = ({ formData, handleCancelProfile }) => {
                     onChange={(e) => {
                       setProfileInfo((prevState) => ({
                         ...prevState,
-                        zipcode: e.target.value,
+                        zipCode: e.target.value,
                       }));
                     }}
                     className="border-b border-gray-300 p-2 w-full focus:outline-none"
@@ -310,7 +314,6 @@ const EditProfile = ({ formData, handleCancelProfile }) => {
                     Save
                   </button>
                   <button
-                    //onClick={handleCancelEdit}
                     onClick={handleCancelProfile}
                     className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 mr-2"
                   >
