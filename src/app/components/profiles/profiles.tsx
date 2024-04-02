@@ -123,7 +123,6 @@ export default function Profiles(profile: AuthUser | any) {
         setSingleProfile(single);
       } else {
         if (profile.profile.username && profile.profile.userId) {
-          console.log("4");
           const create = client.graphql({
             query: mutations.createProfile,
             variables: {
