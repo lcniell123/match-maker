@@ -140,44 +140,26 @@ export default function Profiles(profile: AuthUser | any) {
   }, [profiles]);
 
   return (
-    <div className="max-w-screen-lg mx-auto bg-gray-800 rounded-lg shadow-md p-6 mb-6 w-screen">
-      <div className="max-w-screen-sm mx-auto p-4">
-        {!editingProfile && (
-          <>
-            <div className="mb-4">
-              <ProfilePicture
-                handleEditPicture={setEditingPicture}
-                userProfilePicture={userProfilePicture}
-              />
-
-              <div className="flex justify-center mt-4 space-x-4">
-                <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-                  Profile
-                </button>
-                <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-                  Friends
-                </button>
-                <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-                  Group Activities
-                </button>
-                <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-                  Matching
-                </button>
-              </div>
-            </div>
-            <ProfileDescription
-              formData={singleProfile}
-              handleEditProfile={() => setEditingProfile(true)}
-            />
-          </>
-        )}
-        {editingProfile && (
-          <EditProfile
+    // <div className="max-w-screen-lg mx-auto bg-gray-800 rounded-lg shadow-md p-6 mb-6 w-screen">
+    //   <div className="max-w-screen-sm mx-auto p-4">
+    <>
+      {" "}
+      {!editingProfile && (
+        <>
+          <div className="mb-4"></div>
+          <ProfileDescription
             formData={singleProfile}
-            handleCancelProfile={() => setEditingProfile(false)}
+            handleEditProfile={() => setEditingProfile(true)}
           />
-        )}
-      </div>
-    </div>
+        </>
+      )}
+      {editingProfile && (
+        <EditProfile
+          formData={singleProfile}
+          handleCancelProfile={() => setEditingProfile(false)}
+        />
+      )}
+    </>
+    // </div>
   );
 }
