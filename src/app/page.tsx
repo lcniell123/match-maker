@@ -10,10 +10,10 @@ import awsExports from "../amplifyconfiguration.json";
 
 Amplify.configure(awsExports);
 
-export default function App({ user }: WithAuthenticatorProps) {
+export default function App() {
   return (
     <div className="max-w-screen-lg mx-auto bg-white rounded-lg shadow-md p-6 mb-6 w-full">
-      <h1>Welcome to MatchMaker {user?.username}!</h1>
+      <h1>Welcome to MatchMaker!</h1>
     </div>
   );
 }
