@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import * as mutations from "@/graphql/mutations";
 import { generateClient } from "aws-amplify/api";
 // import { useRouter } from "next/navigation";
-import { useRouter } from "next/router";
-
+import { useRouter } from "next/navigation";
 const EditProfile = ({ formData, handleCancelProfile }) => {
+  const router = useRouter();
   // const router = useRouter();
 
   const [profileInfo, setProfileInfo] = useState({});
@@ -38,8 +38,7 @@ const EditProfile = ({ formData, handleCancelProfile }) => {
     });
 
     raw.then((value) => {
-      console.log("this is raw", value);
-      // handleCancelProfile();
+      window.location.reload();
     });
   }
 

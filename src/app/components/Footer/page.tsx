@@ -1,8 +1,9 @@
-import { useAuthenticator } from "@aws-amplify/ui-react";
+import {
+  WithAuthenticatorProps,
+  withAuthenticator,
+} from "@aws-amplify/ui-react";
 
-function Footer() {
-  const { signOut } = useAuthenticator();
-
+function Footer({ signOut, user }: WithAuthenticatorProps) {
   return (
     <>
       <button

@@ -4,18 +4,30 @@ import {
 } from "@aws-amplify/ui-react";
 import ProfilePicture from "./profiles/profilePicture";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { getCurrentUser } from "aws-amplify/auth";
 
-function Header({ signOut, user }: WithAuthenticatorProps) {
+function Header() {
   const router = useRouter();
+  const [userName, setUserName] = useState("");
+
+  async function currentAuthenticatedUser() {
+    try {
+      const { username } = await getCurrentUser();
+      setUserName(username);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  currentAuthenticatedUser();
 
   return (
     <>
       <h1 className="text-3xl font-bold text-center mb-4">
-        Welcome, {user?.username}{" "}
+        Welcome, {userName}{" "}
       </h1>
       <header className="py-12 nav">
         <main className="mt-8 flex-grow flex justify-center items-center">
-          {/* <div className="max-w-screen-lg mx-auto bg-gray-800 rounded-lg shadow-md p-6 mb-6 w-screen"> */}
           <div className="max-w-screen-sm mx-auto p-4">
             <div className="flex justify-center mt-4 space-x-4"></div>
             <ProfilePicture
@@ -48,7 +60,6 @@ function Header({ signOut, user }: WithAuthenticatorProps) {
                 Matching
               </button>
             </div>
-            {/* </div> */}
           </div>
         </main>
       </header>
@@ -56,4 +67,4 @@ function Header({ signOut, user }: WithAuthenticatorProps) {
   );
 }
 
-export default withAuthenticator(Header);
+export default Header;

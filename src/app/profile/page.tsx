@@ -3,14 +3,12 @@
 import React, { useEffect, useState } from "react";
 import { Amplify } from "aws-amplify";
 
-import { WithAuthenticatorProps } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
-import { withAuthenticator } from "@aws-amplify/ui-react";
 import * as mutations from "@/graphql/mutations";
+import { getCurrentUser } from "aws-amplify/auth";
 
 import awsExports from "../../amplifyconfiguration.json";
-import Profiles from "../components/profiles/profiles";
-import ProfilePicture from "../components/profiles/profilePicture";
+
 import { useRouter } from "next/navigation";
 import { generateClient } from "aws-amplify/api";
 import * as queries from "@/graphql/queries";
@@ -55,21 +53,29 @@ export interface Profile {
   competitivenessLevel?: string | null | undefined;
 }
 
-function Profile({ signOut, user }: WithAuthenticatorProps) {
+function Profile() {
+  const [userName, setUserName] = useState("");
+  const [userId, setUserId] = useState("");
+
   const router = useRouter();
 
   const client = generateClient();
 
-  //const router = useRouter();
+  async function currentAuthenticatedUser() {
+    try {
+      const { username, userId } = await getCurrentUser();
+      setUserName(username);
+      setUserId(userId);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  currentAuthenticatedUser();
+
   const [profiles, setProfiles] = useState<Profile[]>([]);
   const [singleProfile, setSingleProfile] = useState<Profile>();
 
   const [editingProfile, setEditingProfile] = useState(false);
-  const [userProfilePicture, setUserProfilePicture] = useState(null);
-  //const [formData, setFormData] = useState({
-  /* initial form data */
-  //s});
-  const [editingPicture, setEditingPicture] = useState(false);
 
   // const handleEditProfile = () => {
   //   setEditingProfile(true);
@@ -115,29 +121,29 @@ function Profile({ signOut, user }: WithAuthenticatorProps) {
         query: mutations.createProfile,
         variables: {
           input: {
-            name: user?.username ?? "",
-            id: user?.userId ?? "",
+            name: userName,
+            id: userId,
           },
         },
       });
     }
     profiles?.forEach((p) => {
       //when profile name matches profile list show that profile
-      if (user?.userId == p.id) {
+      if (userId == p.id) {
         const single = {
           ...p,
-          name: user?.username,
-          id: user?.userId,
+          name: userName,
+          id: userId,
         };
         setSingleProfile(single);
       } else {
-        if (user?.username && user?.userId) {
+        if (userName && userId) {
           const create = client.graphql({
             query: mutations.createProfile,
             variables: {
               input: {
-                name: user?.username,
-                id: user?.userId,
+                name: userName,
+                id: userId,
               },
             },
           });
@@ -148,8 +154,6 @@ function Profile({ signOut, user }: WithAuthenticatorProps) {
   }, [profiles]);
 
   return (
-    // <div className="max-w-screen-lg mx-auto bg-gray-800 rounded-lg shadow-md p-6 mb-6 w-screen">
-    //   <div className="max-w-screen-sm mx-auto p-4">
     <>
       {" "}
       {!editingProfile && (
@@ -168,8 +172,7 @@ function Profile({ signOut, user }: WithAuthenticatorProps) {
         />
       )}
     </>
-    // </div>
   );
 }
 
-export default withAuthenticator(Profile);
+export default Profile;
