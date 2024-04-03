@@ -1,13 +1,9 @@
-import {
-  WithAuthenticatorProps,
-  withAuthenticator,
-} from "@aws-amplify/ui-react";
 import ProfilePicture from "./profiles/profilePicture";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { getCurrentUser } from "aws-amplify/auth";
 
-function Header() {
+export default function Header() {
   const router = useRouter();
   const [userName, setUserName] = useState("");
 
@@ -66,5 +62,3 @@ function Header() {
     </>
   );
 }
-
-export default Header;

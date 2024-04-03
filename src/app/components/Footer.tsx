@@ -1,6 +1,6 @@
 import { useAuthenticator } from "@aws-amplify/ui-react";
 
-function Footer() {
+export default function Footer() {
   const { signOut } = useAuthenticator();
 
   return (
@@ -14,5 +14,3 @@ function Footer() {
     </>
   );
 }
-
-export default Footer;
