@@ -4,7 +4,6 @@ import { generateClient } from "aws-amplify/api";
 // import { useRouter } from "next/navigation";
 import { useRouter } from "next/navigation";
 const EditProfile = ({ formData, handleCancelProfile }) => {
-  const router = useRouter();
   // const router = useRouter();
 
   const [profileInfo, setProfileInfo] = useState({});
