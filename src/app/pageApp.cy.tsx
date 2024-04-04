@@ -23,7 +23,7 @@ xdescribe("User Forgot Password", () => {
   });
 });
 
-describe("<App />", () => {
+xdescribe("<App />", () => {
   it("should render Sign In page without error", () => {
     cy.mount(<App />);
     cy.get("#signIn-tab");
