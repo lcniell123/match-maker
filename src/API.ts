@@ -221,7 +221,7 @@ export type DeleteProfileInput = {
 };
 
 export type CreateFriendshipsInput = {
-  friendshipId?: string | null,
+  friendshipId: string,
   userId?: string | null,
   friendId?: string | null,
   status?: string | null,
@@ -242,7 +242,7 @@ export type ModelFriendshipsConditionInput = {
 
 export type Friendships = {
   __typename: "Friendships",
-  friendshipId?: string | null,
+  friendshipId: string,
   userId?: string | null,
   friendId?: string | null,
   status?: string | null,
@@ -264,7 +264,7 @@ export type DeleteFriendshipsInput = {
 };
 
 export type CreateGroupsInput = {
-  groupId?: string | null,
+  groupId: string,
   name?: string | null,
   createdBy?: string | null,
   createdAt?: string | null,
@@ -287,7 +287,7 @@ export type ModelGroupsConditionInput = {
 
 export type Groups = {
   __typename: "Groups",
-  groupId?: string | null,
+  groupId: string,
   name?: string | null,
   createdBy?: string | null,
   createdAt?: string | null,
@@ -311,7 +311,7 @@ export type DeleteGroupsInput = {
 };
 
 export type CreateMembershipsInput = {
-  membershipID?: string | null,
+  membershipID: string,
   groupId?: string | null,
   userId?: string | null,
   id?: string | null,
@@ -330,7 +330,7 @@ export type ModelMembershipsConditionInput = {
 
 export type Memberships = {
   __typename: "Memberships",
-  membershipID?: string | null,
+  membershipID: string,
   groupId?: string | null,
   userId?: string | null,
   id: string,
@@ -741,7 +741,7 @@ export type CreateFriendshipsMutationVariables = {
 export type CreateFriendshipsMutation = {
   createFriendships?:  {
     __typename: "Friendships",
-    friendshipId?: string | null,
+    friendshipId: string,
     userId?: string | null,
     friendId?: string | null,
     status?: string | null,
@@ -759,7 +759,7 @@ export type UpdateFriendshipsMutationVariables = {
 export type UpdateFriendshipsMutation = {
   updateFriendships?:  {
     __typename: "Friendships",
-    friendshipId?: string | null,
+    friendshipId: string,
     userId?: string | null,
     friendId?: string | null,
     status?: string | null,
@@ -777,7 +777,7 @@ export type DeleteFriendshipsMutationVariables = {
 export type DeleteFriendshipsMutation = {
   deleteFriendships?:  {
     __typename: "Friendships",
-    friendshipId?: string | null,
+    friendshipId: string,
     userId?: string | null,
     friendId?: string | null,
     status?: string | null,
@@ -795,7 +795,7 @@ export type CreateGroupsMutationVariables = {
 export type CreateGroupsMutation = {
   createGroups?:  {
     __typename: "Groups",
-    groupId?: string | null,
+    groupId: string,
     name?: string | null,
     createdBy?: string | null,
     createdAt?: string | null,
@@ -813,7 +813,7 @@ export type UpdateGroupsMutationVariables = {
 export type UpdateGroupsMutation = {
   updateGroups?:  {
     __typename: "Groups",
-    groupId?: string | null,
+    groupId: string,
     name?: string | null,
     createdBy?: string | null,
     createdAt?: string | null,
@@ -831,7 +831,7 @@ export type DeleteGroupsMutationVariables = {
 export type DeleteGroupsMutation = {
   deleteGroups?:  {
     __typename: "Groups",
-    groupId?: string | null,
+    groupId: string,
     name?: string | null,
     createdBy?: string | null,
     createdAt?: string | null,
@@ -849,7 +849,7 @@ export type CreateMembershipsMutationVariables = {
 export type CreateMembershipsMutation = {
   createMemberships?:  {
     __typename: "Memberships",
-    membershipID?: string | null,
+    membershipID: string,
     groupId?: string | null,
     userId?: string | null,
     id: string,
@@ -866,7 +866,7 @@ export type UpdateMembershipsMutationVariables = {
 export type UpdateMembershipsMutation = {
   updateMemberships?:  {
     __typename: "Memberships",
-    membershipID?: string | null,
+    membershipID: string,
     groupId?: string | null,
     userId?: string | null,
     id: string,
@@ -883,7 +883,7 @@ export type DeleteMembershipsMutationVariables = {
 export type DeleteMembershipsMutation = {
   deleteMemberships?:  {
     __typename: "Memberships",
-    membershipID?: string | null,
+    membershipID: string,
     groupId?: string | null,
     userId?: string | null,
     id: string,
@@ -997,7 +997,7 @@ export type GetFriendshipsQueryVariables = {
 export type GetFriendshipsQuery = {
   getFriendships?:  {
     __typename: "Friendships",
-    friendshipId?: string | null,
+    friendshipId: string,
     userId?: string | null,
     friendId?: string | null,
     status?: string | null,
@@ -1018,7 +1018,7 @@ export type ListFriendshipsQuery = {
     __typename: "ModelFriendshipsConnection",
     items:  Array< {
       __typename: "Friendships",
-      friendshipId?: string | null,
+      friendshipId: string,
       userId?: string | null,
       friendId?: string | null,
       status?: string | null,
@@ -1037,7 +1037,7 @@ export type GetGroupsQueryVariables = {
 export type GetGroupsQuery = {
   getGroups?:  {
     __typename: "Groups",
-    groupId?: string | null,
+    groupId: string,
     name?: string | null,
     createdBy?: string | null,
     createdAt?: string | null,
@@ -1058,7 +1058,7 @@ export type ListGroupsQuery = {
     __typename: "ModelGroupsConnection",
     items:  Array< {
       __typename: "Groups",
-      groupId?: string | null,
+      groupId: string,
       name?: string | null,
       createdBy?: string | null,
       createdAt?: string | null,
@@ -1077,7 +1077,7 @@ export type GetMembershipsQueryVariables = {
 export type GetMembershipsQuery = {
   getMemberships?:  {
     __typename: "Memberships",
-    membershipID?: string | null,
+    membershipID: string,
     groupId?: string | null,
     userId?: string | null,
     id: string,
@@ -1097,7 +1097,7 @@ export type ListMembershipsQuery = {
     __typename: "ModelMembershipsConnection",
     items:  Array< {
       __typename: "Memberships",
-      membershipID?: string | null,
+      membershipID: string,
       groupId?: string | null,
       userId?: string | null,
       id: string,
@@ -1253,7 +1253,7 @@ export type OnCreateFriendshipsSubscriptionVariables = {
 export type OnCreateFriendshipsSubscription = {
   onCreateFriendships?:  {
     __typename: "Friendships",
-    friendshipId?: string | null,
+    friendshipId: string,
     userId?: string | null,
     friendId?: string | null,
     status?: string | null,
@@ -1270,7 +1270,7 @@ export type OnUpdateFriendshipsSubscriptionVariables = {
 export type OnUpdateFriendshipsSubscription = {
   onUpdateFriendships?:  {
     __typename: "Friendships",
-    friendshipId?: string | null,
+    friendshipId: string,
     userId?: string | null,
     friendId?: string | null,
     status?: string | null,
@@ -1287,7 +1287,7 @@ export type OnDeleteFriendshipsSubscriptionVariables = {
 export type OnDeleteFriendshipsSubscription = {
   onDeleteFriendships?:  {
     __typename: "Friendships",
-    friendshipId?: string | null,
+    friendshipId: string,
     userId?: string | null,
     friendId?: string | null,
     status?: string | null,
@@ -1304,7 +1304,7 @@ export type OnCreateGroupsSubscriptionVariables = {
 export type OnCreateGroupsSubscription = {
   onCreateGroups?:  {
     __typename: "Groups",
-    groupId?: string | null,
+    groupId: string,
     name?: string | null,
     createdBy?: string | null,
     createdAt?: string | null,
@@ -1321,7 +1321,7 @@ export type OnUpdateGroupsSubscriptionVariables = {
 export type OnUpdateGroupsSubscription = {
   onUpdateGroups?:  {
     __typename: "Groups",
-    groupId?: string | null,
+    groupId: string,
     name?: string | null,
     createdBy?: string | null,
     createdAt?: string | null,
@@ -1338,7 +1338,7 @@ export type OnDeleteGroupsSubscriptionVariables = {
 export type OnDeleteGroupsSubscription = {
   onDeleteGroups?:  {
     __typename: "Groups",
-    groupId?: string | null,
+    groupId: string,
     name?: string | null,
     createdBy?: string | null,
     createdAt?: string | null,
@@ -1355,7 +1355,7 @@ export type OnCreateMembershipsSubscriptionVariables = {
 export type OnCreateMembershipsSubscription = {
   onCreateMemberships?:  {
     __typename: "Memberships",
-    membershipID?: string | null,
+    membershipID: string,
     groupId?: string | null,
     userId?: string | null,
     id: string,
@@ -1371,7 +1371,7 @@ export type OnUpdateMembershipsSubscriptionVariables = {
 export type OnUpdateMembershipsSubscription = {
   onUpdateMemberships?:  {
     __typename: "Memberships",
-    membershipID?: string | null,
+    membershipID: string,
     groupId?: string | null,
     userId?: string | null,
     id: string,
@@ -1387,7 +1387,7 @@ export type OnDeleteMembershipsSubscriptionVariables = {
 export type OnDeleteMembershipsSubscription = {
   onDeleteMemberships?:  {
     __typename: "Memberships",
-    membershipID?: string | null,
+    membershipID: string,
     groupId?: string | null,
     userId?: string | null,
     id: string,

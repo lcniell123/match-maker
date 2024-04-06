@@ -62,7 +62,7 @@ export default function MembershipsUpdateForm(props) {
   }, [idProp, membershipsModelProp]);
   React.useEffect(resetStateValues, [membershipsRecord]);
   const validations = {
-    membershipID: [],
+    membershipID: [{ type: "Required" }],
     groupId: [],
     userId: [],
   };
@@ -92,7 +92,7 @@ export default function MembershipsUpdateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
-          membershipID: membershipID ?? null,
+          membershipID,
           groupId: groupId ?? null,
           userId: userId ?? null,
         };
@@ -148,7 +148,7 @@ export default function MembershipsUpdateForm(props) {
     >
       <TextField
         label="Membership id"
-        isRequired={false}
+        isRequired={true}
         isReadOnly={false}
         value={membershipID}
         onChange={(e) => {

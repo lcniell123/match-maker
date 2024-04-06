@@ -47,7 +47,7 @@ export default function GroupsCreateForm(props) {
     setErrors({});
   };
   const validations = {
-    groupId: [],
+    groupId: [{ type: "Required" }],
     name: [],
     createdBy: [],
     createdAt: [],
@@ -141,7 +141,7 @@ export default function GroupsCreateForm(props) {
     >
       <TextField
         label="Group id"
-        isRequired={false}
+        isRequired={true}
         isReadOnly={false}
         value={groupId}
         onChange={(e) => {

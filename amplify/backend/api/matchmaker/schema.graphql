@@ -40,13 +40,13 @@ type Profile @model @auth(rules: [{ allow: private }]) {
   competitivenessLevel: String
 }
 type Friendships @model @auth(rules: [{ allow: private }]) {
-  friendshipId: String
+  friendshipId: String!
   userId: String
   friendId: String
   status: String
 }
 type Groups @model @auth(rules: [{ allow: private }]) {
-  groupId: String
+  groupId: String!
   name: String
   createdBy: String
   createdAt: String
@@ -54,7 +54,7 @@ type Groups @model @auth(rules: [{ allow: private }]) {
   image: String
 }
 type Memberships @model @auth(rules: [{ allow: private }]) {
-  membershipID: String
+  membershipID: String!
   groupId: String
   userId: String
 }

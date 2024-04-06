@@ -65,7 +65,7 @@ export default function FriendshipsUpdateForm(props) {
   }, [idProp, friendshipsModelProp]);
   React.useEffect(resetStateValues, [friendshipsRecord]);
   const validations = {
-    friendshipId: [],
+    friendshipId: [{ type: "Required" }],
     userId: [],
     friendId: [],
     status: [],
@@ -96,7 +96,7 @@ export default function FriendshipsUpdateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
-          friendshipId: friendshipId ?? null,
+          friendshipId,
           userId: userId ?? null,
           friendId: friendId ?? null,
           status: status ?? null,
@@ -153,7 +153,7 @@ export default function FriendshipsUpdateForm(props) {
     >
       <TextField
         label="Friendship id"
-        isRequired={false}
+        isRequired={true}
         isReadOnly={false}
         value={friendshipId}
         onChange={(e) => {

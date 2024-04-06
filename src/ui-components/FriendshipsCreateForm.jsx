@@ -43,7 +43,7 @@ export default function FriendshipsCreateForm(props) {
     setErrors({});
   };
   const validations = {
-    friendshipId: [],
+    friendshipId: [{ type: "Required" }],
     userId: [],
     friendId: [],
     status: [],
@@ -133,7 +133,7 @@ export default function FriendshipsCreateForm(props) {
     >
       <TextField
         label="Friendship id"
-        isRequired={false}
+        isRequired={true}
         isReadOnly={false}
         value={friendshipId}
         onChange={(e) => {

@@ -40,7 +40,7 @@ export default function MembershipsCreateForm(props) {
     setErrors({});
   };
   const validations = {
-    membershipID: [],
+    membershipID: [{ type: "Required" }],
     groupId: [],
     userId: [],
   };
@@ -128,7 +128,7 @@ export default function MembershipsCreateForm(props) {
     >
       <TextField
         label="Membership id"
-        isRequired={false}
+        isRequired={true}
         isReadOnly={false}
         value={membershipID}
         onChange={(e) => {
