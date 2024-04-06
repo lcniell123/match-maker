@@ -39,3 +39,22 @@ type Profile @model @auth(rules: [{ allow: private }]) {
   teamworkLevel: String
   competitivenessLevel: String
 }
+type Friendships @model @auth(rules: [{ allow: private }]) {
+  friendshipId: String
+  userId: String
+  friendId: String
+  status: String
+}
+type Groups @model @auth(rules: [{ allow: private }]) {
+  groupId: String
+  name: String
+  createdBy: String
+  createdAt: String
+  updatedAt: String
+  image: String
+}
+type Memberships @model @auth(rules: [{ allow: private }]) {
+  membershipID: String
+  groupId: String
+  userId: String
+}

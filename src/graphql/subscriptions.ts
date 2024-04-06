@@ -143,3 +143,156 @@ export const onDeleteProfile = /* GraphQL */ `subscription OnDeleteProfile($filt
   APITypes.OnDeleteProfileSubscriptionVariables,
   APITypes.OnDeleteProfileSubscription
 >;
+export const onCreateFriendships = /* GraphQL */ `subscription OnCreateFriendships(
+  $filter: ModelSubscriptionFriendshipsFilterInput
+) {
+  onCreateFriendships(filter: $filter) {
+    friendshipId
+    userId
+    friendId
+    status
+    id
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateFriendshipsSubscriptionVariables,
+  APITypes.OnCreateFriendshipsSubscription
+>;
+export const onUpdateFriendships = /* GraphQL */ `subscription OnUpdateFriendships(
+  $filter: ModelSubscriptionFriendshipsFilterInput
+) {
+  onUpdateFriendships(filter: $filter) {
+    friendshipId
+    userId
+    friendId
+    status
+    id
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateFriendshipsSubscriptionVariables,
+  APITypes.OnUpdateFriendshipsSubscription
+>;
+export const onDeleteFriendships = /* GraphQL */ `subscription OnDeleteFriendships(
+  $filter: ModelSubscriptionFriendshipsFilterInput
+) {
+  onDeleteFriendships(filter: $filter) {
+    friendshipId
+    userId
+    friendId
+    status
+    id
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteFriendshipsSubscriptionVariables,
+  APITypes.OnDeleteFriendshipsSubscription
+>;
+export const onCreateGroups = /* GraphQL */ `subscription OnCreateGroups($filter: ModelSubscriptionGroupsFilterInput) {
+  onCreateGroups(filter: $filter) {
+    groupId
+    name
+    createdBy
+    createdAt
+    updatedAt
+    image
+    id
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateGroupsSubscriptionVariables,
+  APITypes.OnCreateGroupsSubscription
+>;
+export const onUpdateGroups = /* GraphQL */ `subscription OnUpdateGroups($filter: ModelSubscriptionGroupsFilterInput) {
+  onUpdateGroups(filter: $filter) {
+    groupId
+    name
+    createdBy
+    createdAt
+    updatedAt
+    image
+    id
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateGroupsSubscriptionVariables,
+  APITypes.OnUpdateGroupsSubscription
+>;
+export const onDeleteGroups = /* GraphQL */ `subscription OnDeleteGroups($filter: ModelSubscriptionGroupsFilterInput) {
+  onDeleteGroups(filter: $filter) {
+    groupId
+    name
+    createdBy
+    createdAt
+    updatedAt
+    image
+    id
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteGroupsSubscriptionVariables,
+  APITypes.OnDeleteGroupsSubscription
+>;
+export const onCreateMemberships = /* GraphQL */ `subscription OnCreateMemberships(
+  $filter: ModelSubscriptionMembershipsFilterInput
+) {
+  onCreateMemberships(filter: $filter) {
+    membershipID
+    groupId
+    userId
+    id
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateMembershipsSubscriptionVariables,
+  APITypes.OnCreateMembershipsSubscription
+>;
+export const onUpdateMemberships = /* GraphQL */ `subscription OnUpdateMemberships(
+  $filter: ModelSubscriptionMembershipsFilterInput
+) {
+  onUpdateMemberships(filter: $filter) {
+    membershipID
+    groupId
+    userId
+    id
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateMembershipsSubscriptionVariables,
+  APITypes.OnUpdateMembershipsSubscription
+>;
+export const onDeleteMemberships = /* GraphQL */ `subscription OnDeleteMemberships(
+  $filter: ModelSubscriptionMembershipsFilterInput
+) {
+  onDeleteMemberships(filter: $filter) {
+    membershipID
+    groupId
+    userId
+    id
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteMembershipsSubscriptionVariables,
+  APITypes.OnDeleteMembershipsSubscription
+>;

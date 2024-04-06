@@ -106,3 +106,118 @@ export const listProfiles = /* GraphQL */ `query ListProfiles(
   APITypes.ListProfilesQueryVariables,
   APITypes.ListProfilesQuery
 >;
+export const getFriendships = /* GraphQL */ `query GetFriendships($id: ID!) {
+  getFriendships(id: $id) {
+    friendshipId
+    userId
+    friendId
+    status
+    id
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetFriendshipsQueryVariables,
+  APITypes.GetFriendshipsQuery
+>;
+export const listFriendships = /* GraphQL */ `query ListFriendships(
+  $filter: ModelFriendshipsFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listFriendships(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      friendshipId
+      userId
+      friendId
+      status
+      id
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListFriendshipsQueryVariables,
+  APITypes.ListFriendshipsQuery
+>;
+export const getGroups = /* GraphQL */ `query GetGroups($id: ID!) {
+  getGroups(id: $id) {
+    groupId
+    name
+    createdBy
+    createdAt
+    updatedAt
+    image
+    id
+    __typename
+  }
+}
+` as GeneratedQuery<APITypes.GetGroupsQueryVariables, APITypes.GetGroupsQuery>;
+export const listGroups = /* GraphQL */ `query ListGroups(
+  $filter: ModelGroupsFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listGroups(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      groupId
+      name
+      createdBy
+      createdAt
+      updatedAt
+      image
+      id
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListGroupsQueryVariables,
+  APITypes.ListGroupsQuery
+>;
+export const getMemberships = /* GraphQL */ `query GetMemberships($id: ID!) {
+  getMemberships(id: $id) {
+    membershipID
+    groupId
+    userId
+    id
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetMembershipsQueryVariables,
+  APITypes.GetMembershipsQuery
+>;
+export const listMemberships = /* GraphQL */ `query ListMemberships(
+  $filter: ModelMembershipsFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listMemberships(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      membershipID
+      groupId
+      userId
+      id
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListMembershipsQueryVariables,
+  APITypes.ListMembershipsQuery
+>;
