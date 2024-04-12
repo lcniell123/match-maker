@@ -2,7 +2,7 @@
   "version": "1",
   "cognitoConfig": {
     "identityPoolName": "matchmakera431c571_identitypool_a431c571",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "matchma431c571",
     "userPoolName": "matchmakera431c571_userpool_a431c571",
     "autoVerifiedAttributes": [

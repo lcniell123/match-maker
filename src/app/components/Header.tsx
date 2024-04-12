@@ -26,10 +26,7 @@ export default function Header() {
         <main className="mt-8 flex-grow flex justify-center items-center">
           <div className="max-w-screen-sm mx-auto p-4">
             <div className="flex justify-center mt-4 space-x-4"></div>
-            <ProfilePicture
-              handleEditPicture={"setEditingPicture"}
-              userProfilePicture={"userProfilePicture"}
-            />
+            <ProfilePicture userName={userName} />
             <div className="flex justify-center mt-4 space-x-4">
               <button
                 onClick={() => router.push("/profile")}
