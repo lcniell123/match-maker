@@ -1,134 +1,164 @@
-'use client';
+"use client";
 
 import { useRouter } from "next/navigation";
-import * as mutations from '@/graphql/mutations';
-import * as queries from '@/graphql/queries';
-import { generateClient } from 'aws-amplify/api';
-import { useEffect, useState } from 'react';
-import ProfileDescription from './profileDescription';
-import EditProfile from './editProfile';
-import ProfilePicture from './profilePicture';
+import * as mutations from "@/graphql/mutations";
+// 1. Add the queries as an import
+import * as queries from "@/graphql/queries";
+import { generateClient } from "aws-amplify/api";
+import { useEffect, useState } from "react";
+import ProfileDescription from "./profileDescription";
+import EditProfile from "./editProfile";
+import ProfilePicture from "./profilePicture";
+import { AuthUser } from "aws-amplify/auth";
+import { ListProfilesQuery } from "@/API";
 
-
-
-
+export interface Profile {
+  id: string;
+  name: string;
+  updatedAt: string | null | undefined;
+  description?: string | null | undefined;
+  languages?: string | null | undefined;
+  zipCode?: string | null | undefined;
+  gamePreference?: string | null | undefined;
+  username?: string | null | undefined;
+  bio?: string | null | undefined;
+  photo?: string | null | undefined;
+  coverPhoto?: string | null | undefined;
+  firstName?: string | null | undefined;
+  lastName?: string | null | undefined;
+  age?: number | null | undefined;
+  country?: string | null | undefined;
+  timeZone?: string | null | undefined;
+  city?: string | null | undefined;
+  region?: string | null | undefined;
+  postalCode?: string | null | undefined;
+  language?: string | null | undefined;
+  favoriteGame?: string | null | undefined;
+  preferredGenre?: string | null | undefined;
+  timeAvailability?: string | null | undefined;
+  preferredTeammateAgeRange?: string | null | undefined;
+  skillLevel?: string | null | undefined;
+  preferredGameMode?: string | null | undefined;
+  preferredRole?: string | null | undefined;
+  playStyle?: string | null | undefined;
+  flexibility?: Boolean | null | undefined;
+  behavior?: string | null | undefined;
+  communicationPreference?: string | null | undefined;
+  toleranceLevel?: string | null | undefined;
+  teamworkLevel?: string | null | undefined;
+  competitivenessLevel?: string | null | undefined;
+}
 const client = generateClient();
 
-
-export default  function Profiles(profile: any) {
-  const router = useRouter()
-  
-  const [allProfiles,setAllProfiles]= useState<any>([]);
-  const [newProfiles, setNewProfiles]=useState<any>([]);
+export default function Profiles(profile: AuthUser | any) {
+  //const router = useRouter();
+  const [profiles, setProfiles] = useState<Profile[]>([]);
+  const [singleProfile, setSingleProfile] = useState<Profile>();
 
   const [editingProfile, setEditingProfile] = useState(false);
   const [userProfilePicture, setUserProfilePicture] = useState(null);
-  const [formData, setFormData] = useState({/* initial form data */});
+  //const [formData, setFormData] = useState({
+  /* initial form data */
+  //s});
   const [editingPicture, setEditingPicture] = useState(false);
 
+  // const handleEditProfile = () => {
+  //   setEditingProfile(true);
+  // };
 
-   useEffect(() => {
-     // Fetch user profile-form-form data from the backend or wherever it's stored
-     // Setting a mock user profile-form-form with attributes
-     const mockUser = {/* mock user data */};
-     setFormData(mockUser);
-    //  setUserProfilePicture(mockUser.profilePicture);
-   }, []);
+  // const handleSaveProfile = () => {
+  //   setEditingProfile(false);
+  //   //updateProfile();
+  //   // Logic to save profile changes
+  // };
 
+  // const handleCancelEdit = () => {
+  //   setEditingProfile(false);
+  //   // Revert changes to the user's original profile data
+  // };
 
-   const handleEditProfile = () => {
-     setEditingProfile(true);
-   };
+  // const handleChange = (e: { target: { name: any; value: any } }) => {
+  //   const { name, value } = e.target;
+  //   setFormData((prevData) => ({
+  //     ...prevData,
+  //     [name]: value,
+  //   }));
+  // };
 
-   const handleSaveProfile = () => {
-     setEditingProfile(false);
-     // Logic to save profile-form-form changes
-   };
+  // Load list of profiles
+  const listProfile = client.graphql({
+    query: queries.listProfiles,
+  });
 
-   const handleCancelEdit = () => {
-     setEditingProfile(false);
-     // Revert changes to the user's original profile-form-form data
-   };
-
-   const handleChange = (e: { target: { name: any; value: any; }; }) => {
-     const { name, value } = e.target;
-     setFormData((prevData) => ({
-       ...prevData,
-       [name]: value
-     }));
-   };
-
-   const handleDeleteProfile = () => {
-     console.log('Deleting profile-form-form...');
-     // Logic to delete the user's profile-form-form
-   };
-
- 
-
-  async function updateProfile (formData:FormData){
-    const profileDetails = {
-        id: '1f3cbde9-e3bb-471e-8c75-1175a8c21dcd',
-        description:formData.get('description')?.toString() ?? ''
-      };
-
-    const {data} = await client.graphql({
-        query: mutations.updateProfile,
-        variables: { input: profileDetails }
-      });
-}
- 
-    // console.log("data",data.data)
-    const  data = client.graphql({
-      query: queries.listProfiles
+  useEffect(() => {
+    // add profile list to profiles state
+    listProfile.then((d) => {
+      if (d.data.listProfiles.items) {
+        setProfiles(d.data.listProfiles.items);
+      }
     });
-    useEffect(()=>{
-      
-      data.then((d)=>{
-        console.log(d.data.listProfiles.items)
-        setAllProfiles(d.data.listProfiles.items)
+  }, []);
 
-      })
-    },[])
-
-    useEffect(()=>{
-    setNewProfiles(allProfiles)
-    },[allProfiles])
-
-    const handleRefresh = () => {
-      router.push('/')
-      router.refresh();
-    };
-
+  useEffect(() => {
+    // if no profiles create a profile with name and id
+    if (profiles && profiles.length === 0) {
+      client.graphql({
+        query: mutations.createProfile,
+        variables: {
+          input: {
+            name: profile.profile.username,
+            id: profile.profile.userId,
+          },
+        },
+      });
+    }
+    profiles?.forEach((p) => {
+      //when profile name matches profile list show that profile
+      if (profile.profile.userId == p.id) {
+        const single = {
+          ...p,
+          name: profile.profile.username,
+          id: profile.profile.userId,
+        };
+        setSingleProfile(single);
+      } else {
+        if (profile.profile.username && profile.profile.userId) {
+          const create = client.graphql({
+            query: mutations.createProfile,
+            variables: {
+              input: {
+                name: profile.profile.username,
+                id: profile.profile.userId,
+              },
+            },
+          });
+          create;
+        }
+      }
+    });
+  }, [profiles]);
 
   return (
-<div className="max-w-screen-lg rounded-lg shadow-md p-6 mb-6 w-screen">
-    <div className="max-w-screen-sm mx-auto p-4">
+    // <div className="max-w-screen-lg mx-auto bg-gray-800 rounded-lg shadow-md p-6 mb-6 w-screen">
+    //   <div className="max-w-screen-sm mx-auto p-4">
+    <>
+      {" "}
       {!editingProfile && (
-        <ProfileDescription
-          formData={formData}
+        <>
+          <div className="mb-4"></div>
+          <ProfileDescription
+            formData={singleProfile}
             handleEditProfile={() => setEditingProfile(true)}
-        />
+          />
+        </>
       )}
       {editingProfile && (
         <EditProfile
-            formData={formData}
-            handleChange={handleChange}
-            editingProfile={editingProfile}
-            handleSaveProfile={handleSaveProfile}
-            handleCancelEdit={() => setEditingProfile(false)}
-            handleDeleteProfile={handleDeleteProfile} handlePictureChange={undefined}
+          formData={singleProfile}
+          handleCancelProfile={() => setEditingProfile(false)}
         />
       )}
-    </div>
-
-      
-      
-      {/* <form action={updateProfile}>
-        <textarea name="description" placeholder={newProfiles[0] && newProfiles[0].description && newProfiles[0].description ? newProfiles[0].description : "add description"} />
-        <br/>
-        <button type="submit" onClick={handleRefresh} >Update</button>
-      </form> */}
-    </div>
-    
+    </>
+    // </div>
   );
 }

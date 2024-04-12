@@ -15,26 +15,27 @@ const GamingPreferences = () => {
                         <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                             <div className="sm:col-span-4">
                                 <label htmlFor="games" className="block text-sm font-medium leading-6 text-gray-900">Favorite
-                                    game(s)</label>
+                                    game</label>
                                 <div className="mt-2">
                                     <select
-                                        id="games"
-                                        name="games"
+                                        id="favorite-game"
+                                        name="favorite-game"
                                         className="block bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     >
                                         <option>Fortnite</option>
                                         <option>Counter Strike</option>
+                                        <option>Other</option>
                                     </select>
                                 </div>
                             </div>
                             <div className="sm:col-span-4">
                                 <label htmlFor="genres"
                                        className="block text-sm font-medium leading-6 text-gray-900">Preferred gaming
-                                    genre(s)</label>
+                                    genre</label>
                                 <div className="mt-2">
                                     <select
-                                        id="genres"
-                                        name="genres"
+                                        id="preferred-genre"
+                                        name="preferred-genre"
                                         className="block bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     >
                                         <option>Shooter</option>

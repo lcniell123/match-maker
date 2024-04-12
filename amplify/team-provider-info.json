@@ -13,7 +13,11 @@
     },
     "categories": {
       "auth": {
-        "matchmakera431c571": {}
+        "matchmakera431c571": {},
+        "userPoolGroups": {}
+      },
+      "api": {
+        "matchmaker": {}
       }
     }
   }

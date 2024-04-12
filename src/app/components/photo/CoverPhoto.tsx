@@ -6,7 +6,7 @@ const CoverPhoto: React.FC = () => {
     const [userProfilePicture, setUserProfilePicture] = useState(null);
 
   return (
-      <div className="relative h-64">
+      <div className="relative h-64 w-full">
           <img
               src="https://wallpapers.com/images/high/enemy-territory-quake-wars-live-gaming-itpl8s3iyfjs6gja.webp"
               alt="Cover Photo"

@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, {useState} from 'react';
 import Stepper from "@/app/components/Stepper";
 import ProfileDetails from '@/app/components/profile-form/ProfileDetails';
 import PersonalInformation from "@/app/components/profile-form/PersonalInfomation";
@@ -11,7 +11,39 @@ export default function ProfileForm() {
   const steps = ["Profile Details", "Personal Information", "Gaming Preferences"];
   const numberOfSteps = steps.length;
 
-  const goToNextStep = () => setCurrentStep(prev => prev === numberOfSteps - 1 ? prev : prev + 1);
+    const [formData, setFormData] = useState({
+     username: "",
+     bio: "",
+  });
+  const handleChange = (e: any) => {
+         console.log("HEEEEREEEEE");
+     const { name, value } = e.target;
+     setFormData((prevData) => ({
+       ...prevData,
+       [name]: value
+     }));
+   };
+     const handleSave = () => {
+    console.log("Form data:", formData);
+  };
+
+    const goToNextStep = () => {
+    handleSave();
+    setCurrentStep(prev => prev === numberOfSteps - 1 ? prev : prev + 1);
+
+  };
+
+
+
+  const updateFormData = (stepData: any) => {
+    setFormData(prevData => ({
+      ...prevData,
+      ...stepData
+    }));
+  };
+
+
+ // const goToNextStep = () => setCurrentStep(prev => prev === numberOfSteps - 1 ? prev : prev + 1);
   const goToPreviousStep = () => setCurrentStep(prev => prev <= 0 ? prev : prev - 1);
   const isLastStep = currentStep === numberOfSteps - 1;
 
@@ -26,7 +58,7 @@ export default function ProfileForm() {
                 finding teammates.</p>
             </div>
             <Stepper currentStep={currentStep} steps={steps}/>
-            {currentStep === 0 && <ProfileDetails/>}
+            {currentStep === 0 && <ProfileDetails formData={formData} handleChange={handleChange}/>}
             {currentStep === 1 && <PersonalInformation/>}
             {currentStep === 2 && <GamingPreferences/>}
           </div>
