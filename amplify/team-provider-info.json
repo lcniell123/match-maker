@@ -18,6 +18,9 @@
       },
       "api": {
         "matchmaker": {}
+      },
+      "storage": {
+        "s3matchmakerstoragefb200466": {}
       }
     }
   }

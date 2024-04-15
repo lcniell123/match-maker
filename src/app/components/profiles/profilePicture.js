@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { uploadData } from "aws-amplify/storage";
 
-const ProfilePicture = ({ handleEditPicture, userProfilePicture }) => {
+const ProfilePicture = ({ userName }) => {
   const [image, setImage] = useState(null);
 
   useEffect(() => {
@@ -10,13 +11,31 @@ const ProfilePicture = ({ handleEditPicture, userProfilePicture }) => {
     }
   }, []);
 
-  const handleImageChange = (e) => {
+  useEffect(() => {
+    setImage(
+      `https://matchmaker-storage-fb200466191228-dev.s3.us-east-2.amazonaws.com/public/${userName}-profile-pic.jpg`
+    );
+  }, [userName]);
+
+  async function handleImageChange(e) {
     const file = e.target.files[0];
     const reader = new FileReader();
 
-    reader.onload = () => {
-      setImage(reader.result);
-      localStorage.setItem("profilePicture", reader.result); // Save image URL in local storage
+    reader.onload = async () => {
+      const filename = file.name;
+      try {
+        const result = await uploadData({
+          key: `${userName}-profile-pic.jpg`,
+          data: file,
+          options: {
+            accessLevel: "guest", // defaults to `guest` but can be 'private' | 'protected' | 'guest'
+          },
+        }).result;
+        console.log("Succeeded: ", result);
+        window.location.reload();
+      } catch (error) {
+        console.log("Error : ", error);
+      }
     };
 
     if (file) {
@@ -25,11 +44,7 @@ const ProfilePicture = ({ handleEditPicture, userProfilePicture }) => {
       setImage(null); // Reset image state if no file is chosen
       localStorage.removeItem("profilePicture"); // Remove image URL from local storage
     }
-  };
-
-  const handleClickEditPicture = () => {
-    handleEditPicture();
-  };
+  }
 
   return (
     <div className="flex justify-center items-center h-full">
@@ -64,12 +79,10 @@ const ProfilePicture = ({ handleEditPicture, userProfilePicture }) => {
         id="profile-image"
         className="hidden"
         onChange={handleImageChange}
+        onClick={handleImageChange}
       />
     </div>
-    
   );
 };
-
-
 
 export default ProfilePicture;
