@@ -19,5 +19,11 @@ export type AmplifyDependentResourcesAttributes = {
     "userPoolGroups": {
       "matchmakerUserGroupRole": "string"
     }
+  },
+  "storage": {
+    "s3matchmakerstoragefb200466": {
+      "BucketName": "string",
+      "Region": "string"
+    }
   }
 }

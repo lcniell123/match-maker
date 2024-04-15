@@ -85,4 +85,8 @@ const ProfilePicture = ({ userName }) => {
   );
 };
 
+<<<<<<< HEAD
 export default ProfilePicture;
+=======
+export default ProfilePicture;
+>>>>>>> 8b63605fdde8ceff235d7f1f9b65ed56d29ec03d
