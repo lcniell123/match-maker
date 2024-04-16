@@ -181,3 +181,109 @@ GraphQL Table:
 Queried Data:
 <img width="1440" alt="Screenshot 2024-03-27 at 2 39 18 PM" src="https://github.com/lcniell123/match-maker/assets/14323809/0e802ee0-a039-4d17-9030-2c3d60b6f7f9">
 
+
+# Sprint 3
+## Daily Scrum
+Date - 4/15/2024\
+What did you do in the last 24 hours that helped the Development Team meet the Sprint Goal?\
+- Ploynapas: I added more attributes to the profile and edited pages, included additional attributes to the match functionality to enhance its effectiveness, conducted test cases, and implemented CI/CD. 
+- Ayo: I worked on functionality for adding friends and creating groups. 
+- Samuel:
+- Luciano: Added image upload capabilities and storage 
+
+What will you do in the next 24 hours to help the Development Team meet the Sprint Goal?\
+- Ploynapas: I will attempt to resolve the issues with the branch on GitHub and CI/CD pipeline tests to ensure that the application is deployed correctly. Additionally, I will assist my teammates with any other functionality they may need help with. 
+- Ayo: Test the updates made to ensure the functions are working as expected. 
+- Samuel: 
+- Luciano: create the groups page
+  
+Do you see any impediment that prevents you or the Development Team from meeting the Sprint Goal? What are the impediments? What is your impediment removal plan?\
+- Ploynapas: Merging codes on GitHub can potentially break the original code and slow down progress. Working together as a team to solve these issues will ensure success. 
+- Ayo: Ayo: There’s a learning curve with GraphQL queries and integrating multiple components. Practicing and referencing code examples is helping. 
+- Samuel: 
+- Luciano: coordinating with team members when sharing and updating schema types. Maybe all agree on schema or use something like Swagger 
+
+  
+## Sprint Review and Retrospective
+Date - 03/21/2024 - 04/15/2024\
+Document:
+https://docs.google.com/document/d/1nwpZsuP1yNPwdPN943nxQaB8j_mO1LzjDaKtxrPcYIQ/edit?usp=sharing
+
+- We have created our Sprint 3's forecast story points.
+
+Screenshot:
+![image](https://github.com/lcniell123/match-maker/assets/95537416/bc0e5eb6-0606-4665-91df-b794b8e2b4de)
+
+
+- We have decomposed stories into smaller tasks for sprint 3.
+
+Screenshot:
+![image](https://github.com/lcniell123/match-maker/assets/95537416/04e54a78-6fd8-4157-b9d2-95b07214d4a9)
+
+
+- We have conducted our sprint review for sprint 3.
+
+Screenshot:
+![Sprint review](https://github.com/lcniell123/match-maker/assets/95537416/4c6abfdd-70ca-4742-9e63-3e6bc58b44dc)
+
+
+- We have added more attributes to the profile and edited pages, option to match with a like-minded gamer, options to add friend, and option to accept friend to this sprint. 
+
+Screenshot:
+![image](https://github.com/lcniell123/match-maker/assets/95537416/7764792e-834c-4381-a43b-b1a88d168ac2)
+
+
+Screenshot:
+![image](https://github.com/lcniell123/match-maker/assets/95537416/f4097392-eec9-4d94-adbb-ba462f1dc4bb)
+
+
+Screenshot:
+![image](https://github.com/lcniell123/match-maker/assets/95537416/950e8069-ec75-4e85-a38c-970f2d937018)
+
+
+Screenshot:
+![image](https://github.com/lcniell123/match-maker/assets/95537416/4c90109b-100a-40cf-9328-025d03374006)
+
+
+
+## Sprint Burndown Chart
+![image](https://github.com/lcniell123/match-maker/assets/95537416/06427509-d094-4af1-8ed0-276783e703a7)
+
+
+
+## Mobbed Programming
+- During our programming session, we made progress and discussed ways to improve our development app's efficiency. 
+
+Screenshot:
+![image](https://github.com/lcniell123/match-maker/assets/95537416/526e2e1d-11e9-4fde-9cb4-8e2a5e83e5ea)
+
+
+
+## Test Suite
+- We built our product test-first with Cypress. We added 1 BDD and 10 test cases across 2 test suites for this sprint. 
+
+Screenshot:
+![image](https://github.com/lcniell123/match-maker/assets/95537416/94654e11-59c5-470a-935f-3fb21d9722f2)
+
+
+Screenshot:
+![image](https://github.com/lcniell123/match-maker/assets/95537416/fcdc58e8-981c-483a-b701-a6b0be6c3261)
+
+
+
+## CI/CD System
+We faced a conflict when trying to deploy CI/CD after merging the code to GitHub. 
+
+Screenshot:
+![image](https://github.com/lcniell123/match-maker/assets/95537416/7ee0fe55-7024-4323-bc84-73b2411c8dc5)
+
+
+Screenshot:
+![image](https://github.com/lcniell123/match-maker/assets/95537416/e4703a85-b1c3-4f53-be88-856cee07e4ac)
+
+
+Screenshot:
+![image](https://github.com/lcniell123/match-maker/assets/95537416/52ecbd50-d343-452d-8d3b-c519b8adf87e)
+
+
+
