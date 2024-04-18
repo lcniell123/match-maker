@@ -1,21 +1,18 @@
 "use client";
-
 import React, { useEffect, useState } from "react";
-import { Amplify } from "aws-amplify";
-
 import "@aws-amplify/ui-react/styles.css";
 import * as mutations from "@/graphql/mutations";
 import { getCurrentUser } from "aws-amplify/auth";
-
-import awsExports from "../../amplifyconfiguration.json";
-
 import { useRouter } from "next/navigation";
 import { generateClient } from "aws-amplify/api";
 import * as queries from "@/graphql/queries";
-import ProfileDescription from "../components/profiles/profileDescription";
-import EditProfile from "../components/profiles/editProfile";
+import ProfileDescription from "../../components/profiles/profileDescription";
+import EditProfile from "../../components/profiles/editProfile";
 
+import awsExports from "../../../../amplifyconfiguration.json";
+import { Amplify } from "aws-amplify";
 Amplify.configure(awsExports);
+
 export interface Profile {
   id: string;
   name: string;
@@ -56,9 +53,7 @@ export interface Profile {
 function Profile() {
   const [userName, setUserName] = useState("");
   const [userId, setUserId] = useState("");
-
   const router = useRouter();
-
   const client = generateClient();
 
   async function currentAuthenticatedUser() {
@@ -74,31 +69,8 @@ function Profile() {
 
   const [profiles, setProfiles] = useState<Profile[]>([]);
   const [singleProfile, setSingleProfile] = useState<Profile>();
-
   const [editingProfile, setEditingProfile] = useState(false);
 
-  // const handleEditProfile = () => {
-  //   setEditingProfile(true);
-  // };
-
-  // const handleSaveProfile = () => {
-  //   setEditingProfile(false);
-  //   //updateProfile();
-  //   // Logic to save profile changes
-  // };
-
-  // const handleCancelEdit = () => {
-  //   setEditingProfile(false);
-  //   // Revert changes to the user's original profile data
-  // };
-
-  // const handleChange = (e: { target: { name: any; value: any } }) => {
-  //   const { name, value } = e.target;
-  //   setFormData((prevData) => ({
-  //     ...prevData,
-  //     [name]: value,
-  //   }));
-  // };
 
   // Load list of profiles
   const listProfile = client.graphql({
