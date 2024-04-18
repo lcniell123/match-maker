@@ -8,15 +8,14 @@ type GeneratedSubscription<InputType, OutputType> = string & {
   __generatedSubscriptionOutput: OutputType;
 };
 
-export const onCreateProfile = /* GraphQL */ `subscription OnCreateProfile($filter: ModelSubscriptionProfileFilterInput) {
-  onCreateProfile(filter: $filter) {
+export const onCreateProfile = /* GraphQL */ `subscription OnCreateProfile(
+  $filter: ModelSubscriptionProfileFilterInput
+  $owner: String
+) {
+  onCreateProfile(filter: $filter, owner: $owner) {
     id
     name
     description
-    languages
-    zipCode
-    gamePreference
-    behaviour
     username
     bio
     photo
@@ -46,6 +45,7 @@ export const onCreateProfile = /* GraphQL */ `subscription OnCreateProfile($filt
     competitivenessLevel
     createdAt
     updatedAt
+    owner
     __typename
   }
 }
@@ -53,15 +53,14 @@ export const onCreateProfile = /* GraphQL */ `subscription OnCreateProfile($filt
   APITypes.OnCreateProfileSubscriptionVariables,
   APITypes.OnCreateProfileSubscription
 >;
-export const onUpdateProfile = /* GraphQL */ `subscription OnUpdateProfile($filter: ModelSubscriptionProfileFilterInput) {
-  onUpdateProfile(filter: $filter) {
+export const onUpdateProfile = /* GraphQL */ `subscription OnUpdateProfile(
+  $filter: ModelSubscriptionProfileFilterInput
+  $owner: String
+) {
+  onUpdateProfile(filter: $filter, owner: $owner) {
     id
     name
     description
-    languages
-    zipCode
-    gamePreference
-    behaviour
     username
     bio
     photo
@@ -91,6 +90,7 @@ export const onUpdateProfile = /* GraphQL */ `subscription OnUpdateProfile($filt
     competitivenessLevel
     createdAt
     updatedAt
+    owner
     __typename
   }
 }
@@ -98,15 +98,14 @@ export const onUpdateProfile = /* GraphQL */ `subscription OnUpdateProfile($filt
   APITypes.OnUpdateProfileSubscriptionVariables,
   APITypes.OnUpdateProfileSubscription
 >;
-export const onDeleteProfile = /* GraphQL */ `subscription OnDeleteProfile($filter: ModelSubscriptionProfileFilterInput) {
-  onDeleteProfile(filter: $filter) {
+export const onDeleteProfile = /* GraphQL */ `subscription OnDeleteProfile(
+  $filter: ModelSubscriptionProfileFilterInput
+  $owner: String
+) {
+  onDeleteProfile(filter: $filter, owner: $owner) {
     id
     name
     description
-    languages
-    zipCode
-    gamePreference
-    behaviour
     username
     bio
     photo
@@ -136,6 +135,7 @@ export const onDeleteProfile = /* GraphQL */ `subscription OnDeleteProfile($filt
     competitivenessLevel
     createdAt
     updatedAt
+    owner
     __typename
   }
 }
@@ -145,8 +145,9 @@ export const onDeleteProfile = /* GraphQL */ `subscription OnDeleteProfile($filt
 >;
 export const onCreateFriendships = /* GraphQL */ `subscription OnCreateFriendships(
   $filter: ModelSubscriptionFriendshipsFilterInput
+  $owner: String
 ) {
-  onCreateFriendships(filter: $filter) {
+  onCreateFriendships(filter: $filter, owner: $owner) {
     friendshipId
     userId
     friendId
@@ -154,6 +155,7 @@ export const onCreateFriendships = /* GraphQL */ `subscription OnCreateFriendshi
     id
     createdAt
     updatedAt
+    owner
     __typename
   }
 }
@@ -163,8 +165,9 @@ export const onCreateFriendships = /* GraphQL */ `subscription OnCreateFriendshi
 >;
 export const onUpdateFriendships = /* GraphQL */ `subscription OnUpdateFriendships(
   $filter: ModelSubscriptionFriendshipsFilterInput
+  $owner: String
 ) {
-  onUpdateFriendships(filter: $filter) {
+  onUpdateFriendships(filter: $filter, owner: $owner) {
     friendshipId
     userId
     friendId
@@ -172,6 +175,7 @@ export const onUpdateFriendships = /* GraphQL */ `subscription OnUpdateFriendshi
     id
     createdAt
     updatedAt
+    owner
     __typename
   }
 }
@@ -181,8 +185,9 @@ export const onUpdateFriendships = /* GraphQL */ `subscription OnUpdateFriendshi
 >;
 export const onDeleteFriendships = /* GraphQL */ `subscription OnDeleteFriendships(
   $filter: ModelSubscriptionFriendshipsFilterInput
+  $owner: String
 ) {
-  onDeleteFriendships(filter: $filter) {
+  onDeleteFriendships(filter: $filter, owner: $owner) {
     friendshipId
     userId
     friendId
@@ -190,6 +195,7 @@ export const onDeleteFriendships = /* GraphQL */ `subscription OnDeleteFriendshi
     id
     createdAt
     updatedAt
+    owner
     __typename
   }
 }
@@ -197,8 +203,11 @@ export const onDeleteFriendships = /* GraphQL */ `subscription OnDeleteFriendshi
   APITypes.OnDeleteFriendshipsSubscriptionVariables,
   APITypes.OnDeleteFriendshipsSubscription
 >;
-export const onCreateGroups = /* GraphQL */ `subscription OnCreateGroups($filter: ModelSubscriptionGroupsFilterInput) {
-  onCreateGroups(filter: $filter) {
+export const onCreateGroups = /* GraphQL */ `subscription OnCreateGroups(
+  $filter: ModelSubscriptionGroupsFilterInput
+  $owner: String
+) {
+  onCreateGroups(filter: $filter, owner: $owner) {
     groupId
     name
     createdBy
@@ -206,6 +215,7 @@ export const onCreateGroups = /* GraphQL */ `subscription OnCreateGroups($filter
     updatedAt
     image
     id
+    owner
     __typename
   }
 }
@@ -213,8 +223,11 @@ export const onCreateGroups = /* GraphQL */ `subscription OnCreateGroups($filter
   APITypes.OnCreateGroupsSubscriptionVariables,
   APITypes.OnCreateGroupsSubscription
 >;
-export const onUpdateGroups = /* GraphQL */ `subscription OnUpdateGroups($filter: ModelSubscriptionGroupsFilterInput) {
-  onUpdateGroups(filter: $filter) {
+export const onUpdateGroups = /* GraphQL */ `subscription OnUpdateGroups(
+  $filter: ModelSubscriptionGroupsFilterInput
+  $owner: String
+) {
+  onUpdateGroups(filter: $filter, owner: $owner) {
     groupId
     name
     createdBy
@@ -222,6 +235,7 @@ export const onUpdateGroups = /* GraphQL */ `subscription OnUpdateGroups($filter
     updatedAt
     image
     id
+    owner
     __typename
   }
 }
@@ -229,8 +243,11 @@ export const onUpdateGroups = /* GraphQL */ `subscription OnUpdateGroups($filter
   APITypes.OnUpdateGroupsSubscriptionVariables,
   APITypes.OnUpdateGroupsSubscription
 >;
-export const onDeleteGroups = /* GraphQL */ `subscription OnDeleteGroups($filter: ModelSubscriptionGroupsFilterInput) {
-  onDeleteGroups(filter: $filter) {
+export const onDeleteGroups = /* GraphQL */ `subscription OnDeleteGroups(
+  $filter: ModelSubscriptionGroupsFilterInput
+  $owner: String
+) {
+  onDeleteGroups(filter: $filter, owner: $owner) {
     groupId
     name
     createdBy
@@ -238,6 +255,7 @@ export const onDeleteGroups = /* GraphQL */ `subscription OnDeleteGroups($filter
     updatedAt
     image
     id
+    owner
     __typename
   }
 }
@@ -245,10 +263,10 @@ export const onDeleteGroups = /* GraphQL */ `subscription OnDeleteGroups($filter
   APITypes.OnDeleteGroupsSubscriptionVariables,
   APITypes.OnDeleteGroupsSubscription
 >;
-export const onCreateMemberships = /* GraphQL */ `subscription OnCreateMemberships(
-  $filter: ModelSubscriptionMembershipsFilterInput
+export const onCreateGroupMemberships = /* GraphQL */ `subscription OnCreateGroupMemberships(
+  $filter: ModelSubscriptionGroupMembershipsFilterInput
 ) {
-  onCreateMemberships(filter: $filter) {
+  onCreateGroupMemberships(filter: $filter) {
     membershipID
     groupId
     userId
@@ -259,13 +277,13 @@ export const onCreateMemberships = /* GraphQL */ `subscription OnCreateMembershi
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnCreateMembershipsSubscriptionVariables,
-  APITypes.OnCreateMembershipsSubscription
+  APITypes.OnCreateGroupMembershipsSubscriptionVariables,
+  APITypes.OnCreateGroupMembershipsSubscription
 >;
-export const onUpdateMemberships = /* GraphQL */ `subscription OnUpdateMemberships(
-  $filter: ModelSubscriptionMembershipsFilterInput
+export const onUpdateGroupMemberships = /* GraphQL */ `subscription OnUpdateGroupMemberships(
+  $filter: ModelSubscriptionGroupMembershipsFilterInput
 ) {
-  onUpdateMemberships(filter: $filter) {
+  onUpdateGroupMemberships(filter: $filter) {
     membershipID
     groupId
     userId
@@ -276,13 +294,13 @@ export const onUpdateMemberships = /* GraphQL */ `subscription OnUpdateMembershi
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnUpdateMembershipsSubscriptionVariables,
-  APITypes.OnUpdateMembershipsSubscription
+  APITypes.OnUpdateGroupMembershipsSubscriptionVariables,
+  APITypes.OnUpdateGroupMembershipsSubscription
 >;
-export const onDeleteMemberships = /* GraphQL */ `subscription OnDeleteMemberships(
-  $filter: ModelSubscriptionMembershipsFilterInput
+export const onDeleteGroupMemberships = /* GraphQL */ `subscription OnDeleteGroupMemberships(
+  $filter: ModelSubscriptionGroupMembershipsFilterInput
 ) {
-  onDeleteMemberships(filter: $filter) {
+  onDeleteGroupMemberships(filter: $filter) {
     membershipID
     groupId
     userId
@@ -293,6 +311,6 @@ export const onDeleteMemberships = /* GraphQL */ `subscription OnDeleteMembershi
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnDeleteMembershipsSubscriptionVariables,
-  APITypes.OnDeleteMembershipsSubscription
+  APITypes.OnDeleteGroupMembershipsSubscriptionVariables,
+  APITypes.OnDeleteGroupMembershipsSubscription
 >;

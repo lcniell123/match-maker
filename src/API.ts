@@ -6,10 +6,6 @@ export type CreateProfileInput = {
   id?: string | null,
   name: string,
   description?: string | null,
-  languages?: string | null,
-  zipCode?: string | null,
-  gamePreference?: string | null,
-  behaviour?: string | null,
   username?: string | null,
   bio?: string | null,
   photo?: string | null,
@@ -42,10 +38,6 @@ export type CreateProfileInput = {
 export type ModelProfileConditionInput = {
   name?: ModelStringInput | null,
   description?: ModelStringInput | null,
-  languages?: ModelStringInput | null,
-  zipCode?: ModelStringInput | null,
-  gamePreference?: ModelStringInput | null,
-  behaviour?: ModelStringInput | null,
   username?: ModelStringInput | null,
   bio?: ModelStringInput | null,
   photo?: ModelStringInput | null,
@@ -78,6 +70,7 @@ export type ModelProfileConditionInput = {
   not?: ModelProfileConditionInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
+  owner?: ModelStringInput | null,
 };
 
 export type ModelStringInput = {
@@ -144,10 +137,6 @@ export type Profile = {
   id: string,
   name: string,
   description?: string | null,
-  languages?: string | null,
-  zipCode?: string | null,
-  gamePreference?: string | null,
-  behaviour?: string | null,
   username?: string | null,
   bio?: string | null,
   photo?: string | null,
@@ -177,16 +166,13 @@ export type Profile = {
   competitivenessLevel?: string | null,
   createdAt: string,
   updatedAt: string,
+  owner?: string | null,
 };
 
 export type UpdateProfileInput = {
   id: string,
   name?: string | null,
   description?: string | null,
-  languages?: string | null,
-  zipCode?: string | null,
-  gamePreference?: string | null,
-  behaviour?: string | null,
   username?: string | null,
   bio?: string | null,
   photo?: string | null,
@@ -221,7 +207,7 @@ export type DeleteProfileInput = {
 };
 
 export type CreateFriendshipsInput = {
-  friendshipId: string,
+  friendshipId?: string | null,
   userId?: string | null,
   friendId?: string | null,
   status?: string | null,
@@ -238,17 +224,19 @@ export type ModelFriendshipsConditionInput = {
   not?: ModelFriendshipsConditionInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
+  owner?: ModelStringInput | null,
 };
 
 export type Friendships = {
   __typename: "Friendships",
-  friendshipId: string,
+  friendshipId?: string | null,
   userId?: string | null,
   friendId?: string | null,
   status?: string | null,
   id: string,
   createdAt: string,
   updatedAt: string,
+  owner?: string | null,
 };
 
 export type UpdateFriendshipsInput = {
@@ -264,7 +252,7 @@ export type DeleteFriendshipsInput = {
 };
 
 export type CreateGroupsInput = {
-  groupId: string,
+  groupId?: string | null,
   name?: string | null,
   createdBy?: string | null,
   createdAt?: string | null,
@@ -283,17 +271,19 @@ export type ModelGroupsConditionInput = {
   and?: Array< ModelGroupsConditionInput | null > | null,
   or?: Array< ModelGroupsConditionInput | null > | null,
   not?: ModelGroupsConditionInput | null,
+  owner?: ModelStringInput | null,
 };
 
 export type Groups = {
   __typename: "Groups",
-  groupId: string,
+  groupId?: string | null,
   name?: string | null,
   createdBy?: string | null,
   createdAt?: string | null,
   updatedAt?: string | null,
   image?: string | null,
   id: string,
+  owner?: string | null,
 };
 
 export type UpdateGroupsInput = {
@@ -310,27 +300,27 @@ export type DeleteGroupsInput = {
   id: string,
 };
 
-export type CreateMembershipsInput = {
-  membershipID: string,
+export type CreateGroupMembershipsInput = {
+  membershipID?: string | null,
   groupId?: string | null,
   userId?: string | null,
   id?: string | null,
 };
 
-export type ModelMembershipsConditionInput = {
+export type ModelGroupMembershipsConditionInput = {
   membershipID?: ModelStringInput | null,
   groupId?: ModelStringInput | null,
   userId?: ModelStringInput | null,
-  and?: Array< ModelMembershipsConditionInput | null > | null,
-  or?: Array< ModelMembershipsConditionInput | null > | null,
-  not?: ModelMembershipsConditionInput | null,
+  and?: Array< ModelGroupMembershipsConditionInput | null > | null,
+  or?: Array< ModelGroupMembershipsConditionInput | null > | null,
+  not?: ModelGroupMembershipsConditionInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
 };
 
-export type Memberships = {
-  __typename: "Memberships",
-  membershipID: string,
+export type GroupMemberships = {
+  __typename: "GroupMemberships",
+  membershipID?: string | null,
   groupId?: string | null,
   userId?: string | null,
   id: string,
@@ -338,14 +328,14 @@ export type Memberships = {
   updatedAt: string,
 };
 
-export type UpdateMembershipsInput = {
+export type UpdateGroupMembershipsInput = {
   membershipID?: string | null,
   groupId?: string | null,
   userId?: string | null,
   id: string,
 };
 
-export type DeleteMembershipsInput = {
+export type DeleteGroupMembershipsInput = {
   id: string,
 };
 
@@ -353,10 +343,6 @@ export type ModelProfileFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
   description?: ModelStringInput | null,
-  languages?: ModelStringInput | null,
-  zipCode?: ModelStringInput | null,
-  gamePreference?: ModelStringInput | null,
-  behaviour?: ModelStringInput | null,
   username?: ModelStringInput | null,
   bio?: ModelStringInput | null,
   photo?: ModelStringInput | null,
@@ -389,6 +375,7 @@ export type ModelProfileFilterInput = {
   and?: Array< ModelProfileFilterInput | null > | null,
   or?: Array< ModelProfileFilterInput | null > | null,
   not?: ModelProfileFilterInput | null,
+  owner?: ModelStringInput | null,
 };
 
 export type ModelIDInput = {
@@ -424,6 +411,7 @@ export type ModelFriendshipsFilterInput = {
   and?: Array< ModelFriendshipsFilterInput | null > | null,
   or?: Array< ModelFriendshipsFilterInput | null > | null,
   not?: ModelFriendshipsFilterInput | null,
+  owner?: ModelStringInput | null,
 };
 
 export type ModelFriendshipsConnection = {
@@ -443,6 +431,7 @@ export type ModelGroupsFilterInput = {
   and?: Array< ModelGroupsFilterInput | null > | null,
   or?: Array< ModelGroupsFilterInput | null > | null,
   not?: ModelGroupsFilterInput | null,
+  owner?: ModelStringInput | null,
 };
 
 export type ModelGroupsConnection = {
@@ -451,21 +440,21 @@ export type ModelGroupsConnection = {
   nextToken?: string | null,
 };
 
-export type ModelMembershipsFilterInput = {
+export type ModelGroupMembershipsFilterInput = {
   membershipID?: ModelStringInput | null,
   groupId?: ModelStringInput | null,
   userId?: ModelStringInput | null,
   id?: ModelIDInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
-  and?: Array< ModelMembershipsFilterInput | null > | null,
-  or?: Array< ModelMembershipsFilterInput | null > | null,
-  not?: ModelMembershipsFilterInput | null,
+  and?: Array< ModelGroupMembershipsFilterInput | null > | null,
+  or?: Array< ModelGroupMembershipsFilterInput | null > | null,
+  not?: ModelGroupMembershipsFilterInput | null,
 };
 
-export type ModelMembershipsConnection = {
-  __typename: "ModelMembershipsConnection",
-  items:  Array<Memberships | null >,
+export type ModelGroupMembershipsConnection = {
+  __typename: "ModelGroupMembershipsConnection",
+  items:  Array<GroupMemberships | null >,
   nextToken?: string | null,
 };
 
@@ -473,10 +462,6 @@ export type ModelSubscriptionProfileFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   name?: ModelSubscriptionStringInput | null,
   description?: ModelSubscriptionStringInput | null,
-  languages?: ModelSubscriptionStringInput | null,
-  zipCode?: ModelSubscriptionStringInput | null,
-  gamePreference?: ModelSubscriptionStringInput | null,
-  behaviour?: ModelSubscriptionStringInput | null,
   username?: ModelSubscriptionStringInput | null,
   bio?: ModelSubscriptionStringInput | null,
   photo?: ModelSubscriptionStringInput | null,
@@ -508,6 +493,7 @@ export type ModelSubscriptionProfileFilterInput = {
   updatedAt?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionProfileFilterInput | null > | null,
   or?: Array< ModelSubscriptionProfileFilterInput | null > | null,
+  owner?: ModelStringInput | null,
 };
 
 export type ModelSubscriptionIDInput = {
@@ -567,6 +553,7 @@ export type ModelSubscriptionFriendshipsFilterInput = {
   updatedAt?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionFriendshipsFilterInput | null > | null,
   or?: Array< ModelSubscriptionFriendshipsFilterInput | null > | null,
+  owner?: ModelStringInput | null,
 };
 
 export type ModelSubscriptionGroupsFilterInput = {
@@ -579,17 +566,18 @@ export type ModelSubscriptionGroupsFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   and?: Array< ModelSubscriptionGroupsFilterInput | null > | null,
   or?: Array< ModelSubscriptionGroupsFilterInput | null > | null,
+  owner?: ModelStringInput | null,
 };
 
-export type ModelSubscriptionMembershipsFilterInput = {
+export type ModelSubscriptionGroupMembershipsFilterInput = {
   membershipID?: ModelSubscriptionStringInput | null,
   groupId?: ModelSubscriptionStringInput | null,
   userId?: ModelSubscriptionStringInput | null,
   id?: ModelSubscriptionIDInput | null,
   createdAt?: ModelSubscriptionStringInput | null,
   updatedAt?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionMembershipsFilterInput | null > | null,
-  or?: Array< ModelSubscriptionMembershipsFilterInput | null > | null,
+  and?: Array< ModelSubscriptionGroupMembershipsFilterInput | null > | null,
+  or?: Array< ModelSubscriptionGroupMembershipsFilterInput | null > | null,
 };
 
 export type CreateProfileMutationVariables = {
@@ -603,10 +591,6 @@ export type CreateProfileMutation = {
     id: string,
     name: string,
     description?: string | null,
-    languages?: string | null,
-    zipCode?: string | null,
-    gamePreference?: string | null,
-    behaviour?: string | null,
     username?: string | null,
     bio?: string | null,
     photo?: string | null,
@@ -636,6 +620,7 @@ export type CreateProfileMutation = {
     competitivenessLevel?: string | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -650,10 +635,6 @@ export type UpdateProfileMutation = {
     id: string,
     name: string,
     description?: string | null,
-    languages?: string | null,
-    zipCode?: string | null,
-    gamePreference?: string | null,
-    behaviour?: string | null,
     username?: string | null,
     bio?: string | null,
     photo?: string | null,
@@ -683,6 +664,7 @@ export type UpdateProfileMutation = {
     competitivenessLevel?: string | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -697,10 +679,6 @@ export type DeleteProfileMutation = {
     id: string,
     name: string,
     description?: string | null,
-    languages?: string | null,
-    zipCode?: string | null,
-    gamePreference?: string | null,
-    behaviour?: string | null,
     username?: string | null,
     bio?: string | null,
     photo?: string | null,
@@ -730,6 +708,7 @@ export type DeleteProfileMutation = {
     competitivenessLevel?: string | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -741,13 +720,14 @@ export type CreateFriendshipsMutationVariables = {
 export type CreateFriendshipsMutation = {
   createFriendships?:  {
     __typename: "Friendships",
-    friendshipId: string,
+    friendshipId?: string | null,
     userId?: string | null,
     friendId?: string | null,
     status?: string | null,
     id: string,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -759,13 +739,14 @@ export type UpdateFriendshipsMutationVariables = {
 export type UpdateFriendshipsMutation = {
   updateFriendships?:  {
     __typename: "Friendships",
-    friendshipId: string,
+    friendshipId?: string | null,
     userId?: string | null,
     friendId?: string | null,
     status?: string | null,
     id: string,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -777,13 +758,14 @@ export type DeleteFriendshipsMutationVariables = {
 export type DeleteFriendshipsMutation = {
   deleteFriendships?:  {
     __typename: "Friendships",
-    friendshipId: string,
+    friendshipId?: string | null,
     userId?: string | null,
     friendId?: string | null,
     status?: string | null,
     id: string,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -795,13 +777,14 @@ export type CreateGroupsMutationVariables = {
 export type CreateGroupsMutation = {
   createGroups?:  {
     __typename: "Groups",
-    groupId: string,
+    groupId?: string | null,
     name?: string | null,
     createdBy?: string | null,
     createdAt?: string | null,
     updatedAt?: string | null,
     image?: string | null,
     id: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -813,13 +796,14 @@ export type UpdateGroupsMutationVariables = {
 export type UpdateGroupsMutation = {
   updateGroups?:  {
     __typename: "Groups",
-    groupId: string,
+    groupId?: string | null,
     name?: string | null,
     createdBy?: string | null,
     createdAt?: string | null,
     updatedAt?: string | null,
     image?: string | null,
     id: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -831,25 +815,26 @@ export type DeleteGroupsMutationVariables = {
 export type DeleteGroupsMutation = {
   deleteGroups?:  {
     __typename: "Groups",
-    groupId: string,
+    groupId?: string | null,
     name?: string | null,
     createdBy?: string | null,
     createdAt?: string | null,
     updatedAt?: string | null,
     image?: string | null,
     id: string,
+    owner?: string | null,
   } | null,
 };
 
-export type CreateMembershipsMutationVariables = {
-  input: CreateMembershipsInput,
-  condition?: ModelMembershipsConditionInput | null,
+export type CreateGroupMembershipsMutationVariables = {
+  input: CreateGroupMembershipsInput,
+  condition?: ModelGroupMembershipsConditionInput | null,
 };
 
-export type CreateMembershipsMutation = {
-  createMemberships?:  {
-    __typename: "Memberships",
-    membershipID: string,
+export type CreateGroupMembershipsMutation = {
+  createGroupMemberships?:  {
+    __typename: "GroupMemberships",
+    membershipID?: string | null,
     groupId?: string | null,
     userId?: string | null,
     id: string,
@@ -858,15 +843,15 @@ export type CreateMembershipsMutation = {
   } | null,
 };
 
-export type UpdateMembershipsMutationVariables = {
-  input: UpdateMembershipsInput,
-  condition?: ModelMembershipsConditionInput | null,
+export type UpdateGroupMembershipsMutationVariables = {
+  input: UpdateGroupMembershipsInput,
+  condition?: ModelGroupMembershipsConditionInput | null,
 };
 
-export type UpdateMembershipsMutation = {
-  updateMemberships?:  {
-    __typename: "Memberships",
-    membershipID: string,
+export type UpdateGroupMembershipsMutation = {
+  updateGroupMemberships?:  {
+    __typename: "GroupMemberships",
+    membershipID?: string | null,
     groupId?: string | null,
     userId?: string | null,
     id: string,
@@ -875,15 +860,15 @@ export type UpdateMembershipsMutation = {
   } | null,
 };
 
-export type DeleteMembershipsMutationVariables = {
-  input: DeleteMembershipsInput,
-  condition?: ModelMembershipsConditionInput | null,
+export type DeleteGroupMembershipsMutationVariables = {
+  input: DeleteGroupMembershipsInput,
+  condition?: ModelGroupMembershipsConditionInput | null,
 };
 
-export type DeleteMembershipsMutation = {
-  deleteMemberships?:  {
-    __typename: "Memberships",
-    membershipID: string,
+export type DeleteGroupMembershipsMutation = {
+  deleteGroupMemberships?:  {
+    __typename: "GroupMemberships",
+    membershipID?: string | null,
     groupId?: string | null,
     userId?: string | null,
     id: string,
@@ -902,10 +887,6 @@ export type GetProfileQuery = {
     id: string,
     name: string,
     description?: string | null,
-    languages?: string | null,
-    zipCode?: string | null,
-    gamePreference?: string | null,
-    behaviour?: string | null,
     username?: string | null,
     bio?: string | null,
     photo?: string | null,
@@ -935,6 +916,7 @@ export type GetProfileQuery = {
     competitivenessLevel?: string | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -952,10 +934,6 @@ export type ListProfilesQuery = {
       id: string,
       name: string,
       description?: string | null,
-      languages?: string | null,
-      zipCode?: string | null,
-      gamePreference?: string | null,
-      behaviour?: string | null,
       username?: string | null,
       bio?: string | null,
       photo?: string | null,
@@ -985,6 +963,7 @@ export type ListProfilesQuery = {
       competitivenessLevel?: string | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -997,13 +976,14 @@ export type GetFriendshipsQueryVariables = {
 export type GetFriendshipsQuery = {
   getFriendships?:  {
     __typename: "Friendships",
-    friendshipId: string,
+    friendshipId?: string | null,
     userId?: string | null,
     friendId?: string | null,
     status?: string | null,
     id: string,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -1018,13 +998,14 @@ export type ListFriendshipsQuery = {
     __typename: "ModelFriendshipsConnection",
     items:  Array< {
       __typename: "Friendships",
-      friendshipId: string,
+      friendshipId?: string | null,
       userId?: string | null,
       friendId?: string | null,
       status?: string | null,
       id: string,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -1037,13 +1018,14 @@ export type GetGroupsQueryVariables = {
 export type GetGroupsQuery = {
   getGroups?:  {
     __typename: "Groups",
-    groupId: string,
+    groupId?: string | null,
     name?: string | null,
     createdBy?: string | null,
     createdAt?: string | null,
     updatedAt?: string | null,
     image?: string | null,
     id: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -1058,26 +1040,27 @@ export type ListGroupsQuery = {
     __typename: "ModelGroupsConnection",
     items:  Array< {
       __typename: "Groups",
-      groupId: string,
+      groupId?: string | null,
       name?: string | null,
       createdBy?: string | null,
       createdAt?: string | null,
       updatedAt?: string | null,
       image?: string | null,
       id: string,
+      owner?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
 };
 
-export type GetMembershipsQueryVariables = {
+export type GetGroupMembershipsQueryVariables = {
   id: string,
 };
 
-export type GetMembershipsQuery = {
-  getMemberships?:  {
-    __typename: "Memberships",
-    membershipID: string,
+export type GetGroupMembershipsQuery = {
+  getGroupMemberships?:  {
+    __typename: "GroupMemberships",
+    membershipID?: string | null,
     groupId?: string | null,
     userId?: string | null,
     id: string,
@@ -1086,18 +1069,18 @@ export type GetMembershipsQuery = {
   } | null,
 };
 
-export type ListMembershipsQueryVariables = {
-  filter?: ModelMembershipsFilterInput | null,
+export type ListGroupMembershipsQueryVariables = {
+  filter?: ModelGroupMembershipsFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type ListMembershipsQuery = {
-  listMemberships?:  {
-    __typename: "ModelMembershipsConnection",
+export type ListGroupMembershipsQuery = {
+  listGroupMemberships?:  {
+    __typename: "ModelGroupMembershipsConnection",
     items:  Array< {
-      __typename: "Memberships",
-      membershipID: string,
+      __typename: "GroupMemberships",
+      membershipID?: string | null,
       groupId?: string | null,
       userId?: string | null,
       id: string,
@@ -1110,6 +1093,7 @@ export type ListMembershipsQuery = {
 
 export type OnCreateProfileSubscriptionVariables = {
   filter?: ModelSubscriptionProfileFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnCreateProfileSubscription = {
@@ -1118,10 +1102,6 @@ export type OnCreateProfileSubscription = {
     id: string,
     name: string,
     description?: string | null,
-    languages?: string | null,
-    zipCode?: string | null,
-    gamePreference?: string | null,
-    behaviour?: string | null,
     username?: string | null,
     bio?: string | null,
     photo?: string | null,
@@ -1151,11 +1131,13 @@ export type OnCreateProfileSubscription = {
     competitivenessLevel?: string | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
 export type OnUpdateProfileSubscriptionVariables = {
   filter?: ModelSubscriptionProfileFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnUpdateProfileSubscription = {
@@ -1164,10 +1146,6 @@ export type OnUpdateProfileSubscription = {
     id: string,
     name: string,
     description?: string | null,
-    languages?: string | null,
-    zipCode?: string | null,
-    gamePreference?: string | null,
-    behaviour?: string | null,
     username?: string | null,
     bio?: string | null,
     photo?: string | null,
@@ -1197,11 +1175,13 @@ export type OnUpdateProfileSubscription = {
     competitivenessLevel?: string | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
 export type OnDeleteProfileSubscriptionVariables = {
   filter?: ModelSubscriptionProfileFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnDeleteProfileSubscription = {
@@ -1210,10 +1190,6 @@ export type OnDeleteProfileSubscription = {
     id: string,
     name: string,
     description?: string | null,
-    languages?: string | null,
-    zipCode?: string | null,
-    gamePreference?: string | null,
-    behaviour?: string | null,
     username?: string | null,
     bio?: string | null,
     photo?: string | null,
@@ -1243,119 +1219,132 @@ export type OnDeleteProfileSubscription = {
     competitivenessLevel?: string | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
 export type OnCreateFriendshipsSubscriptionVariables = {
   filter?: ModelSubscriptionFriendshipsFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnCreateFriendshipsSubscription = {
   onCreateFriendships?:  {
     __typename: "Friendships",
-    friendshipId: string,
+    friendshipId?: string | null,
     userId?: string | null,
     friendId?: string | null,
     status?: string | null,
     id: string,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
 export type OnUpdateFriendshipsSubscriptionVariables = {
   filter?: ModelSubscriptionFriendshipsFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnUpdateFriendshipsSubscription = {
   onUpdateFriendships?:  {
     __typename: "Friendships",
-    friendshipId: string,
+    friendshipId?: string | null,
     userId?: string | null,
     friendId?: string | null,
     status?: string | null,
     id: string,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
 export type OnDeleteFriendshipsSubscriptionVariables = {
   filter?: ModelSubscriptionFriendshipsFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnDeleteFriendshipsSubscription = {
   onDeleteFriendships?:  {
     __typename: "Friendships",
-    friendshipId: string,
+    friendshipId?: string | null,
     userId?: string | null,
     friendId?: string | null,
     status?: string | null,
     id: string,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
 export type OnCreateGroupsSubscriptionVariables = {
   filter?: ModelSubscriptionGroupsFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnCreateGroupsSubscription = {
   onCreateGroups?:  {
     __typename: "Groups",
-    groupId: string,
+    groupId?: string | null,
     name?: string | null,
     createdBy?: string | null,
     createdAt?: string | null,
     updatedAt?: string | null,
     image?: string | null,
     id: string,
+    owner?: string | null,
   } | null,
 };
 
 export type OnUpdateGroupsSubscriptionVariables = {
   filter?: ModelSubscriptionGroupsFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnUpdateGroupsSubscription = {
   onUpdateGroups?:  {
     __typename: "Groups",
-    groupId: string,
+    groupId?: string | null,
     name?: string | null,
     createdBy?: string | null,
     createdAt?: string | null,
     updatedAt?: string | null,
     image?: string | null,
     id: string,
+    owner?: string | null,
   } | null,
 };
 
 export type OnDeleteGroupsSubscriptionVariables = {
   filter?: ModelSubscriptionGroupsFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnDeleteGroupsSubscription = {
   onDeleteGroups?:  {
     __typename: "Groups",
-    groupId: string,
+    groupId?: string | null,
     name?: string | null,
     createdBy?: string | null,
     createdAt?: string | null,
     updatedAt?: string | null,
     image?: string | null,
     id: string,
+    owner?: string | null,
   } | null,
 };
 
-export type OnCreateMembershipsSubscriptionVariables = {
-  filter?: ModelSubscriptionMembershipsFilterInput | null,
+export type OnCreateGroupMembershipsSubscriptionVariables = {
+  filter?: ModelSubscriptionGroupMembershipsFilterInput | null,
 };
 
-export type OnCreateMembershipsSubscription = {
-  onCreateMemberships?:  {
-    __typename: "Memberships",
-    membershipID: string,
+export type OnCreateGroupMembershipsSubscription = {
+  onCreateGroupMemberships?:  {
+    __typename: "GroupMemberships",
+    membershipID?: string | null,
     groupId?: string | null,
     userId?: string | null,
     id: string,
@@ -1364,14 +1353,14 @@ export type OnCreateMembershipsSubscription = {
   } | null,
 };
 
-export type OnUpdateMembershipsSubscriptionVariables = {
-  filter?: ModelSubscriptionMembershipsFilterInput | null,
+export type OnUpdateGroupMembershipsSubscriptionVariables = {
+  filter?: ModelSubscriptionGroupMembershipsFilterInput | null,
 };
 
-export type OnUpdateMembershipsSubscription = {
-  onUpdateMemberships?:  {
-    __typename: "Memberships",
-    membershipID: string,
+export type OnUpdateGroupMembershipsSubscription = {
+  onUpdateGroupMemberships?:  {
+    __typename: "GroupMemberships",
+    membershipID?: string | null,
     groupId?: string | null,
     userId?: string | null,
     id: string,
@@ -1380,14 +1369,14 @@ export type OnUpdateMembershipsSubscription = {
   } | null,
 };
 
-export type OnDeleteMembershipsSubscriptionVariables = {
-  filter?: ModelSubscriptionMembershipsFilterInput | null,
+export type OnDeleteGroupMembershipsSubscriptionVariables = {
+  filter?: ModelSubscriptionGroupMembershipsFilterInput | null,
 };
 
-export type OnDeleteMembershipsSubscription = {
-  onDeleteMemberships?:  {
-    __typename: "Memberships",
-    membershipID: string,
+export type OnDeleteGroupMembershipsSubscription = {
+  onDeleteGroupMemberships?:  {
+    __typename: "GroupMemberships",
+    membershipID?: string | null,
     groupId?: string | null,
     userId?: string | null,
     id: string,

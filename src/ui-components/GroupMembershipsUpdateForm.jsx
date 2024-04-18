@@ -9,13 +9,13 @@ import * as React from "react";
 import { Button, Flex, Grid, TextField } from "@aws-amplify/ui-react";
 import { fetchByPath, getOverrideProps, validateField } from "./utils";
 import { generateClient } from "aws-amplify/api";
-import { getFriendships } from "../graphql/queries";
-import { updateFriendships } from "../graphql/mutations";
+import { getGroupMemberships } from "../graphql/queries";
+import { updateGroupMemberships } from "../graphql/mutations";
 const client = generateClient();
-export default function FriendshipsUpdateForm(props) {
+export default function GroupMembershipsUpdateForm(props) {
   const {
     id: idProp,
-    friendships: friendshipsModelProp,
+    groupMemberships: groupMembershipsModelProp,
     onSuccess,
     onError,
     onSubmit,
@@ -25,50 +25,47 @@ export default function FriendshipsUpdateForm(props) {
     ...rest
   } = props;
   const initialValues = {
-    friendshipId: "",
+    membershipID: "",
+    groupId: "",
     userId: "",
-    friendId: "",
-    status: "",
   };
-  const [friendshipId, setFriendshipId] = React.useState(
-    initialValues.friendshipId
+  const [membershipID, setMembershipID] = React.useState(
+    initialValues.membershipID
   );
+  const [groupId, setGroupId] = React.useState(initialValues.groupId);
   const [userId, setUserId] = React.useState(initialValues.userId);
-  const [friendId, setFriendId] = React.useState(initialValues.friendId);
-  const [status, setStatus] = React.useState(initialValues.status);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
-    const cleanValues = friendshipsRecord
-      ? { ...initialValues, ...friendshipsRecord }
+    const cleanValues = groupMembershipsRecord
+      ? { ...initialValues, ...groupMembershipsRecord }
       : initialValues;
-    setFriendshipId(cleanValues.friendshipId);
+    setMembershipID(cleanValues.membershipID);
+    setGroupId(cleanValues.groupId);
     setUserId(cleanValues.userId);
-    setFriendId(cleanValues.friendId);
-    setStatus(cleanValues.status);
     setErrors({});
   };
-  const [friendshipsRecord, setFriendshipsRecord] =
-    React.useState(friendshipsModelProp);
+  const [groupMembershipsRecord, setGroupMembershipsRecord] = React.useState(
+    groupMembershipsModelProp
+  );
   React.useEffect(() => {
     const queryData = async () => {
       const record = idProp
         ? (
             await client.graphql({
-              query: getFriendships.replaceAll("__typename", ""),
+              query: getGroupMemberships.replaceAll("__typename", ""),
               variables: { id: idProp },
             })
-          )?.data?.getFriendships
-        : friendshipsModelProp;
-      setFriendshipsRecord(record);
+          )?.data?.getGroupMemberships
+        : groupMembershipsModelProp;
+      setGroupMembershipsRecord(record);
     };
     queryData();
-  }, [idProp, friendshipsModelProp]);
-  React.useEffect(resetStateValues, [friendshipsRecord]);
+  }, [idProp, groupMembershipsModelProp]);
+  React.useEffect(resetStateValues, [groupMembershipsRecord]);
   const validations = {
-    friendshipId: [],
+    membershipID: [],
+    groupId: [],
     userId: [],
-    friendId: [],
-    status: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -96,10 +93,9 @@ export default function FriendshipsUpdateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
-          friendshipId: friendshipId ?? null,
+          membershipID: membershipID ?? null,
+          groupId: groupId ?? null,
           userId: userId ?? null,
-          friendId: friendId ?? null,
-          status: status ?? null,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -130,10 +126,10 @@ export default function FriendshipsUpdateForm(props) {
             }
           });
           await client.graphql({
-            query: updateFriendships.replaceAll("__typename", ""),
+            query: updateGroupMemberships.replaceAll("__typename", ""),
             variables: {
               input: {
-                id: friendshipsRecord.id,
+                id: groupMembershipsRecord.id,
                 ...modelFields,
               },
             },
@@ -148,35 +144,60 @@ export default function FriendshipsUpdateForm(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "FriendshipsUpdateForm")}
+      {...getOverrideProps(overrides, "GroupMembershipsUpdateForm")}
       {...rest}
     >
       <TextField
-        label="Friendship id"
+        label="Membership id"
         isRequired={false}
         isReadOnly={false}
-        value={friendshipId}
+        value={membershipID}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              friendshipId: value,
+              membershipID: value,
+              groupId,
               userId,
-              friendId,
-              status,
             };
             const result = onChange(modelFields);
-            value = result?.friendshipId ?? value;
+            value = result?.membershipID ?? value;
           }
-          if (errors.friendshipId?.hasError) {
-            runValidationTasks("friendshipId", value);
+          if (errors.membershipID?.hasError) {
+            runValidationTasks("membershipID", value);
           }
-          setFriendshipId(value);
+          setMembershipID(value);
         }}
-        onBlur={() => runValidationTasks("friendshipId", friendshipId)}
-        errorMessage={errors.friendshipId?.errorMessage}
-        hasError={errors.friendshipId?.hasError}
-        {...getOverrideProps(overrides, "friendshipId")}
+        onBlur={() => runValidationTasks("membershipID", membershipID)}
+        errorMessage={errors.membershipID?.errorMessage}
+        hasError={errors.membershipID?.hasError}
+        {...getOverrideProps(overrides, "membershipID")}
+      ></TextField>
+      <TextField
+        label="Group id"
+        isRequired={false}
+        isReadOnly={false}
+        value={groupId}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              membershipID,
+              groupId: value,
+              userId,
+            };
+            const result = onChange(modelFields);
+            value = result?.groupId ?? value;
+          }
+          if (errors.groupId?.hasError) {
+            runValidationTasks("groupId", value);
+          }
+          setGroupId(value);
+        }}
+        onBlur={() => runValidationTasks("groupId", groupId)}
+        errorMessage={errors.groupId?.errorMessage}
+        hasError={errors.groupId?.hasError}
+        {...getOverrideProps(overrides, "groupId")}
       ></TextField>
       <TextField
         label="User id"
@@ -187,10 +208,9 @@ export default function FriendshipsUpdateForm(props) {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              friendshipId,
+              membershipID,
+              groupId,
               userId: value,
-              friendId,
-              status,
             };
             const result = onChange(modelFields);
             value = result?.userId ?? value;
@@ -205,60 +225,6 @@ export default function FriendshipsUpdateForm(props) {
         hasError={errors.userId?.hasError}
         {...getOverrideProps(overrides, "userId")}
       ></TextField>
-      <TextField
-        label="Friend id"
-        isRequired={false}
-        isReadOnly={false}
-        value={friendId}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              friendshipId,
-              userId,
-              friendId: value,
-              status,
-            };
-            const result = onChange(modelFields);
-            value = result?.friendId ?? value;
-          }
-          if (errors.friendId?.hasError) {
-            runValidationTasks("friendId", value);
-          }
-          setFriendId(value);
-        }}
-        onBlur={() => runValidationTasks("friendId", friendId)}
-        errorMessage={errors.friendId?.errorMessage}
-        hasError={errors.friendId?.hasError}
-        {...getOverrideProps(overrides, "friendId")}
-      ></TextField>
-      <TextField
-        label="Status"
-        isRequired={false}
-        isReadOnly={false}
-        value={status}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              friendshipId,
-              userId,
-              friendId,
-              status: value,
-            };
-            const result = onChange(modelFields);
-            value = result?.status ?? value;
-          }
-          if (errors.status?.hasError) {
-            runValidationTasks("status", value);
-          }
-          setStatus(value);
-        }}
-        onBlur={() => runValidationTasks("status", status)}
-        errorMessage={errors.status?.errorMessage}
-        hasError={errors.status?.hasError}
-        {...getOverrideProps(overrides, "status")}
-      ></TextField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}
@@ -270,7 +236,7 @@ export default function FriendshipsUpdateForm(props) {
             event.preventDefault();
             resetStateValues();
           }}
-          isDisabled={!(idProp || friendshipsModelProp)}
+          isDisabled={!(idProp || groupMembershipsModelProp)}
           {...getOverrideProps(overrides, "ResetButton")}
         ></Button>
         <Flex
@@ -282,7 +248,7 @@ export default function FriendshipsUpdateForm(props) {
             type="submit"
             variation="primary"
             isDisabled={
-              !(idProp || friendshipsModelProp) ||
+              !(idProp || groupMembershipsModelProp) ||
               Object.values(errors).some((e) => e?.hasError)
             }
             {...getOverrideProps(overrides, "SubmitButton")}

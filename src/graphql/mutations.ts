@@ -16,10 +16,6 @@ export const createProfile = /* GraphQL */ `mutation CreateProfile(
     id
     name
     description
-    languages
-    zipCode
-    gamePreference
-    behaviour
     username
     bio
     photo
@@ -49,6 +45,7 @@ export const createProfile = /* GraphQL */ `mutation CreateProfile(
     competitivenessLevel
     createdAt
     updatedAt
+    owner
     __typename
   }
 }
@@ -64,10 +61,6 @@ export const updateProfile = /* GraphQL */ `mutation UpdateProfile(
     id
     name
     description
-    languages
-    zipCode
-    gamePreference
-    behaviour
     username
     bio
     photo
@@ -97,6 +90,7 @@ export const updateProfile = /* GraphQL */ `mutation UpdateProfile(
     competitivenessLevel
     createdAt
     updatedAt
+    owner
     __typename
   }
 }
@@ -112,10 +106,6 @@ export const deleteProfile = /* GraphQL */ `mutation DeleteProfile(
     id
     name
     description
-    languages
-    zipCode
-    gamePreference
-    behaviour
     username
     bio
     photo
@@ -145,6 +135,7 @@ export const deleteProfile = /* GraphQL */ `mutation DeleteProfile(
     competitivenessLevel
     createdAt
     updatedAt
+    owner
     __typename
   }
 }
@@ -164,6 +155,7 @@ export const createFriendships = /* GraphQL */ `mutation CreateFriendships(
     id
     createdAt
     updatedAt
+    owner
     __typename
   }
 }
@@ -183,6 +175,7 @@ export const updateFriendships = /* GraphQL */ `mutation UpdateFriendships(
     id
     createdAt
     updatedAt
+    owner
     __typename
   }
 }
@@ -202,6 +195,7 @@ export const deleteFriendships = /* GraphQL */ `mutation DeleteFriendships(
     id
     createdAt
     updatedAt
+    owner
     __typename
   }
 }
@@ -221,6 +215,7 @@ export const createGroups = /* GraphQL */ `mutation CreateGroups(
     updatedAt
     image
     id
+    owner
     __typename
   }
 }
@@ -240,6 +235,7 @@ export const updateGroups = /* GraphQL */ `mutation UpdateGroups(
     updatedAt
     image
     id
+    owner
     __typename
   }
 }
@@ -259,6 +255,7 @@ export const deleteGroups = /* GraphQL */ `mutation DeleteGroups(
     updatedAt
     image
     id
+    owner
     __typename
   }
 }
@@ -266,11 +263,11 @@ export const deleteGroups = /* GraphQL */ `mutation DeleteGroups(
   APITypes.DeleteGroupsMutationVariables,
   APITypes.DeleteGroupsMutation
 >;
-export const createMemberships = /* GraphQL */ `mutation CreateMemberships(
-  $input: CreateMembershipsInput!
-  $condition: ModelMembershipsConditionInput
+export const createGroupMemberships = /* GraphQL */ `mutation CreateGroupMemberships(
+  $input: CreateGroupMembershipsInput!
+  $condition: ModelGroupMembershipsConditionInput
 ) {
-  createMemberships(input: $input, condition: $condition) {
+  createGroupMemberships(input: $input, condition: $condition) {
     membershipID
     groupId
     userId
@@ -281,14 +278,14 @@ export const createMemberships = /* GraphQL */ `mutation CreateMemberships(
   }
 }
 ` as GeneratedMutation<
-  APITypes.CreateMembershipsMutationVariables,
-  APITypes.CreateMembershipsMutation
+  APITypes.CreateGroupMembershipsMutationVariables,
+  APITypes.CreateGroupMembershipsMutation
 >;
-export const updateMemberships = /* GraphQL */ `mutation UpdateMemberships(
-  $input: UpdateMembershipsInput!
-  $condition: ModelMembershipsConditionInput
+export const updateGroupMemberships = /* GraphQL */ `mutation UpdateGroupMemberships(
+  $input: UpdateGroupMembershipsInput!
+  $condition: ModelGroupMembershipsConditionInput
 ) {
-  updateMemberships(input: $input, condition: $condition) {
+  updateGroupMemberships(input: $input, condition: $condition) {
     membershipID
     groupId
     userId
@@ -299,14 +296,14 @@ export const updateMemberships = /* GraphQL */ `mutation UpdateMemberships(
   }
 }
 ` as GeneratedMutation<
-  APITypes.UpdateMembershipsMutationVariables,
-  APITypes.UpdateMembershipsMutation
+  APITypes.UpdateGroupMembershipsMutationVariables,
+  APITypes.UpdateGroupMembershipsMutation
 >;
-export const deleteMemberships = /* GraphQL */ `mutation DeleteMemberships(
-  $input: DeleteMembershipsInput!
-  $condition: ModelMembershipsConditionInput
+export const deleteGroupMemberships = /* GraphQL */ `mutation DeleteGroupMemberships(
+  $input: DeleteGroupMembershipsInput!
+  $condition: ModelGroupMembershipsConditionInput
 ) {
-  deleteMemberships(input: $input, condition: $condition) {
+  deleteGroupMemberships(input: $input, condition: $condition) {
     membershipID
     groupId
     userId
@@ -317,6 +314,6 @@ export const deleteMemberships = /* GraphQL */ `mutation DeleteMemberships(
   }
 }
 ` as GeneratedMutation<
-  APITypes.DeleteMembershipsMutationVariables,
-  APITypes.DeleteMembershipsMutation
+  APITypes.DeleteGroupMembershipsMutationVariables,
+  APITypes.DeleteGroupMembershipsMutation
 >;

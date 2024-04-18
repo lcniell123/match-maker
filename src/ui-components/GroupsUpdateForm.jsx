@@ -68,7 +68,7 @@ export default function GroupsUpdateForm(props) {
   }, [idProp, groupsModelProp]);
   React.useEffect(resetStateValues, [groupsRecord]);
   const validations = {
-    groupId: [{ type: "Required" }],
+    groupId: [],
     name: [],
     createdBy: [],
     createdAt: [],
@@ -101,7 +101,7 @@ export default function GroupsUpdateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
-          groupId,
+          groupId: groupId ?? null,
           name: name ?? null,
           createdBy: createdBy ?? null,
           createdAt: createdAt ?? null,
@@ -160,7 +160,7 @@ export default function GroupsUpdateForm(props) {
     >
       <TextField
         label="Group id"
-        isRequired={true}
+        isRequired={false}
         isReadOnly={false}
         value={groupId}
         onChange={(e) => {

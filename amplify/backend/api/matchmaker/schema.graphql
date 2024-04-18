@@ -3,14 +3,10 @@
 input AMPLIFY {
   globalAuthRule: AuthRule = { allow: public }
 } # FOR TESTING ONLY!
-type Profile @model @auth(rules: [{ allow: private }]) {
+type Profile @model @auth(rules: [{ allow: owner }]) {
   id: ID!
   name: String!
   description: String
-  languages: String
-  zipCode: String
-  gamePreference: String
-  behaviour: String
   username: String
   bio: String
   photo: String
@@ -39,22 +35,25 @@ type Profile @model @auth(rules: [{ allow: private }]) {
   teamworkLevel: String
   competitivenessLevel: String
 }
-type Friendships @model @auth(rules: [{ allow: private }]) {
-  friendshipId: String!
+
+type Friendships @model @auth(rules: [{ allow: owner }]) {
+  friendshipId: String
   userId: String
   friendId: String
   status: String
 }
-type Groups @model @auth(rules: [{ allow: private }]) {
-  groupId: String!
+
+type Groups @model @auth(rules: [{ allow: owner }]) {
+  groupId: String
   name: String
   createdBy: String
   createdAt: String
   updatedAt: String
   image: String
 }
-type Memberships @model @auth(rules: [{ allow: private }]) {
-  membershipID: String!
+
+type GroupMemberships @model {
+  membershipID: String
   groupId: String
   userId: String
 }

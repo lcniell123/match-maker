@@ -33,10 +33,6 @@ export default function ProfileUpdateForm(props) {
   const initialValues = {
     name: "",
     description: "",
-    languages: "",
-    zipCode: "",
-    gamePreference: "",
-    behaviour: "",
     username: "",
     bio: "",
     photo: "",
@@ -69,12 +65,6 @@ export default function ProfileUpdateForm(props) {
   const [description, setDescription] = React.useState(
     initialValues.description
   );
-  const [languages, setLanguages] = React.useState(initialValues.languages);
-  const [zipCode, setZipCode] = React.useState(initialValues.zipCode);
-  const [gamePreference, setGamePreference] = React.useState(
-    initialValues.gamePreference
-  );
-  const [behaviour, setBehaviour] = React.useState(initialValues.behaviour);
   const [username, setUsername] = React.useState(initialValues.username);
   const [bio, setBio] = React.useState(initialValues.bio);
   const [photo, setPhoto] = React.useState(initialValues.photo);
@@ -130,10 +120,6 @@ export default function ProfileUpdateForm(props) {
       : initialValues;
     setName(cleanValues.name);
     setDescription(cleanValues.description);
-    setLanguages(cleanValues.languages);
-    setZipCode(cleanValues.zipCode);
-    setGamePreference(cleanValues.gamePreference);
-    setBehaviour(cleanValues.behaviour);
     setUsername(cleanValues.username);
     setBio(cleanValues.bio);
     setPhoto(cleanValues.photo);
@@ -182,10 +168,6 @@ export default function ProfileUpdateForm(props) {
   const validations = {
     name: [{ type: "Required" }],
     description: [],
-    languages: [],
-    zipCode: [],
-    gamePreference: [],
-    behaviour: [],
     username: [],
     bio: [],
     photo: [],
@@ -242,10 +224,6 @@ export default function ProfileUpdateForm(props) {
         let modelFields = {
           name,
           description: description ?? null,
-          languages: languages ?? null,
-          zipCode: zipCode ?? null,
-          gamePreference: gamePreference ?? null,
-          behaviour: behaviour ?? null,
           username: username ?? null,
           bio: bio ?? null,
           photo: photo ?? null,
@@ -335,10 +313,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name: value,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -391,10 +365,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description: value,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -437,230 +407,6 @@ export default function ProfileUpdateForm(props) {
         {...getOverrideProps(overrides, "description")}
       ></TextField>
       <TextField
-        label="Languages"
-        isRequired={false}
-        isReadOnly={false}
-        value={languages}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              name,
-              description,
-              languages: value,
-              zipCode,
-              gamePreference,
-              behaviour,
-              username,
-              bio,
-              photo,
-              coverPhoto,
-              firstName,
-              lastName,
-              age,
-              country,
-              timeZone,
-              city,
-              region,
-              postalCode,
-              language,
-              favoriteGame,
-              preferredGenre,
-              timeAvailability,
-              preferredTeammateAgeRange,
-              skillLevel,
-              preferredGameMode,
-              preferredRole,
-              playStyle,
-              flexibility,
-              behavior,
-              communicationPreference,
-              toleranceLevel,
-              teamworkLevel,
-              competitivenessLevel,
-            };
-            const result = onChange(modelFields);
-            value = result?.languages ?? value;
-          }
-          if (errors.languages?.hasError) {
-            runValidationTasks("languages", value);
-          }
-          setLanguages(value);
-        }}
-        onBlur={() => runValidationTasks("languages", languages)}
-        errorMessage={errors.languages?.errorMessage}
-        hasError={errors.languages?.hasError}
-        {...getOverrideProps(overrides, "languages")}
-      ></TextField>
-      <TextField
-        label="Zip code"
-        isRequired={false}
-        isReadOnly={false}
-        value={zipCode}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              name,
-              description,
-              languages,
-              zipCode: value,
-              gamePreference,
-              behaviour,
-              username,
-              bio,
-              photo,
-              coverPhoto,
-              firstName,
-              lastName,
-              age,
-              country,
-              timeZone,
-              city,
-              region,
-              postalCode,
-              language,
-              favoriteGame,
-              preferredGenre,
-              timeAvailability,
-              preferredTeammateAgeRange,
-              skillLevel,
-              preferredGameMode,
-              preferredRole,
-              playStyle,
-              flexibility,
-              behavior,
-              communicationPreference,
-              toleranceLevel,
-              teamworkLevel,
-              competitivenessLevel,
-            };
-            const result = onChange(modelFields);
-            value = result?.zipCode ?? value;
-          }
-          if (errors.zipCode?.hasError) {
-            runValidationTasks("zipCode", value);
-          }
-          setZipCode(value);
-        }}
-        onBlur={() => runValidationTasks("zipCode", zipCode)}
-        errorMessage={errors.zipCode?.errorMessage}
-        hasError={errors.zipCode?.hasError}
-        {...getOverrideProps(overrides, "zipCode")}
-      ></TextField>
-      <TextField
-        label="Game preference"
-        isRequired={false}
-        isReadOnly={false}
-        value={gamePreference}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              name,
-              description,
-              languages,
-              zipCode,
-              gamePreference: value,
-              behaviour,
-              username,
-              bio,
-              photo,
-              coverPhoto,
-              firstName,
-              lastName,
-              age,
-              country,
-              timeZone,
-              city,
-              region,
-              postalCode,
-              language,
-              favoriteGame,
-              preferredGenre,
-              timeAvailability,
-              preferredTeammateAgeRange,
-              skillLevel,
-              preferredGameMode,
-              preferredRole,
-              playStyle,
-              flexibility,
-              behavior,
-              communicationPreference,
-              toleranceLevel,
-              teamworkLevel,
-              competitivenessLevel,
-            };
-            const result = onChange(modelFields);
-            value = result?.gamePreference ?? value;
-          }
-          if (errors.gamePreference?.hasError) {
-            runValidationTasks("gamePreference", value);
-          }
-          setGamePreference(value);
-        }}
-        onBlur={() => runValidationTasks("gamePreference", gamePreference)}
-        errorMessage={errors.gamePreference?.errorMessage}
-        hasError={errors.gamePreference?.hasError}
-        {...getOverrideProps(overrides, "gamePreference")}
-      ></TextField>
-      <TextField
-        label="Behaviour"
-        isRequired={false}
-        isReadOnly={false}
-        value={behaviour}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              name,
-              description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour: value,
-              username,
-              bio,
-              photo,
-              coverPhoto,
-              firstName,
-              lastName,
-              age,
-              country,
-              timeZone,
-              city,
-              region,
-              postalCode,
-              language,
-              favoriteGame,
-              preferredGenre,
-              timeAvailability,
-              preferredTeammateAgeRange,
-              skillLevel,
-              preferredGameMode,
-              preferredRole,
-              playStyle,
-              flexibility,
-              behavior,
-              communicationPreference,
-              toleranceLevel,
-              teamworkLevel,
-              competitivenessLevel,
-            };
-            const result = onChange(modelFields);
-            value = result?.behaviour ?? value;
-          }
-          if (errors.behaviour?.hasError) {
-            runValidationTasks("behaviour", value);
-          }
-          setBehaviour(value);
-        }}
-        onBlur={() => runValidationTasks("behaviour", behaviour)}
-        errorMessage={errors.behaviour?.errorMessage}
-        hasError={errors.behaviour?.hasError}
-        {...getOverrideProps(overrides, "behaviour")}
-      ></TextField>
-      <TextField
         label="Username"
         isRequired={false}
         isReadOnly={false}
@@ -671,10 +417,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username: value,
               bio,
               photo,
@@ -727,10 +469,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio: value,
               photo,
@@ -783,10 +521,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo: value,
@@ -839,10 +573,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -895,10 +625,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -951,10 +677,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -1011,10 +733,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -1067,10 +785,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -1123,10 +837,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -1179,10 +889,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -1235,10 +941,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -1291,10 +993,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -1347,10 +1045,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -1403,10 +1097,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -1459,10 +1149,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -1515,10 +1201,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -1571,10 +1253,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -1632,10 +1310,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -1688,10 +1362,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -1746,10 +1416,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -1802,10 +1468,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -1858,10 +1520,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -1914,10 +1572,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -1970,10 +1624,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -2028,10 +1678,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -2084,10 +1730,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -2140,10 +1782,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,

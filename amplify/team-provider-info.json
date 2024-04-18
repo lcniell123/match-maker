@@ -20,7 +20,8 @@
         "matchmaker": {}
       },
       "storage": {
-        "s3matchmakerstoragefb200466": {}
+        "s3matchmakerstoragefb200466": {},
+        "matchmaker1573e000": {}
       }
     }
   }

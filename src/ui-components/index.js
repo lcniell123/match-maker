@@ -6,10 +6,10 @@
 
 export { default as FriendshipsCreateForm } from "./FriendshipsCreateForm";
 export { default as FriendshipsUpdateForm } from "./FriendshipsUpdateForm";
+export { default as GroupMembershipsCreateForm } from "./GroupMembershipsCreateForm";
+export { default as GroupMembershipsUpdateForm } from "./GroupMembershipsUpdateForm";
 export { default as GroupsCreateForm } from "./GroupsCreateForm";
 export { default as GroupsUpdateForm } from "./GroupsUpdateForm";
-export { default as MembershipsCreateForm } from "./MembershipsCreateForm";
-export { default as MembershipsUpdateForm } from "./MembershipsUpdateForm";
 export { default as ProfileCreateForm } from "./ProfileCreateForm";
 export { default as ProfileUpdateForm } from "./ProfileUpdateForm";
 export { default as studioTheme } from "./studioTheme";

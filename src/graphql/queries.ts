@@ -13,10 +13,6 @@ export const getProfile = /* GraphQL */ `query GetProfile($id: ID!) {
     id
     name
     description
-    languages
-    zipCode
-    gamePreference
-    behaviour
     username
     bio
     photo
@@ -46,6 +42,7 @@ export const getProfile = /* GraphQL */ `query GetProfile($id: ID!) {
     competitivenessLevel
     createdAt
     updatedAt
+    owner
     __typename
   }
 }
@@ -63,10 +60,6 @@ export const listProfiles = /* GraphQL */ `query ListProfiles(
       id
       name
       description
-      languages
-      zipCode
-      gamePreference
-      behaviour
       username
       bio
       photo
@@ -96,6 +89,7 @@ export const listProfiles = /* GraphQL */ `query ListProfiles(
       competitivenessLevel
       createdAt
       updatedAt
+      owner
       __typename
     }
     nextToken
@@ -115,6 +109,7 @@ export const getFriendships = /* GraphQL */ `query GetFriendships($id: ID!) {
     id
     createdAt
     updatedAt
+    owner
     __typename
   }
 }
@@ -136,6 +131,7 @@ export const listFriendships = /* GraphQL */ `query ListFriendships(
       id
       createdAt
       updatedAt
+      owner
       __typename
     }
     nextToken
@@ -155,6 +151,7 @@ export const getGroups = /* GraphQL */ `query GetGroups($id: ID!) {
     updatedAt
     image
     id
+    owner
     __typename
   }
 }
@@ -173,6 +170,7 @@ export const listGroups = /* GraphQL */ `query ListGroups(
       updatedAt
       image
       id
+      owner
       __typename
     }
     nextToken
@@ -183,8 +181,8 @@ export const listGroups = /* GraphQL */ `query ListGroups(
   APITypes.ListGroupsQueryVariables,
   APITypes.ListGroupsQuery
 >;
-export const getMemberships = /* GraphQL */ `query GetMemberships($id: ID!) {
-  getMemberships(id: $id) {
+export const getGroupMemberships = /* GraphQL */ `query GetGroupMemberships($id: ID!) {
+  getGroupMemberships(id: $id) {
     membershipID
     groupId
     userId
@@ -195,15 +193,15 @@ export const getMemberships = /* GraphQL */ `query GetMemberships($id: ID!) {
   }
 }
 ` as GeneratedQuery<
-  APITypes.GetMembershipsQueryVariables,
-  APITypes.GetMembershipsQuery
+  APITypes.GetGroupMembershipsQueryVariables,
+  APITypes.GetGroupMembershipsQuery
 >;
-export const listMemberships = /* GraphQL */ `query ListMemberships(
-  $filter: ModelMembershipsFilterInput
+export const listGroupMemberships = /* GraphQL */ `query ListGroupMemberships(
+  $filter: ModelGroupMembershipsFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listMemberships(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listGroupMemberships(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       membershipID
       groupId
@@ -218,6 +216,6 @@ export const listMemberships = /* GraphQL */ `query ListMemberships(
   }
 }
 ` as GeneratedQuery<
-  APITypes.ListMembershipsQueryVariables,
-  APITypes.ListMembershipsQuery
+  APITypes.ListGroupMembershipsQueryVariables,
+  APITypes.ListGroupMembershipsQuery
 >;
