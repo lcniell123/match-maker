@@ -8,6 +8,10 @@
       "cognitoUserPoolId": "authmatchmakera431c571"
     },
     "conflictResolution": {},
-    "additionalAuthTypes": []
+    "additionalAuthTypes": [
+      {
+        "mode": "AWS_IAM"
+      }
+    ]
   }
 }

@@ -27,17 +27,21 @@ export const onCreateProfile = /* GraphQL */ `subscription OnCreateProfile(
     timeZone
     city
     region
+    zipCode
     postalCode
     language
+    languages
     favoriteGame
-    preferredGenre
+    gamePreference
     timeAvailability
     preferredTeammateAgeRange
+    preferredGenre
     skillLevel
     preferredGameMode
     preferredRole
     playStyle
     flexibility
+    behaviour
     behavior
     communicationPreference
     toleranceLevel
@@ -72,17 +76,21 @@ export const onUpdateProfile = /* GraphQL */ `subscription OnUpdateProfile(
     timeZone
     city
     region
+    zipCode
     postalCode
     language
+    languages
     favoriteGame
-    preferredGenre
+    gamePreference
     timeAvailability
     preferredTeammateAgeRange
+    preferredGenre
     skillLevel
     preferredGameMode
     preferredRole
     playStyle
     flexibility
+    behaviour
     behavior
     communicationPreference
     toleranceLevel
@@ -117,17 +125,21 @@ export const onDeleteProfile = /* GraphQL */ `subscription OnDeleteProfile(
     timeZone
     city
     region
+    zipCode
     postalCode
     language
+    languages
     favoriteGame
-    preferredGenre
+    gamePreference
     timeAvailability
     preferredTeammateAgeRange
+    preferredGenre
     skillLevel
     preferredGameMode
     preferredRole
     playStyle
     flexibility
+    behaviour
     behavior
     communicationPreference
     toleranceLevel

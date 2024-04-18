@@ -21,7 +21,10 @@
       },
       "storage": {
         "s3matchmakerstoragefb200466": {},
-        "matchmaker1573e000": {}
+        "matchmaker1573e000": {
+          "bucketName": "matchmaker-storage",
+          "region": "us-east-2"
+        }
       }
     }
   }

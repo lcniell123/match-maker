@@ -27,17 +27,21 @@ export const createProfile = /* GraphQL */ `mutation CreateProfile(
     timeZone
     city
     region
+    zipCode
     postalCode
     language
+    languages
     favoriteGame
-    preferredGenre
+    gamePreference
     timeAvailability
     preferredTeammateAgeRange
+    preferredGenre
     skillLevel
     preferredGameMode
     preferredRole
     playStyle
     flexibility
+    behaviour
     behavior
     communicationPreference
     toleranceLevel
@@ -72,17 +76,21 @@ export const updateProfile = /* GraphQL */ `mutation UpdateProfile(
     timeZone
     city
     region
+    zipCode
     postalCode
     language
+    languages
     favoriteGame
-    preferredGenre
+    gamePreference
     timeAvailability
     preferredTeammateAgeRange
+    preferredGenre
     skillLevel
     preferredGameMode
     preferredRole
     playStyle
     flexibility
+    behaviour
     behavior
     communicationPreference
     toleranceLevel
@@ -117,17 +125,21 @@ export const deleteProfile = /* GraphQL */ `mutation DeleteProfile(
     timeZone
     city
     region
+    zipCode
     postalCode
     language
+    languages
     favoriteGame
-    preferredGenre
+    gamePreference
     timeAvailability
     preferredTeammateAgeRange
+    preferredGenre
     skillLevel
     preferredGameMode
     preferredRole
     playStyle
     flexibility
+    behaviour
     behavior
     communicationPreference
     toleranceLevel
