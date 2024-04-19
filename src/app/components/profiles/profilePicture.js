@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { uploadData } from "aws-amplify/storage";
+import { getCurrentUser } from "aws-amplify/auth";
 
 const ProfilePicture = ({ userName }) => {
+  console.log("getCurrentUser: ", getCurrentUser);
   const [image, setImage] = useState(null);
 
   useEffect(() => {
@@ -18,6 +20,7 @@ const ProfilePicture = ({ userName }) => {
   }, [userName]);
 
   async function handleImageChange(e) {
+    // alert("clicked");
     const file = e.target.files[0];
     const reader = new FileReader();
 
@@ -86,4 +89,3 @@ const ProfilePicture = ({ userName }) => {
 };
 
 export default ProfilePicture;
-

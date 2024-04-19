@@ -9,7 +9,7 @@ import * as queries from "@/graphql/queries";
 import ProfileDescription from "../../components/profiles/profileDescription";
 import EditProfile from "../../components/profiles/editProfile";
 
-import awsExports from "../../../../amplifyconfiguration.json";
+import awsExports from "../../../amplifyconfiguration.json";
 import { Amplify } from "aws-amplify";
 Amplify.configure(awsExports);
 
@@ -71,7 +71,6 @@ function Profile() {
   const [singleProfile, setSingleProfile] = useState<Profile>();
   const [editingProfile, setEditingProfile] = useState(false);
 
-
   // Load list of profiles
   const listProfile = client.graphql({
     query: queries.listProfiles,
@@ -85,6 +84,11 @@ function Profile() {
       }
     });
   }, []);
+
+  useEffect(() => {
+    // add profile list to profiles state
+    console.log("This is user Name: ", userName);
+  }, [userName]);
 
   useEffect(() => {
     // if no profiles create a profile with name and id
