@@ -22,6 +22,7 @@ Development Team:
 ## Relevant Links
 1. Trello Board - https://trello.com/b/alK9Ozv9/ksu-swe6813-agile-board
 2. Working prototype - [https://main.d29iiengqzu0n.amplifyapp.com/](https://main.d35p1rrpim2uyo.amplifyapp.com/)
+3. Recent working prototype - https://dev.d35p1rrpim2uyo.amplifyapp.com 
 
 # Sprint 1
 ## Daily Scrum
@@ -284,6 +285,11 @@ Screenshot:
 
 Screenshot:
 ![image](https://github.com/lcniell123/match-maker/assets/95537416/52ecbd50-d343-452d-8d3b-c519b8adf87e)
+
+## Updates: We successfully got our app to deploy.
+
+Screenshot:
+![image](https://github.com/lcniell123/match-maker/assets/95537416/fe38e561-c52d-463b-8832-8590f745cad9)
 
 
 
