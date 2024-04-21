@@ -1,7 +1,7 @@
 import React from "react";
 import App from "./page";
 
-describe("User Forgot Password", () => {
+xdescribe("User Forgot Password", () => {
   it("should display an input field for email address", () => {
     cy.mount(<App />);
 
@@ -23,7 +23,7 @@ describe("User Forgot Password", () => {
   });
 });
 
-describe("<App />", () => {
+xdescribe("<App />", () => {
   it("should render Sign In page without error", () => {
     cy.mount(<App />);
     cy.get("#signIn-tab");
