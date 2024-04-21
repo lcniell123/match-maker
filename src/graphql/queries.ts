@@ -8,6 +8,535 @@ type GeneratedQuery<InputType, OutputType> = string & {
   __generatedQueryOutput: OutputType;
 };
 
+export const getFriendRequest = /* GraphQL */ `query GetFriendRequest($id: ID!) {
+  getFriendRequest(id: $id) {
+    id
+    status
+    createdAt
+    updatedAt
+    sender {
+      id
+      name
+      description
+      languages
+      zipCode
+      gamePreference
+      behaviour
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      postalCode
+      language
+      favoriteGame
+      preferredGenre
+      timeAvailability
+      preferredTeammateAgeRange
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      __typename
+    }
+    receiver {
+      id
+      name
+      description
+      languages
+      zipCode
+      gamePreference
+      behaviour
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      postalCode
+      language
+      favoriteGame
+      preferredGenre
+      timeAvailability
+      preferredTeammateAgeRange
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      __typename
+    }
+    friendRequestSenderId
+    friendRequestReceiverId
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetFriendRequestQueryVariables,
+  APITypes.GetFriendRequestQuery
+>;
+export const listFriendRequests = /* GraphQL */ `query ListFriendRequests(
+  $filter: ModelFriendRequestFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listFriendRequests(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      status
+      createdAt
+      updatedAt
+      friendRequestSenderId
+      friendRequestReceiverId
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListFriendRequestsQueryVariables,
+  APITypes.ListFriendRequestsQuery
+>;
+export const getNotification = /* GraphQL */ `query GetNotification($id: ID!) {
+  getNotification(id: $id) {
+    id
+    type
+    content
+    createdAt
+    read
+    target {
+      id
+      name
+      description
+      languages
+      zipCode
+      gamePreference
+      behaviour
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      postalCode
+      language
+      favoriteGame
+      preferredGenre
+      timeAvailability
+      preferredTeammateAgeRange
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      __typename
+    }
+    originator {
+      id
+      name
+      description
+      languages
+      zipCode
+      gamePreference
+      behaviour
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      postalCode
+      language
+      favoriteGame
+      preferredGenre
+      timeAvailability
+      preferredTeammateAgeRange
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      __typename
+    }
+    updatedAt
+    notificationTargetId
+    notificationOriginatorId
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetNotificationQueryVariables,
+  APITypes.GetNotificationQuery
+>;
+export const listNotifications = /* GraphQL */ `query ListNotifications(
+  $filter: ModelNotificationFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listNotifications(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      type
+      content
+      createdAt
+      read
+      updatedAt
+      notificationTargetId
+      notificationOriginatorId
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListNotificationsQueryVariables,
+  APITypes.ListNotificationsQuery
+>;
+export const getMemberships = /* GraphQL */ `query GetMemberships($id: ID!) {
+  getMemberships(id: $id) {
+    id
+    createdAt
+    updatedAt
+    group {
+      id
+      description
+      name
+      image
+      updatedAt
+      createdAt
+      groupsCreatedById
+      __typename
+    }
+    user {
+      id
+      name
+      description
+      languages
+      zipCode
+      gamePreference
+      behaviour
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      postalCode
+      language
+      favoriteGame
+      preferredGenre
+      timeAvailability
+      preferredTeammateAgeRange
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      __typename
+    }
+    status
+    membershipsGroupId
+    membershipsUserId
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetMembershipsQueryVariables,
+  APITypes.GetMembershipsQuery
+>;
+export const listMemberships = /* GraphQL */ `query ListMemberships(
+  $filter: ModelMembershipsFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listMemberships(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      createdAt
+      updatedAt
+      status
+      membershipsGroupId
+      membershipsUserId
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListMembershipsQueryVariables,
+  APITypes.ListMembershipsQuery
+>;
+export const getGroups = /* GraphQL */ `query GetGroups($id: ID!) {
+  getGroups(id: $id) {
+    id
+    description
+    name
+    image
+    updatedAt
+    createdBy {
+      id
+      name
+      description
+      languages
+      zipCode
+      gamePreference
+      behaviour
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      postalCode
+      language
+      favoriteGame
+      preferredGenre
+      timeAvailability
+      preferredTeammateAgeRange
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      __typename
+    }
+    createdAt
+    members {
+      nextToken
+      __typename
+    }
+    groupsCreatedById
+    __typename
+  }
+}
+` as GeneratedQuery<APITypes.GetGroupsQueryVariables, APITypes.GetGroupsQuery>;
+export const listGroups = /* GraphQL */ `query ListGroups(
+  $filter: ModelGroupsFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listGroups(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      description
+      name
+      image
+      updatedAt
+      createdAt
+      groupsCreatedById
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListGroupsQueryVariables,
+  APITypes.ListGroupsQuery
+>;
+export const getFriendships = /* GraphQL */ `query GetFriendships($id: ID!) {
+  getFriendships(id: $id) {
+    id
+    friendshipStatus
+    updatedBy
+    updatedAt
+    firstUser {
+      id
+      name
+      description
+      languages
+      zipCode
+      gamePreference
+      behaviour
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      postalCode
+      language
+      favoriteGame
+      preferredGenre
+      timeAvailability
+      preferredTeammateAgeRange
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      __typename
+    }
+    secondUser {
+      id
+      name
+      description
+      languages
+      zipCode
+      gamePreference
+      behaviour
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      postalCode
+      language
+      favoriteGame
+      preferredGenre
+      timeAvailability
+      preferredTeammateAgeRange
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      __typename
+    }
+    createdAt
+    friendshipsFirstUserId
+    friendshipsSecondUserId
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetFriendshipsQueryVariables,
+  APITypes.GetFriendshipsQuery
+>;
+export const listFriendships = /* GraphQL */ `query ListFriendships(
+  $filter: ModelFriendshipsFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listFriendships(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      friendshipStatus
+      updatedBy
+      updatedAt
+      createdAt
+      friendshipsFirstUserId
+      friendshipsSecondUserId
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListFriendshipsQueryVariables,
+  APITypes.ListFriendshipsQuery
+>;
 export const getProfile = /* GraphQL */ `query GetProfile($id: ID!) {
   getProfile(id: $id) {
     id
@@ -44,6 +573,7 @@ export const getProfile = /* GraphQL */ `query GetProfile($id: ID!) {
     toleranceLevel
     teamworkLevel
     competitivenessLevel
+    groupsID
     createdAt
     updatedAt
     __typename
@@ -94,6 +624,7 @@ export const listProfiles = /* GraphQL */ `query ListProfiles(
       toleranceLevel
       teamworkLevel
       competitivenessLevel
+      groupsID
       createdAt
       updatedAt
       __typename
@@ -106,109 +637,56 @@ export const listProfiles = /* GraphQL */ `query ListProfiles(
   APITypes.ListProfilesQueryVariables,
   APITypes.ListProfilesQuery
 >;
-export const getFriendships = /* GraphQL */ `query GetFriendships($id: ID!) {
-  getFriendships(id: $id) {
-    friendshipId
-    userId
-    friendId
-    status
-    id
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.GetFriendshipsQueryVariables,
-  APITypes.GetFriendshipsQuery
->;
-export const listFriendships = /* GraphQL */ `query ListFriendships(
-  $filter: ModelFriendshipsFilterInput
+export const profilesByGroupsID = /* GraphQL */ `query ProfilesByGroupsID(
+  $groupsID: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelProfileFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listFriendships(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  profilesByGroupsID(
+    groupsID: $groupsID
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
     items {
-      friendshipId
-      userId
-      friendId
-      status
       id
-      createdAt
-      updatedAt
-      __typename
-    }
-    nextToken
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.ListFriendshipsQueryVariables,
-  APITypes.ListFriendshipsQuery
->;
-export const getGroups = /* GraphQL */ `query GetGroups($id: ID!) {
-  getGroups(id: $id) {
-    groupId
-    name
-    createdBy
-    createdAt
-    updatedAt
-    image
-    id
-    __typename
-  }
-}
-` as GeneratedQuery<APITypes.GetGroupsQueryVariables, APITypes.GetGroupsQuery>;
-export const listGroups = /* GraphQL */ `query ListGroups(
-  $filter: ModelGroupsFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listGroups(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      groupId
       name
-      createdBy
-      createdAt
-      updatedAt
-      image
-      id
-      __typename
-    }
-    nextToken
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.ListGroupsQueryVariables,
-  APITypes.ListGroupsQuery
->;
-export const getMemberships = /* GraphQL */ `query GetMemberships($id: ID!) {
-  getMemberships(id: $id) {
-    membershipID
-    groupId
-    userId
-    id
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.GetMembershipsQueryVariables,
-  APITypes.GetMembershipsQuery
->;
-export const listMemberships = /* GraphQL */ `query ListMemberships(
-  $filter: ModelMembershipsFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listMemberships(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      membershipID
-      groupId
-      userId
-      id
+      description
+      languages
+      zipCode
+      gamePreference
+      behaviour
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      postalCode
+      language
+      favoriteGame
+      preferredGenre
+      timeAvailability
+      preferredTeammateAgeRange
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
       createdAt
       updatedAt
       __typename
@@ -218,6 +696,6 @@ export const listMemberships = /* GraphQL */ `query ListMemberships(
   }
 }
 ` as GeneratedQuery<
-  APITypes.ListMembershipsQueryVariables,
-  APITypes.ListMembershipsQuery
+  APITypes.ProfilesByGroupsIDQueryVariables,
+  APITypes.ProfilesByGroupsIDQuery
 >;

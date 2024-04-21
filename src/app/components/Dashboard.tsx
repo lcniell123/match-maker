@@ -24,7 +24,6 @@ const Dashboard: React.FC = () => {
                 const { username, userId } = await getCurrentUser();
                 setUserName(username);
                 setUserId(userId);
-
                 const profileItem = await client.graphql({
                     query: queries.getProfile,
                     variables: { id: userId }

@@ -4,8 +4,10 @@ import "@aws-amplify/ui-react/styles.css";
 import {getCurrentUser} from "aws-amplify/auth";
 import {generateClient} from "aws-amplify/api";
 import * as queries from "@/graphql/queries";
-import {createFriendships} from "@/graphql/mutations";
+import {createFriendRequest, createFriendships} from "@/graphql/mutations";
 import Alert from "../components/Alert"
+import {listFriendRequests} from "@/graphql/queries";
+import {FriendRequestStatus} from "@/API";
 
 
 // todo
@@ -81,9 +83,9 @@ export default function Matches() {
         if (currentUserProfile && currentUserProfile.skillLevel) {
             const filteredProfiles = allProfiles.filter(profile => profile.id !== userId);
             const currentUserSkillIndex = skillTiers.indexOf(currentUserProfile.skillLevel);
-            const friendRequestsResponse = await client.graphql({ query: queries.listFriendships, variables: { filter: { userId: { eq: userId }, status: { eq: "accepted" } } } });
-            const friendRequests = friendRequestsResponse.data.listFriendships.items;
-            const friendProfiles = friendRequests.map(request => request.friendId);
+            const friendRequestsResponse = await client.graphql({ query: queries.listFriendRequests, variables: { filter: { friendRequestSenderId: { eq: userId }, status: { eq: FriendRequestStatus.ACCEPTED } } } });
+            const friendRequests = friendRequestsResponse.data.listFriendRequests.items;
+            const friendProfiles = friendRequests.map(request => request.friendRequestReceiverId);
             const matchedProfiles = filteredProfiles.filter(profile => {
                 const isFriend = friendProfiles.includes(profile.id);
                 if (isFriend) return false;
@@ -98,7 +100,7 @@ export default function Matches() {
             });
 
             const nonFriendProfiles = matchedProfiles.map(profile => {
-                const friendRequest = friendRequests.find(request => (request.friendId === profile.id || request.userId === profile.id));
+                const friendRequest = friendRequests.find(request => (request.friendRequestReceiverId === profile.id || request.friendRequestSenderId === profile.id));
                 const status = friendRequest?.status;
                 return { ...profile, status };
             });
@@ -115,19 +117,19 @@ export default function Matches() {
     }
 }, [userId]);
 
-   // todo: friendship id required, but there;s an id field, - should be gen
+
     const handleAddFriend = async (friendId: string, friendName: string) => {
         try {
             const input = {
                 input: {
-                    friendshipId: Math.random().toString(36).substring(2, length),
-                    userId: userId,
-                    friendId: friendId,
-                    status: "pending"
+                    friendRequestSenderId: userId,
+                    friendRequestReceiverId: friendId,
+                    status: FriendRequestStatus.PENDING,
+                    createdAt: new Date().toISOString()
                 }
             };
 
-             await client.graphql({ query: createFriendships, variables: input });
+             await client.graphql({ query: createFriendRequest, variables: input });
             setAlertMessage(`Friend request sent to ${friendName}`);
             setAlertType("success");
             setShowAlert(true);
@@ -158,7 +160,7 @@ return (
                     <button id="closeButton"
                             className="inline-block text-red-600 dark:text-gray-400 hover:bg-red-200 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
                             type="button">
-                        <span className="sr-only">Remove match</span>
+                        <span className="sr-only">Remove43 match</span>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12"/>
                         </svg>

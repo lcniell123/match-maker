@@ -4,7 +4,6 @@ import "@aws-amplify/ui-react/styles.css";
 import {getCurrentUser} from "aws-amplify/auth";
 import {generateClient} from "aws-amplify/api";
 import * as queries from "@/graphql/queries";
-import {createFriendships} from "@/graphql/mutations";
 import {Menu, Transition} from '@headlessui/react'
 import {Fragment} from 'react'
 import {BellIcon} from "@heroicons/react/24/outline";
@@ -22,13 +21,21 @@ export const Navigation = () => {
     const {signOut} = useAuthenticator();
     const [friendRequests, setFriendRequests] = useState<any[]>([]);
     const [userId, setUserId] = useState("");
+    const [profilePhoto, setProfilePhoto] = useState("");
+    const placeholderImage = '/placeholder_avatar.jpg';
     const client = generateClient();
 
     useEffect(() => {
-        async function fetchFriendRequests() {
+        async function fetchData() {
             try {
                 const {userId} = await getCurrentUser();
                 setUserId(userId);
+                const profileItem = await client.graphql({
+                    query: queries.getProfile,
+                    variables: { id: userId }
+                });
+                setProfilePhoto( placeholderImage);
+                console.log("profile pic", profilePhoto);
                 const response = await client.graphql({
                     query: queries.listFriendships,
                     variables: {
@@ -49,7 +56,7 @@ export const Navigation = () => {
             }
         }
 
-        fetchFriendRequests();
+        fetchData();
     }, []);
 
 
@@ -165,8 +172,8 @@ export const Navigation = () => {
                             <span className="sr-only">Open user menu</span>
                             <img
                                 className="h-8 w-8 rounded-full"
-                                src="http://m.gettywallpapers.com/wp-content/uploads/2023/05/Aesthetic-Anime-Boy-Pfp-1536x1536.jpg"
-                                alt=""
+                                src={profilePhoto}
+                                alt="Profile photo"
                             />
                         </Menu.Button>
                     </div>

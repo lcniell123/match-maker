@@ -95,6 +95,7 @@ function Profile() {
           input: {
             name: userName,
             id: userId,
+            groupsID: null
           },
         },
       });
@@ -116,6 +117,7 @@ function Profile() {
               input: {
                 name: userName,
                 id: userId,
+                groupsID: null
               },
             },
           });

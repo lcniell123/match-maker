@@ -6,7 +6,13 @@
 
 /* eslint-disable */
 import * as React from "react";
-import { Button, Flex, Grid, TextField } from "@aws-amplify/ui-react";
+import {
+  Button,
+  Flex,
+  Grid,
+  SelectField,
+  TextField,
+} from "@aws-amplify/ui-react";
 import { fetchByPath, getOverrideProps, validateField } from "./utils";
 import { generateClient } from "aws-amplify/api";
 import { createMemberships } from "../graphql/mutations";
@@ -23,26 +29,24 @@ export default function MembershipsCreateForm(props) {
     ...rest
   } = props;
   const initialValues = {
-    membershipID: "",
-    groupId: "",
-    userId: "",
+    createdAt: "",
+    updatedAt: "",
+    status: "",
   };
-  const [membershipID, setMembershipID] = React.useState(
-    initialValues.membershipID
-  );
-  const [groupId, setGroupId] = React.useState(initialValues.groupId);
-  const [userId, setUserId] = React.useState(initialValues.userId);
+  const [createdAt, setCreatedAt] = React.useState(initialValues.createdAt);
+  const [updatedAt, setUpdatedAt] = React.useState(initialValues.updatedAt);
+  const [status, setStatus] = React.useState(initialValues.status);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
-    setMembershipID(initialValues.membershipID);
-    setGroupId(initialValues.groupId);
-    setUserId(initialValues.userId);
+    setCreatedAt(initialValues.createdAt);
+    setUpdatedAt(initialValues.updatedAt);
+    setStatus(initialValues.status);
     setErrors({});
   };
   const validations = {
-    membershipID: [{ type: "Required" }],
-    groupId: [],
-    userId: [],
+    createdAt: [],
+    updatedAt: [],
+    status: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -61,6 +65,23 @@ export default function MembershipsCreateForm(props) {
     setErrors((errors) => ({ ...errors, [fieldName]: validationResponse }));
     return validationResponse;
   };
+  const convertToLocal = (date) => {
+    const df = new Intl.DateTimeFormat("default", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      calendar: "iso8601",
+      numberingSystem: "latn",
+      hourCycle: "h23",
+    });
+    const parts = df.formatToParts(date).reduce((acc, part) => {
+      acc[part.type] = part.value;
+      return acc;
+    }, {});
+    return `${parts.year}-${parts.month}-${parts.day}T${parts.hour}:${parts.minute}`;
+  };
   return (
     <Grid
       as="form"
@@ -70,9 +91,9 @@ export default function MembershipsCreateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
-          membershipID,
-          groupId,
-          userId,
+          createdAt,
+          updatedAt,
+          status,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -127,83 +148,108 @@ export default function MembershipsCreateForm(props) {
       {...rest}
     >
       <TextField
-        label="Membership id"
-        isRequired={true}
-        isReadOnly={false}
-        value={membershipID}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              membershipID: value,
-              groupId,
-              userId,
-            };
-            const result = onChange(modelFields);
-            value = result?.membershipID ?? value;
-          }
-          if (errors.membershipID?.hasError) {
-            runValidationTasks("membershipID", value);
-          }
-          setMembershipID(value);
-        }}
-        onBlur={() => runValidationTasks("membershipID", membershipID)}
-        errorMessage={errors.membershipID?.errorMessage}
-        hasError={errors.membershipID?.hasError}
-        {...getOverrideProps(overrides, "membershipID")}
-      ></TextField>
-      <TextField
-        label="Group id"
+        label="Created at"
         isRequired={false}
         isReadOnly={false}
-        value={groupId}
+        type="datetime-local"
+        value={createdAt && convertToLocal(new Date(createdAt))}
         onChange={(e) => {
-          let { value } = e.target;
+          let value =
+            e.target.value === "" ? "" : new Date(e.target.value).toISOString();
           if (onChange) {
             const modelFields = {
-              membershipID,
-              groupId: value,
-              userId,
+              createdAt: value,
+              updatedAt,
+              status,
             };
             const result = onChange(modelFields);
-            value = result?.groupId ?? value;
+            value = result?.createdAt ?? value;
           }
-          if (errors.groupId?.hasError) {
-            runValidationTasks("groupId", value);
+          if (errors.createdAt?.hasError) {
+            runValidationTasks("createdAt", value);
           }
-          setGroupId(value);
+          setCreatedAt(value);
         }}
-        onBlur={() => runValidationTasks("groupId", groupId)}
-        errorMessage={errors.groupId?.errorMessage}
-        hasError={errors.groupId?.hasError}
-        {...getOverrideProps(overrides, "groupId")}
+        onBlur={() => runValidationTasks("createdAt", createdAt)}
+        errorMessage={errors.createdAt?.errorMessage}
+        hasError={errors.createdAt?.hasError}
+        {...getOverrideProps(overrides, "createdAt")}
       ></TextField>
       <TextField
-        label="User id"
+        label="Updated at"
         isRequired={false}
         isReadOnly={false}
-        value={userId}
+        type="datetime-local"
+        value={updatedAt && convertToLocal(new Date(updatedAt))}
+        onChange={(e) => {
+          let value =
+            e.target.value === "" ? "" : new Date(e.target.value).toISOString();
+          if (onChange) {
+            const modelFields = {
+              createdAt,
+              updatedAt: value,
+              status,
+            };
+            const result = onChange(modelFields);
+            value = result?.updatedAt ?? value;
+          }
+          if (errors.updatedAt?.hasError) {
+            runValidationTasks("updatedAt", value);
+          }
+          setUpdatedAt(value);
+        }}
+        onBlur={() => runValidationTasks("updatedAt", updatedAt)}
+        errorMessage={errors.updatedAt?.errorMessage}
+        hasError={errors.updatedAt?.hasError}
+        {...getOverrideProps(overrides, "updatedAt")}
+      ></TextField>
+      <SelectField
+        label="Status"
+        placeholder="Please select an option"
+        isDisabled={false}
+        value={status}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              membershipID,
-              groupId,
-              userId: value,
+              createdAt,
+              updatedAt,
+              status: value,
             };
             const result = onChange(modelFields);
-            value = result?.userId ?? value;
+            value = result?.status ?? value;
           }
-          if (errors.userId?.hasError) {
-            runValidationTasks("userId", value);
+          if (errors.status?.hasError) {
+            runValidationTasks("status", value);
           }
-          setUserId(value);
+          setStatus(value);
         }}
-        onBlur={() => runValidationTasks("userId", userId)}
-        errorMessage={errors.userId?.errorMessage}
-        hasError={errors.userId?.hasError}
-        {...getOverrideProps(overrides, "userId")}
-      ></TextField>
+        onBlur={() => runValidationTasks("status", status)}
+        errorMessage={errors.status?.errorMessage}
+        hasError={errors.status?.hasError}
+        {...getOverrideProps(overrides, "status")}
+      >
+        <option
+          children="Friend"
+          value="FRIEND"
+          {...getOverrideProps(overrides, "statusoption0")}
+        ></option>
+        <option
+          children="Blocked"
+          value="BLOCKED"
+          {...getOverrideProps(overrides, "statusoption1")}
+        ></option>
+        <option
+          children="Removed"
+          value="REMOVED"
+          {...getOverrideProps(overrides, "statusoption2")}
+        ></option>
+        <option
+          children="Group"
+          value="GROUP"
+          {...getOverrideProps(overrides, "statusoption3")}
+        ></option>
+      </SelectField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}

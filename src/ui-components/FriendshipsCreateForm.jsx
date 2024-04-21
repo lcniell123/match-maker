@@ -6,7 +6,13 @@
 
 /* eslint-disable */
 import * as React from "react";
-import { Button, Flex, Grid, TextField } from "@aws-amplify/ui-react";
+import {
+  Button,
+  Flex,
+  Grid,
+  SelectField,
+  TextField,
+} from "@aws-amplify/ui-react";
 import { fetchByPath, getOverrideProps, validateField } from "./utils";
 import { generateClient } from "aws-amplify/api";
 import { createFriendships } from "../graphql/mutations";
@@ -23,30 +29,26 @@ export default function FriendshipsCreateForm(props) {
     ...rest
   } = props;
   const initialValues = {
-    friendshipId: "",
-    userId: "",
-    friendId: "",
-    status: "",
+    friendshipStatus: "",
+    updatedBy: "",
+    updatedAt: "",
   };
-  const [friendshipId, setFriendshipId] = React.useState(
-    initialValues.friendshipId
+  const [friendshipStatus, setFriendshipStatus] = React.useState(
+    initialValues.friendshipStatus
   );
-  const [userId, setUserId] = React.useState(initialValues.userId);
-  const [friendId, setFriendId] = React.useState(initialValues.friendId);
-  const [status, setStatus] = React.useState(initialValues.status);
+  const [updatedBy, setUpdatedBy] = React.useState(initialValues.updatedBy);
+  const [updatedAt, setUpdatedAt] = React.useState(initialValues.updatedAt);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
-    setFriendshipId(initialValues.friendshipId);
-    setUserId(initialValues.userId);
-    setFriendId(initialValues.friendId);
-    setStatus(initialValues.status);
+    setFriendshipStatus(initialValues.friendshipStatus);
+    setUpdatedBy(initialValues.updatedBy);
+    setUpdatedAt(initialValues.updatedAt);
     setErrors({});
   };
   const validations = {
-    friendshipId: [{ type: "Required" }],
-    userId: [],
-    friendId: [],
-    status: [],
+    friendshipStatus: [],
+    updatedBy: [],
+    updatedAt: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -65,6 +67,23 @@ export default function FriendshipsCreateForm(props) {
     setErrors((errors) => ({ ...errors, [fieldName]: validationResponse }));
     return validationResponse;
   };
+  const convertToLocal = (date) => {
+    const df = new Intl.DateTimeFormat("default", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      calendar: "iso8601",
+      numberingSystem: "latn",
+      hourCycle: "h23",
+    });
+    const parts = df.formatToParts(date).reduce((acc, part) => {
+      acc[part.type] = part.value;
+      return acc;
+    }, {});
+    return `${parts.year}-${parts.month}-${parts.day}T${parts.hour}:${parts.minute}`;
+  };
   return (
     <Grid
       as="form"
@@ -74,10 +93,9 @@ export default function FriendshipsCreateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
-          friendshipId,
-          userId,
-          friendId,
-          status,
+          friendshipStatus,
+          updatedBy,
+          updatedAt,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -131,113 +149,106 @@ export default function FriendshipsCreateForm(props) {
       {...getOverrideProps(overrides, "FriendshipsCreateForm")}
       {...rest}
     >
-      <TextField
-        label="Friendship id"
-        isRequired={true}
-        isReadOnly={false}
-        value={friendshipId}
+      <SelectField
+        label="Friendship status"
+        placeholder="Please select an option"
+        isDisabled={false}
+        value={friendshipStatus}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              friendshipId: value,
-              userId,
-              friendId,
-              status,
+              friendshipStatus: value,
+              updatedBy,
+              updatedAt,
             };
             const result = onChange(modelFields);
-            value = result?.friendshipId ?? value;
+            value = result?.friendshipStatus ?? value;
           }
-          if (errors.friendshipId?.hasError) {
-            runValidationTasks("friendshipId", value);
+          if (errors.friendshipStatus?.hasError) {
+            runValidationTasks("friendshipStatus", value);
           }
-          setFriendshipId(value);
+          setFriendshipStatus(value);
         }}
-        onBlur={() => runValidationTasks("friendshipId", friendshipId)}
-        errorMessage={errors.friendshipId?.errorMessage}
-        hasError={errors.friendshipId?.hasError}
-        {...getOverrideProps(overrides, "friendshipId")}
-      ></TextField>
+        onBlur={() => runValidationTasks("friendshipStatus", friendshipStatus)}
+        errorMessage={errors.friendshipStatus?.errorMessage}
+        hasError={errors.friendshipStatus?.hasError}
+        {...getOverrideProps(overrides, "friendshipStatus")}
+      >
+        <option
+          children="Friend"
+          value="FRIEND"
+          {...getOverrideProps(overrides, "friendshipStatusoption0")}
+        ></option>
+        <option
+          children="Blocked"
+          value="BLOCKED"
+          {...getOverrideProps(overrides, "friendshipStatusoption1")}
+        ></option>
+        <option
+          children="Removed"
+          value="REMOVED"
+          {...getOverrideProps(overrides, "friendshipStatusoption2")}
+        ></option>
+        <option
+          children="Group"
+          value="GROUP"
+          {...getOverrideProps(overrides, "friendshipStatusoption3")}
+        ></option>
+      </SelectField>
       <TextField
-        label="User id"
+        label="Updated by"
         isRequired={false}
         isReadOnly={false}
-        value={userId}
+        value={updatedBy}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              friendshipId,
-              userId: value,
-              friendId,
-              status,
+              friendshipStatus,
+              updatedBy: value,
+              updatedAt,
             };
             const result = onChange(modelFields);
-            value = result?.userId ?? value;
+            value = result?.updatedBy ?? value;
           }
-          if (errors.userId?.hasError) {
-            runValidationTasks("userId", value);
+          if (errors.updatedBy?.hasError) {
+            runValidationTasks("updatedBy", value);
           }
-          setUserId(value);
+          setUpdatedBy(value);
         }}
-        onBlur={() => runValidationTasks("userId", userId)}
-        errorMessage={errors.userId?.errorMessage}
-        hasError={errors.userId?.hasError}
-        {...getOverrideProps(overrides, "userId")}
+        onBlur={() => runValidationTasks("updatedBy", updatedBy)}
+        errorMessage={errors.updatedBy?.errorMessage}
+        hasError={errors.updatedBy?.hasError}
+        {...getOverrideProps(overrides, "updatedBy")}
       ></TextField>
       <TextField
-        label="Friend id"
+        label="Updated at"
         isRequired={false}
         isReadOnly={false}
-        value={friendId}
+        type="datetime-local"
+        value={updatedAt && convertToLocal(new Date(updatedAt))}
         onChange={(e) => {
-          let { value } = e.target;
+          let value =
+            e.target.value === "" ? "" : new Date(e.target.value).toISOString();
           if (onChange) {
             const modelFields = {
-              friendshipId,
-              userId,
-              friendId: value,
-              status,
+              friendshipStatus,
+              updatedBy,
+              updatedAt: value,
             };
             const result = onChange(modelFields);
-            value = result?.friendId ?? value;
+            value = result?.updatedAt ?? value;
           }
-          if (errors.friendId?.hasError) {
-            runValidationTasks("friendId", value);
+          if (errors.updatedAt?.hasError) {
+            runValidationTasks("updatedAt", value);
           }
-          setFriendId(value);
+          setUpdatedAt(value);
         }}
-        onBlur={() => runValidationTasks("friendId", friendId)}
-        errorMessage={errors.friendId?.errorMessage}
-        hasError={errors.friendId?.hasError}
-        {...getOverrideProps(overrides, "friendId")}
-      ></TextField>
-      <TextField
-        label="Status"
-        isRequired={false}
-        isReadOnly={false}
-        value={status}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              friendshipId,
-              userId,
-              friendId,
-              status: value,
-            };
-            const result = onChange(modelFields);
-            value = result?.status ?? value;
-          }
-          if (errors.status?.hasError) {
-            runValidationTasks("status", value);
-          }
-          setStatus(value);
-        }}
-        onBlur={() => runValidationTasks("status", status)}
-        errorMessage={errors.status?.errorMessage}
-        hasError={errors.status?.hasError}
-        {...getOverrideProps(overrides, "status")}
+        onBlur={() => runValidationTasks("updatedAt", updatedAt)}
+        errorMessage={errors.updatedAt?.errorMessage}
+        hasError={errors.updatedAt?.hasError}
+        {...getOverrideProps(overrides, "updatedAt")}
       ></TextField>
       <Flex
         justifyContent="space-between"

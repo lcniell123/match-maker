@@ -16,9 +16,12 @@ export default function App() {
   const router = useRouter();
 
   return (
-    <Authenticator>
-      {() => (
-          <Dashboard/>
+        <Authenticator>
+      {({ signOut, user }) => (
+          <><Dashboard/>
+            <h1>Hello {user?.username}
+            </h1>
+          </>
       )}
     </Authenticator>
   );

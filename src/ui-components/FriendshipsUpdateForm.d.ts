@@ -5,7 +5,7 @@
  **************************************************************************/
 
 import * as React from "react";
-import { GridProps, TextFieldProps } from "@aws-amplify/ui-react";
+import { GridProps, SelectFieldProps, TextFieldProps } from "@aws-amplify/ui-react";
 import { Friendships } from "../API.ts";
 export declare type EscapeHatchProps = {
     [elementHierarchy: string]: Record<string, unknown>;
@@ -23,24 +23,21 @@ export declare type ValidationResponse = {
 };
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
 export declare type FriendshipsUpdateFormInputValues = {
-    friendshipId?: string;
-    userId?: string;
-    friendId?: string;
-    status?: string;
+    friendshipStatus?: string;
+    updatedBy?: string;
+    updatedAt?: string;
 };
 export declare type FriendshipsUpdateFormValidationValues = {
-    friendshipId?: ValidationFunction<string>;
-    userId?: ValidationFunction<string>;
-    friendId?: ValidationFunction<string>;
-    status?: ValidationFunction<string>;
+    friendshipStatus?: ValidationFunction<string>;
+    updatedBy?: ValidationFunction<string>;
+    updatedAt?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type FriendshipsUpdateFormOverridesProps = {
     FriendshipsUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
-    friendshipId?: PrimitiveOverrideProps<TextFieldProps>;
-    userId?: PrimitiveOverrideProps<TextFieldProps>;
-    friendId?: PrimitiveOverrideProps<TextFieldProps>;
-    status?: PrimitiveOverrideProps<TextFieldProps>;
+    friendshipStatus?: PrimitiveOverrideProps<SelectFieldProps>;
+    updatedBy?: PrimitiveOverrideProps<TextFieldProps>;
+    updatedAt?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type FriendshipsUpdateFormProps = React.PropsWithChildren<{
     overrides?: FriendshipsUpdateFormOverridesProps | undefined | null;

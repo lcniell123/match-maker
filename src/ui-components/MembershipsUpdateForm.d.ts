@@ -5,7 +5,7 @@
  **************************************************************************/
 
 import * as React from "react";
-import { GridProps, TextFieldProps } from "@aws-amplify/ui-react";
+import { GridProps, SelectFieldProps, TextFieldProps } from "@aws-amplify/ui-react";
 import { Memberships } from "../API.ts";
 export declare type EscapeHatchProps = {
     [elementHierarchy: string]: Record<string, unknown>;
@@ -23,21 +23,21 @@ export declare type ValidationResponse = {
 };
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
 export declare type MembershipsUpdateFormInputValues = {
-    membershipID?: string;
-    groupId?: string;
-    userId?: string;
+    createdAt?: string;
+    updatedAt?: string;
+    status?: string;
 };
 export declare type MembershipsUpdateFormValidationValues = {
-    membershipID?: ValidationFunction<string>;
-    groupId?: ValidationFunction<string>;
-    userId?: ValidationFunction<string>;
+    createdAt?: ValidationFunction<string>;
+    updatedAt?: ValidationFunction<string>;
+    status?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type MembershipsUpdateFormOverridesProps = {
     MembershipsUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
-    membershipID?: PrimitiveOverrideProps<TextFieldProps>;
-    groupId?: PrimitiveOverrideProps<TextFieldProps>;
-    userId?: PrimitiveOverrideProps<TextFieldProps>;
+    createdAt?: PrimitiveOverrideProps<TextFieldProps>;
+    updatedAt?: PrimitiveOverrideProps<TextFieldProps>;
+    status?: PrimitiveOverrideProps<SelectFieldProps>;
 } & EscapeHatchProps;
 export declare type MembershipsUpdateFormProps = React.PropsWithChildren<{
     overrides?: MembershipsUpdateFormOverridesProps | undefined | null;
