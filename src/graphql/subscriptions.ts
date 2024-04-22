@@ -47,6 +47,7 @@ export const onCreateProfile = /* GraphQL */ `subscription OnCreateProfile(
     toleranceLevel
     teamworkLevel
     competitivenessLevel
+    groupsID
     createdAt
     updatedAt
     owner
@@ -96,6 +97,7 @@ export const onUpdateProfile = /* GraphQL */ `subscription OnUpdateProfile(
     toleranceLevel
     teamworkLevel
     competitivenessLevel
+    groupsID
     createdAt
     updatedAt
     owner
@@ -145,6 +147,7 @@ export const onDeleteProfile = /* GraphQL */ `subscription OnDeleteProfile(
     toleranceLevel
     teamworkLevel
     competitivenessLevel
+    groupsID
     createdAt
     updatedAt
     owner
@@ -160,13 +163,95 @@ export const onCreateFriendships = /* GraphQL */ `subscription OnCreateFriendshi
   $owner: String
 ) {
   onCreateFriendships(filter: $filter, owner: $owner) {
-    friendshipId
-    userId
-    friendId
-    status
     id
+    friendshipStatus
+    updatedBy
+    firstUser {
+      id
+      name
+      description
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      zipCode
+      postalCode
+      language
+      languages
+      favoriteGame
+      gamePreference
+      timeAvailability
+      preferredTeammateAgeRange
+      preferredGenre
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behaviour
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+    secondUser {
+      id
+      name
+      description
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      zipCode
+      postalCode
+      language
+      languages
+      favoriteGame
+      gamePreference
+      timeAvailability
+      preferredTeammateAgeRange
+      preferredGenre
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behaviour
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
     createdAt
     updatedAt
+    friendshipsFirstUserId
+    friendshipsSecondUserId
     owner
     __typename
   }
@@ -180,13 +265,95 @@ export const onUpdateFriendships = /* GraphQL */ `subscription OnUpdateFriendshi
   $owner: String
 ) {
   onUpdateFriendships(filter: $filter, owner: $owner) {
-    friendshipId
-    userId
-    friendId
-    status
     id
+    friendshipStatus
+    updatedBy
+    firstUser {
+      id
+      name
+      description
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      zipCode
+      postalCode
+      language
+      languages
+      favoriteGame
+      gamePreference
+      timeAvailability
+      preferredTeammateAgeRange
+      preferredGenre
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behaviour
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+    secondUser {
+      id
+      name
+      description
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      zipCode
+      postalCode
+      language
+      languages
+      favoriteGame
+      gamePreference
+      timeAvailability
+      preferredTeammateAgeRange
+      preferredGenre
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behaviour
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
     createdAt
     updatedAt
+    friendshipsFirstUserId
+    friendshipsSecondUserId
     owner
     __typename
   }
@@ -200,13 +367,95 @@ export const onDeleteFriendships = /* GraphQL */ `subscription OnDeleteFriendshi
   $owner: String
 ) {
   onDeleteFriendships(filter: $filter, owner: $owner) {
-    friendshipId
-    userId
-    friendId
-    status
     id
+    friendshipStatus
+    updatedBy
+    firstUser {
+      id
+      name
+      description
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      zipCode
+      postalCode
+      language
+      languages
+      favoriteGame
+      gamePreference
+      timeAvailability
+      preferredTeammateAgeRange
+      preferredGenre
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behaviour
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+    secondUser {
+      id
+      name
+      description
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      zipCode
+      postalCode
+      language
+      languages
+      favoriteGame
+      gamePreference
+      timeAvailability
+      preferredTeammateAgeRange
+      preferredGenre
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behaviour
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
     createdAt
     updatedAt
+    friendshipsFirstUserId
+    friendshipsSecondUserId
     owner
     __typename
   }
@@ -220,13 +469,58 @@ export const onCreateGroups = /* GraphQL */ `subscription OnCreateGroups(
   $owner: String
 ) {
   onCreateGroups(filter: $filter, owner: $owner) {
-    groupId
+    id
+    description
     name
-    createdBy
+    image
+    createdBy {
+      id
+      name
+      description
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      zipCode
+      postalCode
+      language
+      languages
+      favoriteGame
+      gamePreference
+      timeAvailability
+      preferredTeammateAgeRange
+      preferredGenre
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behaviour
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+    members {
+      nextToken
+      __typename
+    }
     createdAt
     updatedAt
-    image
-    id
+    groupsCreatedById
     owner
     __typename
   }
@@ -240,13 +534,58 @@ export const onUpdateGroups = /* GraphQL */ `subscription OnUpdateGroups(
   $owner: String
 ) {
   onUpdateGroups(filter: $filter, owner: $owner) {
-    groupId
+    id
+    description
     name
-    createdBy
+    image
+    createdBy {
+      id
+      name
+      description
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      zipCode
+      postalCode
+      language
+      languages
+      favoriteGame
+      gamePreference
+      timeAvailability
+      preferredTeammateAgeRange
+      preferredGenre
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behaviour
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+    members {
+      nextToken
+      __typename
+    }
     createdAt
     updatedAt
-    image
-    id
+    groupsCreatedById
     owner
     __typename
   }
@@ -260,13 +599,58 @@ export const onDeleteGroups = /* GraphQL */ `subscription OnDeleteGroups(
   $owner: String
 ) {
   onDeleteGroups(filter: $filter, owner: $owner) {
-    groupId
+    id
+    description
     name
-    createdBy
+    image
+    createdBy {
+      id
+      name
+      description
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      zipCode
+      postalCode
+      language
+      languages
+      favoriteGame
+      gamePreference
+      timeAvailability
+      preferredTeammateAgeRange
+      preferredGenre
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behaviour
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+    members {
+      nextToken
+      __typename
+    }
     createdAt
     updatedAt
-    image
-    id
+    groupsCreatedById
     owner
     __typename
   }

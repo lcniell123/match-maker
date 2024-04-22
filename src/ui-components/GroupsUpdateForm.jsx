@@ -25,29 +25,22 @@ export default function GroupsUpdateForm(props) {
     ...rest
   } = props;
   const initialValues = {
-    groupId: "",
+    description: "",
     name: "",
-    createdBy: "",
-    createdAt: "",
-    updatedAt: "",
     image: "",
   };
-  const [groupId, setGroupId] = React.useState(initialValues.groupId);
+  const [description, setDescription] = React.useState(
+    initialValues.description
+  );
   const [name, setName] = React.useState(initialValues.name);
-  const [createdBy, setCreatedBy] = React.useState(initialValues.createdBy);
-  const [createdAt, setCreatedAt] = React.useState(initialValues.createdAt);
-  const [updatedAt, setUpdatedAt] = React.useState(initialValues.updatedAt);
   const [image, setImage] = React.useState(initialValues.image);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     const cleanValues = groupsRecord
       ? { ...initialValues, ...groupsRecord }
       : initialValues;
-    setGroupId(cleanValues.groupId);
+    setDescription(cleanValues.description);
     setName(cleanValues.name);
-    setCreatedBy(cleanValues.createdBy);
-    setCreatedAt(cleanValues.createdAt);
-    setUpdatedAt(cleanValues.updatedAt);
     setImage(cleanValues.image);
     setErrors({});
   };
@@ -68,11 +61,8 @@ export default function GroupsUpdateForm(props) {
   }, [idProp, groupsModelProp]);
   React.useEffect(resetStateValues, [groupsRecord]);
   const validations = {
-    groupId: [],
-    name: [],
-    createdBy: [],
-    createdAt: [],
-    updatedAt: [],
+    description: [],
+    name: [{ type: "Required" }],
     image: [],
   };
   const runValidationTasks = async (
@@ -101,11 +91,8 @@ export default function GroupsUpdateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
-          groupId: groupId ?? null,
-          name: name ?? null,
-          createdBy: createdBy ?? null,
-          createdAt: createdAt ?? null,
-          updatedAt: updatedAt ?? null,
+          description: description ?? null,
+          name,
           image: image ?? null,
         };
         const validationResponses = await Promise.all(
@@ -159,48 +146,42 @@ export default function GroupsUpdateForm(props) {
       {...rest}
     >
       <TextField
-        label="Group id"
+        label="Description"
         isRequired={false}
         isReadOnly={false}
-        value={groupId}
+        value={description}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              groupId: value,
+              description: value,
               name,
-              createdBy,
-              createdAt,
-              updatedAt,
               image,
             };
             const result = onChange(modelFields);
-            value = result?.groupId ?? value;
+            value = result?.description ?? value;
           }
-          if (errors.groupId?.hasError) {
-            runValidationTasks("groupId", value);
+          if (errors.description?.hasError) {
+            runValidationTasks("description", value);
           }
-          setGroupId(value);
+          setDescription(value);
         }}
-        onBlur={() => runValidationTasks("groupId", groupId)}
-        errorMessage={errors.groupId?.errorMessage}
-        hasError={errors.groupId?.hasError}
-        {...getOverrideProps(overrides, "groupId")}
+        onBlur={() => runValidationTasks("description", description)}
+        errorMessage={errors.description?.errorMessage}
+        hasError={errors.description?.hasError}
+        {...getOverrideProps(overrides, "description")}
       ></TextField>
       <TextField
         label="Name"
-        isRequired={false}
+        isRequired={true}
         isReadOnly={false}
         value={name}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              groupId,
+              description,
               name: value,
-              createdBy,
-              createdAt,
-              updatedAt,
               image,
             };
             const result = onChange(modelFields);
@@ -217,93 +198,6 @@ export default function GroupsUpdateForm(props) {
         {...getOverrideProps(overrides, "name")}
       ></TextField>
       <TextField
-        label="Created by"
-        isRequired={false}
-        isReadOnly={false}
-        value={createdBy}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              groupId,
-              name,
-              createdBy: value,
-              createdAt,
-              updatedAt,
-              image,
-            };
-            const result = onChange(modelFields);
-            value = result?.createdBy ?? value;
-          }
-          if (errors.createdBy?.hasError) {
-            runValidationTasks("createdBy", value);
-          }
-          setCreatedBy(value);
-        }}
-        onBlur={() => runValidationTasks("createdBy", createdBy)}
-        errorMessage={errors.createdBy?.errorMessage}
-        hasError={errors.createdBy?.hasError}
-        {...getOverrideProps(overrides, "createdBy")}
-      ></TextField>
-      <TextField
-        label="Created at"
-        isRequired={false}
-        isReadOnly={false}
-        value={createdAt}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              groupId,
-              name,
-              createdBy,
-              createdAt: value,
-              updatedAt,
-              image,
-            };
-            const result = onChange(modelFields);
-            value = result?.createdAt ?? value;
-          }
-          if (errors.createdAt?.hasError) {
-            runValidationTasks("createdAt", value);
-          }
-          setCreatedAt(value);
-        }}
-        onBlur={() => runValidationTasks("createdAt", createdAt)}
-        errorMessage={errors.createdAt?.errorMessage}
-        hasError={errors.createdAt?.hasError}
-        {...getOverrideProps(overrides, "createdAt")}
-      ></TextField>
-      <TextField
-        label="Updated at"
-        isRequired={false}
-        isReadOnly={false}
-        value={updatedAt}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              groupId,
-              name,
-              createdBy,
-              createdAt,
-              updatedAt: value,
-              image,
-            };
-            const result = onChange(modelFields);
-            value = result?.updatedAt ?? value;
-          }
-          if (errors.updatedAt?.hasError) {
-            runValidationTasks("updatedAt", value);
-          }
-          setUpdatedAt(value);
-        }}
-        onBlur={() => runValidationTasks("updatedAt", updatedAt)}
-        errorMessage={errors.updatedAt?.errorMessage}
-        hasError={errors.updatedAt?.hasError}
-        {...getOverrideProps(overrides, "updatedAt")}
-      ></TextField>
-      <TextField
         label="Image"
         isRequired={false}
         isReadOnly={false}
@@ -312,11 +206,8 @@ export default function GroupsUpdateForm(props) {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              groupId,
+              description,
               name,
-              createdBy,
-              createdAt,
-              updatedAt,
               image: value,
             };
             const result = onChange(modelFields);

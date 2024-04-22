@@ -47,6 +47,7 @@ export const createProfile = /* GraphQL */ `mutation CreateProfile(
     toleranceLevel
     teamworkLevel
     competitivenessLevel
+    groupsID
     createdAt
     updatedAt
     owner
@@ -96,6 +97,7 @@ export const updateProfile = /* GraphQL */ `mutation UpdateProfile(
     toleranceLevel
     teamworkLevel
     competitivenessLevel
+    groupsID
     createdAt
     updatedAt
     owner
@@ -145,6 +147,7 @@ export const deleteProfile = /* GraphQL */ `mutation DeleteProfile(
     toleranceLevel
     teamworkLevel
     competitivenessLevel
+    groupsID
     createdAt
     updatedAt
     owner
@@ -160,13 +163,95 @@ export const createFriendships = /* GraphQL */ `mutation CreateFriendships(
   $condition: ModelFriendshipsConditionInput
 ) {
   createFriendships(input: $input, condition: $condition) {
-    friendshipId
-    userId
-    friendId
-    status
     id
+    friendshipStatus
+    updatedBy
+    firstUser {
+      id
+      name
+      description
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      zipCode
+      postalCode
+      language
+      languages
+      favoriteGame
+      gamePreference
+      timeAvailability
+      preferredTeammateAgeRange
+      preferredGenre
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behaviour
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+    secondUser {
+      id
+      name
+      description
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      zipCode
+      postalCode
+      language
+      languages
+      favoriteGame
+      gamePreference
+      timeAvailability
+      preferredTeammateAgeRange
+      preferredGenre
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behaviour
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
     createdAt
     updatedAt
+    friendshipsFirstUserId
+    friendshipsSecondUserId
     owner
     __typename
   }
@@ -180,13 +265,95 @@ export const updateFriendships = /* GraphQL */ `mutation UpdateFriendships(
   $condition: ModelFriendshipsConditionInput
 ) {
   updateFriendships(input: $input, condition: $condition) {
-    friendshipId
-    userId
-    friendId
-    status
     id
+    friendshipStatus
+    updatedBy
+    firstUser {
+      id
+      name
+      description
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      zipCode
+      postalCode
+      language
+      languages
+      favoriteGame
+      gamePreference
+      timeAvailability
+      preferredTeammateAgeRange
+      preferredGenre
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behaviour
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+    secondUser {
+      id
+      name
+      description
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      zipCode
+      postalCode
+      language
+      languages
+      favoriteGame
+      gamePreference
+      timeAvailability
+      preferredTeammateAgeRange
+      preferredGenre
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behaviour
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
     createdAt
     updatedAt
+    friendshipsFirstUserId
+    friendshipsSecondUserId
     owner
     __typename
   }
@@ -200,13 +367,95 @@ export const deleteFriendships = /* GraphQL */ `mutation DeleteFriendships(
   $condition: ModelFriendshipsConditionInput
 ) {
   deleteFriendships(input: $input, condition: $condition) {
-    friendshipId
-    userId
-    friendId
-    status
     id
+    friendshipStatus
+    updatedBy
+    firstUser {
+      id
+      name
+      description
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      zipCode
+      postalCode
+      language
+      languages
+      favoriteGame
+      gamePreference
+      timeAvailability
+      preferredTeammateAgeRange
+      preferredGenre
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behaviour
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+    secondUser {
+      id
+      name
+      description
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      zipCode
+      postalCode
+      language
+      languages
+      favoriteGame
+      gamePreference
+      timeAvailability
+      preferredTeammateAgeRange
+      preferredGenre
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behaviour
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
     createdAt
     updatedAt
+    friendshipsFirstUserId
+    friendshipsSecondUserId
     owner
     __typename
   }
@@ -220,13 +469,58 @@ export const createGroups = /* GraphQL */ `mutation CreateGroups(
   $condition: ModelGroupsConditionInput
 ) {
   createGroups(input: $input, condition: $condition) {
-    groupId
+    id
+    description
     name
-    createdBy
+    image
+    createdBy {
+      id
+      name
+      description
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      zipCode
+      postalCode
+      language
+      languages
+      favoriteGame
+      gamePreference
+      timeAvailability
+      preferredTeammateAgeRange
+      preferredGenre
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behaviour
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+    members {
+      nextToken
+      __typename
+    }
     createdAt
     updatedAt
-    image
-    id
+    groupsCreatedById
     owner
     __typename
   }
@@ -240,13 +534,58 @@ export const updateGroups = /* GraphQL */ `mutation UpdateGroups(
   $condition: ModelGroupsConditionInput
 ) {
   updateGroups(input: $input, condition: $condition) {
-    groupId
+    id
+    description
     name
-    createdBy
+    image
+    createdBy {
+      id
+      name
+      description
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      zipCode
+      postalCode
+      language
+      languages
+      favoriteGame
+      gamePreference
+      timeAvailability
+      preferredTeammateAgeRange
+      preferredGenre
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behaviour
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+    members {
+      nextToken
+      __typename
+    }
     createdAt
     updatedAt
-    image
-    id
+    groupsCreatedById
     owner
     __typename
   }
@@ -260,13 +599,58 @@ export const deleteGroups = /* GraphQL */ `mutation DeleteGroups(
   $condition: ModelGroupsConditionInput
 ) {
   deleteGroups(input: $input, condition: $condition) {
-    groupId
+    id
+    description
     name
-    createdBy
+    image
+    createdBy {
+      id
+      name
+      description
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      zipCode
+      postalCode
+      language
+      languages
+      favoriteGame
+      gamePreference
+      timeAvailability
+      preferredTeammateAgeRange
+      preferredGenre
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behaviour
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+    members {
+      nextToken
+      __typename
+    }
     createdAt
     updatedAt
-    image
-    id
+    groupsCreatedById
     owner
     __typename
   }

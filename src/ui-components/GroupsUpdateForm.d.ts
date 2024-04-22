@@ -23,29 +23,20 @@ export declare type ValidationResponse = {
 };
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
 export declare type GroupsUpdateFormInputValues = {
-    groupId?: string;
+    description?: string;
     name?: string;
-    createdBy?: string;
-    createdAt?: string;
-    updatedAt?: string;
     image?: string;
 };
 export declare type GroupsUpdateFormValidationValues = {
-    groupId?: ValidationFunction<string>;
+    description?: ValidationFunction<string>;
     name?: ValidationFunction<string>;
-    createdBy?: ValidationFunction<string>;
-    createdAt?: ValidationFunction<string>;
-    updatedAt?: ValidationFunction<string>;
     image?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type GroupsUpdateFormOverridesProps = {
     GroupsUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
-    groupId?: PrimitiveOverrideProps<TextFieldProps>;
+    description?: PrimitiveOverrideProps<TextFieldProps>;
     name?: PrimitiveOverrideProps<TextFieldProps>;
-    createdBy?: PrimitiveOverrideProps<TextFieldProps>;
-    createdAt?: PrimitiveOverrideProps<TextFieldProps>;
-    updatedAt?: PrimitiveOverrideProps<TextFieldProps>;
     image?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type GroupsUpdateFormProps = React.PropsWithChildren<{

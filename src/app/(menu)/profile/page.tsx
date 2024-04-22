@@ -86,11 +86,6 @@ function Profile() {
   }, []);
 
   useEffect(() => {
-    // add profile list to profiles state
-    console.log("This is user Name: ", userName);
-  }, [userName]);
-
-  useEffect(() => {
     // if no profiles create a profile with name and id
     if (profiles && profiles.length === 0) {
       client.graphql({

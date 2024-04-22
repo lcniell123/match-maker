@@ -44,6 +44,7 @@ export const getProfile = /* GraphQL */ `query GetProfile($id: ID!) {
     toleranceLevel
     teamworkLevel
     competitivenessLevel
+    groupsID
     createdAt
     updatedAt
     owner
@@ -95,6 +96,7 @@ export const listProfiles = /* GraphQL */ `query ListProfiles(
       toleranceLevel
       teamworkLevel
       competitivenessLevel
+      groupsID
       createdAt
       updatedAt
       owner
@@ -108,15 +110,160 @@ export const listProfiles = /* GraphQL */ `query ListProfiles(
   APITypes.ListProfilesQueryVariables,
   APITypes.ListProfilesQuery
 >;
+export const profilesByGroupsID = /* GraphQL */ `query ProfilesByGroupsID(
+  $groupsID: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelProfileFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  profilesByGroupsID(
+    groupsID: $groupsID
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      name
+      description
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      zipCode
+      postalCode
+      language
+      languages
+      favoriteGame
+      gamePreference
+      timeAvailability
+      preferredTeammateAgeRange
+      preferredGenre
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behaviour
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ProfilesByGroupsIDQueryVariables,
+  APITypes.ProfilesByGroupsIDQuery
+>;
 export const getFriendships = /* GraphQL */ `query GetFriendships($id: ID!) {
   getFriendships(id: $id) {
-    friendshipId
-    userId
-    friendId
-    status
     id
+    friendshipStatus
+    updatedBy
+    firstUser {
+      id
+      name
+      description
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      zipCode
+      postalCode
+      language
+      languages
+      favoriteGame
+      gamePreference
+      timeAvailability
+      preferredTeammateAgeRange
+      preferredGenre
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behaviour
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+    secondUser {
+      id
+      name
+      description
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      zipCode
+      postalCode
+      language
+      languages
+      favoriteGame
+      gamePreference
+      timeAvailability
+      preferredTeammateAgeRange
+      preferredGenre
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behaviour
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
     createdAt
     updatedAt
+    friendshipsFirstUserId
+    friendshipsSecondUserId
     owner
     __typename
   }
@@ -132,13 +279,13 @@ export const listFriendships = /* GraphQL */ `query ListFriendships(
 ) {
   listFriendships(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
-      friendshipId
-      userId
-      friendId
-      status
       id
+      friendshipStatus
+      updatedBy
       createdAt
       updatedAt
+      friendshipsFirstUserId
+      friendshipsSecondUserId
       owner
       __typename
     }
@@ -152,13 +299,58 @@ export const listFriendships = /* GraphQL */ `query ListFriendships(
 >;
 export const getGroups = /* GraphQL */ `query GetGroups($id: ID!) {
   getGroups(id: $id) {
-    groupId
+    id
+    description
     name
-    createdBy
+    image
+    createdBy {
+      id
+      name
+      description
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      zipCode
+      postalCode
+      language
+      languages
+      favoriteGame
+      gamePreference
+      timeAvailability
+      preferredTeammateAgeRange
+      preferredGenre
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behaviour
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+    members {
+      nextToken
+      __typename
+    }
     createdAt
     updatedAt
-    image
-    id
+    groupsCreatedById
     owner
     __typename
   }
@@ -171,13 +363,13 @@ export const listGroups = /* GraphQL */ `query ListGroups(
 ) {
   listGroups(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
-      groupId
+      id
+      description
       name
-      createdBy
+      image
       createdAt
       updatedAt
-      image
-      id
+      groupsCreatedById
       owner
       __typename
     }

@@ -5,7 +5,7 @@
  **************************************************************************/
 
 import * as React from "react";
-import { GridProps, TextFieldProps } from "@aws-amplify/ui-react";
+import { GridProps, SelectFieldProps, TextFieldProps } from "@aws-amplify/ui-react";
 export declare type EscapeHatchProps = {
     [elementHierarchy: string]: Record<string, unknown>;
 } | null;
@@ -22,24 +22,18 @@ export declare type ValidationResponse = {
 };
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
 export declare type FriendshipsCreateFormInputValues = {
-    friendshipId?: string;
-    userId?: string;
-    friendId?: string;
-    status?: string;
+    friendshipStatus?: string;
+    updatedBy?: string;
 };
 export declare type FriendshipsCreateFormValidationValues = {
-    friendshipId?: ValidationFunction<string>;
-    userId?: ValidationFunction<string>;
-    friendId?: ValidationFunction<string>;
-    status?: ValidationFunction<string>;
+    friendshipStatus?: ValidationFunction<string>;
+    updatedBy?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type FriendshipsCreateFormOverridesProps = {
     FriendshipsCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
-    friendshipId?: PrimitiveOverrideProps<TextFieldProps>;
-    userId?: PrimitiveOverrideProps<TextFieldProps>;
-    friendId?: PrimitiveOverrideProps<TextFieldProps>;
-    status?: PrimitiveOverrideProps<TextFieldProps>;
+    friendshipStatus?: PrimitiveOverrideProps<SelectFieldProps>;
+    updatedBy?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type FriendshipsCreateFormProps = React.PropsWithChildren<{
     overrides?: FriendshipsCreateFormOverridesProps | undefined | null;
