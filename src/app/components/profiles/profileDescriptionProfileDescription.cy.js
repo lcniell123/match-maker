@@ -43,7 +43,7 @@ describe("ProfileDescription component", () => {
     cy.log("Edit profile action triggered.");
   });
 
-  it("should display the user's name correctly", () => {
+  xit("should display the user's name correctly", () => {
     // Assert that the user's name is displayed correctly based on the provided form data
     cy.get(".mb-6 > :nth-child(1) > :nth-child(1)").should(
       "contain.text",

@@ -1,0 +1,58 @@
+type Profile @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  name: String!
+  description: String
+  username: String
+  bio: String
+  photo: String
+  coverPhoto: String
+  firstName: String
+  lastName: String
+  age: Int
+  country: String
+  timeZone: String
+  city: String
+  region: String
+  zipCode: String
+  postalCode: String
+  language: String
+  languages: String
+  favoriteGame: String
+  gamePreference: String
+  timeAvailability: String
+  preferredTeammateAgeRange: String
+  preferredGenre: String
+  skillLevel: String
+  preferredGameMode: String
+  preferredRole: String
+  playStyle: String
+  flexibility: Boolean
+  behaviour: String
+  behavior: String
+  communicationPreference: String
+  toleranceLevel: String
+  teamworkLevel: String
+  competitivenessLevel: String
+}
+
+type Friendships @model @auth(rules: [{ allow: owner }]) {
+  friendshipId: String
+  userId: String
+  friendId: String
+  status: String
+}
+
+type Groups @model @auth(rules: [{ allow: owner }]) {
+  groupId: String
+  name: String
+  createdBy: String
+  createdAt: String
+  updatedAt: String
+  image: String
+}
+
+type GroupMemberships @model @auth(rules: [{ allow: private }]) {
+  membershipID: String
+  groupId: String
+  userId: String
+}
