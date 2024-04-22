@@ -6,14 +6,16 @@
 
 /* eslint-disable */
 import * as React from "react";
-import { Button, Flex, Grid, SelectField } from "@aws-amplify/ui-react";
+import { Button, Flex, Grid } from "@aws-amplify/ui-react";
 import { fetchByPath, getOverrideProps, validateField } from "./utils";
 import { generateClient } from "aws-amplify/api";
-import { createMemberships } from "../graphql/mutations";
+import { getMatches } from "../graphql/queries";
+import { updateMatches } from "../graphql/mutations";
 const client = generateClient();
-export default function MembershipsCreateForm(props) {
+export default function MatchesUpdateForm(props) {
   const {
-    clearOnSuccess = true,
+    id: idProp,
+    matches: matchesModelProp,
     onSuccess,
     onError,
     onSubmit,
@@ -22,18 +24,31 @@ export default function MembershipsCreateForm(props) {
     overrides,
     ...rest
   } = props;
-  const initialValues = {
-    status: "",
-  };
-  const [status, setStatus] = React.useState(initialValues.status);
+  const initialValues = {};
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
-    setStatus(initialValues.status);
+    const cleanValues = matchesRecord
+      ? { ...initialValues, ...matchesRecord }
+      : initialValues;
     setErrors({});
   };
-  const validations = {
-    status: [],
-  };
+  const [matchesRecord, setMatchesRecord] = React.useState(matchesModelProp);
+  React.useEffect(() => {
+    const queryData = async () => {
+      const record = idProp
+        ? (
+            await client.graphql({
+              query: getMatches.replaceAll("__typename", ""),
+              variables: { id: idProp },
+            })
+          )?.data?.getMatches
+        : matchesModelProp;
+      setMatchesRecord(record);
+    };
+    queryData();
+  }, [idProp, matchesModelProp]);
+  React.useEffect(resetStateValues, [matchesRecord]);
+  const validations = {};
   const runValidationTasks = async (
     fieldName,
     currentValue,
@@ -59,9 +74,7 @@ export default function MembershipsCreateForm(props) {
       padding="20px"
       onSubmit={async (event) => {
         event.preventDefault();
-        let modelFields = {
-          status,
-        };
+        let modelFields = {};
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
             if (Array.isArray(modelFields[fieldName])) {
@@ -91,18 +104,16 @@ export default function MembershipsCreateForm(props) {
             }
           });
           await client.graphql({
-            query: createMemberships.replaceAll("__typename", ""),
+            query: updateMatches.replaceAll("__typename", ""),
             variables: {
               input: {
+                id: matchesRecord.id,
                 ...modelFields,
               },
             },
           });
           if (onSuccess) {
             onSuccess(modelFields);
-          }
-          if (clearOnSuccess) {
-            resetStateValues();
           }
         } catch (err) {
           if (onError) {
@@ -111,66 +122,22 @@ export default function MembershipsCreateForm(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "MembershipsCreateForm")}
+      {...getOverrideProps(overrides, "MatchesUpdateForm")}
       {...rest}
     >
-      <SelectField
-        label="Status"
-        placeholder="Please select an option"
-        isDisabled={false}
-        value={status}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              status: value,
-            };
-            const result = onChange(modelFields);
-            value = result?.status ?? value;
-          }
-          if (errors.status?.hasError) {
-            runValidationTasks("status", value);
-          }
-          setStatus(value);
-        }}
-        onBlur={() => runValidationTasks("status", status)}
-        errorMessage={errors.status?.errorMessage}
-        hasError={errors.status?.hasError}
-        {...getOverrideProps(overrides, "status")}
-      >
-        <option
-          children="Friend"
-          value="FRIEND"
-          {...getOverrideProps(overrides, "statusoption0")}
-        ></option>
-        <option
-          children="Blocked"
-          value="BLOCKED"
-          {...getOverrideProps(overrides, "statusoption1")}
-        ></option>
-        <option
-          children="Removed"
-          value="REMOVED"
-          {...getOverrideProps(overrides, "statusoption2")}
-        ></option>
-        <option
-          children="Group"
-          value="GROUP"
-          {...getOverrideProps(overrides, "statusoption3")}
-        ></option>
-      </SelectField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}
       >
         <Button
-          children="Clear"
+          children="Reset"
           type="reset"
           onClick={(event) => {
             event.preventDefault();
             resetStateValues();
           }}
-          {...getOverrideProps(overrides, "ClearButton")}
+          isDisabled={!(idProp || matchesModelProp)}
+          {...getOverrideProps(overrides, "ResetButton")}
         ></Button>
         <Flex
           gap="15px"
@@ -180,7 +147,10 @@ export default function MembershipsCreateForm(props) {
             children="Submit"
             type="submit"
             variation="primary"
-            isDisabled={Object.values(errors).some((e) => e?.hasError)}
+            isDisabled={
+              !(idProp || matchesModelProp) ||
+              Object.values(errors).some((e) => e?.hasError)
+            }
             {...getOverrideProps(overrides, "SubmitButton")}
           ></Button>
         </Flex>

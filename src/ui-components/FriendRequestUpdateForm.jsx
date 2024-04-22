@@ -9,11 +9,13 @@ import * as React from "react";
 import { Button, Flex, Grid, SelectField } from "@aws-amplify/ui-react";
 import { fetchByPath, getOverrideProps, validateField } from "./utils";
 import { generateClient } from "aws-amplify/api";
-import { createMemberships } from "../graphql/mutations";
+import { getFriendRequest } from "../graphql/queries";
+import { updateFriendRequest } from "../graphql/mutations";
 const client = generateClient();
-export default function MembershipsCreateForm(props) {
+export default function FriendRequestUpdateForm(props) {
   const {
-    clearOnSuccess = true,
+    id: idProp,
+    friendRequest: friendRequestModelProp,
     onSuccess,
     onError,
     onSubmit,
@@ -28,9 +30,30 @@ export default function MembershipsCreateForm(props) {
   const [status, setStatus] = React.useState(initialValues.status);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
-    setStatus(initialValues.status);
+    const cleanValues = friendRequestRecord
+      ? { ...initialValues, ...friendRequestRecord }
+      : initialValues;
+    setStatus(cleanValues.status);
     setErrors({});
   };
+  const [friendRequestRecord, setFriendRequestRecord] = React.useState(
+    friendRequestModelProp
+  );
+  React.useEffect(() => {
+    const queryData = async () => {
+      const record = idProp
+        ? (
+            await client.graphql({
+              query: getFriendRequest.replaceAll("__typename", ""),
+              variables: { id: idProp },
+            })
+          )?.data?.getFriendRequest
+        : friendRequestModelProp;
+      setFriendRequestRecord(record);
+    };
+    queryData();
+  }, [idProp, friendRequestModelProp]);
+  React.useEffect(resetStateValues, [friendRequestRecord]);
   const validations = {
     status: [],
   };
@@ -60,7 +83,7 @@ export default function MembershipsCreateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
-          status,
+          status: status ?? null,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -91,18 +114,16 @@ export default function MembershipsCreateForm(props) {
             }
           });
           await client.graphql({
-            query: createMemberships.replaceAll("__typename", ""),
+            query: updateFriendRequest.replaceAll("__typename", ""),
             variables: {
               input: {
+                id: friendRequestRecord.id,
                 ...modelFields,
               },
             },
           });
           if (onSuccess) {
             onSuccess(modelFields);
-          }
-          if (clearOnSuccess) {
-            resetStateValues();
           }
         } catch (err) {
           if (onError) {
@@ -111,7 +132,7 @@ export default function MembershipsCreateForm(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "MembershipsCreateForm")}
+      {...getOverrideProps(overrides, "FriendRequestUpdateForm")}
       {...rest}
     >
       <SelectField
@@ -139,24 +160,19 @@ export default function MembershipsCreateForm(props) {
         {...getOverrideProps(overrides, "status")}
       >
         <option
-          children="Friend"
-          value="FRIEND"
+          children="Pending"
+          value="PENDING"
           {...getOverrideProps(overrides, "statusoption0")}
         ></option>
         <option
-          children="Blocked"
-          value="BLOCKED"
+          children="Accepted"
+          value="ACCEPTED"
           {...getOverrideProps(overrides, "statusoption1")}
         ></option>
         <option
-          children="Removed"
-          value="REMOVED"
+          children="Rejected"
+          value="REJECTED"
           {...getOverrideProps(overrides, "statusoption2")}
-        ></option>
-        <option
-          children="Group"
-          value="GROUP"
-          {...getOverrideProps(overrides, "statusoption3")}
         ></option>
       </SelectField>
       <Flex
@@ -164,13 +180,14 @@ export default function MembershipsCreateForm(props) {
         {...getOverrideProps(overrides, "CTAFlex")}
       >
         <Button
-          children="Clear"
+          children="Reset"
           type="reset"
           onClick={(event) => {
             event.preventDefault();
             resetStateValues();
           }}
-          {...getOverrideProps(overrides, "ClearButton")}
+          isDisabled={!(idProp || friendRequestModelProp)}
+          {...getOverrideProps(overrides, "ResetButton")}
         ></Button>
         <Flex
           gap="15px"
@@ -180,7 +197,10 @@ export default function MembershipsCreateForm(props) {
             children="Submit"
             type="submit"
             variation="primary"
-            isDisabled={Object.values(errors).some((e) => e?.hasError)}
+            isDisabled={
+              !(idProp || friendRequestModelProp) ||
+              Object.values(errors).some((e) => e?.hasError)
+            }
             {...getOverrideProps(overrides, "SubmitButton")}
           ></Button>
         </Flex>

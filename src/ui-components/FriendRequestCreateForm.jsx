@@ -9,9 +9,9 @@ import * as React from "react";
 import { Button, Flex, Grid, SelectField } from "@aws-amplify/ui-react";
 import { fetchByPath, getOverrideProps, validateField } from "./utils";
 import { generateClient } from "aws-amplify/api";
-import { createMemberships } from "../graphql/mutations";
+import { createFriendRequest } from "../graphql/mutations";
 const client = generateClient();
-export default function MembershipsCreateForm(props) {
+export default function FriendRequestCreateForm(props) {
   const {
     clearOnSuccess = true,
     onSuccess,
@@ -91,7 +91,7 @@ export default function MembershipsCreateForm(props) {
             }
           });
           await client.graphql({
-            query: createMemberships.replaceAll("__typename", ""),
+            query: createFriendRequest.replaceAll("__typename", ""),
             variables: {
               input: {
                 ...modelFields,
@@ -111,7 +111,7 @@ export default function MembershipsCreateForm(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "MembershipsCreateForm")}
+      {...getOverrideProps(overrides, "FriendRequestCreateForm")}
       {...rest}
     >
       <SelectField
@@ -139,24 +139,19 @@ export default function MembershipsCreateForm(props) {
         {...getOverrideProps(overrides, "status")}
       >
         <option
-          children="Friend"
-          value="FRIEND"
+          children="Pending"
+          value="PENDING"
           {...getOverrideProps(overrides, "statusoption0")}
         ></option>
         <option
-          children="Blocked"
-          value="BLOCKED"
+          children="Accepted"
+          value="ACCEPTED"
           {...getOverrideProps(overrides, "statusoption1")}
         ></option>
         <option
-          children="Removed"
-          value="REMOVED"
+          children="Rejected"
+          value="REJECTED"
           {...getOverrideProps(overrides, "statusoption2")}
-        ></option>
-        <option
-          children="Group"
-          value="GROUP"
-          {...getOverrideProps(overrides, "statusoption3")}
         ></option>
       </SelectField>
       <Flex

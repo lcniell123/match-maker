@@ -6,12 +6,12 @@
 
 /* eslint-disable */
 import * as React from "react";
-import { Button, Flex, Grid, SelectField } from "@aws-amplify/ui-react";
+import { Button, Flex, Grid } from "@aws-amplify/ui-react";
 import { fetchByPath, getOverrideProps, validateField } from "./utils";
 import { generateClient } from "aws-amplify/api";
-import { createMemberships } from "../graphql/mutations";
+import { createMatches } from "../graphql/mutations";
 const client = generateClient();
-export default function MembershipsCreateForm(props) {
+export default function MatchesCreateForm(props) {
   const {
     clearOnSuccess = true,
     onSuccess,
@@ -22,18 +22,12 @@ export default function MembershipsCreateForm(props) {
     overrides,
     ...rest
   } = props;
-  const initialValues = {
-    status: "",
-  };
-  const [status, setStatus] = React.useState(initialValues.status);
+  const initialValues = {};
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
-    setStatus(initialValues.status);
     setErrors({});
   };
-  const validations = {
-    status: [],
-  };
+  const validations = {};
   const runValidationTasks = async (
     fieldName,
     currentValue,
@@ -59,9 +53,7 @@ export default function MembershipsCreateForm(props) {
       padding="20px"
       onSubmit={async (event) => {
         event.preventDefault();
-        let modelFields = {
-          status,
-        };
+        let modelFields = {};
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
             if (Array.isArray(modelFields[fieldName])) {
@@ -91,7 +83,7 @@ export default function MembershipsCreateForm(props) {
             }
           });
           await client.graphql({
-            query: createMemberships.replaceAll("__typename", ""),
+            query: createMatches.replaceAll("__typename", ""),
             variables: {
               input: {
                 ...modelFields,
@@ -111,54 +103,9 @@ export default function MembershipsCreateForm(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "MembershipsCreateForm")}
+      {...getOverrideProps(overrides, "MatchesCreateForm")}
       {...rest}
     >
-      <SelectField
-        label="Status"
-        placeholder="Please select an option"
-        isDisabled={false}
-        value={status}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              status: value,
-            };
-            const result = onChange(modelFields);
-            value = result?.status ?? value;
-          }
-          if (errors.status?.hasError) {
-            runValidationTasks("status", value);
-          }
-          setStatus(value);
-        }}
-        onBlur={() => runValidationTasks("status", status)}
-        errorMessage={errors.status?.errorMessage}
-        hasError={errors.status?.hasError}
-        {...getOverrideProps(overrides, "status")}
-      >
-        <option
-          children="Friend"
-          value="FRIEND"
-          {...getOverrideProps(overrides, "statusoption0")}
-        ></option>
-        <option
-          children="Blocked"
-          value="BLOCKED"
-          {...getOverrideProps(overrides, "statusoption1")}
-        ></option>
-        <option
-          children="Removed"
-          value="REMOVED"
-          {...getOverrideProps(overrides, "statusoption2")}
-        ></option>
-        <option
-          children="Group"
-          value="GROUP"
-          {...getOverrideProps(overrides, "statusoption3")}
-        ></option>
-      </SelectField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}

@@ -6,7 +6,6 @@
 
 import * as React from "react";
 import { GridProps, SelectFieldProps } from "@aws-amplify/ui-react";
-import { Memberships } from "../API.ts";
 export declare type EscapeHatchProps = {
     [elementHierarchy: string]: Record<string, unknown>;
 } | null;
@@ -22,26 +21,25 @@ export declare type ValidationResponse = {
     errorMessage?: string;
 };
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
-export declare type MembershipsUpdateFormInputValues = {
+export declare type FriendRequestCreateFormInputValues = {
     status?: string;
 };
-export declare type MembershipsUpdateFormValidationValues = {
+export declare type FriendRequestCreateFormValidationValues = {
     status?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
-export declare type MembershipsUpdateFormOverridesProps = {
-    MembershipsUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
+export declare type FriendRequestCreateFormOverridesProps = {
+    FriendRequestCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
     status?: PrimitiveOverrideProps<SelectFieldProps>;
 } & EscapeHatchProps;
-export declare type MembershipsUpdateFormProps = React.PropsWithChildren<{
-    overrides?: MembershipsUpdateFormOverridesProps | undefined | null;
+export declare type FriendRequestCreateFormProps = React.PropsWithChildren<{
+    overrides?: FriendRequestCreateFormOverridesProps | undefined | null;
 } & {
-    id?: string;
-    memberships?: Memberships;
-    onSubmit?: (fields: MembershipsUpdateFormInputValues) => MembershipsUpdateFormInputValues;
-    onSuccess?: (fields: MembershipsUpdateFormInputValues) => void;
-    onError?: (fields: MembershipsUpdateFormInputValues, errorMessage: string) => void;
-    onChange?: (fields: MembershipsUpdateFormInputValues) => MembershipsUpdateFormInputValues;
-    onValidate?: MembershipsUpdateFormValidationValues;
+    clearOnSuccess?: boolean;
+    onSubmit?: (fields: FriendRequestCreateFormInputValues) => FriendRequestCreateFormInputValues;
+    onSuccess?: (fields: FriendRequestCreateFormInputValues) => void;
+    onError?: (fields: FriendRequestCreateFormInputValues, errorMessage: string) => void;
+    onChange?: (fields: FriendRequestCreateFormInputValues) => FriendRequestCreateFormInputValues;
+    onValidate?: FriendRequestCreateFormValidationValues;
 } & React.CSSProperties>;
-export default function MembershipsUpdateForm(props: MembershipsUpdateFormProps): React.ReactElement;
+export default function FriendRequestCreateForm(props: FriendRequestCreateFormProps): React.ReactElement;

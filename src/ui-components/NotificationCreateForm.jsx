@@ -6,12 +6,19 @@
 
 /* eslint-disable */
 import * as React from "react";
-import { Button, Flex, Grid, SelectField } from "@aws-amplify/ui-react";
+import {
+  Button,
+  Flex,
+  Grid,
+  SelectField,
+  SwitchField,
+  TextField,
+} from "@aws-amplify/ui-react";
 import { fetchByPath, getOverrideProps, validateField } from "./utils";
 import { generateClient } from "aws-amplify/api";
-import { createMemberships } from "../graphql/mutations";
+import { createNotification } from "../graphql/mutations";
 const client = generateClient();
-export default function MembershipsCreateForm(props) {
+export default function NotificationCreateForm(props) {
   const {
     clearOnSuccess = true,
     onSuccess,
@@ -23,16 +30,24 @@ export default function MembershipsCreateForm(props) {
     ...rest
   } = props;
   const initialValues = {
-    status: "",
+    type: "",
+    content: "",
+    read: false,
   };
-  const [status, setStatus] = React.useState(initialValues.status);
+  const [type, setType] = React.useState(initialValues.type);
+  const [content, setContent] = React.useState(initialValues.content);
+  const [read, setRead] = React.useState(initialValues.read);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
-    setStatus(initialValues.status);
+    setType(initialValues.type);
+    setContent(initialValues.content);
+    setRead(initialValues.read);
     setErrors({});
   };
   const validations = {
-    status: [],
+    type: [],
+    content: [{ type: "Required" }],
+    read: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -60,7 +75,9 @@ export default function MembershipsCreateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
-          status,
+          type,
+          content,
+          read,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -91,7 +108,7 @@ export default function MembershipsCreateForm(props) {
             }
           });
           await client.graphql({
-            query: createMemberships.replaceAll("__typename", ""),
+            query: createNotification.replaceAll("__typename", ""),
             variables: {
               input: {
                 ...modelFields,
@@ -111,54 +128,108 @@ export default function MembershipsCreateForm(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "MembershipsCreateForm")}
+      {...getOverrideProps(overrides, "NotificationCreateForm")}
       {...rest}
     >
       <SelectField
-        label="Status"
+        label="Type"
         placeholder="Please select an option"
         isDisabled={false}
-        value={status}
+        value={type}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              status: value,
+              type: value,
+              content,
+              read,
             };
             const result = onChange(modelFields);
-            value = result?.status ?? value;
+            value = result?.type ?? value;
           }
-          if (errors.status?.hasError) {
-            runValidationTasks("status", value);
+          if (errors.type?.hasError) {
+            runValidationTasks("type", value);
           }
-          setStatus(value);
+          setType(value);
         }}
-        onBlur={() => runValidationTasks("status", status)}
-        errorMessage={errors.status?.errorMessage}
-        hasError={errors.status?.hasError}
-        {...getOverrideProps(overrides, "status")}
+        onBlur={() => runValidationTasks("type", type)}
+        errorMessage={errors.type?.errorMessage}
+        hasError={errors.type?.hasError}
+        {...getOverrideProps(overrides, "type")}
       >
         <option
-          children="Friend"
-          value="FRIEND"
-          {...getOverrideProps(overrides, "statusoption0")}
+          children="Friend request"
+          value="FRIEND_REQUEST"
+          {...getOverrideProps(overrides, "typeoption0")}
         ></option>
         <option
-          children="Blocked"
-          value="BLOCKED"
-          {...getOverrideProps(overrides, "statusoption1")}
+          children="Message"
+          value="MESSAGE"
+          {...getOverrideProps(overrides, "typeoption1")}
         ></option>
         <option
-          children="Removed"
-          value="REMOVED"
-          {...getOverrideProps(overrides, "statusoption2")}
+          children="Group invitation"
+          value="GROUP_INVITATION"
+          {...getOverrideProps(overrides, "typeoption2")}
         ></option>
         <option
-          children="Group"
-          value="GROUP"
-          {...getOverrideProps(overrides, "statusoption3")}
+          children="Group message"
+          value="GROUP_MESSAGE"
+          {...getOverrideProps(overrides, "typeoption3")}
         ></option>
       </SelectField>
+      <TextField
+        label="Content"
+        isRequired={true}
+        isReadOnly={false}
+        value={content}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              type,
+              content: value,
+              read,
+            };
+            const result = onChange(modelFields);
+            value = result?.content ?? value;
+          }
+          if (errors.content?.hasError) {
+            runValidationTasks("content", value);
+          }
+          setContent(value);
+        }}
+        onBlur={() => runValidationTasks("content", content)}
+        errorMessage={errors.content?.errorMessage}
+        hasError={errors.content?.hasError}
+        {...getOverrideProps(overrides, "content")}
+      ></TextField>
+      <SwitchField
+        label="Read"
+        defaultChecked={false}
+        isDisabled={false}
+        isChecked={read}
+        onChange={(e) => {
+          let value = e.target.checked;
+          if (onChange) {
+            const modelFields = {
+              type,
+              content,
+              read: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.read ?? value;
+          }
+          if (errors.read?.hasError) {
+            runValidationTasks("read", value);
+          }
+          setRead(value);
+        }}
+        onBlur={() => runValidationTasks("read", read)}
+        errorMessage={errors.read?.errorMessage}
+        hasError={errors.read?.hasError}
+        {...getOverrideProps(overrides, "read")}
+      ></SwitchField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}
