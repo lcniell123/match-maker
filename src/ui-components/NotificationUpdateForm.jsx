@@ -34,12 +34,10 @@ export default function NotificationUpdateForm(props) {
   const initialValues = {
     type: "",
     content: "",
-    createdAt: "",
     read: false,
   };
   const [type, setType] = React.useState(initialValues.type);
   const [content, setContent] = React.useState(initialValues.content);
-  const [createdAt, setCreatedAt] = React.useState(initialValues.createdAt);
   const [read, setRead] = React.useState(initialValues.read);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
@@ -48,7 +46,6 @@ export default function NotificationUpdateForm(props) {
       : initialValues;
     setType(cleanValues.type);
     setContent(cleanValues.content);
-    setCreatedAt(cleanValues.createdAt);
     setRead(cleanValues.read);
     setErrors({});
   };
@@ -73,7 +70,6 @@ export default function NotificationUpdateForm(props) {
   const validations = {
     type: [],
     content: [{ type: "Required" }],
-    createdAt: [],
     read: [],
   };
   const runValidationTasks = async (
@@ -93,23 +89,6 @@ export default function NotificationUpdateForm(props) {
     setErrors((errors) => ({ ...errors, [fieldName]: validationResponse }));
     return validationResponse;
   };
-  const convertToLocal = (date) => {
-    const df = new Intl.DateTimeFormat("default", {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-      calendar: "iso8601",
-      numberingSystem: "latn",
-      hourCycle: "h23",
-    });
-    const parts = df.formatToParts(date).reduce((acc, part) => {
-      acc[part.type] = part.value;
-      return acc;
-    }, {});
-    return `${parts.year}-${parts.month}-${parts.day}T${parts.hour}:${parts.minute}`;
-  };
   return (
     <Grid
       as="form"
@@ -121,7 +100,6 @@ export default function NotificationUpdateForm(props) {
         let modelFields = {
           type: type ?? null,
           content,
-          createdAt: createdAt ?? null,
           read: read ?? null,
         };
         const validationResponses = await Promise.all(
@@ -185,7 +163,6 @@ export default function NotificationUpdateForm(props) {
             const modelFields = {
               type: value,
               content,
-              createdAt,
               read,
             };
             const result = onChange(modelFields);
@@ -233,7 +210,6 @@ export default function NotificationUpdateForm(props) {
             const modelFields = {
               type,
               content: value,
-              createdAt,
               read,
             };
             const result = onChange(modelFields);
@@ -249,35 +225,6 @@ export default function NotificationUpdateForm(props) {
         hasError={errors.content?.hasError}
         {...getOverrideProps(overrides, "content")}
       ></TextField>
-      <TextField
-        label="Created at"
-        isRequired={false}
-        isReadOnly={false}
-        type="datetime-local"
-        value={createdAt && convertToLocal(new Date(createdAt))}
-        onChange={(e) => {
-          let value =
-            e.target.value === "" ? "" : new Date(e.target.value).toISOString();
-          if (onChange) {
-            const modelFields = {
-              type,
-              content,
-              createdAt: value,
-              read,
-            };
-            const result = onChange(modelFields);
-            value = result?.createdAt ?? value;
-          }
-          if (errors.createdAt?.hasError) {
-            runValidationTasks("createdAt", value);
-          }
-          setCreatedAt(value);
-        }}
-        onBlur={() => runValidationTasks("createdAt", createdAt)}
-        errorMessage={errors.createdAt?.errorMessage}
-        hasError={errors.createdAt?.hasError}
-        {...getOverrideProps(overrides, "createdAt")}
-      ></TextField>
       <SwitchField
         label="Read"
         defaultChecked={false}
@@ -289,7 +236,6 @@ export default function NotificationUpdateForm(props) {
             const modelFields = {
               type,
               content,
-              createdAt,
               read: value,
             };
             const result = onChange(modelFields);

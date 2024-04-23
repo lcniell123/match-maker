@@ -6,13 +6,7 @@
 
 /* eslint-disable */
 import * as React from "react";
-import {
-  Button,
-  Flex,
-  Grid,
-  SelectField,
-  TextField,
-} from "@aws-amplify/ui-react";
+import { Button, Flex, Grid, SelectField } from "@aws-amplify/ui-react";
 import { fetchByPath, getOverrideProps, validateField } from "./utils";
 import { generateClient } from "aws-amplify/api";
 import { getMemberships } from "../graphql/queries";
@@ -31,20 +25,14 @@ export default function MembershipsUpdateForm(props) {
     ...rest
   } = props;
   const initialValues = {
-    createdAt: "",
-    updatedAt: "",
     status: "",
   };
-  const [createdAt, setCreatedAt] = React.useState(initialValues.createdAt);
-  const [updatedAt, setUpdatedAt] = React.useState(initialValues.updatedAt);
   const [status, setStatus] = React.useState(initialValues.status);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     const cleanValues = membershipsRecord
       ? { ...initialValues, ...membershipsRecord }
       : initialValues;
-    setCreatedAt(cleanValues.createdAt);
-    setUpdatedAt(cleanValues.updatedAt);
     setStatus(cleanValues.status);
     setErrors({});
   };
@@ -66,8 +54,6 @@ export default function MembershipsUpdateForm(props) {
   }, [idProp, membershipsModelProp]);
   React.useEffect(resetStateValues, [membershipsRecord]);
   const validations = {
-    createdAt: [],
-    updatedAt: [],
     status: [],
   };
   const runValidationTasks = async (
@@ -87,23 +73,6 @@ export default function MembershipsUpdateForm(props) {
     setErrors((errors) => ({ ...errors, [fieldName]: validationResponse }));
     return validationResponse;
   };
-  const convertToLocal = (date) => {
-    const df = new Intl.DateTimeFormat("default", {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-      calendar: "iso8601",
-      numberingSystem: "latn",
-      hourCycle: "h23",
-    });
-    const parts = df.formatToParts(date).reduce((acc, part) => {
-      acc[part.type] = part.value;
-      return acc;
-    }, {});
-    return `${parts.year}-${parts.month}-${parts.day}T${parts.hour}:${parts.minute}`;
-  };
   return (
     <Grid
       as="form"
@@ -113,8 +82,6 @@ export default function MembershipsUpdateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
-          createdAt: createdAt ?? null,
-          updatedAt: updatedAt ?? null,
           status: status ?? null,
         };
         const validationResponses = await Promise.all(
@@ -167,62 +134,6 @@ export default function MembershipsUpdateForm(props) {
       {...getOverrideProps(overrides, "MembershipsUpdateForm")}
       {...rest}
     >
-      <TextField
-        label="Created at"
-        isRequired={false}
-        isReadOnly={false}
-        type="datetime-local"
-        value={createdAt && convertToLocal(new Date(createdAt))}
-        onChange={(e) => {
-          let value =
-            e.target.value === "" ? "" : new Date(e.target.value).toISOString();
-          if (onChange) {
-            const modelFields = {
-              createdAt: value,
-              updatedAt,
-              status,
-            };
-            const result = onChange(modelFields);
-            value = result?.createdAt ?? value;
-          }
-          if (errors.createdAt?.hasError) {
-            runValidationTasks("createdAt", value);
-          }
-          setCreatedAt(value);
-        }}
-        onBlur={() => runValidationTasks("createdAt", createdAt)}
-        errorMessage={errors.createdAt?.errorMessage}
-        hasError={errors.createdAt?.hasError}
-        {...getOverrideProps(overrides, "createdAt")}
-      ></TextField>
-      <TextField
-        label="Updated at"
-        isRequired={false}
-        isReadOnly={false}
-        type="datetime-local"
-        value={updatedAt && convertToLocal(new Date(updatedAt))}
-        onChange={(e) => {
-          let value =
-            e.target.value === "" ? "" : new Date(e.target.value).toISOString();
-          if (onChange) {
-            const modelFields = {
-              createdAt,
-              updatedAt: value,
-              status,
-            };
-            const result = onChange(modelFields);
-            value = result?.updatedAt ?? value;
-          }
-          if (errors.updatedAt?.hasError) {
-            runValidationTasks("updatedAt", value);
-          }
-          setUpdatedAt(value);
-        }}
-        onBlur={() => runValidationTasks("updatedAt", updatedAt)}
-        errorMessage={errors.updatedAt?.errorMessage}
-        hasError={errors.updatedAt?.hasError}
-        {...getOverrideProps(overrides, "updatedAt")}
-      ></TextField>
       <SelectField
         label="Status"
         placeholder="Please select an option"
@@ -232,8 +143,6 @@ export default function MembershipsUpdateForm(props) {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              createdAt,
-              updatedAt,
               status: value,
             };
             const result = onChange(modelFields);

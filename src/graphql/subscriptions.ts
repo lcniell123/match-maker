@@ -8,991 +8,168 @@ type GeneratedSubscription<InputType, OutputType> = string & {
   __generatedSubscriptionOutput: OutputType;
 };
 
-export const onCreateFriendRequest = /* GraphQL */ `subscription OnCreateFriendRequest(
-  $filter: ModelSubscriptionFriendRequestFilterInput
+export const onCreateProfile = /* GraphQL */ `subscription OnCreateProfile(
+  $filter: ModelSubscriptionProfileFilterInput
+  $owner: String
 ) {
-  onCreateFriendRequest(filter: $filter) {
+  onCreateProfile(filter: $filter, owner: $owner) {
     id
-    status
-    createdAt
-    updatedAt
-    sender {
-      id
-      name
-      description
-      languages
-      zipCode
-      gamePreference
-      behaviour
-      username
-      bio
-      photo
-      coverPhoto
-      firstName
-      lastName
-      age
-      country
-      timeZone
-      city
-      region
-      postalCode
-      language
-      favoriteGame
-      preferredGenre
-      timeAvailability
-      preferredTeammateAgeRange
-      skillLevel
-      preferredGameMode
-      preferredRole
-      playStyle
-      flexibility
-      behavior
-      communicationPreference
-      toleranceLevel
-      teamworkLevel
-      competitivenessLevel
-      groupsID
-      createdAt
-      updatedAt
-      __typename
-    }
-    receiver {
-      id
-      name
-      description
-      languages
-      zipCode
-      gamePreference
-      behaviour
-      username
-      bio
-      photo
-      coverPhoto
-      firstName
-      lastName
-      age
-      country
-      timeZone
-      city
-      region
-      postalCode
-      language
-      favoriteGame
-      preferredGenre
-      timeAvailability
-      preferredTeammateAgeRange
-      skillLevel
-      preferredGameMode
-      preferredRole
-      playStyle
-      flexibility
-      behavior
-      communicationPreference
-      toleranceLevel
-      teamworkLevel
-      competitivenessLevel
-      groupsID
-      createdAt
-      updatedAt
-      __typename
-    }
-    friendRequestSenderId
-    friendRequestReceiverId
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnCreateFriendRequestSubscriptionVariables,
-  APITypes.OnCreateFriendRequestSubscription
->;
-export const onUpdateFriendRequest = /* GraphQL */ `subscription OnUpdateFriendRequest(
-  $filter: ModelSubscriptionFriendRequestFilterInput
-) {
-  onUpdateFriendRequest(filter: $filter) {
-    id
-    status
-    createdAt
-    updatedAt
-    sender {
-      id
-      name
-      description
-      languages
-      zipCode
-      gamePreference
-      behaviour
-      username
-      bio
-      photo
-      coverPhoto
-      firstName
-      lastName
-      age
-      country
-      timeZone
-      city
-      region
-      postalCode
-      language
-      favoriteGame
-      preferredGenre
-      timeAvailability
-      preferredTeammateAgeRange
-      skillLevel
-      preferredGameMode
-      preferredRole
-      playStyle
-      flexibility
-      behavior
-      communicationPreference
-      toleranceLevel
-      teamworkLevel
-      competitivenessLevel
-      groupsID
-      createdAt
-      updatedAt
-      __typename
-    }
-    receiver {
-      id
-      name
-      description
-      languages
-      zipCode
-      gamePreference
-      behaviour
-      username
-      bio
-      photo
-      coverPhoto
-      firstName
-      lastName
-      age
-      country
-      timeZone
-      city
-      region
-      postalCode
-      language
-      favoriteGame
-      preferredGenre
-      timeAvailability
-      preferredTeammateAgeRange
-      skillLevel
-      preferredGameMode
-      preferredRole
-      playStyle
-      flexibility
-      behavior
-      communicationPreference
-      toleranceLevel
-      teamworkLevel
-      competitivenessLevel
-      groupsID
-      createdAt
-      updatedAt
-      __typename
-    }
-    friendRequestSenderId
-    friendRequestReceiverId
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnUpdateFriendRequestSubscriptionVariables,
-  APITypes.OnUpdateFriendRequestSubscription
->;
-export const onDeleteFriendRequest = /* GraphQL */ `subscription OnDeleteFriendRequest(
-  $filter: ModelSubscriptionFriendRequestFilterInput
-) {
-  onDeleteFriendRequest(filter: $filter) {
-    id
-    status
-    createdAt
-    updatedAt
-    sender {
-      id
-      name
-      description
-      languages
-      zipCode
-      gamePreference
-      behaviour
-      username
-      bio
-      photo
-      coverPhoto
-      firstName
-      lastName
-      age
-      country
-      timeZone
-      city
-      region
-      postalCode
-      language
-      favoriteGame
-      preferredGenre
-      timeAvailability
-      preferredTeammateAgeRange
-      skillLevel
-      preferredGameMode
-      preferredRole
-      playStyle
-      flexibility
-      behavior
-      communicationPreference
-      toleranceLevel
-      teamworkLevel
-      competitivenessLevel
-      groupsID
-      createdAt
-      updatedAt
-      __typename
-    }
-    receiver {
-      id
-      name
-      description
-      languages
-      zipCode
-      gamePreference
-      behaviour
-      username
-      bio
-      photo
-      coverPhoto
-      firstName
-      lastName
-      age
-      country
-      timeZone
-      city
-      region
-      postalCode
-      language
-      favoriteGame
-      preferredGenre
-      timeAvailability
-      preferredTeammateAgeRange
-      skillLevel
-      preferredGameMode
-      preferredRole
-      playStyle
-      flexibility
-      behavior
-      communicationPreference
-      toleranceLevel
-      teamworkLevel
-      competitivenessLevel
-      groupsID
-      createdAt
-      updatedAt
-      __typename
-    }
-    friendRequestSenderId
-    friendRequestReceiverId
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnDeleteFriendRequestSubscriptionVariables,
-  APITypes.OnDeleteFriendRequestSubscription
->;
-export const onCreateNotification = /* GraphQL */ `subscription OnCreateNotification(
-  $filter: ModelSubscriptionNotificationFilterInput
-) {
-  onCreateNotification(filter: $filter) {
-    id
-    type
-    content
-    createdAt
-    read
-    target {
-      id
-      name
-      description
-      languages
-      zipCode
-      gamePreference
-      behaviour
-      username
-      bio
-      photo
-      coverPhoto
-      firstName
-      lastName
-      age
-      country
-      timeZone
-      city
-      region
-      postalCode
-      language
-      favoriteGame
-      preferredGenre
-      timeAvailability
-      preferredTeammateAgeRange
-      skillLevel
-      preferredGameMode
-      preferredRole
-      playStyle
-      flexibility
-      behavior
-      communicationPreference
-      toleranceLevel
-      teamworkLevel
-      competitivenessLevel
-      groupsID
-      createdAt
-      updatedAt
-      __typename
-    }
-    originator {
-      id
-      name
-      description
-      languages
-      zipCode
-      gamePreference
-      behaviour
-      username
-      bio
-      photo
-      coverPhoto
-      firstName
-      lastName
-      age
-      country
-      timeZone
-      city
-      region
-      postalCode
-      language
-      favoriteGame
-      preferredGenre
-      timeAvailability
-      preferredTeammateAgeRange
-      skillLevel
-      preferredGameMode
-      preferredRole
-      playStyle
-      flexibility
-      behavior
-      communicationPreference
-      toleranceLevel
-      teamworkLevel
-      competitivenessLevel
-      groupsID
-      createdAt
-      updatedAt
-      __typename
-    }
-    updatedAt
-    notificationTargetId
-    notificationOriginatorId
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnCreateNotificationSubscriptionVariables,
-  APITypes.OnCreateNotificationSubscription
->;
-export const onUpdateNotification = /* GraphQL */ `subscription OnUpdateNotification(
-  $filter: ModelSubscriptionNotificationFilterInput
-) {
-  onUpdateNotification(filter: $filter) {
-    id
-    type
-    content
-    createdAt
-    read
-    target {
-      id
-      name
-      description
-      languages
-      zipCode
-      gamePreference
-      behaviour
-      username
-      bio
-      photo
-      coverPhoto
-      firstName
-      lastName
-      age
-      country
-      timeZone
-      city
-      region
-      postalCode
-      language
-      favoriteGame
-      preferredGenre
-      timeAvailability
-      preferredTeammateAgeRange
-      skillLevel
-      preferredGameMode
-      preferredRole
-      playStyle
-      flexibility
-      behavior
-      communicationPreference
-      toleranceLevel
-      teamworkLevel
-      competitivenessLevel
-      groupsID
-      createdAt
-      updatedAt
-      __typename
-    }
-    originator {
-      id
-      name
-      description
-      languages
-      zipCode
-      gamePreference
-      behaviour
-      username
-      bio
-      photo
-      coverPhoto
-      firstName
-      lastName
-      age
-      country
-      timeZone
-      city
-      region
-      postalCode
-      language
-      favoriteGame
-      preferredGenre
-      timeAvailability
-      preferredTeammateAgeRange
-      skillLevel
-      preferredGameMode
-      preferredRole
-      playStyle
-      flexibility
-      behavior
-      communicationPreference
-      toleranceLevel
-      teamworkLevel
-      competitivenessLevel
-      groupsID
-      createdAt
-      updatedAt
-      __typename
-    }
-    updatedAt
-    notificationTargetId
-    notificationOriginatorId
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnUpdateNotificationSubscriptionVariables,
-  APITypes.OnUpdateNotificationSubscription
->;
-export const onDeleteNotification = /* GraphQL */ `subscription OnDeleteNotification(
-  $filter: ModelSubscriptionNotificationFilterInput
-) {
-  onDeleteNotification(filter: $filter) {
-    id
-    type
-    content
-    createdAt
-    read
-    target {
-      id
-      name
-      description
-      languages
-      zipCode
-      gamePreference
-      behaviour
-      username
-      bio
-      photo
-      coverPhoto
-      firstName
-      lastName
-      age
-      country
-      timeZone
-      city
-      region
-      postalCode
-      language
-      favoriteGame
-      preferredGenre
-      timeAvailability
-      preferredTeammateAgeRange
-      skillLevel
-      preferredGameMode
-      preferredRole
-      playStyle
-      flexibility
-      behavior
-      communicationPreference
-      toleranceLevel
-      teamworkLevel
-      competitivenessLevel
-      groupsID
-      createdAt
-      updatedAt
-      __typename
-    }
-    originator {
-      id
-      name
-      description
-      languages
-      zipCode
-      gamePreference
-      behaviour
-      username
-      bio
-      photo
-      coverPhoto
-      firstName
-      lastName
-      age
-      country
-      timeZone
-      city
-      region
-      postalCode
-      language
-      favoriteGame
-      preferredGenre
-      timeAvailability
-      preferredTeammateAgeRange
-      skillLevel
-      preferredGameMode
-      preferredRole
-      playStyle
-      flexibility
-      behavior
-      communicationPreference
-      toleranceLevel
-      teamworkLevel
-      competitivenessLevel
-      groupsID
-      createdAt
-      updatedAt
-      __typename
-    }
-    updatedAt
-    notificationTargetId
-    notificationOriginatorId
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnDeleteNotificationSubscriptionVariables,
-  APITypes.OnDeleteNotificationSubscription
->;
-export const onCreateMemberships = /* GraphQL */ `subscription OnCreateMemberships(
-  $filter: ModelSubscriptionMembershipsFilterInput
-) {
-  onCreateMemberships(filter: $filter) {
-    id
-    createdAt
-    updatedAt
-    group {
-      id
-      description
-      name
-      image
-      updatedAt
-      createdAt
-      groupsCreatedById
-      __typename
-    }
-    user {
-      id
-      name
-      description
-      languages
-      zipCode
-      gamePreference
-      behaviour
-      username
-      bio
-      photo
-      coverPhoto
-      firstName
-      lastName
-      age
-      country
-      timeZone
-      city
-      region
-      postalCode
-      language
-      favoriteGame
-      preferredGenre
-      timeAvailability
-      preferredTeammateAgeRange
-      skillLevel
-      preferredGameMode
-      preferredRole
-      playStyle
-      flexibility
-      behavior
-      communicationPreference
-      toleranceLevel
-      teamworkLevel
-      competitivenessLevel
-      groupsID
-      createdAt
-      updatedAt
-      __typename
-    }
-    status
-    membershipsGroupId
-    membershipsUserId
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnCreateMembershipsSubscriptionVariables,
-  APITypes.OnCreateMembershipsSubscription
->;
-export const onUpdateMemberships = /* GraphQL */ `subscription OnUpdateMemberships(
-  $filter: ModelSubscriptionMembershipsFilterInput
-) {
-  onUpdateMemberships(filter: $filter) {
-    id
-    createdAt
-    updatedAt
-    group {
-      id
-      description
-      name
-      image
-      updatedAt
-      createdAt
-      groupsCreatedById
-      __typename
-    }
-    user {
-      id
-      name
-      description
-      languages
-      zipCode
-      gamePreference
-      behaviour
-      username
-      bio
-      photo
-      coverPhoto
-      firstName
-      lastName
-      age
-      country
-      timeZone
-      city
-      region
-      postalCode
-      language
-      favoriteGame
-      preferredGenre
-      timeAvailability
-      preferredTeammateAgeRange
-      skillLevel
-      preferredGameMode
-      preferredRole
-      playStyle
-      flexibility
-      behavior
-      communicationPreference
-      toleranceLevel
-      teamworkLevel
-      competitivenessLevel
-      groupsID
-      createdAt
-      updatedAt
-      __typename
-    }
-    status
-    membershipsGroupId
-    membershipsUserId
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnUpdateMembershipsSubscriptionVariables,
-  APITypes.OnUpdateMembershipsSubscription
->;
-export const onDeleteMemberships = /* GraphQL */ `subscription OnDeleteMemberships(
-  $filter: ModelSubscriptionMembershipsFilterInput
-) {
-  onDeleteMemberships(filter: $filter) {
-    id
-    createdAt
-    updatedAt
-    group {
-      id
-      description
-      name
-      image
-      updatedAt
-      createdAt
-      groupsCreatedById
-      __typename
-    }
-    user {
-      id
-      name
-      description
-      languages
-      zipCode
-      gamePreference
-      behaviour
-      username
-      bio
-      photo
-      coverPhoto
-      firstName
-      lastName
-      age
-      country
-      timeZone
-      city
-      region
-      postalCode
-      language
-      favoriteGame
-      preferredGenre
-      timeAvailability
-      preferredTeammateAgeRange
-      skillLevel
-      preferredGameMode
-      preferredRole
-      playStyle
-      flexibility
-      behavior
-      communicationPreference
-      toleranceLevel
-      teamworkLevel
-      competitivenessLevel
-      groupsID
-      createdAt
-      updatedAt
-      __typename
-    }
-    status
-    membershipsGroupId
-    membershipsUserId
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnDeleteMembershipsSubscriptionVariables,
-  APITypes.OnDeleteMembershipsSubscription
->;
-export const onCreateGroups = /* GraphQL */ `subscription OnCreateGroups($filter: ModelSubscriptionGroupsFilterInput) {
-  onCreateGroups(filter: $filter) {
-    id
-    description
     name
-    image
-    updatedAt
-    createdBy {
-      id
-      name
-      description
-      languages
-      zipCode
-      gamePreference
-      behaviour
-      username
-      bio
-      photo
-      coverPhoto
-      firstName
-      lastName
-      age
-      country
-      timeZone
-      city
-      region
-      postalCode
-      language
-      favoriteGame
-      preferredGenre
-      timeAvailability
-      preferredTeammateAgeRange
-      skillLevel
-      preferredGameMode
-      preferredRole
-      playStyle
-      flexibility
-      behavior
-      communicationPreference
-      toleranceLevel
-      teamworkLevel
-      competitivenessLevel
-      groupsID
-      createdAt
-      updatedAt
-      __typename
-    }
-    createdAt
-    members {
-      nextToken
-      __typename
-    }
-    groupsCreatedById
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnCreateGroupsSubscriptionVariables,
-  APITypes.OnCreateGroupsSubscription
->;
-export const onUpdateGroups = /* GraphQL */ `subscription OnUpdateGroups($filter: ModelSubscriptionGroupsFilterInput) {
-  onUpdateGroups(filter: $filter) {
-    id
     description
-    name
-    image
-    updatedAt
-    createdBy {
-      id
-      name
-      description
-      languages
-      zipCode
-      gamePreference
-      behaviour
-      username
-      bio
-      photo
-      coverPhoto
-      firstName
-      lastName
-      age
-      country
-      timeZone
-      city
-      region
-      postalCode
-      language
-      favoriteGame
-      preferredGenre
-      timeAvailability
-      preferredTeammateAgeRange
-      skillLevel
-      preferredGameMode
-      preferredRole
-      playStyle
-      flexibility
-      behavior
-      communicationPreference
-      toleranceLevel
-      teamworkLevel
-      competitivenessLevel
-      groupsID
-      createdAt
-      updatedAt
-      __typename
-    }
+    username
+    bio
+    photo
+    coverPhoto
+    firstName
+    lastName
+    age
+    country
+    timeZone
+    city
+    region
+    zipCode
+    postalCode
+    language
+    languages
+    favoriteGame
+    gamePreference
+    timeAvailability
+    preferredTeammateAgeRange
+    preferredGenre
+    skillLevel
+    preferredGameMode
+    preferredRole
+    playStyle
+    flexibility
+    behaviour
+    behavior
+    communicationPreference
+    toleranceLevel
+    teamworkLevel
+    competitivenessLevel
+    groupsID
     createdAt
-    members {
-      nextToken
-      __typename
-    }
-    groupsCreatedById
+    updatedAt
+    owner
     __typename
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnUpdateGroupsSubscriptionVariables,
-  APITypes.OnUpdateGroupsSubscription
+  APITypes.OnCreateProfileSubscriptionVariables,
+  APITypes.OnCreateProfileSubscription
 >;
-export const onDeleteGroups = /* GraphQL */ `subscription OnDeleteGroups($filter: ModelSubscriptionGroupsFilterInput) {
-  onDeleteGroups(filter: $filter) {
+export const onUpdateProfile = /* GraphQL */ `subscription OnUpdateProfile(
+  $filter: ModelSubscriptionProfileFilterInput
+  $owner: String
+) {
+  onUpdateProfile(filter: $filter, owner: $owner) {
     id
-    description
     name
-    image
-    updatedAt
-    createdBy {
-      id
-      name
-      description
-      languages
-      zipCode
-      gamePreference
-      behaviour
-      username
-      bio
-      photo
-      coverPhoto
-      firstName
-      lastName
-      age
-      country
-      timeZone
-      city
-      region
-      postalCode
-      language
-      favoriteGame
-      preferredGenre
-      timeAvailability
-      preferredTeammateAgeRange
-      skillLevel
-      preferredGameMode
-      preferredRole
-      playStyle
-      flexibility
-      behavior
-      communicationPreference
-      toleranceLevel
-      teamworkLevel
-      competitivenessLevel
-      groupsID
-      createdAt
-      updatedAt
-      __typename
-    }
+    description
+    username
+    bio
+    photo
+    coverPhoto
+    firstName
+    lastName
+    age
+    country
+    timeZone
+    city
+    region
+    zipCode
+    postalCode
+    language
+    languages
+    favoriteGame
+    gamePreference
+    timeAvailability
+    preferredTeammateAgeRange
+    preferredGenre
+    skillLevel
+    preferredGameMode
+    preferredRole
+    playStyle
+    flexibility
+    behaviour
+    behavior
+    communicationPreference
+    toleranceLevel
+    teamworkLevel
+    competitivenessLevel
+    groupsID
     createdAt
-    members {
-      nextToken
-      __typename
-    }
-    groupsCreatedById
+    updatedAt
+    owner
     __typename
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnDeleteGroupsSubscriptionVariables,
-  APITypes.OnDeleteGroupsSubscription
+  APITypes.OnUpdateProfileSubscriptionVariables,
+  APITypes.OnUpdateProfileSubscription
+>;
+export const onDeleteProfile = /* GraphQL */ `subscription OnDeleteProfile(
+  $filter: ModelSubscriptionProfileFilterInput
+  $owner: String
+) {
+  onDeleteProfile(filter: $filter, owner: $owner) {
+    id
+    name
+    description
+    username
+    bio
+    photo
+    coverPhoto
+    firstName
+    lastName
+    age
+    country
+    timeZone
+    city
+    region
+    zipCode
+    postalCode
+    language
+    languages
+    favoriteGame
+    gamePreference
+    timeAvailability
+    preferredTeammateAgeRange
+    preferredGenre
+    skillLevel
+    preferredGameMode
+    preferredRole
+    playStyle
+    flexibility
+    behaviour
+    behavior
+    communicationPreference
+    toleranceLevel
+    teamworkLevel
+    competitivenessLevel
+    groupsID
+    createdAt
+    updatedAt
+    owner
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteProfileSubscriptionVariables,
+  APITypes.OnDeleteProfileSubscription
 >;
 export const onCreateFriendships = /* GraphQL */ `subscription OnCreateFriendships(
   $filter: ModelSubscriptionFriendshipsFilterInput
+  $owner: String
 ) {
-  onCreateFriendships(filter: $filter) {
+  onCreateFriendships(filter: $filter, owner: $owner) {
     id
     friendshipStatus
     updatedBy
-    updatedAt
     firstUser {
       id
       name
       description
-      languages
-      zipCode
-      gamePreference
-      behaviour
       username
       bio
       photo
@@ -1004,17 +181,21 @@ export const onCreateFriendships = /* GraphQL */ `subscription OnCreateFriendshi
       timeZone
       city
       region
+      zipCode
       postalCode
       language
+      languages
       favoriteGame
-      preferredGenre
+      gamePreference
       timeAvailability
       preferredTeammateAgeRange
+      preferredGenre
       skillLevel
       preferredGameMode
       preferredRole
       playStyle
       flexibility
+      behaviour
       behavior
       communicationPreference
       toleranceLevel
@@ -1023,16 +204,13 @@ export const onCreateFriendships = /* GraphQL */ `subscription OnCreateFriendshi
       groupsID
       createdAt
       updatedAt
+      owner
       __typename
     }
     secondUser {
       id
       name
       description
-      languages
-      zipCode
-      gamePreference
-      behaviour
       username
       bio
       photo
@@ -1044,17 +222,21 @@ export const onCreateFriendships = /* GraphQL */ `subscription OnCreateFriendshi
       timeZone
       city
       region
+      zipCode
       postalCode
       language
+      languages
       favoriteGame
-      preferredGenre
+      gamePreference
       timeAvailability
       preferredTeammateAgeRange
+      preferredGenre
       skillLevel
       preferredGameMode
       preferredRole
       playStyle
       flexibility
+      behaviour
       behavior
       communicationPreference
       toleranceLevel
@@ -1063,11 +245,14 @@ export const onCreateFriendships = /* GraphQL */ `subscription OnCreateFriendshi
       groupsID
       createdAt
       updatedAt
+      owner
       __typename
     }
     createdAt
+    updatedAt
     friendshipsFirstUserId
     friendshipsSecondUserId
+    owner
     __typename
   }
 }
@@ -1077,20 +262,16 @@ export const onCreateFriendships = /* GraphQL */ `subscription OnCreateFriendshi
 >;
 export const onUpdateFriendships = /* GraphQL */ `subscription OnUpdateFriendships(
   $filter: ModelSubscriptionFriendshipsFilterInput
+  $owner: String
 ) {
-  onUpdateFriendships(filter: $filter) {
+  onUpdateFriendships(filter: $filter, owner: $owner) {
     id
     friendshipStatus
     updatedBy
-    updatedAt
     firstUser {
       id
       name
       description
-      languages
-      zipCode
-      gamePreference
-      behaviour
       username
       bio
       photo
@@ -1102,17 +283,21 @@ export const onUpdateFriendships = /* GraphQL */ `subscription OnUpdateFriendshi
       timeZone
       city
       region
+      zipCode
       postalCode
       language
+      languages
       favoriteGame
-      preferredGenre
+      gamePreference
       timeAvailability
       preferredTeammateAgeRange
+      preferredGenre
       skillLevel
       preferredGameMode
       preferredRole
       playStyle
       flexibility
+      behaviour
       behavior
       communicationPreference
       toleranceLevel
@@ -1121,16 +306,13 @@ export const onUpdateFriendships = /* GraphQL */ `subscription OnUpdateFriendshi
       groupsID
       createdAt
       updatedAt
+      owner
       __typename
     }
     secondUser {
       id
       name
       description
-      languages
-      zipCode
-      gamePreference
-      behaviour
       username
       bio
       photo
@@ -1142,17 +324,21 @@ export const onUpdateFriendships = /* GraphQL */ `subscription OnUpdateFriendshi
       timeZone
       city
       region
+      zipCode
       postalCode
       language
+      languages
       favoriteGame
-      preferredGenre
+      gamePreference
       timeAvailability
       preferredTeammateAgeRange
+      preferredGenre
       skillLevel
       preferredGameMode
       preferredRole
       playStyle
       flexibility
+      behaviour
       behavior
       communicationPreference
       toleranceLevel
@@ -1161,11 +347,14 @@ export const onUpdateFriendships = /* GraphQL */ `subscription OnUpdateFriendshi
       groupsID
       createdAt
       updatedAt
+      owner
       __typename
     }
     createdAt
+    updatedAt
     friendshipsFirstUserId
     friendshipsSecondUserId
+    owner
     __typename
   }
 }
@@ -1175,20 +364,16 @@ export const onUpdateFriendships = /* GraphQL */ `subscription OnUpdateFriendshi
 >;
 export const onDeleteFriendships = /* GraphQL */ `subscription OnDeleteFriendships(
   $filter: ModelSubscriptionFriendshipsFilterInput
+  $owner: String
 ) {
-  onDeleteFriendships(filter: $filter) {
+  onDeleteFriendships(filter: $filter, owner: $owner) {
     id
     friendshipStatus
     updatedBy
-    updatedAt
     firstUser {
       id
       name
       description
-      languages
-      zipCode
-      gamePreference
-      behaviour
       username
       bio
       photo
@@ -1200,17 +385,21 @@ export const onDeleteFriendships = /* GraphQL */ `subscription OnDeleteFriendshi
       timeZone
       city
       region
+      zipCode
       postalCode
       language
+      languages
       favoriteGame
-      preferredGenre
+      gamePreference
       timeAvailability
       preferredTeammateAgeRange
+      preferredGenre
       skillLevel
       preferredGameMode
       preferredRole
       playStyle
       flexibility
+      behaviour
       behavior
       communicationPreference
       toleranceLevel
@@ -1219,16 +408,13 @@ export const onDeleteFriendships = /* GraphQL */ `subscription OnDeleteFriendshi
       groupsID
       createdAt
       updatedAt
+      owner
       __typename
     }
     secondUser {
       id
       name
       description
-      languages
-      zipCode
-      gamePreference
-      behaviour
       username
       bio
       photo
@@ -1240,17 +426,21 @@ export const onDeleteFriendships = /* GraphQL */ `subscription OnDeleteFriendshi
       timeZone
       city
       region
+      zipCode
       postalCode
       language
+      languages
       favoriteGame
-      preferredGenre
+      gamePreference
       timeAvailability
       preferredTeammateAgeRange
+      preferredGenre
       skillLevel
       preferredGameMode
       preferredRole
       playStyle
       flexibility
+      behaviour
       behavior
       communicationPreference
       toleranceLevel
@@ -1259,11 +449,14 @@ export const onDeleteFriendships = /* GraphQL */ `subscription OnDeleteFriendshi
       groupsID
       createdAt
       updatedAt
+      owner
       __typename
     }
     createdAt
+    updatedAt
     friendshipsFirstUserId
     friendshipsSecondUserId
+    owner
     __typename
   }
 }
@@ -1271,141 +464,249 @@ export const onDeleteFriendships = /* GraphQL */ `subscription OnDeleteFriendshi
   APITypes.OnDeleteFriendshipsSubscriptionVariables,
   APITypes.OnDeleteFriendshipsSubscription
 >;
-export const onCreateProfile = /* GraphQL */ `subscription OnCreateProfile($filter: ModelSubscriptionProfileFilterInput) {
-  onCreateProfile(filter: $filter) {
+export const onCreateGroups = /* GraphQL */ `subscription OnCreateGroups(
+  $filter: ModelSubscriptionGroupsFilterInput
+  $owner: String
+) {
+  onCreateGroups(filter: $filter, owner: $owner) {
     id
-    name
     description
-    languages
-    zipCode
-    gamePreference
-    behaviour
-    username
-    bio
-    photo
-    coverPhoto
-    firstName
-    lastName
-    age
-    country
-    timeZone
-    city
-    region
-    postalCode
-    language
-    favoriteGame
-    preferredGenre
-    timeAvailability
-    preferredTeammateAgeRange
-    skillLevel
-    preferredGameMode
-    preferredRole
-    playStyle
-    flexibility
-    behavior
-    communicationPreference
-    toleranceLevel
-    teamworkLevel
-    competitivenessLevel
-    groupsID
+    name
+    image
+    createdBy {
+      id
+      name
+      description
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      zipCode
+      postalCode
+      language
+      languages
+      favoriteGame
+      gamePreference
+      timeAvailability
+      preferredTeammateAgeRange
+      preferredGenre
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behaviour
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+    members {
+      nextToken
+      __typename
+    }
     createdAt
     updatedAt
+    groupsCreatedById
+    owner
     __typename
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnCreateProfileSubscriptionVariables,
-  APITypes.OnCreateProfileSubscription
+  APITypes.OnCreateGroupsSubscriptionVariables,
+  APITypes.OnCreateGroupsSubscription
 >;
-export const onUpdateProfile = /* GraphQL */ `subscription OnUpdateProfile($filter: ModelSubscriptionProfileFilterInput) {
-  onUpdateProfile(filter: $filter) {
+export const onUpdateGroups = /* GraphQL */ `subscription OnUpdateGroups(
+  $filter: ModelSubscriptionGroupsFilterInput
+  $owner: String
+) {
+  onUpdateGroups(filter: $filter, owner: $owner) {
     id
-    name
     description
-    languages
-    zipCode
-    gamePreference
-    behaviour
-    username
-    bio
-    photo
-    coverPhoto
-    firstName
-    lastName
-    age
-    country
-    timeZone
-    city
-    region
-    postalCode
-    language
-    favoriteGame
-    preferredGenre
-    timeAvailability
-    preferredTeammateAgeRange
-    skillLevel
-    preferredGameMode
-    preferredRole
-    playStyle
-    flexibility
-    behavior
-    communicationPreference
-    toleranceLevel
-    teamworkLevel
-    competitivenessLevel
-    groupsID
+    name
+    image
+    createdBy {
+      id
+      name
+      description
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      zipCode
+      postalCode
+      language
+      languages
+      favoriteGame
+      gamePreference
+      timeAvailability
+      preferredTeammateAgeRange
+      preferredGenre
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behaviour
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+    members {
+      nextToken
+      __typename
+    }
     createdAt
     updatedAt
+    groupsCreatedById
+    owner
     __typename
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnUpdateProfileSubscriptionVariables,
-  APITypes.OnUpdateProfileSubscription
+  APITypes.OnUpdateGroupsSubscriptionVariables,
+  APITypes.OnUpdateGroupsSubscription
 >;
-export const onDeleteProfile = /* GraphQL */ `subscription OnDeleteProfile($filter: ModelSubscriptionProfileFilterInput) {
-  onDeleteProfile(filter: $filter) {
+export const onDeleteGroups = /* GraphQL */ `subscription OnDeleteGroups(
+  $filter: ModelSubscriptionGroupsFilterInput
+  $owner: String
+) {
+  onDeleteGroups(filter: $filter, owner: $owner) {
     id
-    name
     description
-    languages
-    zipCode
-    gamePreference
-    behaviour
-    username
-    bio
-    photo
-    coverPhoto
-    firstName
-    lastName
-    age
-    country
-    timeZone
-    city
-    region
-    postalCode
-    language
-    favoriteGame
-    preferredGenre
-    timeAvailability
-    preferredTeammateAgeRange
-    skillLevel
-    preferredGameMode
-    preferredRole
-    playStyle
-    flexibility
-    behavior
-    communicationPreference
-    toleranceLevel
-    teamworkLevel
-    competitivenessLevel
-    groupsID
+    name
+    image
+    createdBy {
+      id
+      name
+      description
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      zipCode
+      postalCode
+      language
+      languages
+      favoriteGame
+      gamePreference
+      timeAvailability
+      preferredTeammateAgeRange
+      preferredGenre
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behaviour
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+    members {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    groupsCreatedById
+    owner
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteGroupsSubscriptionVariables,
+  APITypes.OnDeleteGroupsSubscription
+>;
+export const onCreateGroupMemberships = /* GraphQL */ `subscription OnCreateGroupMemberships(
+  $filter: ModelSubscriptionGroupMembershipsFilterInput
+) {
+  onCreateGroupMemberships(filter: $filter) {
+    membershipID
+    groupId
+    userId
+    id
     createdAt
     updatedAt
     __typename
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnDeleteProfileSubscriptionVariables,
-  APITypes.OnDeleteProfileSubscription
+  APITypes.OnCreateGroupMembershipsSubscriptionVariables,
+  APITypes.OnCreateGroupMembershipsSubscription
+>;
+export const onUpdateGroupMemberships = /* GraphQL */ `subscription OnUpdateGroupMemberships(
+  $filter: ModelSubscriptionGroupMembershipsFilterInput
+) {
+  onUpdateGroupMemberships(filter: $filter) {
+    membershipID
+    groupId
+    userId
+    id
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateGroupMembershipsSubscriptionVariables,
+  APITypes.OnUpdateGroupMembershipsSubscription
+>;
+export const onDeleteGroupMemberships = /* GraphQL */ `subscription OnDeleteGroupMemberships(
+  $filter: ModelSubscriptionGroupMembershipsFilterInput
+) {
+  onDeleteGroupMemberships(filter: $filter) {
+    membershipID
+    groupId
+    userId
+    id
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteGroupMembershipsSubscriptionVariables,
+  APITypes.OnDeleteGroupMembershipsSubscription
 >;

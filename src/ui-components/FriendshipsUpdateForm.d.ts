@@ -25,19 +25,16 @@ export declare type ValidationFunction<T> = (value: T, validationResponse: Valid
 export declare type FriendshipsUpdateFormInputValues = {
     friendshipStatus?: string;
     updatedBy?: string;
-    updatedAt?: string;
 };
 export declare type FriendshipsUpdateFormValidationValues = {
     friendshipStatus?: ValidationFunction<string>;
     updatedBy?: ValidationFunction<string>;
-    updatedAt?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type FriendshipsUpdateFormOverridesProps = {
     FriendshipsUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
     friendshipStatus?: PrimitiveOverrideProps<SelectFieldProps>;
     updatedBy?: PrimitiveOverrideProps<TextFieldProps>;
-    updatedAt?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type FriendshipsUpdateFormProps = React.PropsWithChildren<{
     overrides?: FriendshipsUpdateFormOverridesProps | undefined | null;

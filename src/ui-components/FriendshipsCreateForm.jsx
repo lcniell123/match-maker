@@ -31,24 +31,20 @@ export default function FriendshipsCreateForm(props) {
   const initialValues = {
     friendshipStatus: "",
     updatedBy: "",
-    updatedAt: "",
   };
   const [friendshipStatus, setFriendshipStatus] = React.useState(
     initialValues.friendshipStatus
   );
   const [updatedBy, setUpdatedBy] = React.useState(initialValues.updatedBy);
-  const [updatedAt, setUpdatedAt] = React.useState(initialValues.updatedAt);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setFriendshipStatus(initialValues.friendshipStatus);
     setUpdatedBy(initialValues.updatedBy);
-    setUpdatedAt(initialValues.updatedAt);
     setErrors({});
   };
   const validations = {
     friendshipStatus: [],
     updatedBy: [],
-    updatedAt: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -67,23 +63,6 @@ export default function FriendshipsCreateForm(props) {
     setErrors((errors) => ({ ...errors, [fieldName]: validationResponse }));
     return validationResponse;
   };
-  const convertToLocal = (date) => {
-    const df = new Intl.DateTimeFormat("default", {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-      calendar: "iso8601",
-      numberingSystem: "latn",
-      hourCycle: "h23",
-    });
-    const parts = df.formatToParts(date).reduce((acc, part) => {
-      acc[part.type] = part.value;
-      return acc;
-    }, {});
-    return `${parts.year}-${parts.month}-${parts.day}T${parts.hour}:${parts.minute}`;
-  };
   return (
     <Grid
       as="form"
@@ -95,7 +74,6 @@ export default function FriendshipsCreateForm(props) {
         let modelFields = {
           friendshipStatus,
           updatedBy,
-          updatedAt,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -160,7 +138,6 @@ export default function FriendshipsCreateForm(props) {
             const modelFields = {
               friendshipStatus: value,
               updatedBy,
-              updatedAt,
             };
             const result = onChange(modelFields);
             value = result?.friendshipStatus ?? value;
@@ -207,7 +184,6 @@ export default function FriendshipsCreateForm(props) {
             const modelFields = {
               friendshipStatus,
               updatedBy: value,
-              updatedAt,
             };
             const result = onChange(modelFields);
             value = result?.updatedBy ?? value;
@@ -221,34 +197,6 @@ export default function FriendshipsCreateForm(props) {
         errorMessage={errors.updatedBy?.errorMessage}
         hasError={errors.updatedBy?.hasError}
         {...getOverrideProps(overrides, "updatedBy")}
-      ></TextField>
-      <TextField
-        label="Updated at"
-        isRequired={false}
-        isReadOnly={false}
-        type="datetime-local"
-        value={updatedAt && convertToLocal(new Date(updatedAt))}
-        onChange={(e) => {
-          let value =
-            e.target.value === "" ? "" : new Date(e.target.value).toISOString();
-          if (onChange) {
-            const modelFields = {
-              friendshipStatus,
-              updatedBy,
-              updatedAt: value,
-            };
-            const result = onChange(modelFields);
-            value = result?.updatedAt ?? value;
-          }
-          if (errors.updatedAt?.hasError) {
-            runValidationTasks("updatedAt", value);
-          }
-          setUpdatedAt(value);
-        }}
-        onBlur={() => runValidationTasks("updatedAt", updatedAt)}
-        errorMessage={errors.updatedAt?.errorMessage}
-        hasError={errors.updatedAt?.hasError}
-        {...getOverrideProps(overrides, "updatedAt")}
       ></TextField>
       <Flex
         justifyContent="space-between"

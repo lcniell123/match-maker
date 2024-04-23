@@ -5,7 +5,7 @@
  **************************************************************************/
 
 import * as React from "react";
-import { GridProps, SelectFieldProps } from "@aws-amplify/ui-react";
+import { GridProps } from "@aws-amplify/ui-react";
 export declare type EscapeHatchProps = {
     [elementHierarchy: string]: Record<string, unknown>;
 } | null;
@@ -21,25 +21,20 @@ export declare type ValidationResponse = {
     errorMessage?: string;
 };
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
-export declare type FriendRequestCreateFormInputValues = {
-    status?: string;
-};
-export declare type FriendRequestCreateFormValidationValues = {
-    status?: ValidationFunction<string>;
-};
+export declare type MatchesCreateFormInputValues = {};
+export declare type MatchesCreateFormValidationValues = {};
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
-export declare type FriendRequestCreateFormOverridesProps = {
-    FriendRequestCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
-    status?: PrimitiveOverrideProps<SelectFieldProps>;
+export declare type MatchesCreateFormOverridesProps = {
+    MatchesCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
 } & EscapeHatchProps;
-export declare type FriendRequestCreateFormProps = React.PropsWithChildren<{
-    overrides?: FriendRequestCreateFormOverridesProps | undefined | null;
+export declare type MatchesCreateFormProps = React.PropsWithChildren<{
+    overrides?: MatchesCreateFormOverridesProps | undefined | null;
 } & {
     clearOnSuccess?: boolean;
-    onSubmit?: (fields: FriendRequestCreateFormInputValues) => FriendRequestCreateFormInputValues;
-    onSuccess?: (fields: FriendRequestCreateFormInputValues) => void;
-    onError?: (fields: FriendRequestCreateFormInputValues, errorMessage: string) => void;
-    onChange?: (fields: FriendRequestCreateFormInputValues) => FriendRequestCreateFormInputValues;
-    onValidate?: FriendRequestCreateFormValidationValues;
+    onSubmit?: (fields: MatchesCreateFormInputValues) => MatchesCreateFormInputValues;
+    onSuccess?: (fields: MatchesCreateFormInputValues) => void;
+    onError?: (fields: MatchesCreateFormInputValues, errorMessage: string) => void;
+    onChange?: (fields: MatchesCreateFormInputValues) => MatchesCreateFormInputValues;
+    onValidate?: MatchesCreateFormValidationValues;
 } & React.CSSProperties>;
-export default function FriendRequestCreateForm(props: FriendRequestCreateFormProps): React.ReactElement;
+export default function MatchesCreateForm(props: MatchesCreateFormProps): React.ReactElement;

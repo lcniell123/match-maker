@@ -1,4 +1,4 @@
-type Profile @model @auth(rules: [{ allow: owner }]) {
+type Profile @model @auth(rules: [{allow: owner}]) {
   id: ID!
   name: String!
   description: String
@@ -33,26 +33,30 @@ type Profile @model @auth(rules: [{ allow: owner }]) {
   toleranceLevel: String
   teamworkLevel: String
   competitivenessLevel: String
+  groupsID: ID @index(name: "byGroups")
 }
 
-type Friendships @model @auth(rules: [{ allow: owner }]) {
-  friendshipId: String
-  userId: String
-  friendId: String
-  status: String
+enum RelationshipStatus {
+  FRIEND
+  BLOCKED
+  REMOVED
+  GROUP
 }
 
-type Groups @model @auth(rules: [{ allow: owner }]) {
-  groupId: String
-  name: String
-  createdBy: String
-  createdAt: String
-  updatedAt: String
+type Friendships @model @auth(rules: [{allow: owner}]) {
+  id: ID!
+  friendshipStatus: RelationshipStatus
+  updatedBy: ID
+  firstUser: Profile @hasOne
+  secondUser: Profile @hasOne
+}
+
+type Groups @model @auth(rules: [{allow: owner}]) {
+  id: ID!
+  description: String
+  name: String!
   image: String
+  createdBy: Profile @hasOne
+  members: [Profile] @hasMany(indexName: "byGroups", fields: ["id"])
 }
-
-type GroupMemberships @model @auth(rules: [{ allow: private }]) {
-  membershipID: String
-  groupId: String
-  userId: String
-}
+ 

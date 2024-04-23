@@ -5,7 +5,7 @@
  **************************************************************************/
 
 import * as React from "react";
-import { GridProps, SelectFieldProps, TextFieldProps } from "@aws-amplify/ui-react";
+import { GridProps, SelectFieldProps } from "@aws-amplify/ui-react";
 import { FriendRequest } from "../API.ts";
 export declare type EscapeHatchProps = {
     [elementHierarchy: string]: Record<string, unknown>;
@@ -24,20 +24,14 @@ export declare type ValidationResponse = {
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
 export declare type FriendRequestUpdateFormInputValues = {
     status?: string;
-    createdAt?: string;
-    updatedAt?: string;
 };
 export declare type FriendRequestUpdateFormValidationValues = {
     status?: ValidationFunction<string>;
-    createdAt?: ValidationFunction<string>;
-    updatedAt?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type FriendRequestUpdateFormOverridesProps = {
     FriendRequestUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
     status?: PrimitiveOverrideProps<SelectFieldProps>;
-    createdAt?: PrimitiveOverrideProps<TextFieldProps>;
-    updatedAt?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type FriendRequestUpdateFormProps = React.PropsWithChildren<{
     overrides?: FriendRequestUpdateFormOverridesProps | undefined | null;
