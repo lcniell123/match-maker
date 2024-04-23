@@ -1,78 +1,7 @@
-enum FriendRequestStatus {
-  PENDING
-  ACCEPTED
-  REJECTED
-}
-
-type FriendRequest @model @auth(rules: [{ allow: private }]) {
-  id: ID!
-  status: FriendRequestStatus
-  sender: Profile @hasOne
-  receiver: Profile @hasOne
-}
-
-enum NotificationType {
-  FRIEND_REQUEST
-  MESSAGE
-  GROUP_INVITATION
-  GROUP_MESSAGE
-}
-
-type Notification @model @auth(rules: [{ allow: private }]) {
-  id: ID!
-  type: NotificationType
-  content: String!
-  read: Boolean
-  target: Profile @hasOne
-  originator: Profile @hasOne
-}
-
-type Memberships @model @auth(rules: [{ allow: private }]) {
-  id: ID!
-  group: Groups @hasOne
-  user: Profile @hasOne
-  status: RelationshipStatus
-}
-
-type Groups @model @auth(rules: [{ allow: private }]) {
-  id: ID!
-  description: String
-  name: String!
-  image: String
-  createdBy: Profile @hasOne
-  members: [Profile] @hasMany(indexName: "byGroups", fields: ["id"])
-}
-
-type Matches @model @auth(rules: [{ allow: private }]) {
-  id: ID!
-  user: Profile @hasOne
-  matches: [Profile] @hasMany
-  rejectedMatches: [Profile] @hasMany
-}
-
-enum RelationshipStatus {
-  FRIEND
-  BLOCKED
-  REMOVED
-  GROUP
-}
-
-type Friendships @model @auth(rules: [{ allow: private }]) {
-  id: ID!
-  friendshipStatus: RelationshipStatus
-  updatedBy: ID
-  firstUser: Profile @hasOne
-  secondUser: Profile @hasOne
-}
-
-type Profile @model @auth(rules: [{ allow: private }]) {
+type Profile @model @auth(rules: [{allow: owner}]) {
   id: ID!
   name: String!
   description: String
-  languages: String
-  zipCode: String
-  gamePreference: String
-  behaviour: String
   username: String
   bio: String
   photo: String
@@ -84,17 +13,21 @@ type Profile @model @auth(rules: [{ allow: private }]) {
   timeZone: String
   city: String
   region: String
+  zipCode: String
   postalCode: String
   language: String
+  languages: String
   favoriteGame: String
-  preferredGenre: String
+  gamePreference: String
   timeAvailability: String
   preferredTeammateAgeRange: String
+  preferredGenre: String
   skillLevel: String
   preferredGameMode: String
   preferredRole: String
   playStyle: String
   flexibility: Boolean
+  behaviour: String
   behavior: String
   communicationPreference: String
   toleranceLevel: String
@@ -102,3 +35,28 @@ type Profile @model @auth(rules: [{ allow: private }]) {
   competitivenessLevel: String
   groupsID: ID @index(name: "byGroups")
 }
+
+enum RelationshipStatus {
+  FRIEND
+  BLOCKED
+  REMOVED
+  GROUP
+}
+
+type Friendships @model @auth(rules: [{allow: owner}]) {
+  id: ID!
+  friendshipStatus: RelationshipStatus
+  updatedBy: ID
+  firstUser: Profile @hasOne
+  secondUser: Profile @hasOne
+}
+
+type Groups @model @auth(rules: [{allow: owner}]) {
+  id: ID!
+  description: String
+  name: String!
+  image: String
+  createdBy: Profile @hasOne
+  members: [Profile] @hasMany(indexName: "byGroups", fields: ["id"])
+}
+ 

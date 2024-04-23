@@ -33,10 +33,6 @@ export default function ProfileUpdateForm(props) {
   const initialValues = {
     name: "",
     description: "",
-    languages: "",
-    zipCode: "",
-    gamePreference: "",
-    behaviour: "",
     username: "",
     bio: "",
     photo: "",
@@ -48,17 +44,21 @@ export default function ProfileUpdateForm(props) {
     timeZone: "",
     city: "",
     region: "",
+    zipCode: "",
     postalCode: "",
     language: "",
+    languages: "",
     favoriteGame: "",
-    preferredGenre: "",
+    gamePreference: "",
     timeAvailability: "",
     preferredTeammateAgeRange: "",
+    preferredGenre: "",
     skillLevel: "",
     preferredGameMode: "",
     preferredRole: "",
     playStyle: "",
     flexibility: false,
+    behaviour: "",
     behavior: "",
     communicationPreference: "",
     toleranceLevel: "",
@@ -69,12 +69,6 @@ export default function ProfileUpdateForm(props) {
   const [description, setDescription] = React.useState(
     initialValues.description
   );
-  const [languages, setLanguages] = React.useState(initialValues.languages);
-  const [zipCode, setZipCode] = React.useState(initialValues.zipCode);
-  const [gamePreference, setGamePreference] = React.useState(
-    initialValues.gamePreference
-  );
-  const [behaviour, setBehaviour] = React.useState(initialValues.behaviour);
   const [username, setUsername] = React.useState(initialValues.username);
   const [bio, setBio] = React.useState(initialValues.bio);
   const [photo, setPhoto] = React.useState(initialValues.photo);
@@ -86,19 +80,24 @@ export default function ProfileUpdateForm(props) {
   const [timeZone, setTimeZone] = React.useState(initialValues.timeZone);
   const [city, setCity] = React.useState(initialValues.city);
   const [region, setRegion] = React.useState(initialValues.region);
+  const [zipCode, setZipCode] = React.useState(initialValues.zipCode);
   const [postalCode, setPostalCode] = React.useState(initialValues.postalCode);
   const [language, setLanguage] = React.useState(initialValues.language);
+  const [languages, setLanguages] = React.useState(initialValues.languages);
   const [favoriteGame, setFavoriteGame] = React.useState(
     initialValues.favoriteGame
   );
-  const [preferredGenre, setPreferredGenre] = React.useState(
-    initialValues.preferredGenre
+  const [gamePreference, setGamePreference] = React.useState(
+    initialValues.gamePreference
   );
   const [timeAvailability, setTimeAvailability] = React.useState(
     initialValues.timeAvailability
   );
   const [preferredTeammateAgeRange, setPreferredTeammateAgeRange] =
     React.useState(initialValues.preferredTeammateAgeRange);
+  const [preferredGenre, setPreferredGenre] = React.useState(
+    initialValues.preferredGenre
+  );
   const [skillLevel, setSkillLevel] = React.useState(initialValues.skillLevel);
   const [preferredGameMode, setPreferredGameMode] = React.useState(
     initialValues.preferredGameMode
@@ -110,6 +109,7 @@ export default function ProfileUpdateForm(props) {
   const [flexibility, setFlexibility] = React.useState(
     initialValues.flexibility
   );
+  const [behaviour, setBehaviour] = React.useState(initialValues.behaviour);
   const [behavior, setBehavior] = React.useState(initialValues.behavior);
   const [communicationPreference, setCommunicationPreference] = React.useState(
     initialValues.communicationPreference
@@ -130,10 +130,6 @@ export default function ProfileUpdateForm(props) {
       : initialValues;
     setName(cleanValues.name);
     setDescription(cleanValues.description);
-    setLanguages(cleanValues.languages);
-    setZipCode(cleanValues.zipCode);
-    setGamePreference(cleanValues.gamePreference);
-    setBehaviour(cleanValues.behaviour);
     setUsername(cleanValues.username);
     setBio(cleanValues.bio);
     setPhoto(cleanValues.photo);
@@ -145,17 +141,21 @@ export default function ProfileUpdateForm(props) {
     setTimeZone(cleanValues.timeZone);
     setCity(cleanValues.city);
     setRegion(cleanValues.region);
+    setZipCode(cleanValues.zipCode);
     setPostalCode(cleanValues.postalCode);
     setLanguage(cleanValues.language);
+    setLanguages(cleanValues.languages);
     setFavoriteGame(cleanValues.favoriteGame);
-    setPreferredGenre(cleanValues.preferredGenre);
+    setGamePreference(cleanValues.gamePreference);
     setTimeAvailability(cleanValues.timeAvailability);
     setPreferredTeammateAgeRange(cleanValues.preferredTeammateAgeRange);
+    setPreferredGenre(cleanValues.preferredGenre);
     setSkillLevel(cleanValues.skillLevel);
     setPreferredGameMode(cleanValues.preferredGameMode);
     setPreferredRole(cleanValues.preferredRole);
     setPlayStyle(cleanValues.playStyle);
     setFlexibility(cleanValues.flexibility);
+    setBehaviour(cleanValues.behaviour);
     setBehavior(cleanValues.behavior);
     setCommunicationPreference(cleanValues.communicationPreference);
     setToleranceLevel(cleanValues.toleranceLevel);
@@ -182,10 +182,6 @@ export default function ProfileUpdateForm(props) {
   const validations = {
     name: [{ type: "Required" }],
     description: [],
-    languages: [],
-    zipCode: [],
-    gamePreference: [],
-    behaviour: [],
     username: [],
     bio: [],
     photo: [],
@@ -197,17 +193,21 @@ export default function ProfileUpdateForm(props) {
     timeZone: [],
     city: [],
     region: [],
+    zipCode: [],
     postalCode: [],
     language: [],
+    languages: [],
     favoriteGame: [],
-    preferredGenre: [],
+    gamePreference: [],
     timeAvailability: [],
     preferredTeammateAgeRange: [],
+    preferredGenre: [],
     skillLevel: [],
     preferredGameMode: [],
     preferredRole: [],
     playStyle: [],
     flexibility: [],
+    behaviour: [],
     behavior: [],
     communicationPreference: [],
     toleranceLevel: [],
@@ -242,10 +242,6 @@ export default function ProfileUpdateForm(props) {
         let modelFields = {
           name,
           description: description ?? null,
-          languages: languages ?? null,
-          zipCode: zipCode ?? null,
-          gamePreference: gamePreference ?? null,
-          behaviour: behaviour ?? null,
           username: username ?? null,
           bio: bio ?? null,
           photo: photo ?? null,
@@ -257,17 +253,21 @@ export default function ProfileUpdateForm(props) {
           timeZone: timeZone ?? null,
           city: city ?? null,
           region: region ?? null,
+          zipCode: zipCode ?? null,
           postalCode: postalCode ?? null,
           language: language ?? null,
+          languages: languages ?? null,
           favoriteGame: favoriteGame ?? null,
-          preferredGenre: preferredGenre ?? null,
+          gamePreference: gamePreference ?? null,
           timeAvailability: timeAvailability ?? null,
           preferredTeammateAgeRange: preferredTeammateAgeRange ?? null,
+          preferredGenre: preferredGenre ?? null,
           skillLevel: skillLevel ?? null,
           preferredGameMode: preferredGameMode ?? null,
           preferredRole: preferredRole ?? null,
           playStyle: playStyle ?? null,
           flexibility: flexibility ?? null,
+          behaviour: behaviour ?? null,
           behavior: behavior ?? null,
           communicationPreference: communicationPreference ?? null,
           toleranceLevel: toleranceLevel ?? null,
@@ -335,10 +335,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name: value,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -350,17 +346,21 @@ export default function ProfileUpdateForm(props) {
               timeZone,
               city,
               region,
+              zipCode,
               postalCode,
               language,
+              languages,
               favoriteGame,
-              preferredGenre,
+              gamePreference,
               timeAvailability,
               preferredTeammateAgeRange,
+              preferredGenre,
               skillLevel,
               preferredGameMode,
               preferredRole,
               playStyle,
               flexibility,
+              behaviour,
               behavior,
               communicationPreference,
               toleranceLevel,
@@ -391,10 +391,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description: value,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -406,17 +402,21 @@ export default function ProfileUpdateForm(props) {
               timeZone,
               city,
               region,
+              zipCode,
               postalCode,
               language,
+              languages,
               favoriteGame,
-              preferredGenre,
+              gamePreference,
               timeAvailability,
               preferredTeammateAgeRange,
+              preferredGenre,
               skillLevel,
               preferredGameMode,
               preferredRole,
               playStyle,
               flexibility,
+              behaviour,
               behavior,
               communicationPreference,
               toleranceLevel,
@@ -437,230 +437,6 @@ export default function ProfileUpdateForm(props) {
         {...getOverrideProps(overrides, "description")}
       ></TextField>
       <TextField
-        label="Languages"
-        isRequired={false}
-        isReadOnly={false}
-        value={languages}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              name,
-              description,
-              languages: value,
-              zipCode,
-              gamePreference,
-              behaviour,
-              username,
-              bio,
-              photo,
-              coverPhoto,
-              firstName,
-              lastName,
-              age,
-              country,
-              timeZone,
-              city,
-              region,
-              postalCode,
-              language,
-              favoriteGame,
-              preferredGenre,
-              timeAvailability,
-              preferredTeammateAgeRange,
-              skillLevel,
-              preferredGameMode,
-              preferredRole,
-              playStyle,
-              flexibility,
-              behavior,
-              communicationPreference,
-              toleranceLevel,
-              teamworkLevel,
-              competitivenessLevel,
-            };
-            const result = onChange(modelFields);
-            value = result?.languages ?? value;
-          }
-          if (errors.languages?.hasError) {
-            runValidationTasks("languages", value);
-          }
-          setLanguages(value);
-        }}
-        onBlur={() => runValidationTasks("languages", languages)}
-        errorMessage={errors.languages?.errorMessage}
-        hasError={errors.languages?.hasError}
-        {...getOverrideProps(overrides, "languages")}
-      ></TextField>
-      <TextField
-        label="Zip code"
-        isRequired={false}
-        isReadOnly={false}
-        value={zipCode}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              name,
-              description,
-              languages,
-              zipCode: value,
-              gamePreference,
-              behaviour,
-              username,
-              bio,
-              photo,
-              coverPhoto,
-              firstName,
-              lastName,
-              age,
-              country,
-              timeZone,
-              city,
-              region,
-              postalCode,
-              language,
-              favoriteGame,
-              preferredGenre,
-              timeAvailability,
-              preferredTeammateAgeRange,
-              skillLevel,
-              preferredGameMode,
-              preferredRole,
-              playStyle,
-              flexibility,
-              behavior,
-              communicationPreference,
-              toleranceLevel,
-              teamworkLevel,
-              competitivenessLevel,
-            };
-            const result = onChange(modelFields);
-            value = result?.zipCode ?? value;
-          }
-          if (errors.zipCode?.hasError) {
-            runValidationTasks("zipCode", value);
-          }
-          setZipCode(value);
-        }}
-        onBlur={() => runValidationTasks("zipCode", zipCode)}
-        errorMessage={errors.zipCode?.errorMessage}
-        hasError={errors.zipCode?.hasError}
-        {...getOverrideProps(overrides, "zipCode")}
-      ></TextField>
-      <TextField
-        label="Game preference"
-        isRequired={false}
-        isReadOnly={false}
-        value={gamePreference}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              name,
-              description,
-              languages,
-              zipCode,
-              gamePreference: value,
-              behaviour,
-              username,
-              bio,
-              photo,
-              coverPhoto,
-              firstName,
-              lastName,
-              age,
-              country,
-              timeZone,
-              city,
-              region,
-              postalCode,
-              language,
-              favoriteGame,
-              preferredGenre,
-              timeAvailability,
-              preferredTeammateAgeRange,
-              skillLevel,
-              preferredGameMode,
-              preferredRole,
-              playStyle,
-              flexibility,
-              behavior,
-              communicationPreference,
-              toleranceLevel,
-              teamworkLevel,
-              competitivenessLevel,
-            };
-            const result = onChange(modelFields);
-            value = result?.gamePreference ?? value;
-          }
-          if (errors.gamePreference?.hasError) {
-            runValidationTasks("gamePreference", value);
-          }
-          setGamePreference(value);
-        }}
-        onBlur={() => runValidationTasks("gamePreference", gamePreference)}
-        errorMessage={errors.gamePreference?.errorMessage}
-        hasError={errors.gamePreference?.hasError}
-        {...getOverrideProps(overrides, "gamePreference")}
-      ></TextField>
-      <TextField
-        label="Behaviour"
-        isRequired={false}
-        isReadOnly={false}
-        value={behaviour}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              name,
-              description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour: value,
-              username,
-              bio,
-              photo,
-              coverPhoto,
-              firstName,
-              lastName,
-              age,
-              country,
-              timeZone,
-              city,
-              region,
-              postalCode,
-              language,
-              favoriteGame,
-              preferredGenre,
-              timeAvailability,
-              preferredTeammateAgeRange,
-              skillLevel,
-              preferredGameMode,
-              preferredRole,
-              playStyle,
-              flexibility,
-              behavior,
-              communicationPreference,
-              toleranceLevel,
-              teamworkLevel,
-              competitivenessLevel,
-            };
-            const result = onChange(modelFields);
-            value = result?.behaviour ?? value;
-          }
-          if (errors.behaviour?.hasError) {
-            runValidationTasks("behaviour", value);
-          }
-          setBehaviour(value);
-        }}
-        onBlur={() => runValidationTasks("behaviour", behaviour)}
-        errorMessage={errors.behaviour?.errorMessage}
-        hasError={errors.behaviour?.hasError}
-        {...getOverrideProps(overrides, "behaviour")}
-      ></TextField>
-      <TextField
         label="Username"
         isRequired={false}
         isReadOnly={false}
@@ -671,10 +447,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username: value,
               bio,
               photo,
@@ -686,17 +458,21 @@ export default function ProfileUpdateForm(props) {
               timeZone,
               city,
               region,
+              zipCode,
               postalCode,
               language,
+              languages,
               favoriteGame,
-              preferredGenre,
+              gamePreference,
               timeAvailability,
               preferredTeammateAgeRange,
+              preferredGenre,
               skillLevel,
               preferredGameMode,
               preferredRole,
               playStyle,
               flexibility,
+              behaviour,
               behavior,
               communicationPreference,
               toleranceLevel,
@@ -727,10 +503,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio: value,
               photo,
@@ -742,17 +514,21 @@ export default function ProfileUpdateForm(props) {
               timeZone,
               city,
               region,
+              zipCode,
               postalCode,
               language,
+              languages,
               favoriteGame,
-              preferredGenre,
+              gamePreference,
               timeAvailability,
               preferredTeammateAgeRange,
+              preferredGenre,
               skillLevel,
               preferredGameMode,
               preferredRole,
               playStyle,
               flexibility,
+              behaviour,
               behavior,
               communicationPreference,
               toleranceLevel,
@@ -783,10 +559,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo: value,
@@ -798,17 +570,21 @@ export default function ProfileUpdateForm(props) {
               timeZone,
               city,
               region,
+              zipCode,
               postalCode,
               language,
+              languages,
               favoriteGame,
-              preferredGenre,
+              gamePreference,
               timeAvailability,
               preferredTeammateAgeRange,
+              preferredGenre,
               skillLevel,
               preferredGameMode,
               preferredRole,
               playStyle,
               flexibility,
+              behaviour,
               behavior,
               communicationPreference,
               toleranceLevel,
@@ -839,10 +615,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -854,17 +626,21 @@ export default function ProfileUpdateForm(props) {
               timeZone,
               city,
               region,
+              zipCode,
               postalCode,
               language,
+              languages,
               favoriteGame,
-              preferredGenre,
+              gamePreference,
               timeAvailability,
               preferredTeammateAgeRange,
+              preferredGenre,
               skillLevel,
               preferredGameMode,
               preferredRole,
               playStyle,
               flexibility,
+              behaviour,
               behavior,
               communicationPreference,
               toleranceLevel,
@@ -895,10 +671,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -910,17 +682,21 @@ export default function ProfileUpdateForm(props) {
               timeZone,
               city,
               region,
+              zipCode,
               postalCode,
               language,
+              languages,
               favoriteGame,
-              preferredGenre,
+              gamePreference,
               timeAvailability,
               preferredTeammateAgeRange,
+              preferredGenre,
               skillLevel,
               preferredGameMode,
               preferredRole,
               playStyle,
               flexibility,
+              behaviour,
               behavior,
               communicationPreference,
               toleranceLevel,
@@ -951,10 +727,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -966,17 +738,21 @@ export default function ProfileUpdateForm(props) {
               timeZone,
               city,
               region,
+              zipCode,
               postalCode,
               language,
+              languages,
               favoriteGame,
-              preferredGenre,
+              gamePreference,
               timeAvailability,
               preferredTeammateAgeRange,
+              preferredGenre,
               skillLevel,
               preferredGameMode,
               preferredRole,
               playStyle,
               flexibility,
+              behaviour,
               behavior,
               communicationPreference,
               toleranceLevel,
@@ -1011,10 +787,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -1026,17 +798,21 @@ export default function ProfileUpdateForm(props) {
               timeZone,
               city,
               region,
+              zipCode,
               postalCode,
               language,
+              languages,
               favoriteGame,
-              preferredGenre,
+              gamePreference,
               timeAvailability,
               preferredTeammateAgeRange,
+              preferredGenre,
               skillLevel,
               preferredGameMode,
               preferredRole,
               playStyle,
               flexibility,
+              behaviour,
               behavior,
               communicationPreference,
               toleranceLevel,
@@ -1067,10 +843,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -1082,17 +854,21 @@ export default function ProfileUpdateForm(props) {
               timeZone,
               city,
               region,
+              zipCode,
               postalCode,
               language,
+              languages,
               favoriteGame,
-              preferredGenre,
+              gamePreference,
               timeAvailability,
               preferredTeammateAgeRange,
+              preferredGenre,
               skillLevel,
               preferredGameMode,
               preferredRole,
               playStyle,
               flexibility,
+              behaviour,
               behavior,
               communicationPreference,
               toleranceLevel,
@@ -1123,10 +899,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -1138,17 +910,21 @@ export default function ProfileUpdateForm(props) {
               timeZone: value,
               city,
               region,
+              zipCode,
               postalCode,
               language,
+              languages,
               favoriteGame,
-              preferredGenre,
+              gamePreference,
               timeAvailability,
               preferredTeammateAgeRange,
+              preferredGenre,
               skillLevel,
               preferredGameMode,
               preferredRole,
               playStyle,
               flexibility,
+              behaviour,
               behavior,
               communicationPreference,
               toleranceLevel,
@@ -1179,10 +955,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -1194,17 +966,21 @@ export default function ProfileUpdateForm(props) {
               timeZone,
               city: value,
               region,
+              zipCode,
               postalCode,
               language,
+              languages,
               favoriteGame,
-              preferredGenre,
+              gamePreference,
               timeAvailability,
               preferredTeammateAgeRange,
+              preferredGenre,
               skillLevel,
               preferredGameMode,
               preferredRole,
               playStyle,
               flexibility,
+              behaviour,
               behavior,
               communicationPreference,
               toleranceLevel,
@@ -1235,10 +1011,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -1250,17 +1022,21 @@ export default function ProfileUpdateForm(props) {
               timeZone,
               city,
               region: value,
+              zipCode,
               postalCode,
               language,
+              languages,
               favoriteGame,
-              preferredGenre,
+              gamePreference,
               timeAvailability,
               preferredTeammateAgeRange,
+              preferredGenre,
               skillLevel,
               preferredGameMode,
               preferredRole,
               playStyle,
               flexibility,
+              behaviour,
               behavior,
               communicationPreference,
               toleranceLevel,
@@ -1281,20 +1057,16 @@ export default function ProfileUpdateForm(props) {
         {...getOverrideProps(overrides, "region")}
       ></TextField>
       <TextField
-        label="Postal code"
+        label="Zip code"
         isRequired={false}
         isReadOnly={false}
-        value={postalCode}
+        value={zipCode}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -1306,17 +1078,77 @@ export default function ProfileUpdateForm(props) {
               timeZone,
               city,
               region,
-              postalCode: value,
+              zipCode: value,
+              postalCode,
               language,
+              languages,
               favoriteGame,
-              preferredGenre,
+              gamePreference,
               timeAvailability,
               preferredTeammateAgeRange,
+              preferredGenre,
               skillLevel,
               preferredGameMode,
               preferredRole,
               playStyle,
               flexibility,
+              behaviour,
+              behavior,
+              communicationPreference,
+              toleranceLevel,
+              teamworkLevel,
+              competitivenessLevel,
+            };
+            const result = onChange(modelFields);
+            value = result?.zipCode ?? value;
+          }
+          if (errors.zipCode?.hasError) {
+            runValidationTasks("zipCode", value);
+          }
+          setZipCode(value);
+        }}
+        onBlur={() => runValidationTasks("zipCode", zipCode)}
+        errorMessage={errors.zipCode?.errorMessage}
+        hasError={errors.zipCode?.hasError}
+        {...getOverrideProps(overrides, "zipCode")}
+      ></TextField>
+      <TextField
+        label="Postal code"
+        isRequired={false}
+        isReadOnly={false}
+        value={postalCode}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              name,
+              description,
+              username,
+              bio,
+              photo,
+              coverPhoto,
+              firstName,
+              lastName,
+              age,
+              country,
+              timeZone,
+              city,
+              region,
+              zipCode,
+              postalCode: value,
+              language,
+              languages,
+              favoriteGame,
+              gamePreference,
+              timeAvailability,
+              preferredTeammateAgeRange,
+              preferredGenre,
+              skillLevel,
+              preferredGameMode,
+              preferredRole,
+              playStyle,
+              flexibility,
+              behaviour,
               behavior,
               communicationPreference,
               toleranceLevel,
@@ -1347,10 +1179,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -1362,17 +1190,21 @@ export default function ProfileUpdateForm(props) {
               timeZone,
               city,
               region,
+              zipCode,
               postalCode,
               language: value,
+              languages,
               favoriteGame,
-              preferredGenre,
+              gamePreference,
               timeAvailability,
               preferredTeammateAgeRange,
+              preferredGenre,
               skillLevel,
               preferredGameMode,
               preferredRole,
               playStyle,
               flexibility,
+              behaviour,
               behavior,
               communicationPreference,
               toleranceLevel,
@@ -1393,20 +1225,16 @@ export default function ProfileUpdateForm(props) {
         {...getOverrideProps(overrides, "language")}
       ></TextField>
       <TextField
-        label="Favorite game"
+        label="Languages"
         isRequired={false}
         isReadOnly={false}
-        value={favoriteGame}
+        value={languages}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -1418,17 +1246,77 @@ export default function ProfileUpdateForm(props) {
               timeZone,
               city,
               region,
+              zipCode,
               postalCode,
               language,
-              favoriteGame: value,
-              preferredGenre,
+              languages: value,
+              favoriteGame,
+              gamePreference,
               timeAvailability,
               preferredTeammateAgeRange,
+              preferredGenre,
               skillLevel,
               preferredGameMode,
               preferredRole,
               playStyle,
               flexibility,
+              behaviour,
+              behavior,
+              communicationPreference,
+              toleranceLevel,
+              teamworkLevel,
+              competitivenessLevel,
+            };
+            const result = onChange(modelFields);
+            value = result?.languages ?? value;
+          }
+          if (errors.languages?.hasError) {
+            runValidationTasks("languages", value);
+          }
+          setLanguages(value);
+        }}
+        onBlur={() => runValidationTasks("languages", languages)}
+        errorMessage={errors.languages?.errorMessage}
+        hasError={errors.languages?.hasError}
+        {...getOverrideProps(overrides, "languages")}
+      ></TextField>
+      <TextField
+        label="Favorite game"
+        isRequired={false}
+        isReadOnly={false}
+        value={favoriteGame}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              name,
+              description,
+              username,
+              bio,
+              photo,
+              coverPhoto,
+              firstName,
+              lastName,
+              age,
+              country,
+              timeZone,
+              city,
+              region,
+              zipCode,
+              postalCode,
+              language,
+              languages,
+              favoriteGame: value,
+              gamePreference,
+              timeAvailability,
+              preferredTeammateAgeRange,
+              preferredGenre,
+              skillLevel,
+              preferredGameMode,
+              preferredRole,
+              playStyle,
+              flexibility,
+              behaviour,
               behavior,
               communicationPreference,
               toleranceLevel,
@@ -1449,20 +1337,16 @@ export default function ProfileUpdateForm(props) {
         {...getOverrideProps(overrides, "favoriteGame")}
       ></TextField>
       <TextField
-        label="Preferred genre"
+        label="Game preference"
         isRequired={false}
         isReadOnly={false}
-        value={preferredGenre}
+        value={gamePreference}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -1474,17 +1358,21 @@ export default function ProfileUpdateForm(props) {
               timeZone,
               city,
               region,
+              zipCode,
               postalCode,
               language,
+              languages,
               favoriteGame,
-              preferredGenre: value,
+              gamePreference: value,
               timeAvailability,
               preferredTeammateAgeRange,
+              preferredGenre,
               skillLevel,
               preferredGameMode,
               preferredRole,
               playStyle,
               flexibility,
+              behaviour,
               behavior,
               communicationPreference,
               toleranceLevel,
@@ -1492,17 +1380,17 @@ export default function ProfileUpdateForm(props) {
               competitivenessLevel,
             };
             const result = onChange(modelFields);
-            value = result?.preferredGenre ?? value;
+            value = result?.gamePreference ?? value;
           }
-          if (errors.preferredGenre?.hasError) {
-            runValidationTasks("preferredGenre", value);
+          if (errors.gamePreference?.hasError) {
+            runValidationTasks("gamePreference", value);
           }
-          setPreferredGenre(value);
+          setGamePreference(value);
         }}
-        onBlur={() => runValidationTasks("preferredGenre", preferredGenre)}
-        errorMessage={errors.preferredGenre?.errorMessage}
-        hasError={errors.preferredGenre?.hasError}
-        {...getOverrideProps(overrides, "preferredGenre")}
+        onBlur={() => runValidationTasks("gamePreference", gamePreference)}
+        errorMessage={errors.gamePreference?.errorMessage}
+        hasError={errors.gamePreference?.hasError}
+        {...getOverrideProps(overrides, "gamePreference")}
       ></TextField>
       <TextField
         label="Time availability"
@@ -1515,10 +1403,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -1530,17 +1414,21 @@ export default function ProfileUpdateForm(props) {
               timeZone,
               city,
               region,
+              zipCode,
               postalCode,
               language,
+              languages,
               favoriteGame,
-              preferredGenre,
+              gamePreference,
               timeAvailability: value,
               preferredTeammateAgeRange,
+              preferredGenre,
               skillLevel,
               preferredGameMode,
               preferredRole,
               playStyle,
               flexibility,
+              behaviour,
               behavior,
               communicationPreference,
               toleranceLevel,
@@ -1571,10 +1459,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -1586,17 +1470,21 @@ export default function ProfileUpdateForm(props) {
               timeZone,
               city,
               region,
+              zipCode,
               postalCode,
               language,
+              languages,
               favoriteGame,
-              preferredGenre,
+              gamePreference,
               timeAvailability,
               preferredTeammateAgeRange: value,
+              preferredGenre,
               skillLevel,
               preferredGameMode,
               preferredRole,
               playStyle,
               flexibility,
+              behaviour,
               behavior,
               communicationPreference,
               toleranceLevel,
@@ -1622,20 +1510,16 @@ export default function ProfileUpdateForm(props) {
         {...getOverrideProps(overrides, "preferredTeammateAgeRange")}
       ></TextField>
       <TextField
-        label="Skill level"
+        label="Preferred genre"
         isRequired={false}
         isReadOnly={false}
-        value={skillLevel}
+        value={preferredGenre}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -1647,17 +1531,77 @@ export default function ProfileUpdateForm(props) {
               timeZone,
               city,
               region,
+              zipCode,
               postalCode,
               language,
+              languages,
               favoriteGame,
-              preferredGenre,
+              gamePreference,
               timeAvailability,
               preferredTeammateAgeRange,
+              preferredGenre: value,
+              skillLevel,
+              preferredGameMode,
+              preferredRole,
+              playStyle,
+              flexibility,
+              behaviour,
+              behavior,
+              communicationPreference,
+              toleranceLevel,
+              teamworkLevel,
+              competitivenessLevel,
+            };
+            const result = onChange(modelFields);
+            value = result?.preferredGenre ?? value;
+          }
+          if (errors.preferredGenre?.hasError) {
+            runValidationTasks("preferredGenre", value);
+          }
+          setPreferredGenre(value);
+        }}
+        onBlur={() => runValidationTasks("preferredGenre", preferredGenre)}
+        errorMessage={errors.preferredGenre?.errorMessage}
+        hasError={errors.preferredGenre?.hasError}
+        {...getOverrideProps(overrides, "preferredGenre")}
+      ></TextField>
+      <TextField
+        label="Skill level"
+        isRequired={false}
+        isReadOnly={false}
+        value={skillLevel}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              name,
+              description,
+              username,
+              bio,
+              photo,
+              coverPhoto,
+              firstName,
+              lastName,
+              age,
+              country,
+              timeZone,
+              city,
+              region,
+              zipCode,
+              postalCode,
+              language,
+              languages,
+              favoriteGame,
+              gamePreference,
+              timeAvailability,
+              preferredTeammateAgeRange,
+              preferredGenre,
               skillLevel: value,
               preferredGameMode,
               preferredRole,
               playStyle,
               flexibility,
+              behaviour,
               behavior,
               communicationPreference,
               toleranceLevel,
@@ -1688,10 +1632,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -1703,17 +1643,21 @@ export default function ProfileUpdateForm(props) {
               timeZone,
               city,
               region,
+              zipCode,
               postalCode,
               language,
+              languages,
               favoriteGame,
-              preferredGenre,
+              gamePreference,
               timeAvailability,
               preferredTeammateAgeRange,
+              preferredGenre,
               skillLevel,
               preferredGameMode: value,
               preferredRole,
               playStyle,
               flexibility,
+              behaviour,
               behavior,
               communicationPreference,
               toleranceLevel,
@@ -1746,10 +1690,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -1761,17 +1701,21 @@ export default function ProfileUpdateForm(props) {
               timeZone,
               city,
               region,
+              zipCode,
               postalCode,
               language,
+              languages,
               favoriteGame,
-              preferredGenre,
+              gamePreference,
               timeAvailability,
               preferredTeammateAgeRange,
+              preferredGenre,
               skillLevel,
               preferredGameMode,
               preferredRole: value,
               playStyle,
               flexibility,
+              behaviour,
               behavior,
               communicationPreference,
               toleranceLevel,
@@ -1802,10 +1746,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -1817,17 +1757,21 @@ export default function ProfileUpdateForm(props) {
               timeZone,
               city,
               region,
+              zipCode,
               postalCode,
               language,
+              languages,
               favoriteGame,
-              preferredGenre,
+              gamePreference,
               timeAvailability,
               preferredTeammateAgeRange,
+              preferredGenre,
               skillLevel,
               preferredGameMode,
               preferredRole,
               playStyle: value,
               flexibility,
+              behaviour,
               behavior,
               communicationPreference,
               toleranceLevel,
@@ -1858,10 +1802,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -1873,17 +1813,21 @@ export default function ProfileUpdateForm(props) {
               timeZone,
               city,
               region,
+              zipCode,
               postalCode,
               language,
+              languages,
               favoriteGame,
-              preferredGenre,
+              gamePreference,
               timeAvailability,
               preferredTeammateAgeRange,
+              preferredGenre,
               skillLevel,
               preferredGameMode,
               preferredRole,
               playStyle,
               flexibility: value,
+              behaviour,
               behavior,
               communicationPreference,
               toleranceLevel,
@@ -1904,20 +1848,16 @@ export default function ProfileUpdateForm(props) {
         {...getOverrideProps(overrides, "flexibility")}
       ></SwitchField>
       <TextField
-        label="Behavior"
+        label="Behaviour"
         isRequired={false}
         isReadOnly={false}
-        value={behavior}
+        value={behaviour}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -1929,17 +1869,77 @@ export default function ProfileUpdateForm(props) {
               timeZone,
               city,
               region,
+              zipCode,
               postalCode,
               language,
+              languages,
               favoriteGame,
-              preferredGenre,
+              gamePreference,
               timeAvailability,
               preferredTeammateAgeRange,
+              preferredGenre,
               skillLevel,
               preferredGameMode,
               preferredRole,
               playStyle,
               flexibility,
+              behaviour: value,
+              behavior,
+              communicationPreference,
+              toleranceLevel,
+              teamworkLevel,
+              competitivenessLevel,
+            };
+            const result = onChange(modelFields);
+            value = result?.behaviour ?? value;
+          }
+          if (errors.behaviour?.hasError) {
+            runValidationTasks("behaviour", value);
+          }
+          setBehaviour(value);
+        }}
+        onBlur={() => runValidationTasks("behaviour", behaviour)}
+        errorMessage={errors.behaviour?.errorMessage}
+        hasError={errors.behaviour?.hasError}
+        {...getOverrideProps(overrides, "behaviour")}
+      ></TextField>
+      <TextField
+        label="Behavior"
+        isRequired={false}
+        isReadOnly={false}
+        value={behavior}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              name,
+              description,
+              username,
+              bio,
+              photo,
+              coverPhoto,
+              firstName,
+              lastName,
+              age,
+              country,
+              timeZone,
+              city,
+              region,
+              zipCode,
+              postalCode,
+              language,
+              languages,
+              favoriteGame,
+              gamePreference,
+              timeAvailability,
+              preferredTeammateAgeRange,
+              preferredGenre,
+              skillLevel,
+              preferredGameMode,
+              preferredRole,
+              playStyle,
+              flexibility,
+              behaviour,
               behavior: value,
               communicationPreference,
               toleranceLevel,
@@ -1970,10 +1970,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -1985,17 +1981,21 @@ export default function ProfileUpdateForm(props) {
               timeZone,
               city,
               region,
+              zipCode,
               postalCode,
               language,
+              languages,
               favoriteGame,
-              preferredGenre,
+              gamePreference,
               timeAvailability,
               preferredTeammateAgeRange,
+              preferredGenre,
               skillLevel,
               preferredGameMode,
               preferredRole,
               playStyle,
               flexibility,
+              behaviour,
               behavior,
               communicationPreference: value,
               toleranceLevel,
@@ -2028,10 +2028,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -2043,17 +2039,21 @@ export default function ProfileUpdateForm(props) {
               timeZone,
               city,
               region,
+              zipCode,
               postalCode,
               language,
+              languages,
               favoriteGame,
-              preferredGenre,
+              gamePreference,
               timeAvailability,
               preferredTeammateAgeRange,
+              preferredGenre,
               skillLevel,
               preferredGameMode,
               preferredRole,
               playStyle,
               flexibility,
+              behaviour,
               behavior,
               communicationPreference,
               toleranceLevel: value,
@@ -2084,10 +2084,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -2099,17 +2095,21 @@ export default function ProfileUpdateForm(props) {
               timeZone,
               city,
               region,
+              zipCode,
               postalCode,
               language,
+              languages,
               favoriteGame,
-              preferredGenre,
+              gamePreference,
               timeAvailability,
               preferredTeammateAgeRange,
+              preferredGenre,
               skillLevel,
               preferredGameMode,
               preferredRole,
               playStyle,
               flexibility,
+              behaviour,
               behavior,
               communicationPreference,
               toleranceLevel,
@@ -2140,10 +2140,6 @@ export default function ProfileUpdateForm(props) {
             const modelFields = {
               name,
               description,
-              languages,
-              zipCode,
-              gamePreference,
-              behaviour,
               username,
               bio,
               photo,
@@ -2155,17 +2151,21 @@ export default function ProfileUpdateForm(props) {
               timeZone,
               city,
               region,
+              zipCode,
               postalCode,
               language,
+              languages,
               favoriteGame,
-              preferredGenre,
+              gamePreference,
               timeAvailability,
               preferredTeammateAgeRange,
+              preferredGenre,
               skillLevel,
               preferredGameMode,
               preferredRole,
               playStyle,
               flexibility,
+              behaviour,
               behavior,
               communicationPreference,
               toleranceLevel,
