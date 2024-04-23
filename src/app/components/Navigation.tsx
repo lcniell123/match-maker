@@ -13,6 +13,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { Container } from "@/app/components/Container";
 import * as mutations from "@/graphql/mutations";
+import { RelationshipStatus } from "@/API";
+import { FriendRequestStatus } from "@/models";
 
 function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(" ");
@@ -33,11 +35,11 @@ export const Navigation = () => {
           query: queries.listFriendships,
           variables: {
             filter: {
-              friendId: {
+              id: {
                 eq: userId,
               },
-              status: {
-                eq: "pending",
+              friendshipStatus: {
+                eq: RelationshipStatus.FRIEND,
               },
             },
           },
@@ -59,7 +61,7 @@ export const Navigation = () => {
         variables: {
           input: {
             id: id,
-            status: "accepted",
+            friendshipStatus: RelationshipStatus.FRIEND,
           },
         },
       });
@@ -67,10 +69,11 @@ export const Navigation = () => {
         query: mutations.createFriendships,
         variables: {
           input: {
-            friendshipId: Math.random().toString(36).substring(2, length),
-            userId: userId,
-            friendId: friendId,
-            status: "accepted",
+            // Had to comment out section, need to revisit in case we need more data
+            // id: Math.random().toString(36).substring(2, length),
+            // userId: userId,
+            id: friendId,
+            friendshipStatus: RelationshipStatus.FRIEND,
           },
         },
       });
