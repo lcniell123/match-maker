@@ -24,8 +24,14 @@ export const Navigation = () => {
   const { signOut } = useAuthenticator();
   const [friendRequests, setFriendRequests] = useState<any[]>([]);
   const [userId, setUserId] = useState("");
-  const client = generateClient();
+  const [userName, setUserName] = useState("");
 
+  const client = generateClient();
+  const user = getCurrentUser();
+  user.then((item) => {
+    setUserName(item.username);
+  });
+  //console.log("thisisuser:", user.then((item)=>{setUserName(item.username)}));
   useEffect(() => {
     async function fetchFriendRequests() {
       try {
@@ -159,7 +165,7 @@ export const Navigation = () => {
                 <span className="sr-only">Open user menu</span>
                 <img
                   className="h-8 w-8 rounded-full"
-                  src="http://m.gettywallpapers.com/wp-content/uploads/2023/05/Aesthetic-Anime-Boy-Pfp-1536x1536.jpg"
+                  src={`https://mm-bucket191228-dev.s3.us-east-2.amazonaws.com/public/${userName}-profile-pic.jpg`}
                   alt=""
                 />
               </Menu.Button>
