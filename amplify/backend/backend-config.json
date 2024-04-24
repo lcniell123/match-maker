@@ -76,30 +76,13 @@
           "resourceName": "matchmaker1573e000"
         }
       ]
-    },
-    "AMPLIFY_storage_matchmaker664883c0_bucketName": {
-      "usedBy": [
-        {
-          "category": "storage",
-          "resourceName": "matchmaker664883c0"
-        }
-      ]
-    },
-    "AMPLIFY_storage_matchmaker664883c0_region": {
-      "usedBy": [
-        {
-          "category": "storage",
-          "resourceName": "matchmaker664883c0"
-        }
-      ]
     }
   },
   "storage": {
-    "matchmaker664883c0": {
+    "mmFriedlyName": {
       "dependsOn": [],
       "providerPlugin": "awscloudformation",
-      "service": "S3",
-      "serviceType": "imported"
+      "service": "S3"
     }
   }
 }

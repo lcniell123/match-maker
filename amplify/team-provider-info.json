@@ -22,10 +22,7 @@
           "bucketName": "matchmaker-storage",
           "region": "us-east-2"
         },
-        "matchmaker664883c0": {
-          "bucketName": "matchmaker-storage-fb200466191228-dev",
-          "region": "us-east-2"
-        }
+        "mmFriedlyName": {}
       },
       "api": {
         "matchmaker": {}

@@ -15,7 +15,7 @@ const ProfilePicture = ({ userName }) => {
 
   useEffect(() => {
     setImage(
-      `https://matchmaker-storage-fb200466191228-dev.s3.us-east-2.amazonaws.com/public/${userName}-profile-pic.jpg`
+      `https://mm-bucket191228-dev.s3.us-east-2.amazonaws.com/public/${userName}-profile-pic.jpg`
     );
   }, [userName]);
 
