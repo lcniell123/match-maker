@@ -16,9 +16,6 @@
         "matchmakera431c571": {},
         "userPoolGroups": {}
       },
-      "api": {
-        "matchmaker": {}
-      },
       "storage": {
         "s3matchmakerstoragefb200466": {},
         "matchmaker1573e000": {
@@ -29,6 +26,9 @@
           "bucketName": "matchmaker-storage-fb200466191228-dev",
           "region": "us-east-2"
         }
+      },
+      "api": {
+        "matchmaker": {}
       }
     }
   }
