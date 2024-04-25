@@ -1,14 +1,33 @@
 import React, { useEffect, useState } from "react";
 import * as mutations from "@/graphql/mutations";
 import { generateClient } from "aws-amplify/api";
+import { uploadData } from "aws-amplify/storage";
+import { getCurrentUser } from "aws-amplify/auth";
+
 // import { useRouter } from "next/navigation";
 import { useRouter } from "next/navigation";
 const EditProfile = ({ formData, handleCancelProfile }) => {
   // const router = useRouter();
 
   const [profileInfo, setProfileInfo] = useState({});
+  const [userName, setUserName] = useState("");
+  const [background, setBackground] = useState("");
   const [showInfo, setShowInfo] = useState(true);
   const client = generateClient();
+
+  useEffect(() => {
+    async function currentAuthenticatedUser() {
+      try {
+        const user = await getCurrentUser();
+        console.log("this is the user:", user);
+        setUserName(user.username);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    currentAuthenticatedUser();
+  }, []);
 
   // convert prop to state
   useEffect(() => {
@@ -40,7 +59,7 @@ const EditProfile = ({ formData, handleCancelProfile }) => {
       communicationPreference: profileInfo.communicationPreference ?? "",
       toleranceLevel: profileInfo.toleranceLevel ?? "",
       teamworkLevel: profileInfo.teamworkLevel ?? "",
-      competitivenessLevel: profileInfo.competitivenessLevel ?? ""
+      competitivenessLevel: profileInfo.competitivenessLevel ?? "",
     };
     const raw = client.graphql({
       query: mutations.updateProfile,
@@ -50,6 +69,35 @@ const EditProfile = ({ formData, handleCancelProfile }) => {
     raw.then((value) => {
       window.location.reload();
     });
+  }
+
+  async function handleImageChange(e) {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = async () => {
+      const filename = file.name;
+      try {
+        const result = await uploadData({
+          key: `${userName}-background-pic.jpg`,
+          data: file,
+          options: {
+            accessLevel: "guest", // defaults to `guest` but can be 'private' | 'protected' | 'guest'
+          },
+        }).result;
+        console.log("Succeeded: ", result);
+        window.location.reload();
+      } catch (error) {
+        console.log("Error : ", error);
+      }
+    };
+
+    if (file) {
+      reader.readAsDataURL(file);
+    } else {
+      setImage(null); // Reset image state if no file is chosen
+      localStorage.removeItem("profilePicture"); // Remove image URL from local storage
+    }
   }
 
   return (
@@ -123,8 +171,8 @@ const EditProfile = ({ formData, handleCancelProfile }) => {
                     }}
                     className="border-b border-gray-300 p-2 w-full focus:outline-none"
                   >
-                  <option value="select">Select Language</option>
-                  <option value="English">English</option>
+                    <option value="select">Select Language</option>
+                    <option value="English">English</option>
                     <option value="Korean">Korean</option>
                     <option value="Japanese">Japanese</option>
                     <option value="Chinese">Chinese</option>
@@ -175,8 +223,8 @@ const EditProfile = ({ formData, handleCancelProfile }) => {
                     }}
                     className="border-b border-gray-300 p-2 w-full focus:outline-none"
                   >
-                  <option value="select">Select Country</option>
-                  <option value="United States">United States</option>
+                    <option value="select">Select Country</option>
+                    <option value="United States">United States</option>
                     <option value="South Korea">South Korea</option>
                     <option value="Japan">Japan</option>
                     <option value="China">China</option>
@@ -233,7 +281,7 @@ const EditProfile = ({ formData, handleCancelProfile }) => {
                     <option value="EST">EST</option>
                     <option value="PST Korea">PST</option>
                     <option value="CT">CT</option>
-                    </select>
+                  </select>
                 </div>
                 <div className="mb-6">
                   <label
@@ -255,15 +303,21 @@ const EditProfile = ({ formData, handleCancelProfile }) => {
                     }}
                     className="border-b border-gray-300 p-2 w-full focus:outline-none"
                   >
-                   <option value="select">Select Game</option>
+                    <option value="select">Select Game</option>
                     <option value="Call of Duty:">Call of Duty:</option>
                     <option value="Overwatch">Overwatch</option>
-                    <option value="The Witcher 3: Wild Hunt">The Witcher 3: Wild Hunt</option>
+                    <option value="The Witcher 3: Wild Hunt">
+                      The Witcher 3: Wild Hunt
+                    </option>
                     <option value="Fortnite">Fortnite</option>
                     <option value="Apex Legends">Apex Legends</option>
                     <option value="FIFA series">FIFA series</option>
-                    <option value="Red Dead Redemption 2">Red Dead Redemption 2</option>
-                    <option value="Assassin's Creed Valhalla:">Assassin's Creed Valhalla:</option>
+                    <option value="Red Dead Redemption 2">
+                      Red Dead Redemption 2
+                    </option>
+                    <option value="Assassin's Creed Valhalla:">
+                      Assassin's Creed Valhalla:
+                    </option>
                     <option value="Final Fantasy XIV">Final Fantasy XIV</option>
                     <option value="Rocket League:">Rocket League:</option>
                   </select>
@@ -341,12 +395,16 @@ const EditProfile = ({ formData, handleCancelProfile }) => {
                     }}
                     className="border-b border-gray-300 p-2 w-full focus:outline-none"
                   >
-                   <option value="select">Select Genre</option>
+                    <option value="select">Select Genre</option>
                     <option value="Action/Adventure:">Action/Adventure</option>
-                    <option value="Role-Playing Game (RPG)">Role-Playing Game (RPG)</option>
+                    <option value="Role-Playing Game (RPG)">
+                      Role-Playing Game (RPG)
+                    </option>
                     <option value="Sports">Sports</option>
                     <option value="Strategy">Strategy</option>
-                    <option value="First-Person Shooter (FPS)">First-Person Shooter (FPS)</option>
+                    <option value="First-Person Shooter (FPS)">
+                      First-Person Shooter (FPS)
+                    </option>
                     <option value="Platformer">Platformer</option>
                   </select>
                 </div>
@@ -370,10 +428,14 @@ const EditProfile = ({ formData, handleCancelProfile }) => {
                     }}
                     className="border-b border-gray-300 p-2 w-full focus:outline-none"
                   >
-                   <option value="select">Select Time</option>
-                    <option value="Weekends Afternoon">Weekends Afternoon</option>
+                    <option value="select">Select Time</option>
+                    <option value="Weekends Afternoon">
+                      Weekends Afternoon
+                    </option>
                     <option value="Weekends Evening">Weekends Evening</option>
-                    <option value="Weekdays Afternoon">Weekdays Afternoon</option>
+                    <option value="Weekdays Afternoon">
+                      Weekdays Afternoon
+                    </option>
                     <option value="Weekdays Evening">Weekdays Evening</option>
                   </select>
                 </div>
@@ -397,12 +459,12 @@ const EditProfile = ({ formData, handleCancelProfile }) => {
                     }}
                     className="border-b border-gray-300 p-2 w-full focus:outline-none"
                   >
-                  <option value="select">Select Teammates Age Range</option>
-                  <option value="18-25">18 - 25</option>
-                  <option value="26-35">26 - 35</option>
-                  <option value="36-45">36 - 45</option>
-                  <option value="46-55">46 - 55</option>
-                  <option value="56+">56+</option>
+                    <option value="select">Select Teammates Age Range</option>
+                    <option value="18-25">18 - 25</option>
+                    <option value="26-35">26 - 35</option>
+                    <option value="36-45">36 - 45</option>
+                    <option value="46-55">46 - 55</option>
+                    <option value="56+">56+</option>
                   </select>
                 </div>
                 <div className="mb-6">
@@ -425,14 +487,14 @@ const EditProfile = ({ formData, handleCancelProfile }) => {
                     }}
                     className="border-b border-gray-300 p-2 w-full focus:outline-none"
                   >
-                  <option value="">Select Game Mode</option>
-                  <option value="Single Player">Single Player</option>
-                  <option value="Multiplayer">Multiplayer</option>
-                  <option value="Cooperative">Cooperative</option>
-                  <option value="Competitive">Competitive</option>
-                  <option value="Battle Royale">Battle Royale</option>
-                  <option value="Free for All">Free for All</option>
-                </select>
+                    <option value="">Select Game Mode</option>
+                    <option value="Single Player">Single Player</option>
+                    <option value="Multiplayer">Multiplayer</option>
+                    <option value="Cooperative">Cooperative</option>
+                    <option value="Competitive">Competitive</option>
+                    <option value="Battle Royale">Battle Royale</option>
+                    <option value="Free for All">Free for All</option>
+                  </select>
                 </div>
                 <div className="mb-6">
                   <label
@@ -454,13 +516,15 @@ const EditProfile = ({ formData, handleCancelProfile }) => {
                     }}
                     className="border-b border-gray-300 p-2 w-full focus:outline-none"
                   >
-                      <option value="">Select Preferred Role</option>
-                      <option value="Tank">Tank</option>
-                      <option value="DPS (Damage Per Second)">DPS (Damage Per Second)</option>
-                      <option value="Support/Healer">Support/Healer</option>
-                      <option value="Bruiser/Off-Tank">Bruiser/Off-Tank</option>
-                      <option value="Carry/Assassin">Carry/Assassin</option>
-                      <option value="Utility">Utility</option>
+                    <option value="">Select Preferred Role</option>
+                    <option value="Tank">Tank</option>
+                    <option value="DPS (Damage Per Second)">
+                      DPS (Damage Per Second)
+                    </option>
+                    <option value="Support/Healer">Support/Healer</option>
+                    <option value="Bruiser/Off-Tank">Bruiser/Off-Tank</option>
+                    <option value="Carry/Assassin">Carry/Assassin</option>
+                    <option value="Utility">Utility</option>
                   </select>
                 </div>
                 <div className="mb-6">
@@ -482,12 +546,12 @@ const EditProfile = ({ formData, handleCancelProfile }) => {
                       }));
                     }}
                     className="border-b border-gray-300 p-2 w-full focus:outline-none"
-                  > 
-                  <option value="">Select Flexibility Level</option>
-                  <option value="Very Flexible">Very Flexible</option>
-                  <option value="Flexible">Flexible</option>
-                  <option value="Moderate">Moderate</option>
-                  <option value="Inflexible">Inflexible</option>
+                  >
+                    <option value="">Select Flexibility Level</option>
+                    <option value="Very Flexible">Very Flexible</option>
+                    <option value="Flexible">Flexible</option>
+                    <option value="Moderate">Moderate</option>
+                    <option value="Inflexible">Inflexible</option>
                   </select>
                 </div>
                 <div className="mb-6">
@@ -510,10 +574,10 @@ const EditProfile = ({ formData, handleCancelProfile }) => {
                     }}
                     className="border-b border-gray-300 p-2 w-full focus:outline-none"
                   >
-                  <option value="">Select Communication Preference</option>
-                  <option value="Voice Chat">Voice Chat</option>
-                  <option value="Text Chat">Text Chat</option>
-                  <option value="No Communication">No Communication</option>
+                    <option value="">Select Communication Preference</option>
+                    <option value="Voice Chat">Voice Chat</option>
+                    <option value="Text Chat">Text Chat</option>
+                    <option value="No Communication">No Communication</option>
                   </select>
                 </div>
                 <div className="mb-6">
@@ -536,11 +600,10 @@ const EditProfile = ({ formData, handleCancelProfile }) => {
                     }}
                     className="border-b border-gray-300 p-2 w-full focus:outline-none"
                   >
-                   <option value="select">Select Tolerance Level</option>
+                    <option value="select">Select Tolerance Level</option>
                     <option value="Low">Low</option>
                     <option value="Medium">Medium</option>
                     <option value="High">High</option>
-                
                   </select>
                 </div>
                 <div className="mb-6">
@@ -563,13 +626,12 @@ const EditProfile = ({ formData, handleCancelProfile }) => {
                     }}
                     className="border-b border-gray-300 p-2 w-full focus:outline-none"
                   >
-                  <option value="select">Select Teamwork Level</option>
-                  <option value="Low">Low</option>
-                  <option value="Medium">Medium</option>
-                  <option value="High">High</option>
+                    <option value="select">Select Teamwork Level</option>
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
                   </select>
                 </div>
-               
                 <div className="mb-6">
                   <label
                     htmlFor="competitivenessLevel"
@@ -590,14 +652,12 @@ const EditProfile = ({ formData, handleCancelProfile }) => {
                     }}
                     className="border-b border-gray-300 p-2 w-full focus:outline-none"
                   >
-                  <option value="select">Select Competitiveness Level</option>
-                  <option value="Low">Low</option>
-                  <option value="Medium">Medium</option>
-                  <option value="High">High</option>
+                    <option value="select">Select Competitiveness Level</option>
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
                   </select>
                 </div>
-
-
                 <div className="mb-6">
                   <label
                     htmlFor="playStyle"
@@ -631,6 +691,15 @@ const EditProfile = ({ formData, handleCancelProfile }) => {
                     <option value="casual">Casual/Relaxed</option>
                   </select>
                 </div>{" "}
+                <div className="mb-6">
+                  <label
+                    htmlFor="playStyle"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
+                    Background Image:
+                    <input type="file" onChange={handleImageChange} />
+                  </label>
+                </div>
                 <div className="flex justify-end">
                   <button
                     onClick={updateData}
