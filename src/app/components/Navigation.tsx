@@ -15,6 +15,7 @@ import { Container } from "@/app/components/Container";
 import * as mutations from "@/graphql/mutations";
 import { RelationshipStatus } from "@/API";
 import { FriendRequestStatus } from "@/models";
+import { getUrl } from "aws-amplify/storage";
 
 function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(" ");
@@ -25,6 +26,9 @@ export const Navigation = () => {
   const [friendRequests, setFriendRequests] = useState<any[]>([]);
   const [userId, setUserId] = useState("");
   const [userName, setUserName] = useState("");
+  const [image, setImage] = useState(
+    "https://mm-bucket191228-dev.s3.us-east-2.amazonaws.com/public/default-profile-pic.jpg"
+  );
 
   const client = generateClient();
   const user = getCurrentUser();
@@ -87,6 +91,22 @@ export const Navigation = () => {
       console.error("Error accepting friend request:", error);
     }
   }
+  async function checkFileExists() {
+    if (userName.length > 0) {
+      const url = await getUrl({
+        key: `${userName}-profile-pic.jpg`,
+        options: {
+          validateObjectExistence: true,
+        },
+      });
+      if (url.url.pathname) {
+        setImage(`${userName}-profile-pic.jpg`);
+      }
+      console.log(url);
+    }
+  }
+
+  checkFileExists();
 
   function rejectFriendRequest(friendId: any) {}
 
@@ -165,7 +185,7 @@ export const Navigation = () => {
                 <span className="sr-only">Open user menu</span>
                 <img
                   className="h-8 w-8 rounded-full"
-                  src={`https://mm-bucket191228-dev.s3.us-east-2.amazonaws.com/public/${userName}-profile-pic.jpg`}
+                  src={`https://mm-bucket191228-dev.s3.us-east-2.amazonaws.com/public/${image}`}
                   alt=""
                 />
               </Menu.Button>

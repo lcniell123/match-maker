@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import ProfilePicture from "@/app/components/profiles/profilePicture";
 import { getCurrentUser } from "aws-amplify/auth";
+import { list, getUrl } from "aws-amplify/storage";
 
 const CoverPhoto: React.FC = () => {
   const [userName, setUserName] = useState("");
+  const [hasBg, setHasBg] = useState(false);
+  const [bgFileName, setBgFileName] = useState("default-bg.jpg");
 
   async function currentAuthenticatedUser() {
     try {
@@ -15,10 +18,29 @@ const CoverPhoto: React.FC = () => {
   }
   currentAuthenticatedUser();
 
+  //create template name if no coverphoto is available
+  async function checkFileExists() {
+    if (userName.length > 0) {
+      const url = await getUrl({
+        key: `${userName}-background-pic.jpg`,
+        options: {
+          validateObjectExistence: true,
+        },
+      });
+      if (url.url.pathname) {
+        setBgFileName(`${userName}-background-pic.jpg`);
+      }
+    }
+  }
+
+  const files = checkFileExists();
+  files.then((file) => {
+    console.log(file);
+  });
   return (
     <div className="relative h-64 w-full">
       <img
-        src={`https://mm-bucket191228-dev.s3.us-east-2.amazonaws.com/public/${userName}-background-pic.jpg`}
+        src={`https://mm-bucket191228-dev.s3.us-east-2.amazonaws.com/public/${bgFileName}`}
         alt="Cover Photo"
         className="w-full h-full object-cover"
       />

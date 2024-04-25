@@ -1,23 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { uploadData } from "aws-amplify/storage";
 import { getCurrentUser } from "aws-amplify/auth";
+import { getUrl } from "aws-amplify/storage";
 
 const ProfilePicture = ({ userName }) => {
-  console.log("getCurrentUser: ", getCurrentUser);
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState(
+    "https://mm-bucket191228-dev.s3.us-east-2.amazonaws.com/public/default-profile-pic.jpg"
+  );
 
-  useEffect(() => {
-    const storedImage = localStorage.getItem("profilePicture");
-    if (storedImage) {
-      setImage(storedImage);
+  async function checkFileExists() {
+    if (userName.length > 0) {
+      const url = await getUrl({
+        key: `${userName}-profile-pic.jpg`,
+        options: {
+          validateObjectExistence: true,
+        },
+      });
+      if (url.url.pathname) {
+        setImage(
+          `https://mm-bucket191228-dev.s3.us-east-2.amazonaws.com/public/${userName}-profile-pic.jpg`
+        );
+      }
     }
-  }, []);
+  }
 
-  useEffect(() => {
-    setImage(
-      `https://mm-bucket191228-dev.s3.us-east-2.amazonaws.com/public/${userName}-profile-pic.jpg`
-    );
-  }, [userName]);
+  checkFileExists();
 
   async function handleImageChange(e) {
     // alert("clicked");
@@ -34,7 +41,6 @@ const ProfilePicture = ({ userName }) => {
             accessLevel: "guest", // defaults to `guest` but can be 'private' | 'protected' | 'guest'
           },
         }).result;
-        console.log("Succeeded: ", result);
         window.location.reload();
       } catch (error) {
         console.log("Error : ", error);

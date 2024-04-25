@@ -57,33 +57,8 @@ export default function Profiles(profile: AuthUser | any) {
 
   const [editingProfile, setEditingProfile] = useState(false);
   const [userProfilePicture, setUserProfilePicture] = useState(null);
-  //const [formData, setFormData] = useState({
-  /* initial form data */
-  //s});
+
   const [editingPicture, setEditingPicture] = useState(false);
-
-  // const handleEditProfile = () => {
-  //   setEditingProfile(true);
-  // };
-
-  // const handleSaveProfile = () => {
-  //   setEditingProfile(false);
-  //   //updateProfile();
-  //   // Logic to save profile changes
-  // };
-
-  // const handleCancelEdit = () => {
-  //   setEditingProfile(false);
-  //   // Revert changes to the user's original profile data
-  // };
-
-  // const handleChange = (e: { target: { name: any; value: any } }) => {
-  //   const { name, value } = e.target;
-  //   setFormData((prevData) => ({
-  //     ...prevData,
-  //     [name]: value,
-  //   }));
-  // };
 
   // Load list of profiles
   const listProfile = client.graphql({
