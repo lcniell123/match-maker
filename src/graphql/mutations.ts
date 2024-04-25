@@ -8,168 +8,329 @@ type GeneratedMutation<InputType, OutputType> = string & {
   __generatedMutationOutput: OutputType;
 };
 
-export const createProfile = /* GraphQL */ `mutation CreateProfile(
-  $input: CreateProfileInput!
-  $condition: ModelProfileConditionInput
+export const createFriendRequest = /* GraphQL */ `mutation CreateFriendRequest(
+  $input: CreateFriendRequestInput!
+  $condition: ModelFriendRequestConditionInput
 ) {
-  createProfile(input: $input, condition: $condition) {
+  createFriendRequest(input: $input, condition: $condition) {
     id
-    name
-    description
-    username
-    bio
-    photo
-    coverPhoto
-    firstName
-    lastName
-    age
-    country
-    timeZone
-    city
-    region
-    zipCode
-    postalCode
-    language
-    languages
-    favoriteGame
-    gamePreference
-    timeAvailability
-    preferredTeammateAgeRange
-    preferredGenre
-    skillLevel
-    preferredGameMode
-    preferredRole
-    playStyle
-    flexibility
-    behaviour
-    behavior
-    communicationPreference
-    toleranceLevel
-    teamworkLevel
-    competitivenessLevel
-    groupsID
+    status
+    sender {
+      id
+      name
+      description
+      languages
+      zipCode
+      gamePreference
+      behaviour
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      postalCode
+      language
+      favoriteGame
+      preferredGenre
+      timeAvailability
+      preferredTeammateAgeRange
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      matchesMatchesId
+      matchesRejectedMatchesId
+      __typename
+    }
+    receiver {
+      id
+      name
+      description
+      languages
+      zipCode
+      gamePreference
+      behaviour
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      postalCode
+      language
+      favoriteGame
+      preferredGenre
+      timeAvailability
+      preferredTeammateAgeRange
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      matchesMatchesId
+      matchesRejectedMatchesId
+      __typename
+    }
     createdAt
     updatedAt
-    owner
+    friendRequestSenderId
+    friendRequestReceiverId
     __typename
   }
 }
 ` as GeneratedMutation<
-  APITypes.CreateProfileMutationVariables,
-  APITypes.CreateProfileMutation
+  APITypes.CreateFriendRequestMutationVariables,
+  APITypes.CreateFriendRequestMutation
 >;
-export const updateProfile = /* GraphQL */ `mutation UpdateProfile(
-  $input: UpdateProfileInput!
-  $condition: ModelProfileConditionInput
+export const updateFriendRequest = /* GraphQL */ `mutation UpdateFriendRequest(
+  $input: UpdateFriendRequestInput!
+  $condition: ModelFriendRequestConditionInput
 ) {
-  updateProfile(input: $input, condition: $condition) {
+  updateFriendRequest(input: $input, condition: $condition) {
     id
-    name
-    description
-    username
-    bio
-    photo
-    coverPhoto
-    firstName
-    lastName
-    age
-    country
-    timeZone
-    city
-    region
-    zipCode
-    postalCode
-    language
-    languages
-    favoriteGame
-    gamePreference
-    timeAvailability
-    preferredTeammateAgeRange
-    preferredGenre
-    skillLevel
-    preferredGameMode
-    preferredRole
-    playStyle
-    flexibility
-    behaviour
-    behavior
-    communicationPreference
-    toleranceLevel
-    teamworkLevel
-    competitivenessLevel
-    groupsID
+    status
+    sender {
+      id
+      name
+      description
+      languages
+      zipCode
+      gamePreference
+      behaviour
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      postalCode
+      language
+      favoriteGame
+      preferredGenre
+      timeAvailability
+      preferredTeammateAgeRange
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      matchesMatchesId
+      matchesRejectedMatchesId
+      __typename
+    }
+    receiver {
+      id
+      name
+      description
+      languages
+      zipCode
+      gamePreference
+      behaviour
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      postalCode
+      language
+      favoriteGame
+      preferredGenre
+      timeAvailability
+      preferredTeammateAgeRange
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      matchesMatchesId
+      matchesRejectedMatchesId
+      __typename
+    }
     createdAt
     updatedAt
-    owner
+    friendRequestSenderId
+    friendRequestReceiverId
     __typename
   }
 }
 ` as GeneratedMutation<
-  APITypes.UpdateProfileMutationVariables,
-  APITypes.UpdateProfileMutation
+  APITypes.UpdateFriendRequestMutationVariables,
+  APITypes.UpdateFriendRequestMutation
 >;
-export const deleteProfile = /* GraphQL */ `mutation DeleteProfile(
-  $input: DeleteProfileInput!
-  $condition: ModelProfileConditionInput
+export const deleteFriendRequest = /* GraphQL */ `mutation DeleteFriendRequest(
+  $input: DeleteFriendRequestInput!
+  $condition: ModelFriendRequestConditionInput
 ) {
-  deleteProfile(input: $input, condition: $condition) {
+  deleteFriendRequest(input: $input, condition: $condition) {
     id
-    name
-    description
-    username
-    bio
-    photo
-    coverPhoto
-    firstName
-    lastName
-    age
-    country
-    timeZone
-    city
-    region
-    zipCode
-    postalCode
-    language
-    languages
-    favoriteGame
-    gamePreference
-    timeAvailability
-    preferredTeammateAgeRange
-    preferredGenre
-    skillLevel
-    preferredGameMode
-    preferredRole
-    playStyle
-    flexibility
-    behaviour
-    behavior
-    communicationPreference
-    toleranceLevel
-    teamworkLevel
-    competitivenessLevel
-    groupsID
+    status
+    sender {
+      id
+      name
+      description
+      languages
+      zipCode
+      gamePreference
+      behaviour
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      postalCode
+      language
+      favoriteGame
+      preferredGenre
+      timeAvailability
+      preferredTeammateAgeRange
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      matchesMatchesId
+      matchesRejectedMatchesId
+      __typename
+    }
+    receiver {
+      id
+      name
+      description
+      languages
+      zipCode
+      gamePreference
+      behaviour
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      postalCode
+      language
+      favoriteGame
+      preferredGenre
+      timeAvailability
+      preferredTeammateAgeRange
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      matchesMatchesId
+      matchesRejectedMatchesId
+      __typename
+    }
     createdAt
     updatedAt
-    owner
+    friendRequestSenderId
+    friendRequestReceiverId
     __typename
   }
 }
 ` as GeneratedMutation<
-  APITypes.DeleteProfileMutationVariables,
-  APITypes.DeleteProfileMutation
+  APITypes.DeleteFriendRequestMutationVariables,
+  APITypes.DeleteFriendRequestMutation
 >;
-export const createFriendships = /* GraphQL */ `mutation CreateFriendships(
-  $input: CreateFriendshipsInput!
-  $condition: ModelFriendshipsConditionInput
+export const createNotification = /* GraphQL */ `mutation CreateNotification(
+  $input: CreateNotificationInput!
+  $condition: ModelNotificationConditionInput
 ) {
-  createFriendships(input: $input, condition: $condition) {
+  createNotification(input: $input, condition: $condition) {
     id
-    friendshipStatus
-    updatedBy
-    firstUser {
+    type
+    content
+    read
+    target {
       id
       name
       description
+      languages
+      zipCode
+      gamePreference
+      behaviour
       username
       bio
       photo
@@ -181,21 +342,17 @@ export const createFriendships = /* GraphQL */ `mutation CreateFriendships(
       timeZone
       city
       region
-      zipCode
       postalCode
       language
-      languages
       favoriteGame
-      gamePreference
+      preferredGenre
       timeAvailability
       preferredTeammateAgeRange
-      preferredGenre
       skillLevel
       preferredGameMode
       preferredRole
       playStyle
       flexibility
-      behaviour
       behavior
       communicationPreference
       toleranceLevel
@@ -204,13 +361,18 @@ export const createFriendships = /* GraphQL */ `mutation CreateFriendships(
       groupsID
       createdAt
       updatedAt
-      owner
+      matchesMatchesId
+      matchesRejectedMatchesId
       __typename
     }
-    secondUser {
+    originator {
       id
       name
       description
+      languages
+      zipCode
+      gamePreference
+      behaviour
       username
       bio
       photo
@@ -222,21 +384,17 @@ export const createFriendships = /* GraphQL */ `mutation CreateFriendships(
       timeZone
       city
       region
-      zipCode
       postalCode
       language
-      languages
       favoriteGame
-      gamePreference
+      preferredGenre
       timeAvailability
       preferredTeammateAgeRange
-      preferredGenre
       skillLevel
       preferredGameMode
       preferredRole
       playStyle
       flexibility
-      behaviour
       behavior
       communicationPreference
       toleranceLevel
@@ -245,33 +403,38 @@ export const createFriendships = /* GraphQL */ `mutation CreateFriendships(
       groupsID
       createdAt
       updatedAt
-      owner
+      matchesMatchesId
+      matchesRejectedMatchesId
       __typename
     }
     createdAt
     updatedAt
-    friendshipsFirstUserId
-    friendshipsSecondUserId
-    owner
+    notificationTargetId
+    notificationOriginatorId
     __typename
   }
 }
 ` as GeneratedMutation<
-  APITypes.CreateFriendshipsMutationVariables,
-  APITypes.CreateFriendshipsMutation
+  APITypes.CreateNotificationMutationVariables,
+  APITypes.CreateNotificationMutation
 >;
-export const updateFriendships = /* GraphQL */ `mutation UpdateFriendships(
-  $input: UpdateFriendshipsInput!
-  $condition: ModelFriendshipsConditionInput
+export const updateNotification = /* GraphQL */ `mutation UpdateNotification(
+  $input: UpdateNotificationInput!
+  $condition: ModelNotificationConditionInput
 ) {
-  updateFriendships(input: $input, condition: $condition) {
+  updateNotification(input: $input, condition: $condition) {
     id
-    friendshipStatus
-    updatedBy
-    firstUser {
+    type
+    content
+    read
+    target {
       id
       name
       description
+      languages
+      zipCode
+      gamePreference
+      behaviour
       username
       bio
       photo
@@ -283,21 +446,17 @@ export const updateFriendships = /* GraphQL */ `mutation UpdateFriendships(
       timeZone
       city
       region
-      zipCode
       postalCode
       language
-      languages
       favoriteGame
-      gamePreference
+      preferredGenre
       timeAvailability
       preferredTeammateAgeRange
-      preferredGenre
       skillLevel
       preferredGameMode
       preferredRole
       playStyle
       flexibility
-      behaviour
       behavior
       communicationPreference
       toleranceLevel
@@ -306,13 +465,18 @@ export const updateFriendships = /* GraphQL */ `mutation UpdateFriendships(
       groupsID
       createdAt
       updatedAt
-      owner
+      matchesMatchesId
+      matchesRejectedMatchesId
       __typename
     }
-    secondUser {
+    originator {
       id
       name
       description
+      languages
+      zipCode
+      gamePreference
+      behaviour
       username
       bio
       photo
@@ -324,21 +488,17 @@ export const updateFriendships = /* GraphQL */ `mutation UpdateFriendships(
       timeZone
       city
       region
-      zipCode
       postalCode
       language
-      languages
       favoriteGame
-      gamePreference
+      preferredGenre
       timeAvailability
       preferredTeammateAgeRange
-      preferredGenre
       skillLevel
       preferredGameMode
       preferredRole
       playStyle
       flexibility
-      behaviour
       behavior
       communicationPreference
       toleranceLevel
@@ -347,33 +507,38 @@ export const updateFriendships = /* GraphQL */ `mutation UpdateFriendships(
       groupsID
       createdAt
       updatedAt
-      owner
+      matchesMatchesId
+      matchesRejectedMatchesId
       __typename
     }
     createdAt
     updatedAt
-    friendshipsFirstUserId
-    friendshipsSecondUserId
-    owner
+    notificationTargetId
+    notificationOriginatorId
     __typename
   }
 }
 ` as GeneratedMutation<
-  APITypes.UpdateFriendshipsMutationVariables,
-  APITypes.UpdateFriendshipsMutation
+  APITypes.UpdateNotificationMutationVariables,
+  APITypes.UpdateNotificationMutation
 >;
-export const deleteFriendships = /* GraphQL */ `mutation DeleteFriendships(
-  $input: DeleteFriendshipsInput!
-  $condition: ModelFriendshipsConditionInput
+export const deleteNotification = /* GraphQL */ `mutation DeleteNotification(
+  $input: DeleteNotificationInput!
+  $condition: ModelNotificationConditionInput
 ) {
-  deleteFriendships(input: $input, condition: $condition) {
+  deleteNotification(input: $input, condition: $condition) {
     id
-    friendshipStatus
-    updatedBy
-    firstUser {
+    type
+    content
+    read
+    target {
       id
       name
       description
+      languages
+      zipCode
+      gamePreference
+      behaviour
       username
       bio
       photo
@@ -385,21 +550,17 @@ export const deleteFriendships = /* GraphQL */ `mutation DeleteFriendships(
       timeZone
       city
       region
-      zipCode
       postalCode
       language
-      languages
       favoriteGame
-      gamePreference
+      preferredGenre
       timeAvailability
       preferredTeammateAgeRange
-      preferredGenre
       skillLevel
       preferredGameMode
       preferredRole
       playStyle
       flexibility
-      behaviour
       behavior
       communicationPreference
       toleranceLevel
@@ -408,13 +569,18 @@ export const deleteFriendships = /* GraphQL */ `mutation DeleteFriendships(
       groupsID
       createdAt
       updatedAt
-      owner
+      matchesMatchesId
+      matchesRejectedMatchesId
       __typename
     }
-    secondUser {
+    originator {
       id
       name
       description
+      languages
+      zipCode
+      gamePreference
+      behaviour
       username
       bio
       photo
@@ -426,21 +592,17 @@ export const deleteFriendships = /* GraphQL */ `mutation DeleteFriendships(
       timeZone
       city
       region
-      zipCode
       postalCode
       language
-      languages
       favoriteGame
-      gamePreference
+      preferredGenre
       timeAvailability
       preferredTeammateAgeRange
-      preferredGenre
       skillLevel
       preferredGameMode
       preferredRole
       playStyle
       flexibility
-      behaviour
       behavior
       communicationPreference
       toleranceLevel
@@ -449,20 +611,230 @@ export const deleteFriendships = /* GraphQL */ `mutation DeleteFriendships(
       groupsID
       createdAt
       updatedAt
-      owner
+      matchesMatchesId
+      matchesRejectedMatchesId
       __typename
     }
     createdAt
     updatedAt
-    friendshipsFirstUserId
-    friendshipsSecondUserId
-    owner
+    notificationTargetId
+    notificationOriginatorId
     __typename
   }
 }
 ` as GeneratedMutation<
-  APITypes.DeleteFriendshipsMutationVariables,
-  APITypes.DeleteFriendshipsMutation
+  APITypes.DeleteNotificationMutationVariables,
+  APITypes.DeleteNotificationMutation
+>;
+export const createMemberships = /* GraphQL */ `mutation CreateMemberships(
+  $input: CreateMembershipsInput!
+  $condition: ModelMembershipsConditionInput
+) {
+  createMemberships(input: $input, condition: $condition) {
+    id
+    group {
+      id
+      description
+      name
+      image
+      createdAt
+      updatedAt
+      groupsCreatedById
+      __typename
+    }
+    user {
+      id
+      name
+      description
+      languages
+      zipCode
+      gamePreference
+      behaviour
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      postalCode
+      language
+      favoriteGame
+      preferredGenre
+      timeAvailability
+      preferredTeammateAgeRange
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      matchesMatchesId
+      matchesRejectedMatchesId
+      __typename
+    }
+    status
+    createdAt
+    updatedAt
+    membershipsGroupId
+    membershipsUserId
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateMembershipsMutationVariables,
+  APITypes.CreateMembershipsMutation
+>;
+export const updateMemberships = /* GraphQL */ `mutation UpdateMemberships(
+  $input: UpdateMembershipsInput!
+  $condition: ModelMembershipsConditionInput
+) {
+  updateMemberships(input: $input, condition: $condition) {
+    id
+    group {
+      id
+      description
+      name
+      image
+      createdAt
+      updatedAt
+      groupsCreatedById
+      __typename
+    }
+    user {
+      id
+      name
+      description
+      languages
+      zipCode
+      gamePreference
+      behaviour
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      postalCode
+      language
+      favoriteGame
+      preferredGenre
+      timeAvailability
+      preferredTeammateAgeRange
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      matchesMatchesId
+      matchesRejectedMatchesId
+      __typename
+    }
+    status
+    createdAt
+    updatedAt
+    membershipsGroupId
+    membershipsUserId
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateMembershipsMutationVariables,
+  APITypes.UpdateMembershipsMutation
+>;
+export const deleteMemberships = /* GraphQL */ `mutation DeleteMemberships(
+  $input: DeleteMembershipsInput!
+  $condition: ModelMembershipsConditionInput
+) {
+  deleteMemberships(input: $input, condition: $condition) {
+    id
+    group {
+      id
+      description
+      name
+      image
+      createdAt
+      updatedAt
+      groupsCreatedById
+      __typename
+    }
+    user {
+      id
+      name
+      description
+      languages
+      zipCode
+      gamePreference
+      behaviour
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      postalCode
+      language
+      favoriteGame
+      preferredGenre
+      timeAvailability
+      preferredTeammateAgeRange
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      matchesMatchesId
+      matchesRejectedMatchesId
+      __typename
+    }
+    status
+    createdAt
+    updatedAt
+    membershipsGroupId
+    membershipsUserId
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteMembershipsMutationVariables,
+  APITypes.DeleteMembershipsMutation
 >;
 export const createGroups = /* GraphQL */ `mutation CreateGroups(
   $input: CreateGroupsInput!
@@ -477,6 +849,10 @@ export const createGroups = /* GraphQL */ `mutation CreateGroups(
       id
       name
       description
+      languages
+      zipCode
+      gamePreference
+      behaviour
       username
       bio
       photo
@@ -488,21 +864,17 @@ export const createGroups = /* GraphQL */ `mutation CreateGroups(
       timeZone
       city
       region
-      zipCode
       postalCode
       language
-      languages
       favoriteGame
-      gamePreference
+      preferredGenre
       timeAvailability
       preferredTeammateAgeRange
-      preferredGenre
       skillLevel
       preferredGameMode
       preferredRole
       playStyle
       flexibility
-      behaviour
       behavior
       communicationPreference
       toleranceLevel
@@ -511,7 +883,8 @@ export const createGroups = /* GraphQL */ `mutation CreateGroups(
       groupsID
       createdAt
       updatedAt
-      owner
+      matchesMatchesId
+      matchesRejectedMatchesId
       __typename
     }
     members {
@@ -521,7 +894,6 @@ export const createGroups = /* GraphQL */ `mutation CreateGroups(
     createdAt
     updatedAt
     groupsCreatedById
-    owner
     __typename
   }
 }
@@ -542,6 +914,10 @@ export const updateGroups = /* GraphQL */ `mutation UpdateGroups(
       id
       name
       description
+      languages
+      zipCode
+      gamePreference
+      behaviour
       username
       bio
       photo
@@ -553,21 +929,17 @@ export const updateGroups = /* GraphQL */ `mutation UpdateGroups(
       timeZone
       city
       region
-      zipCode
       postalCode
       language
-      languages
       favoriteGame
-      gamePreference
+      preferredGenre
       timeAvailability
       preferredTeammateAgeRange
-      preferredGenre
       skillLevel
       preferredGameMode
       preferredRole
       playStyle
       flexibility
-      behaviour
       behavior
       communicationPreference
       toleranceLevel
@@ -576,7 +948,8 @@ export const updateGroups = /* GraphQL */ `mutation UpdateGroups(
       groupsID
       createdAt
       updatedAt
-      owner
+      matchesMatchesId
+      matchesRejectedMatchesId
       __typename
     }
     members {
@@ -586,7 +959,6 @@ export const updateGroups = /* GraphQL */ `mutation UpdateGroups(
     createdAt
     updatedAt
     groupsCreatedById
-    owner
     __typename
   }
 }
@@ -607,6 +979,10 @@ export const deleteGroups = /* GraphQL */ `mutation DeleteGroups(
       id
       name
       description
+      languages
+      zipCode
+      gamePreference
+      behaviour
       username
       bio
       photo
@@ -618,21 +994,17 @@ export const deleteGroups = /* GraphQL */ `mutation DeleteGroups(
       timeZone
       city
       region
-      zipCode
       postalCode
       language
-      languages
       favoriteGame
-      gamePreference
+      preferredGenre
       timeAvailability
       preferredTeammateAgeRange
-      preferredGenre
       skillLevel
       preferredGameMode
       preferredRole
       playStyle
       flexibility
-      behaviour
       behavior
       communicationPreference
       toleranceLevel
@@ -641,7 +1013,8 @@ export const deleteGroups = /* GraphQL */ `mutation DeleteGroups(
       groupsID
       createdAt
       updatedAt
-      owner
+      matchesMatchesId
+      matchesRejectedMatchesId
       __typename
     }
     members {
@@ -651,7 +1024,6 @@ export const deleteGroups = /* GraphQL */ `mutation DeleteGroups(
     createdAt
     updatedAt
     groupsCreatedById
-    owner
     __typename
   }
 }
@@ -659,57 +1031,663 @@ export const deleteGroups = /* GraphQL */ `mutation DeleteGroups(
   APITypes.DeleteGroupsMutationVariables,
   APITypes.DeleteGroupsMutation
 >;
-export const createGroupMemberships = /* GraphQL */ `mutation CreateGroupMemberships(
-  $input: CreateGroupMembershipsInput!
-  $condition: ModelGroupMembershipsConditionInput
+export const createMatches = /* GraphQL */ `mutation CreateMatches(
+  $input: CreateMatchesInput!
+  $condition: ModelMatchesConditionInput
 ) {
-  createGroupMemberships(input: $input, condition: $condition) {
-    membershipID
-    groupId
-    userId
+  createMatches(input: $input, condition: $condition) {
     id
+    user {
+      id
+      name
+      description
+      languages
+      zipCode
+      gamePreference
+      behaviour
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      postalCode
+      language
+      favoriteGame
+      preferredGenre
+      timeAvailability
+      preferredTeammateAgeRange
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      matchesMatchesId
+      matchesRejectedMatchesId
+      __typename
+    }
+    matches {
+      nextToken
+      __typename
+    }
+    rejectedMatches {
+      nextToken
+      __typename
+    }
     createdAt
     updatedAt
+    matchesUserId
     __typename
   }
 }
 ` as GeneratedMutation<
-  APITypes.CreateGroupMembershipsMutationVariables,
-  APITypes.CreateGroupMembershipsMutation
+  APITypes.CreateMatchesMutationVariables,
+  APITypes.CreateMatchesMutation
 >;
-export const updateGroupMemberships = /* GraphQL */ `mutation UpdateGroupMemberships(
-  $input: UpdateGroupMembershipsInput!
-  $condition: ModelGroupMembershipsConditionInput
+export const updateMatches = /* GraphQL */ `mutation UpdateMatches(
+  $input: UpdateMatchesInput!
+  $condition: ModelMatchesConditionInput
 ) {
-  updateGroupMemberships(input: $input, condition: $condition) {
-    membershipID
-    groupId
-    userId
+  updateMatches(input: $input, condition: $condition) {
     id
+    user {
+      id
+      name
+      description
+      languages
+      zipCode
+      gamePreference
+      behaviour
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      postalCode
+      language
+      favoriteGame
+      preferredGenre
+      timeAvailability
+      preferredTeammateAgeRange
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      matchesMatchesId
+      matchesRejectedMatchesId
+      __typename
+    }
+    matches {
+      nextToken
+      __typename
+    }
+    rejectedMatches {
+      nextToken
+      __typename
+    }
     createdAt
     updatedAt
+    matchesUserId
     __typename
   }
 }
 ` as GeneratedMutation<
-  APITypes.UpdateGroupMembershipsMutationVariables,
-  APITypes.UpdateGroupMembershipsMutation
+  APITypes.UpdateMatchesMutationVariables,
+  APITypes.UpdateMatchesMutation
 >;
-export const deleteGroupMemberships = /* GraphQL */ `mutation DeleteGroupMemberships(
-  $input: DeleteGroupMembershipsInput!
-  $condition: ModelGroupMembershipsConditionInput
+export const deleteMatches = /* GraphQL */ `mutation DeleteMatches(
+  $input: DeleteMatchesInput!
+  $condition: ModelMatchesConditionInput
 ) {
-  deleteGroupMemberships(input: $input, condition: $condition) {
-    membershipID
-    groupId
-    userId
+  deleteMatches(input: $input, condition: $condition) {
     id
+    user {
+      id
+      name
+      description
+      languages
+      zipCode
+      gamePreference
+      behaviour
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      postalCode
+      language
+      favoriteGame
+      preferredGenre
+      timeAvailability
+      preferredTeammateAgeRange
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      matchesMatchesId
+      matchesRejectedMatchesId
+      __typename
+    }
+    matches {
+      nextToken
+      __typename
+    }
+    rejectedMatches {
+      nextToken
+      __typename
+    }
     createdAt
     updatedAt
+    matchesUserId
     __typename
   }
 }
 ` as GeneratedMutation<
-  APITypes.DeleteGroupMembershipsMutationVariables,
-  APITypes.DeleteGroupMembershipsMutation
+  APITypes.DeleteMatchesMutationVariables,
+  APITypes.DeleteMatchesMutation
+>;
+export const createFriendships = /* GraphQL */ `mutation CreateFriendships(
+  $input: CreateFriendshipsInput!
+  $condition: ModelFriendshipsConditionInput
+) {
+  createFriendships(input: $input, condition: $condition) {
+    id
+    friendshipStatus
+    updatedBy
+    firstUser {
+      id
+      name
+      description
+      languages
+      zipCode
+      gamePreference
+      behaviour
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      postalCode
+      language
+      favoriteGame
+      preferredGenre
+      timeAvailability
+      preferredTeammateAgeRange
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      matchesMatchesId
+      matchesRejectedMatchesId
+      __typename
+    }
+    secondUser {
+      id
+      name
+      description
+      languages
+      zipCode
+      gamePreference
+      behaviour
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      postalCode
+      language
+      favoriteGame
+      preferredGenre
+      timeAvailability
+      preferredTeammateAgeRange
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      matchesMatchesId
+      matchesRejectedMatchesId
+      __typename
+    }
+    createdAt
+    updatedAt
+    friendshipsFirstUserId
+    friendshipsSecondUserId
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateFriendshipsMutationVariables,
+  APITypes.CreateFriendshipsMutation
+>;
+export const updateFriendships = /* GraphQL */ `mutation UpdateFriendships(
+  $input: UpdateFriendshipsInput!
+  $condition: ModelFriendshipsConditionInput
+) {
+  updateFriendships(input: $input, condition: $condition) {
+    id
+    friendshipStatus
+    updatedBy
+    firstUser {
+      id
+      name
+      description
+      languages
+      zipCode
+      gamePreference
+      behaviour
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      postalCode
+      language
+      favoriteGame
+      preferredGenre
+      timeAvailability
+      preferredTeammateAgeRange
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      matchesMatchesId
+      matchesRejectedMatchesId
+      __typename
+    }
+    secondUser {
+      id
+      name
+      description
+      languages
+      zipCode
+      gamePreference
+      behaviour
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      postalCode
+      language
+      favoriteGame
+      preferredGenre
+      timeAvailability
+      preferredTeammateAgeRange
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      matchesMatchesId
+      matchesRejectedMatchesId
+      __typename
+    }
+    createdAt
+    updatedAt
+    friendshipsFirstUserId
+    friendshipsSecondUserId
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateFriendshipsMutationVariables,
+  APITypes.UpdateFriendshipsMutation
+>;
+export const deleteFriendships = /* GraphQL */ `mutation DeleteFriendships(
+  $input: DeleteFriendshipsInput!
+  $condition: ModelFriendshipsConditionInput
+) {
+  deleteFriendships(input: $input, condition: $condition) {
+    id
+    friendshipStatus
+    updatedBy
+    firstUser {
+      id
+      name
+      description
+      languages
+      zipCode
+      gamePreference
+      behaviour
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      postalCode
+      language
+      favoriteGame
+      preferredGenre
+      timeAvailability
+      preferredTeammateAgeRange
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      matchesMatchesId
+      matchesRejectedMatchesId
+      __typename
+    }
+    secondUser {
+      id
+      name
+      description
+      languages
+      zipCode
+      gamePreference
+      behaviour
+      username
+      bio
+      photo
+      coverPhoto
+      firstName
+      lastName
+      age
+      country
+      timeZone
+      city
+      region
+      postalCode
+      language
+      favoriteGame
+      preferredGenre
+      timeAvailability
+      preferredTeammateAgeRange
+      skillLevel
+      preferredGameMode
+      preferredRole
+      playStyle
+      flexibility
+      behavior
+      communicationPreference
+      toleranceLevel
+      teamworkLevel
+      competitivenessLevel
+      groupsID
+      createdAt
+      updatedAt
+      matchesMatchesId
+      matchesRejectedMatchesId
+      __typename
+    }
+    createdAt
+    updatedAt
+    friendshipsFirstUserId
+    friendshipsSecondUserId
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteFriendshipsMutationVariables,
+  APITypes.DeleteFriendshipsMutation
+>;
+export const createProfile = /* GraphQL */ `mutation CreateProfile(
+  $input: CreateProfileInput!
+  $condition: ModelProfileConditionInput
+) {
+  createProfile(input: $input, condition: $condition) {
+    id
+    name
+    description
+    languages
+    zipCode
+    gamePreference
+    behaviour
+    username
+    bio
+    photo
+    coverPhoto
+    firstName
+    lastName
+    age
+    country
+    timeZone
+    city
+    region
+    postalCode
+    language
+    favoriteGame
+    preferredGenre
+    timeAvailability
+    preferredTeammateAgeRange
+    skillLevel
+    preferredGameMode
+    preferredRole
+    playStyle
+    flexibility
+    behavior
+    communicationPreference
+    toleranceLevel
+    teamworkLevel
+    competitivenessLevel
+    groupsID
+    createdAt
+    updatedAt
+    matchesMatchesId
+    matchesRejectedMatchesId
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateProfileMutationVariables,
+  APITypes.CreateProfileMutation
+>;
+export const updateProfile = /* GraphQL */ `mutation UpdateProfile(
+  $input: UpdateProfileInput!
+  $condition: ModelProfileConditionInput
+) {
+  updateProfile(input: $input, condition: $condition) {
+    id
+    name
+    description
+    languages
+    zipCode
+    gamePreference
+    behaviour
+    username
+    bio
+    photo
+    coverPhoto
+    firstName
+    lastName
+    age
+    country
+    timeZone
+    city
+    region
+    postalCode
+    language
+    favoriteGame
+    preferredGenre
+    timeAvailability
+    preferredTeammateAgeRange
+    skillLevel
+    preferredGameMode
+    preferredRole
+    playStyle
+    flexibility
+    behavior
+    communicationPreference
+    toleranceLevel
+    teamworkLevel
+    competitivenessLevel
+    groupsID
+    createdAt
+    updatedAt
+    matchesMatchesId
+    matchesRejectedMatchesId
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateProfileMutationVariables,
+  APITypes.UpdateProfileMutation
+>;
+export const deleteProfile = /* GraphQL */ `mutation DeleteProfile(
+  $input: DeleteProfileInput!
+  $condition: ModelProfileConditionInput
+) {
+  deleteProfile(input: $input, condition: $condition) {
+    id
+    name
+    description
+    languages
+    zipCode
+    gamePreference
+    behaviour
+    username
+    bio
+    photo
+    coverPhoto
+    firstName
+    lastName
+    age
+    country
+    timeZone
+    city
+    region
+    postalCode
+    language
+    favoriteGame
+    preferredGenre
+    timeAvailability
+    preferredTeammateAgeRange
+    skillLevel
+    preferredGameMode
+    preferredRole
+    playStyle
+    flexibility
+    behavior
+    communicationPreference
+    toleranceLevel
+    teamworkLevel
+    competitivenessLevel
+    groupsID
+    createdAt
+    updatedAt
+    matchesMatchesId
+    matchesRejectedMatchesId
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteProfileMutationVariables,
+  APITypes.DeleteProfileMutation
 >;

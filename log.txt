@@ -1,0 +1,3 @@
+common errors: 
+
+https://arcadian.cloud/aws/2023/02/03/aws-amplify-fix-a-deployment-is-in-progress/
