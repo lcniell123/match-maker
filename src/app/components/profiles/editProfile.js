@@ -112,7 +112,7 @@ const EditProfile = ({ formData, handleCancelProfile }) => {
                   htmlFor="name"
                   className="block text-sm font-medium text-gray-700 mb-1"
                 >
-                  Name:
+                  Name*:
                 </label>
                 <input
                   id="name"
@@ -133,7 +133,7 @@ const EditProfile = ({ formData, handleCancelProfile }) => {
                     htmlFor="age"
                     className="block text-sm font-medium text-gray-700 mb-1"
                   >
-                    Age:{" "}
+                    Age*:{" "}
                   </label>
                   <input
                     id="age"
@@ -155,7 +155,7 @@ const EditProfile = ({ formData, handleCancelProfile }) => {
                     htmlFor="language"
                     className="block text-sm font-medium text-gray-700 mb-1"
                   >
-                    Languages:{" "}
+                    Languages*:{" "}
                   </label>
                   <select
                     id="language"
@@ -208,7 +208,7 @@ const EditProfile = ({ formData, handleCancelProfile }) => {
                     htmlFor="country"
                     className="block text-sm font-medium text-gray-700 mb-1"
                   >
-                    Country:{" "}
+                    Country*:{" "}
                   </label>
                   <select
                     id="country"
@@ -241,7 +241,7 @@ const EditProfile = ({ formData, handleCancelProfile }) => {
                     htmlFor="zipCode"
                     className="block text-sm font-medium text-gray-700 mb-1"
                   >
-                    Zip Code:{" "}
+                    Zip Code*:{" "}
                   </label>
                   <input
                     id="zipCode"
@@ -501,7 +501,7 @@ const EditProfile = ({ formData, handleCancelProfile }) => {
                     htmlFor="preferredRole"
                     className="block text-sm font-medium text-gray-700 mb-1"
                   >
-                    Preferred Role:{" "}
+                    Preferred Role*:{" "}
                   </label>
                   <select
                     id="preferredRole"
