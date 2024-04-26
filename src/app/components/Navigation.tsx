@@ -16,7 +16,7 @@ import * as mutations from "@/graphql/mutations";
 import { RelationshipStatus } from "@/API";
 import { FriendRequestStatus } from "@/models";
 import { getUrl } from "aws-amplify/storage";
-
+import { fetchAuthSession } from "aws-amplify/auth";
 function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(" ");
 }
@@ -31,10 +31,27 @@ export const Navigation = () => {
   );
 
   const client = generateClient();
-  const user = getCurrentUser();
-  user.then((item) => {
-    setUserName(item.username);
-  });
+
+  async function currentAuthenticatedUser() {
+    try {
+      const { username, userId } = await getCurrentUser();
+      setUserName(username);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  currentAuthenticatedUser();
+
+  async function currentSession() {
+    try {
+      const { accessToken, idToken } = (await fetchAuthSession()).tokens ?? {};
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  const session = currentSession();
+  console.log(session);
   //console.log("thisisuser:", user.then((item)=>{setUserName(item.username)}));
   useEffect(() => {
     async function fetchFriendRequests() {
@@ -92,7 +109,7 @@ export const Navigation = () => {
     }
   }
   async function checkFileExists() {
-    if (userName.length > 0) {
+    if (userName && userName.length > 0) {
       const url = await getUrl({
         key: `${userName}-profile-pic.jpg`,
         options: {
@@ -102,7 +119,7 @@ export const Navigation = () => {
       if (url.url.pathname) {
         setImage(`${userName}-profile-pic.jpg`);
       }
-      console.log(url);
+      //console.log(url);
     }
   }
 

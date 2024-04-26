@@ -6,31 +6,40 @@ const ProfileDescription = ({ formData, handleEditProfile }) => {
       {formData && (
         <>
           <div className="personal-info mb-8">
-            <h3 className="text-2xl font-semibold mb-4">Personal Information</h3>
+            <h3 className="text-2xl font-semibold mb-4">
+              Personal Information
+            </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <p className="text-sm font-medium mb-2 flex items-center">
-                  <span className="text-gray-600 mr-2">👤</span> Name: {formData.name}
+                  <span className="text-gray-600 mr-2">👤</span> Name*:{" "}
+                  {formData.name ?? ""}
                 </p>
                 <p className="text-sm font-medium mb-2 flex items-center">
-                  <span className="text-gray-600 mr-2">📅</span> Age: {formData.age}
+                  <span className="text-gray-600 mr-2">📅</span> Age*:{" "}
+                  {formData.age ?? ""}
                 </p>
                 <p className="text-sm font-medium mb-2 flex items-center">
-                  <span className="text-gray-600 mr-2">🗣️</span> Languages: {formData.languages}
+                  <span className="text-gray-600 mr-2">🗣️</span> Languages*:{" "}
+                  {formData.languages ?? ""}
                 </p>
                 <p className="text-sm font-medium mb-2 flex items-center">
-                  <span className="text-gray-600 mr-2">📝</span> Bio: {formData.bio}
+                  <span className="text-gray-600 mr-2">📝</span> Bio:{" "}
+                  {formData.bio ?? ""}
                 </p>
               </div>
               <div>
                 <p className="text-sm font-medium mb-2 flex items-center">
-                  <span className="text-gray-600 mr-2">🌍</span> Country: {formData.country}
+                  <span className="text-gray-600 mr-2">🌍</span> Country*:{" "}
+                  {formData.country ?? ""}
                 </p>
                 <p className="text-sm font-medium mb-2 flex items-center">
-                  <span className="text-gray-600 mr-2">🏠</span> Zip Code: {formData.zipCode}
+                  <span className="text-gray-600 mr-2">🏠</span> Zip Code*:{" "}
+                  {formData.zipCode ?? ""}
                 </p>
                 <p className="text-sm font-medium mb-2 flex items-center">
-                  <span className="text-gray-600 mr-2">⏰</span> Time Zone: {formData.timeZone}
+                  <span className="text-gray-600 mr-2">⏰</span> Time Zone:{" "}
+                  {formData.timeZone ?? ""}
                 </p>
               </div>
             </div>
@@ -41,24 +50,30 @@ const ProfileDescription = ({ formData, handleEditProfile }) => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <p className="text-sm font-medium mb-2">
-                  <span className="text-gray-600 mr-2">🎮</span> Favorite Game: {formData.gamePreference}
+                  <span className="text-gray-600 mr-2">🎮</span> Favorite Game:{" "}
+                  {formData.gamePreference}
                 </p>
                 <p className="text-sm font-medium mb-2">
-                  <span className="text-gray-600 mr-2">🎲</span> Preferred Genre: {formData.preferredGenre}
+                  <span className="text-gray-600 mr-2">🎲</span> Preferred
+                  Genre: {formData.preferredGenre}
                 </p>
                 <p className="text-sm font-medium mb-2">
-                  <span className="text-gray-600 mr-2">⏰</span> Time Availability: {formData.timeAvailability}
+                  <span className="text-gray-600 mr-2">⏰</span> Time
+                  Availability: {formData.timeAvailability}
                 </p>
               </div>
               <div>
                 <p className="text-sm font-medium mb-2">
-                  <span className="text-gray-600 mr-2">👥</span> Preferred Teammates Age Range: {formData.preferredTeammateAgeRange}
+                  <span className="text-gray-600 mr-2">👥</span> Preferred
+                  Teammates Age Range: {formData.preferredTeammateAgeRange}
                 </p>
                 <p className="text-sm font-medium mb-2">
-                  <span className="text-gray-600 mr-2">⭐️</span> Skill Level: {formData.skillLevel}
+                  <span className="text-gray-600 mr-2">⭐️</span> Skill Level:{" "}
+                  {formData.skillLevel}
                 </p>
                 <p className="text-sm font-medium mb-2">
-                  <span className="text-gray-600 mr-2">🎮</span> Preferred Game Mode: {formData.preferredGameMode}
+                  <span className="text-gray-600 mr-2">🎮</span> Preferred Game
+                  Mode: {formData.preferredGameMode}
                 </p>
               </div>
             </div>
@@ -69,38 +84,48 @@ const ProfileDescription = ({ formData, handleEditProfile }) => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <p className="text-sm font-medium mb-2">
-                  <span className="text-gray-600 mr-2">🎮</span> Preferred Role in-game: {formData.preferredRole}
+                  <span className="text-gray-600 mr-2">🎮</span> Preferred Role
+                  in-game*: {formData.preferredRole}
                 </p>
                 <p className="text-sm font-medium mb-2">
-                  <span className="text-gray-600 mr-2">🎮</span> Play Style: {formData.playStyle}
+                  <span className="text-gray-600 mr-2">🎮</span> Play Style:{" "}
+                  {formData.playStyle}
                 </p>
                 <p className="text-sm font-medium mb-2">
-                  <span className="text-gray-600 mr-2">🔄</span> Flexibility in Adopting: {formData.flexibility}
+                  <span className="text-gray-600 mr-2">🔄</span> Flexibility in
+                  Adopting: {formData.flexibility}
                 </p>
               </div>
             </div>
           </div>
 
           <div className="attitude-communication mb-8">
-            <h3 className="text-2xl font-semibold mb-4">Attitude and Communication</h3>
+            <h3 className="text-2xl font-semibold mb-4">
+              Attitude and Communication
+            </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <p className="text-sm font-medium mb-2">
-                  <span className="text-gray-600 mr-2">😊</span> Behaviour: {formData.behaviour}
+                  <span className="text-gray-600 mr-2">😊</span> Behaviour:{" "}
+                  {formData.behaviour}
                 </p>
                 <p className="text-sm font-medium mb-2">
-                  <span className="text-gray-600 mr-2">💬</span> Communication Preference: {formData.communicationPreference}
+                  <span className="text-gray-600 mr-2">💬</span> Communication
+                  Preference: {formData.communicationPreference}
                 </p>
                 <p className="text-sm font-medium mb-2">
-                  <span className="text-gray-600 mr-2">🛑</span> Tolerance Level for Mistakes: {formData.toleranceLevel}
+                  <span className="text-gray-600 mr-2">🛑</span> Tolerance Level
+                  for Mistakes: {formData.toleranceLevel}
                 </p>
               </div>
               <div>
                 <p className="text-sm font-medium mb-2">
-                  <span className="text-gray-600 mr-2">🤝</span> Teamwork and Collaboration: {formData.teamworkLevel}
+                  <span className="text-gray-600 mr-2">🤝</span> Teamwork and
+                  Collaboration: {formData.teamworkLevel}
                 </p>
                 <p className="text-sm font-medium mb-2">
-                  <span className="text-gray-600 mr-2">🏆</span> Competitiveness Level: {formData.competitivenessLevel}
+                  <span className="text-gray-600 mr-2">🏆</span> Competitiveness
+                  Level: {formData.competitivenessLevel}
                 </p>
               </div>
             </div>

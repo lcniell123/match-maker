@@ -16,11 +16,10 @@ const CoverPhoto: React.FC = () => {
       console.log(err);
     }
   }
-  currentAuthenticatedUser();
 
   //create template name if no coverphoto is available
   async function checkFileExists() {
-    if (userName.length > 0) {
+    if (userName && userName.length > 0) {
       const url = await getUrl({
         key: `${userName}-background-pic.jpg`,
         options: {
@@ -33,7 +32,7 @@ const CoverPhoto: React.FC = () => {
     }
   }
 
-  const files = checkFileExists();
+  const files = currentAuthenticatedUser().then(() => checkFileExists());
   files.then((file) => {
     console.log(file);
   });

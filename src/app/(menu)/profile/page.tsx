@@ -11,6 +11,8 @@ import EditProfile from "../../components/profiles/editProfile";
 
 import awsExports from "../../../amplifyconfiguration.json";
 import { Amplify } from "aws-amplify";
+//const router = useRouter();
+const client = generateClient();
 Amplify.configure(awsExports);
 
 export interface Profile {
@@ -53,12 +55,11 @@ export interface Profile {
 function Profile() {
   const [userName, setUserName] = useState("");
   const [userId, setUserId] = useState("");
-  const router = useRouter();
-  const client = generateClient();
 
   async function currentAuthenticatedUser() {
     try {
       const { username, userId } = await getCurrentUser();
+
       setUserName(username);
       setUserId(userId);
     } catch (err) {
