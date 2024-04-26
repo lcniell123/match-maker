@@ -1691,3 +1691,4 @@ export const deleteProfile = /* GraphQL */ `mutation DeleteProfile(
   APITypes.DeleteProfileMutationVariables,
   APITypes.DeleteProfileMutation
 >;
+

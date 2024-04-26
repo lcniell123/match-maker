@@ -9,7 +9,7 @@ import * as queries from "@/graphql/queries";
 import ProfileDescription from "../../components/profiles/profileDescription";
 import EditProfile from "../../components/profiles/editProfile";
 
-import awsExports from "../../../amplifyconfiguration.json";
+import awsExports from "../../../../amplifyconfiguration.json";
 import { Amplify } from "aws-amplify";
 Amplify.configure(awsExports);
 
