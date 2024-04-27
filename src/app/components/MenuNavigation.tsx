@@ -8,6 +8,10 @@ import { Fragment, useState } from "react";
 import { BellIcon } from "@heroicons/react/24/outline";
 import { getCurrentUser } from "aws-amplify/auth";
 
+import awsExports from '../../../amplifyconfiguration.json';
+import {Amplify} from "aws-amplify";
+Amplify.configure(awsExports);
+
 function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(" ");
 }

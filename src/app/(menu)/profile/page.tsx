@@ -72,7 +72,6 @@ function Profile() {
   const [singleProfile, setSingleProfile] = useState<Profile>();
   const [editingProfile, setEditingProfile] = useState(false);
 
-
   // Load list of profiles
   const listProfile = client.graphql({
     query: queries.listProfiles,
@@ -96,7 +95,6 @@ function Profile() {
           input: {
             name: userName,
             id: userId,
-            groupsID: null
           },
         },
       });
@@ -118,7 +116,6 @@ function Profile() {
               input: {
                 name: userName,
                 id: userId,
-                groupsID: null
               },
             },
           });

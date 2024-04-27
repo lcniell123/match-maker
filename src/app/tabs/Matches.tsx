@@ -4,10 +4,9 @@ import "@aws-amplify/ui-react/styles.css";
 import {getCurrentUser} from "aws-amplify/auth";
 import {generateClient} from "aws-amplify/api";
 import * as queries from "@/graphql/queries";
-import {createFriendRequest, createFriendships} from "@/graphql/mutations";
+import * as mutations from "@/graphql/mutations";
 import Alert from "../components/Alert"
-import {listFriendRequests} from "@/graphql/queries";
-import {FriendRequestStatus} from "@/API";
+import {FriendRequestStatus, NotificationType} from "@/API";
 
 
 // todo
@@ -50,9 +49,9 @@ export interface Profile {
 }
 
 
-
 export default function Matches() {
     const [userId, setUserId] = useState("");
+    const [userName, setUserName] = useState("");
     const [matchedProfiles, setMatchedProfiles] = useState<Profile[]>([]);
     const [alertMessage, setAlertMessage] = useState("");
     const [alertType, setAlertType] = useState("");
@@ -62,8 +61,9 @@ export default function Matches() {
     useEffect(() => {
         async function currentAuthenticatedUser() {
             try {
-                const { userId } = await getCurrentUser();
+                const {userId, username} = await getCurrentUser();
                 setUserId(userId);
+                setUserName(username);
             } catch (err) {
                 console.log(err);
             }
@@ -74,48 +74,56 @@ export default function Matches() {
 
     useEffect(() => {
 
- async function fetchProfiles() {
-     const skillTiers = ['beginner', 'intermediate', 'advanced'];
-    try {
-        const allProfilesResponse = await client.graphql({ query: queries.listProfiles });
-        const allProfiles = allProfilesResponse.data.listProfiles.items;
-        const currentUserProfile = allProfiles.find(profile => profile.id === userId);
-        if (currentUserProfile && currentUserProfile.skillLevel) {
-            const filteredProfiles = allProfiles.filter(profile => profile.id !== userId);
-            const currentUserSkillIndex = skillTiers.indexOf(currentUserProfile.skillLevel);
-            const friendRequestsResponse = await client.graphql({ query: queries.listFriendRequests, variables: { filter: { friendRequestSenderId: { eq: userId }, status: { eq: FriendRequestStatus.ACCEPTED } } } });
-            const friendRequests = friendRequestsResponse.data.listFriendRequests.items;
-            const friendProfiles = friendRequests.map(request => request.friendRequestReceiverId);
-            const matchedProfiles = filteredProfiles.filter(profile => {
-                const isFriend = friendProfiles.includes(profile.id);
-                if (isFriend) return false;
-                const profileSkillLevel = profile.skillLevel;
-                if (!profileSkillLevel) return false;
-                const profileSkillIndex = skillTiers.indexOf(profileSkillLevel);
-                return profile.behavior === currentUserProfile.behavior &&
-                    profile.playStyle === currentUserProfile.playStyle &&
-                    (profileSkillIndex === currentUserSkillIndex ||
-                    profileSkillIndex === currentUserSkillIndex - 1 ||
-                    profileSkillIndex === currentUserSkillIndex + 1);
-            });
+        async function fetchProfiles() {
+            const skillTiers = ['beginner', 'intermediate', 'advanced'];
+            try {
+                const allProfilesResponse = await client.graphql({query: queries.listProfiles});
+                const allProfiles = allProfilesResponse.data.listProfiles.items;
+                const currentUserProfile = allProfiles.find(profile => profile.id === userId);
+                if (currentUserProfile && currentUserProfile.skillLevel) {
+                    const filteredProfiles = allProfiles.filter(profile => profile.id !== userId);
+                    const currentUserSkillIndex = skillTiers.indexOf(currentUserProfile.skillLevel);
+                    const friendRequestsResponse = await client.graphql({query: queries.listFriendRequests,
+                        variables: {
+                            filter: {
+                                friendRequestSenderId: {eq: userId},
+                                status: {eq: FriendRequestStatus.ACCEPTED}
+                            }
+                        }
+                    });
+                    const friendRequests = friendRequestsResponse.data.listFriendRequests.items;
+                    const friendProfiles = friendRequests.map(request => request.friendRequestReceiverId);
+                    const matchedProfiles = filteredProfiles.filter(profile => {
+                        const isFriend = friendProfiles.includes(profile.id);
+                        if (isFriend) return false;
+                        const profileSkillLevel = profile.skillLevel;
+                        if (!profileSkillLevel) return false;
+                        const profileSkillIndex = skillTiers.indexOf(profileSkillLevel);
+                        return profile.behavior === currentUserProfile.behavior &&
+                            profile.country === currentUserProfile.country &&
+                            profile.playStyle === currentUserProfile.playStyle &&
+                            (profileSkillIndex === currentUserSkillIndex ||
+                                profileSkillIndex === currentUserSkillIndex - 1 ||
+                                profileSkillIndex === currentUserSkillIndex + 1);
+                    });
 
-            const nonFriendProfiles = matchedProfiles.map(profile => {
-                const friendRequest = friendRequests.find(request => (request.friendRequestReceiverId === profile.id || request.friendRequestSenderId === profile.id));
-                const status = friendRequest?.status;
-                return { ...profile, status };
-            });
+                    const nonFriendProfiles = matchedProfiles.map(profile => {
+                        const friendRequest = friendRequests.find(request => (request.friendRequestReceiverId === profile.id || request.friendRequestSenderId === profile.id));
+                        const status = friendRequest?.status;
+                        return {...profile, status};
+                    });
 
-            setMatchedProfiles(nonFriendProfiles);
+                    setMatchedProfiles(nonFriendProfiles);
+                }
+            } catch (error) {
+                console.error("Error fetching profiles:", error);
+            }
         }
-    } catch (error) {
-        console.error("Error fetching profiles:", error);
-    }
-}
 
-    if (userId) {
-        fetchProfiles();
-    }
-}, [userId]);
+        if (userId) {
+            fetchProfiles();
+        }
+    }, [userId]);
 
 
     const handleAddFriend = async (friendId: string, friendName: string) => {
@@ -124,12 +132,23 @@ export default function Matches() {
                 input: {
                     friendRequestSenderId: userId,
                     friendRequestReceiverId: friendId,
-                    status: FriendRequestStatus.PENDING,
-                    createdAt: new Date().toISOString()
+                    status: FriendRequestStatus.PENDING
                 }
             };
+            await client.graphql({query: mutations.createFriendRequest, variables: input});
+            await client.graphql({
+                query: mutations.createNotification,
+                variables: {
+                    input: {
+                        type: NotificationType.FRIEND_REQUEST,
+                        notificationTargetId: friendId,
+                        notificationOriginatorId: userId,
+                        content: `Received friend request from ${userName}`,
+                        read: false,
 
-             await client.graphql({ query: createFriendRequest, variables: input });
+                    },
+                },
+            });
             setAlertMessage(`Friend request sent to ${friendName}`);
             setAlertType("success");
             setShowAlert(true);
@@ -142,51 +161,74 @@ export default function Matches() {
             setAlertType("error");
             setShowAlert(true);
         }
+
+
     };
 
+    console.log(matchedProfiles)
 
-return (
-    <div className="mb-6 flex flex-wrap">
-       {showAlert && (
-            <Alert
-                message={alertMessage}
-                type={alertType}
-                onClose={() => setShowAlert(false)}
-            />
-        )}
-        {matchedProfiles.map(profile => (
-            <div className="w-full max-w-sm border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-2 mb-4" key={profile.id}>
-                <div className="flex justify-end px-4 pt-4">
-                    <button id="closeButton"
-                            className="inline-block text-red-600 dark:text-gray-400 hover:bg-red-200 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
-                            type="button">
-                        <span className="sr-only">Remove43 match</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12"/>
-                        </svg>
-                    </button>
-                </div>
-                <div className="flex flex-col items-center pb-10">
-                    <img className="w-24 h-24 mb-3 rounded-full shadow-lg" src={profile.photo ? String(profile.photo) : "/placeholder_avatar.jpg"} alt="Match profile picture"/>
-                    <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">{profile.name}</h5>
-                    <span className="text-sm text-gray-500 dark:text-gray-400">{profile.bio}</span>
-                    <div className="flex mt-4 md:mt-6">
-                        <button
-                            onClick={() => handleAddFriend(profile.id, profile.name)}
-                            disabled={profile.status === "pending"} // Disable button if status is pending
-                            className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                        >
-                            {profile.status === "pending" ? "Pending" : "Add Friend"}
+    return (
+        <div className="mb-6 flex flex-wrap">
+            {showAlert && (
+                <Alert
+                    message={alertMessage}
+                    type={alertType}
+                    onClose={() => setShowAlert(false)}
+                />
+            )}
+            {matchedProfiles.map(profile => (
+                <div
+                    className="w-full max-w-sm border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-2 mb-4"
+                    key={profile.id}>
+                    <div className="flex justify-end px-4 pt-4">
+                        <button id="dropdownButton" data-dropdown-toggle="dropdown"
+                                className="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
+                                type="button">
+                            <span className="sr-only">Open dropdown</span>
+                            <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                 fill="currentColor" viewBox="0 0 16 3">
+                                <path
+                                    d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
+                            </svg>
                         </button>
-                        <a href="#" className="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-                            Message
-                        </a>
+                        <div id="dropdown"
+                             className="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                            <ul className="py-2" aria-labelledby="dropdownButton">
+                                <li>
+                                    <a href="#"
+                                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">View Profile</a>
+                                </li>
+                                <li>
+                                    <a href="#"
+                                       className="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Remove Match</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div className="flex flex-col items-center pb-10">
+                        <img className="w-24 h-24 mb-3 rounded-full shadow-lg"
+                             src={profile.photo ? String(profile.photo) : "/placeholder_avatar.jpg"}
+                             alt="Match profile picture"/>
+                        <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">{profile.name}</h5>
+                        <span className="text-sm text-gray-500 dark:text-gray-400">{profile.bio}</span>
+                        <div className="flex mt-4 md:mt-6">
+                            <button
+                                onClick={() => handleAddFriend(profile.id, profile.name)}
+                                disabled={profile.status === FriendRequestStatus.PENDING} // Disable button if status is pending
+                                className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                            >
+                                {profile.status === FriendRequestStatus.PENDING ? "Pending" : "Add Friend"}
+                            </button>
+                            <a href="#"
+                               className="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                                Message
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        ))}
-    </div>
-);
+            ))}
+        </div>
+    );
 
 
 }

@@ -17,12 +17,9 @@ export default function App() {
 
   return (
         <Authenticator>
-      {({ signOut, user }) => (
-          <><Dashboard/>
-            <h1>Hello {user?.username}
-            </h1>
+                <>
+                  <Dashboard/>
           </>
-      )}
     </Authenticator>
   );
 }

@@ -4,7 +4,6 @@ import "@aws-amplify/ui-react/styles.css";
 import { getCurrentUser } from "aws-amplify/auth";
 import { generateClient } from "aws-amplify/api";
 import * as queries from "@/graphql/queries";
-import { createFriendships } from "@/graphql/mutations";
 import { Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { BellIcon } from "@heroicons/react/24/outline";
@@ -13,17 +12,17 @@ import Link from "next/link";
 import Image from "next/image";
 import { Container } from "@/app/components/Container";
 import * as mutations from "@/graphql/mutations";
-import { RelationshipStatus } from "@/API";
-import { FriendRequestStatus } from "@/models";
+import {NotificationType, RelationshipStatus, FriendRequestStatus, Notification} from "@/API";
 import { getUrl } from "aws-amplify/storage";
 import { fetchAuthSession } from "aws-amplify/auth";
+
 function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(" ");
 }
 
 export const Navigation = () => {
   const { signOut } = useAuthenticator();
-  const [friendRequests, setFriendRequests] = useState<any[]>([]);
+  const [notifications, setNotifications] = useState<Notification[]>([]);
   const [userId, setUserId] = useState("");
   const [userName, setUserName] = useState("");
   const [image, setImage] = useState(
@@ -36,6 +35,7 @@ export const Navigation = () => {
     try {
       const { username, userId } = await getCurrentUser();
       setUserName(username);
+      setUserId(userId);
     } catch (err) {
       console.log(err);
     }
@@ -52,54 +52,73 @@ export const Navigation = () => {
   }
   const session = currentSession();
   console.log(session);
-  //console.log("thisisuser:", user.then((item)=>{setUserName(item.username)}));
+
   useEffect(() => {
-    async function fetchFriendRequests() {
+    async function fetchNotifications() {
       try {
         const { userId } = await getCurrentUser();
         setUserId(userId);
         const response = await client.graphql({
-          query: queries.listFriendships,
+          query: queries.listNotifications,
           variables: {
             filter: {
-              id: {
+              notificationTargetId: {
                 eq: userId,
               },
-              friendshipStatus: {
-                eq: RelationshipStatus.FRIEND,
+              read: {
+                eq: false
               },
             },
           },
         });
-        const pendingRequests = response.data.listFriendships.items;
-        setFriendRequests(pendingRequests);
+
+        const pendingNotifications = response.data.listNotifications.items;
+        setNotifications(pendingNotifications);
       } catch (error) {
-        console.error("Error fetching friend requests:", error);
+        console.error("Error fetching notifications:", error);
       }
     }
 
-    fetchFriendRequests();
+    fetchNotifications();
   }, []);
 
-  async function acceptFriendRequest(id: any, friendId: any) {
+  async function rejectFriendRequest(friendId: any) {
     try {
       await client.graphql({
-        query: mutations.updateFriendships,
+        query: mutations.updateFriendRequest,
         variables: {
           input: {
-            id: id,
-            friendshipStatus: RelationshipStatus.FRIEND,
+            id: "", // todo: fetch id
+            friendRequestSenderId: userId,
+            friendRequestReceiverId: friendId,
+            status: FriendRequestStatus.REJECTED,
           },
         },
       });
+    } catch (error) {
+      console.error("Error accepting friend request:", error);
+    }
+  }
+
+  async function acceptFriendRequest(notificationID: any, friendId: any) {
+    try {
+       await client.graphql({
+        query: mutations.updateNotification,
+        variables: {
+          input: {
+            id: notificationID,
+            read: true,
+          },
+        },
+      });
+
       await client.graphql({
         query: mutations.createFriendships,
         variables: {
           input: {
-            // Had to comment out section, need to revisit in case we need more data
-            // id: Math.random().toString(36).substring(2, length),
-            // userId: userId,
-            id: friendId,
+            friendshipsFirstUserId: friendId,
+            friendshipsSecondUserId: userId,
+            updatedBy: userId,
             friendshipStatus: RelationshipStatus.FRIEND,
           },
         },
@@ -125,7 +144,7 @@ export const Navigation = () => {
 
   checkFileExists();
 
-  function rejectFriendRequest(friendId: any) {}
+
 
   return (
     <div className="sticky top-0 backdrop-blur-xl z-50">
@@ -141,9 +160,9 @@ export const Navigation = () => {
                 <span className="absolute -inset-1.5" />
                 <span className="sr-only">View notifications</span>
                 <BellIcon className="h-6 w-6" aria-hidden="true" />
-                {friendRequests.length > 0 && (
+                {notifications.length > 0 && (
                   <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-blue-500 border-2 border-white rounded-full -top-2 -end-2">
-                    {friendRequests.length}
+                    {notifications.length}
                   </div>
                 )}
               </Menu.Button>
@@ -158,17 +177,17 @@ export const Navigation = () => {
               leaveTo="transform opacity-0 scale-95"
             >
               <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                {friendRequests.map((request: any) => (
+                {notifications.map((request: any) => (
                   <Menu.Item key={request.id}>
                     {() => (
                       <div className="flex-auto px-4 py-2 hover:bg-gray-100">
                         <p className="text-sm text-gray-600">
-                          {request.userId} sent a friend request
+                          {request.content}
                         </p>
                         <div className="space-x-2">
                           <button
                             onClick={() =>
-                              acceptFriendRequest(request.id, request.userId)
+                              acceptFriendRequest(request.id, request.notificationOriginatorId)
                             }
                             className={classNames(
                               "px-2 py-1 text-sm font-semibold rounded-md focus:outline-none",
@@ -178,7 +197,7 @@ export const Navigation = () => {
                             Accept
                           </button>
                           <button
-                            onClick={() => rejectFriendRequest(request.userId)}
+                            onClick={() => rejectFriendRequest(request.notificationOriginatorId)}
                             className={classNames(
                               "px-2 py-1 text-sm font-semibold rounded-md focus:outline-none",
                               "text-white bg-red-500 hover:bg-red-600"
