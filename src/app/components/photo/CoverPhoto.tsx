@@ -12,30 +12,31 @@ const CoverPhoto: React.FC = () => {
     try {
       const { username, userId } = await getCurrentUser();
       setUserName(username);
+      //checkFileExists();
+
+      //setBgFileName(`${userName}-background-pic.jpg`);
     } catch (err) {
       console.log(err);
     }
   }
 
-  //create template name if no coverphoto is available
+  currentAuthenticatedUser();
+
   async function checkFileExists() {
-    if (userName && userName.length > 0) {
+    if (userName.length > 0) {
       const url = await getUrl({
         key: `${userName}-background-pic.jpg`,
         options: {
           validateObjectExistence: true,
         },
       });
-      if (url.url.pathname) {
+      // console.log("THISISURL: ", url);
+      if (url.url) {
+        /// console.log("THISISURL: ", url.url);
         setBgFileName(`${userName}-background-pic.jpg`);
       }
     }
   }
-
-  const files = currentAuthenticatedUser().then(() => checkFileExists());
-  files.then((file) => {
-    console.log(file);
-  });
   return (
     <div className="relative h-64 w-full">
       <img

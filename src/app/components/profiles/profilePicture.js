@@ -7,7 +7,13 @@ const ProfilePicture = ({ userName }) => {
   const [image, setImage] = useState(
     "https://mm-bucket191228-dev.s3.us-east-2.amazonaws.com/public/default-profile-pic.jpg"
   );
+  useEffect(() => {
+    setImage(
+      `https://mm-bucket191228-dev.s3.us-east-2.amazonaws.com/public/${userName}-profile-pic.jpg`
+    );
+  }, [userName]);
 
+  //check to see if profile bg exists
   async function checkFileExists() {
     if (userName.length > 0) {
       const url = await getUrl({
@@ -16,18 +22,13 @@ const ProfilePicture = ({ userName }) => {
           validateObjectExistence: true,
         },
       });
-      if (url.url.pathname) {
-        setImage(
-          `https://mm-bucket191228-dev.s3.us-east-2.amazonaws.com/public/${userName}-profile-pic.jpg`
-        );
+      if (url.url.length > 0) {
+        setImage(url.url);
       }
     }
   }
-
   checkFileExists();
-
   async function handleImageChange(e) {
-    // alert("clicked");
     const file = e.target.files[0];
     const reader = new FileReader();
 

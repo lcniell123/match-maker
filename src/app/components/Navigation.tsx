@@ -12,7 +12,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { Container } from "@/app/components/Container";
 import * as mutations from "@/graphql/mutations";
-import {NotificationType, RelationshipStatus, FriendRequestStatus, Notification} from "@/API";
+import {
+  NotificationType,
+  RelationshipStatus,
+  FriendRequestStatus,
+  Notification,
+} from "@/API";
 import { getUrl } from "aws-amplify/storage";
 import { fetchAuthSession } from "aws-amplify/auth";
 
@@ -66,7 +71,7 @@ export const Navigation = () => {
                 eq: userId,
               },
               read: {
-                eq: false
+                eq: false,
               },
             },
           },
@@ -102,7 +107,7 @@ export const Navigation = () => {
 
   async function acceptFriendRequest(notificationID: any, friendId: any) {
     try {
-       await client.graphql({
+      await client.graphql({
         query: mutations.updateNotification,
         variables: {
           input: {
@@ -127,24 +132,25 @@ export const Navigation = () => {
       console.error("Error accepting friend request:", error);
     }
   }
+  //check to see if profile bg exists
   async function checkFileExists() {
-    if (userName && userName.length > 0) {
+    if (userName.length > 0) {
       const url = await getUrl({
         key: `${userName}-profile-pic.jpg`,
         options: {
           validateObjectExistence: true,
         },
       });
-      if (url.url.pathname) {
-        setImage(`${userName}-profile-pic.jpg`);
+      if (url.url) {
+        setImage(
+          `https://mm-bucket191228-dev.s3.us-east-2.amazonaws.com/public/${userName}-profile-pic.jpg`
+        );
       }
-      //console.log(url);
+      console.log(url);
     }
   }
 
   checkFileExists();
-
-
 
   return (
     <div className="sticky top-0 backdrop-blur-xl z-50">
@@ -187,7 +193,10 @@ export const Navigation = () => {
                         <div className="space-x-2">
                           <button
                             onClick={() =>
-                              acceptFriendRequest(request.id, request.notificationOriginatorId)
+                              acceptFriendRequest(
+                                request.id,
+                                request.notificationOriginatorId
+                              )
                             }
                             className={classNames(
                               "px-2 py-1 text-sm font-semibold rounded-md focus:outline-none",
@@ -197,7 +206,11 @@ export const Navigation = () => {
                             Accept
                           </button>
                           <button
-                            onClick={() => rejectFriendRequest(request.notificationOriginatorId)}
+                            onClick={() =>
+                              rejectFriendRequest(
+                                request.notificationOriginatorId
+                              )
+                            }
                             className={classNames(
                               "px-2 py-1 text-sm font-semibold rounded-md focus:outline-none",
                               "text-white bg-red-500 hover:bg-red-600"
@@ -219,11 +232,7 @@ export const Navigation = () => {
               <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                 <span className="absolute -inset-1.5" />
                 <span className="sr-only">Open user menu</span>
-                <img
-                  className="h-8 w-8 rounded-full"
-                  src={`https://mm-bucket191228-dev.s3.us-east-2.amazonaws.com/public/${image}`}
-                  alt=""
-                />
+                <img className="h-8 w-8 rounded-full" src={image} alt="" />
               </Menu.Button>
             </div>
             <Transition
