@@ -90,7 +90,7 @@ const Dashboard: React.FC = () => {
     console.log("hasProfile:", hasProfile);
     if (!hasProfile) {
       console.log("rediretct to profile");
-      redirect("/profile");
+      redirect("/profile-form");
     }
   }, [hasProfile]);
 

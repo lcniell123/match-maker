@@ -133,24 +133,43 @@ export const Navigation = () => {
     }
   }
   //check to see if profile bg exists
+  // async function checkFileExists() {
+  //   if (userName.length > 0) {
+  //     const url = await getUrl({
+  //       key: `${userName}-profile-pic.jpg`,
+  //       options: {
+  //         validateObjectExistence: true,
+  //       },
+  //     });
+  //     if (url.url) {
+  //       setImage(
+  //         `https://mm-bucket191228-dev.s3.us-east-2.amazonaws.com/public/${userName}-profile-pic.jpg`
+  //       );
+  //     }
+  //     console.log(url);
+  //   }
+  // }
+
+  // checkFileExists();
+
   async function checkFileExists() {
     if (userName.length > 0) {
       const url = await getUrl({
-        key: `${userName}-profile-pic.jpg`,
+        key: `mmm-background-pic.jpg`,
         options: {
           validateObjectExistence: true,
         },
       });
-      if (url.url) {
+      if (url && url.url) {
         setImage(
           `https://mm-bucket191228-dev.s3.us-east-2.amazonaws.com/public/${userName}-profile-pic.jpg`
         );
       }
-      console.log(url);
+      console.log("URL: ", url);
     }
   }
 
-  checkFileExists();
+  //checkFileExists();
 
   return (
     <div className="sticky top-0 backdrop-blur-xl z-50">

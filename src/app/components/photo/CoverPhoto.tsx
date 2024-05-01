@@ -22,6 +22,23 @@ const CoverPhoto: React.FC = () => {
 
   currentAuthenticatedUser();
 
+  // async function checkFileExists() {
+  //   if (userName.length > 0) {
+  //     const url = await getUrl({
+  //       key: `${userName}-background-pic.jpg`,
+  //       options: {
+  //         validateObjectExistence: true,
+  //       },
+  //     });
+  //     // console.log("THISISURL: ", url);
+  //     if (url.url) {
+  //       /// console.log("THISISURL: ", url.url);
+  //       setBgFileName(`${userName}-background-pic.jpg`);
+  //     }
+  //   }
+  // }
+
+  //check to see if profile bg exists
   async function checkFileExists() {
     if (userName.length > 0) {
       const url = await getUrl({
@@ -30,13 +47,15 @@ const CoverPhoto: React.FC = () => {
           validateObjectExistence: true,
         },
       });
-      // console.log("THISISURL: ", url);
-      if (url.url) {
-        /// console.log("THISISURL: ", url.url);
+      if (url && url.url.pathname) {
         setBgFileName(`${userName}-background-pic.jpg`);
       }
+      console.log(url);
     }
   }
+
+  checkFileExists();
+
   return (
     <div className="relative h-64 w-full">
       <img

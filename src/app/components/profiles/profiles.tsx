@@ -114,26 +114,27 @@ export default function Profiles(profile: AuthUser | any) {
   }, [profiles]);
 
   return (
-    // <div className="max-w-screen-lg mx-auto bg-gray-800 rounded-lg shadow-md p-6 mb-6 w-screen">
-    //   <div className="max-w-screen-sm mx-auto p-4">
-    <>
-      {" "}
-      {!editingProfile && (
+    <div className="max-w-screen-lg mx-auto bg-gray-800 rounded-lg shadow-md p-6 mb-6 w-screen">
+      <div className="max-w-screen-sm mx-auto p-4">
         <>
-          <div className="mb-4"></div>
-          <ProfileDescription
-            formData={singleProfile}
-            handleEditProfile={() => setEditingProfile(true)}
-          />
+          {" "}
+          {!editingProfile && (
+            <>
+              <div className="mb-4"></div>
+              <ProfileDescription
+                formData={singleProfile}
+                handleEditProfile={() => setEditingProfile(true)}
+              />
+            </>
+          )}
+          {editingProfile && (
+            <EditProfile
+              formData={singleProfile}
+              handleCancelProfile={() => setEditingProfile(false)}
+            />
+          )}
         </>
-      )}
-      {editingProfile && (
-        <EditProfile
-          formData={singleProfile}
-          handleCancelProfile={() => setEditingProfile(false)}
-        />
-      )}
-    </>
-    // </div>
+      </div>{" "}
+    </div>
   );
 }

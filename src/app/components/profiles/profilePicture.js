@@ -26,8 +26,11 @@ const ProfilePicture = ({ userName }) => {
         setImage(url.url);
       }
     }
+    return url;
   }
-  checkFileExists();
+  // checkFileExists().then((url) => {
+  //   console.log("This is url: ", url);
+  // });
   async function handleImageChange(e) {
     const file = e.target.files[0];
     const reader = new FileReader();
