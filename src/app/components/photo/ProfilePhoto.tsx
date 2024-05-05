@@ -31,11 +31,11 @@ const ProfilePhoto: React.FC = () => {
 
   return (
     <>
-      <img
+      {/* <img
         src={`https://mm-bucket191228-dev.s3.us-east-2.amazonaws.com/public/${fileName}`}
         alt="Profile Photo"
         className="w-32 h-32 rounded-full border-4 border-white"
-      />
+      /> */}
       <>rest</>
     </>
   );
