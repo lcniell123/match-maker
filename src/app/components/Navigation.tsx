@@ -14,7 +14,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Container } from "@/app/components/Container";
 import * as mutations from "@/graphql/mutations";
-import { redirect } from "next/navigation";
+// import { redirect } from "next/navigation";
 
 import {
   NotificationType,
@@ -311,9 +311,11 @@ export const Navigation = () => {
                     <button
                       onClick={() => {
                         signOut();
-                        redirect("/");
+                        console.log("clicked");
+                        // redirect("/yuiu");
+                        router.push("/");
                       }}
-                      // onClick={() => router.refresh()}
+                      //onClick={() => router.refresh()}
                       className={classNames(
                         active ? "bg-gray-100" : "",
                         "block px-4 py-2 text-sm text-gray-700"

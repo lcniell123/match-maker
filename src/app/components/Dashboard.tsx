@@ -3,8 +3,10 @@
 import CoverPhoto from "@/app/components/photo/CoverPhoto";
 import React, { useEffect, useState } from "react";
 import { Container } from "@/app/components/Container";
+import * as mutations from "@/graphql/mutations";
+
 import "../../../styles/globals.css";
-import { getCurrentUser } from "aws-amplify/auth";
+import { getCurrentUser, confirmUserAttribute } from "aws-amplify/auth";
 import * as queries from "@/graphql/queries";
 import { Profile } from "@/API";
 import { generateClient } from "aws-amplify/api";
@@ -13,86 +15,165 @@ import Matches from "@/app/tabs/Matches";
 import Friends from "@/app/tabs/Friends";
 import { Navigation } from "@/app/components/Navigation";
 
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 
 const Dashboard: React.FC = () => {
+  const router = useRouter();
+
   const [activeTab, setActiveTab] = useState<string>("Groups");
   const [userName, setUserName] = useState("");
-  const [hasProfile, setHasProfile] = useState(true);
+  const [completeProfile, setCompleteProfile] = useState(true);
   const [userId, setUserId] = useState("");
   const [profile, setProfile] = useState<Profile>();
   const client = generateClient();
 
   // Load list of profiles
-  async function currentAuthenticatedUser() {
-    try {
-      const { username, userId } = await getCurrentUser();
-      setUserName(username);
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
-  currentAuthenticatedUser();
+  // async function currentAuthenticatedUser() {
+  //   try {
+  //     const { username, userId } = await getCurrentUser();
+  //     setUserName(username);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }
+  // getCurrentUser().then((info) => {
+  //   console.log("!!!!", info);
+  //   if (info.username) {
+  //     setUserName(info.username);
+  //   }
+  // });
+  // currentAuthenticatedUser();
 
   const listProfile = client.graphql({
     query: queries.listProfiles,
   });
 
-  useEffect(() => {}, []);
-
   useEffect(() => {
     async function fetchData() {
-      try {
-        const { username, userId } = await getCurrentUser();
-        setUserName(username);
-        setUserId(userId);
+      getCurrentUser().then(async (info) => {
+        if (info.username) {
+          setUserName(info.username);
+          setUserId(info.userId);
+          const profileItem = await client.graphql({
+            query: queries.getProfile,
+            variables: { id: userId },
+          });
 
-        const profileItem = await client.graphql({
-          query: queries.getProfile,
-          variables: { id: userId },
-        });
-
-        if (profileItem.data.getProfile) {
-          setProfile(profileItem.data.getProfile);
+          if (profileItem.data.getProfile) {
+            setProfile(profileItem.data.getProfile);
+          }
         }
-      } catch (err) {
-        console.log(err);
-      }
-    }
-    fetchData();
+      });
 
-    // add profile list to profiles state
-    listProfile.then(async (d) => {
-      const { username } = await getCurrentUser();
-
-      if (d.data.listProfiles.items) {
-        console.log("items: ", d.data.listProfiles.items);
-        d.data.listProfiles.items.forEach((profile) => {
-          if (profile.name == username) {
-            //stop redirecting if these parameters are met
-            if (
-              !profile.name ||
-              !profile.age ||
-              !profile.languages ||
-              !profile.zipCode ||
-              !profile.country ||
-              !profile.preferredRole
-            ) {
-              setHasProfile(false);
+      listProfile.then(async (d) => {
+        //const { username, userId } = await getCurrentUser();
+        await getCurrentUser().then((info) => {
+          if (info.username) {
+            if (d.data.listProfiles.items) {
+              d.data.listProfiles.items.forEach((profile) => {
+                //console.log("pn", profile.name, username);
+                if (profile.name == info.username) {
+                  if (
+                    !profile.name ||
+                    !profile.age ||
+                    !profile.languages ||
+                    !profile.zipCode ||
+                    !profile.country ||
+                    !profile.preferredRole
+                  ) {
+                    setCompleteProfile(false);
+                    router.refresh();
+                  }
+                } else {
+                  // create new profile if it doesnt exist
+                  console.log("@@@@", info.username, userId);
+                  client.graphql({
+                    query: mutations.createProfile,
+                    variables: {
+                      input: {
+                        name: info.username,
+                        id: userId,
+                      },
+                    },
+                  });
+                  router.refresh();
+                }
+              });
             }
           }
         });
-      }
-    });
+      });
+      // try {
+      //   const { username, userId } = await getCurrentUser();
+      //   setUserName(username);
+      //   setUserId(userId);
+
+      //   const profileItem = await client.graphql({
+      //     query: queries.getProfile,
+      //     variables: { id: userId },
+      //   });
+
+      //   if (profileItem.data.getProfile) {
+      //     setProfile(profileItem.data.getProfile);
+      //   }
+      // } catch (err) {
+      //   console.log(err);
+      // }
+    }
+    fetchData();
   }, []);
+
   useEffect(() => {
-    console.log("hasProfile:", hasProfile);
-    if (!hasProfile) {
+    // add profile list to profiles state
+    if (userId.length > 0 && userName.length > 0 && userName) {
+      console.log("THISISID", userId, userName);
+      // listProfile.then(async (d) => {
+      //   //const { username, userId } = await getCurrentUser();
+      //   await getCurrentUser().then((info) => {
+      //     if (info.username) {
+      //       if (d.data.listProfiles.items) {
+      //         d.data.listProfiles.items.forEach((profile) => {
+      //           //console.log("pn", profile.name, username);
+      //           if (profile.name == info.username) {
+      //             if (
+      //               !profile.name ||
+      //               !profile.age ||
+      //               !profile.languages ||
+      //               !profile.zipCode ||
+      //               !profile.country ||
+      //               !profile.preferredRole
+      //             ) {
+      //               setCompleteProfile(false);
+      //               router.refresh();
+      //             }
+      //           } else {
+      //             // create new profile if it doesnt exist
+      //             console.log("@@@@", info.username, userId);
+      //             client.graphql({
+      //               query: mutations.createProfile,
+      //               variables: {
+      //                 input: {
+      //                   name: info.username,
+      //                   id: userId,
+      //                 },
+      //               },
+      //             });
+      //             router.refresh();
+      //           }
+      //         });
+      //       }
+      //     }
+      //   });
+      // });
+    }
+  }, [userId, userName]);
+
+  useEffect(() => {
+    if (!completeProfile) {
       console.log("rediretct to profile");
       redirect("/profile-form");
     }
-  }, [hasProfile]);
+  }, [completeProfile]);
 
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);
