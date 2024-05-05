@@ -20,13 +20,17 @@ import {
 } from "@/API";
 import { getUrl } from "aws-amplify/storage";
 import { fetchAuthSession } from "aws-amplify/auth";
+import { signOut } from "aws-amplify/auth";
 
 function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(" ");
 }
 
+async function handleSignOut() {
+  await signOut();
+}
+
 export const Navigation = () => {
-  const { signOut } = useAuthenticator();
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [userId, setUserId] = useState("");
   const [userName, setUserName] = useState("");
@@ -133,41 +137,41 @@ export const Navigation = () => {
     }
   }
   //check to see if profile bg exists
-  // async function checkFileExists() {
-  //   if (userName.length > 0) {
-  //     const url = await getUrl({
-  //       key: `${userName}-profile-pic.jpg`,
-  //       options: {
-  //         validateObjectExistence: true,
-  //       },
-  //     });
-  //     if (url.url) {
-  //       setImage(
-  //         `https://mm-bucket191228-dev.s3.us-east-2.amazonaws.com/public/${userName}-profile-pic.jpg`
-  //       );
-  //     }
-  //     console.log(url);
-  //   }
-  // }
-
-  // checkFileExists();
-
   async function checkFileExists() {
     if (userName.length > 0) {
       const url = await getUrl({
-        key: `mmm-background-pic.jpg`,
+        key: `${userName}-profile-pic.jpg`,
         options: {
           validateObjectExistence: true,
         },
       });
-      if (url && url.url) {
+      if (url.url) {
         setImage(
           `https://mm-bucket191228-dev.s3.us-east-2.amazonaws.com/public/${userName}-profile-pic.jpg`
         );
       }
-      console.log("URL: ", url);
+      console.log(url);
     }
   }
+
+  checkFileExists();
+
+  // async function checkFileExists() {
+  //   if (userName.length > 0) {
+  //     const url = await getUrl({
+  //       key: `mmm-background-pic.jpg`,
+  //       options: {
+  //         validateObjectExistence: true,
+  //       },
+  //     });
+  //     if (url && url.url) {
+  //       setImage(
+  //         `https://mm-bucket191228-dev.s3.us-east-2.amazonaws.com/public/${userName}-profile-pic.jpg`
+  //       );
+  //     }
+  //     console.log("URL: ", url);
+  //   }
+  // }
 
   //checkFileExists();
 
@@ -280,7 +284,7 @@ export const Navigation = () => {
                 <Menu.Item>
                   {({ active }) => (
                     <button
-                      onClick={signOut}
+                      onClick={() => signOut()}
                       className={classNames(
                         active ? "bg-gray-100" : "",
                         "block px-4 py-2 text-sm text-gray-700"
