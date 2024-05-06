@@ -121,7 +121,7 @@ const Dashboard: React.FC = () => {
       // }
     }
     fetchData();
-  }, []);
+  }, [userName, userId]);
 
   useEffect(() => {
     // add profile list to profiles state
@@ -169,11 +169,11 @@ const Dashboard: React.FC = () => {
   }, [userId, userName]);
 
   useEffect(() => {
-    if (!completeProfile) {
+    if (completeProfile == false) {
       console.log("rediretct to profile");
       redirect("/profile-form");
     }
-  }, [completeProfile]);
+  }, [userId, userName, completeProfile]);
 
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);

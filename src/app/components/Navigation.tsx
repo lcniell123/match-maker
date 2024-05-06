@@ -14,7 +14,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Container } from "@/app/components/Container";
 import * as mutations from "@/graphql/mutations";
-// import { redirect } from "next/navigation";
+import { redirect } from "next/navigation";
 
 import {
   NotificationType,
@@ -312,7 +312,7 @@ export const Navigation = () => {
                       onClick={() => {
                         signOut();
                         console.log("clicked");
-                        // redirect("/yuiu");
+                        redirect("/");
                         router.push("/");
                       }}
                       //onClick={() => router.refresh()}
