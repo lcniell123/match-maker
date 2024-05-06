@@ -1,27 +1,49 @@
 'use client';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Stepper from "@/app/components/Stepper";
 import ProfileDetails from '@/app/components/profile-form/ProfileDetails';
 import PersonalInformation from "@/app/components/profile-form/PersonalInfomation";
 import GamingPreferences from "@/app/components/profile-form/GamingPreferences";
 import {Container} from "@/app/components/Container";
+import {createProfile} from "@/graphql/mutations";
+import {generateClient} from "aws-amplify/api";
+import {getCurrentUser} from "aws-amplify/auth";
 
 export default function ProfileForm() {
     const [currentStep, setCurrentStep] = React.useState(0);
     const steps = ["Profile Details", "Personal Information", "Gaming Preferences"];
     const numberOfSteps = steps.length;
+    const client =  generateClient();
+    const [userId, setUserId] = useState("");
+    const [userName, setUserName] = useState("");
+
+    useEffect(() => {
+        async function currentAuthenticatedUser() {
+            try {
+                const {username, userId} = await getCurrentUser();
+                setUserName(username);
+                setUserId(userId);
+            } catch (err) {
+                console.log(err);
+            }
+        }
+
+        currentAuthenticatedUser();
+    }, []);
 
     const [formData, setFormData] = useState({
-        name: "",
+        name: userName,
         bio: "",
         photo: "",
         coverPhoto: "",
         firstName: "",
         lastName: "",
         age: "",
-        languages: "",
+        city: "",
+        language: "",
         country: "",
         zipCode: "",
+        region: "",
         timeZone: "",
         gamePreference: "",
         skillLevel: "",
@@ -40,6 +62,22 @@ export default function ProfileForm() {
         competitivenessLevel: "",
     });
 
+    console.log(formData);
+
+    const updateTimezone = (timeZone: string) => {
+        setFormData(prevFormData => ({
+            ...prevFormData,
+            timeZone: timeZone
+        }));
+    };
+
+    const updateGames = (selectedGames: any) => {
+        setFormData((prevData) => ({
+            ...prevData,
+            favoriteGame: selectedGames.join(", ")
+        }));
+    };
+
     const handleChange = (e: any) => {
         const {name, value} = e.target;
         setFormData((prevData) => ({
@@ -47,12 +85,20 @@ export default function ProfileForm() {
             [name]: value
         }));
     };
-    const handleSave = () => {
-        console.log("Form data:", formData);
+   const handleSave = async () => {
+        try {
+            await client.graphql({
+                query: createProfile,
+                variables: { input: formData },
+            });
+
+            console.log("Profile created successfully");
+        } catch (error) {
+            console.error("Error creating profile:", error);
+        }
     };
 
     const goToNextStep = () => {
-        handleSave();
         setCurrentStep(prev => prev === numberOfSteps - 1 ? prev : prev + 1);
 
     };
@@ -74,8 +120,9 @@ export default function ProfileForm() {
                     </div>
                     <Stepper currentStep={currentStep} steps={steps}/>
                     {currentStep === 0 && <ProfileDetails formData={formData} handleChange={handleChange}/>}
-                    {currentStep === 1 && <PersonalInformation formData={formData} handleChange={handleChange}/>}
-                    {currentStep === 2 && <GamingPreferences formData={formData} handleChange={handleChange}/>}
+                    {currentStep === 1 && <PersonalInformation formData={formData} handleChange={handleChange}
+                                                               updateTimezone={updateTimezone}/>}
+                    {currentStep === 2 && <GamingPreferences formData={formData} handleChange={handleChange} updateGames={updateGames}/>}
                 </div>
 
                 <div className="mt-6 flex items-center justify-end gap-x-6">
