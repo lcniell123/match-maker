@@ -1,5 +1,5 @@
 import React from "react";
-import { Navigation } from "./MenuNavigation";
+import { Navigation } from "./oldMenuNavigation";
 
 describe("<Navigation />", () => {
   xit("should allow users to click on notification button to check their friend requests", () => {
