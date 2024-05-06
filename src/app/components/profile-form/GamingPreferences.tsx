@@ -1,10 +1,36 @@
 import React from 'react';
+import GameList from "@/app/components/GameList";
+
 interface GamingPreferencesProps {
-  formData: any,
-  handleChange: any
+    formData: any,
+    handleChange: any,
+    updateGames: (games: string) => void
 }
 
-const GamingPreferences:React.FC<GamingPreferencesProps> = ({formData, handleChange}) => {
+const games = [
+    "Call of Duty",
+    "Overwatch",
+    "The Witcher 3: Wild Hunt",
+    "Fortnite",
+    "Apex Legends",
+    "FIFA series",
+    "Red Dead Redemption 2",
+    "Assassin's Creed Valhalla",
+    "Final Fantasy XIV",
+    "Rocket League",
+    "League of Legends",
+    "Valorant",
+    "Minecraft",
+    "Counter-Strike: Global Offensive",
+    "Genshin Impact",
+    "Among Us",
+    "World of Warcraft",
+    "PlayerUnknown's Battlegrounds",
+    "Dota 2",
+    "Rainbow Six Siege",
+];
+
+const GamingPreferences: React.FC<GamingPreferencesProps> = ({formData, handleChange, updateGames}) => {
     console.log(formData);
 
     return (
@@ -20,18 +46,10 @@ const GamingPreferences:React.FC<GamingPreferencesProps> = ({formData, handleCha
                     <div className="mt-6 space-y-6">
                         <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                             <div className="sm:col-span-4">
-                                <label htmlFor="games" className="block text-sm font-medium leading-6 text-gray-900">Favorite
-                                    game</label>
+                                <label htmlFor="favoriteGame"
+                                       className="block text-sm font-medium leading-6 text-gray-900">
+                                    Games you would like to find team mates for</label>
                                 <div className="mt-2">
-                                    <select
-                                        id="favorite-game"
-                                        name="favorite-game"
-                                        className="block bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    >
-                                        <option>Fortnite</option>
-                                        <option>Counter Strike</option>
-                                        <option>Other</option>
-                                    </select>
                                 </div>
                             </div>
                             <div className="sm:col-span-4">
@@ -40,10 +58,13 @@ const GamingPreferences:React.FC<GamingPreferencesProps> = ({formData, handleCha
                                     genre</label>
                                 <div className="mt-2">
                                     <select
-                                        id="preferred-genre"
-                                        name="preferred-genre"
-                                        className="block bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        onChange={handleChange}
+                                        value={formData.preferredGenre}
+                                        id="preferredGenre"
+                                        name="preferredGenre"
+                                        className="block bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     >
+                                        <option>Select...</option>
                                         <option>Shooter</option>
                                         <option>Action</option>
                                         <option>Adventure</option>
@@ -61,13 +82,23 @@ const GamingPreferences:React.FC<GamingPreferencesProps> = ({formData, handleCha
                                     availability for gaming sessions</label>
                                 <div className="mt-2">
                                     <select
-                                        id="time-availability"
-                                        name="time-availability"
-                                        className="block bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        onChange={handleChange}
+                                        value={formData.timeAvailability}
+                                        id="timeAvailability"
+                                        name="timeAvailability"
+                                        className="block bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     >
-                                        <option>Weekends Morning</option>
-                                        <option>Weekends Afternoon</option>
-                                        <option>Weekends Evening</option>
+                                        <option value="">Select...</option>
+                                        <option value="(6-12 AM) Weekdays Morning">(6-12 AM) Weekdays Morning</option>
+                                        <option value="(12-5 PM) Weekdays Afternoon">(12-5 PM) Weekdays Afternoon
+                                        </option>
+                                        <option value="(5-9 PM) Weekdays Evening">(5-9 PM) Weekdays Evening</option>
+                                        <option value="(9-6 AM) Weekdays Night">(9-6 AM) Weekdays Night</option>
+                                        <option value="(6-12 AM) Weekends Morning">(6-12 AM) Weekends Morning</option>
+                                        <option value="(12-5 PM) Weekends Afternoon">(12-5 PM) Weekends Afternoon
+                                        </option>
+                                        <option value="(5-9 PM) Weekends Evening">(5-9 PM) Weekends Evening</option>
+                                        <option value="(9-6 AM) Weekends Night">(9-6 AM) Weekends Night</option>
                                     </select>
                                 </div>
                             </div>
@@ -77,11 +108,11 @@ const GamingPreferences:React.FC<GamingPreferencesProps> = ({formData, handleCha
                                     age range of teammates</label>
                                 <div className="mt-2">
                                     <select
-                                        id="age-range"
-                                        name="age-range"
-                                        className="block bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        id="preferredTeammateAgeRange"
+                                        name="preferredTeammateAgeRange"
+                                        className="block bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     >
-                                        <option value="">No preference</option>
+                                        <option value="No preference">No preference</option>
                                         <option value="16-24">16-24</option>
                                         <option value="25-34">25-34</option>
                                         <option value="35-44">35-44</option>
@@ -96,8 +127,11 @@ const GamingPreferences:React.FC<GamingPreferencesProps> = ({formData, handleCha
                             <div className="flex items-center gap-x-3">
                                 <input
                                     id="beginner"
-                                    name="skill-level"
+                                    name="skillLevel"
                                     type="radio"
+                                    value="Beginner"
+                                    checked={formData.skillLevel === "Beginner"}
+                                    onChange={handleChange}
                                     className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                                 />
                                 <label htmlFor="beginner" className="block text-sm font-medium leading-6 text-gray-900">
@@ -107,8 +141,11 @@ const GamingPreferences:React.FC<GamingPreferencesProps> = ({formData, handleCha
                             <div className="flex items-center gap-x-3">
                                 <input
                                     id="intermediate"
-                                    name="skill-level"
+                                    name="skillLevel"
                                     type="radio"
+                                    value="Intermediate"
+                                    checked={formData.skillLevel === "Intermediate"}
+                                    onChange={handleChange}
                                     className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                                 />
                                 <label htmlFor="intermediate"
@@ -119,8 +156,11 @@ const GamingPreferences:React.FC<GamingPreferencesProps> = ({formData, handleCha
                             <div className="flex items-center gap-x-3">
                                 <input
                                     id="advanced"
-                                    name="skill-level"
+                                    name="skillLevel"
                                     type="radio"
+                                    value="Advanced"
+                                    checked={formData.skillLevel === "Advanced"}
+                                    onChange={handleChange}
                                     className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                                 />
                                 <label htmlFor="advanced" className="block text-sm font-medium leading-6 text-gray-900">
@@ -133,8 +173,11 @@ const GamingPreferences:React.FC<GamingPreferencesProps> = ({formData, handleCha
                             <div className="flex items-center gap-x-3">
                                 <input
                                     id="ranked"
-                                    name="game-mode"
+                                    name="preferredGameMode"
                                     type="radio"
+                                    value="Ranked"
+                                    checked={formData.preferredGameMode === "Ranked"}
+                                    onChange={handleChange}
                                     className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                                 />
                                 <label htmlFor="ranked" className="block text-sm font-medium leading-6 text-gray-900">
@@ -144,8 +187,11 @@ const GamingPreferences:React.FC<GamingPreferencesProps> = ({formData, handleCha
                             <div className="flex items-center gap-x-3">
                                 <input
                                     id="casual"
-                                    name="game-mode"
+                                    name="preferredGameMode"
                                     type="radio"
+                                    value="Casual"
+                                    checked={formData.preferredGameMode === "Casual"}
+                                    onChange={handleChange}
                                     className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                                 />
                                 <label htmlFor="casual" className="block text-sm font-medium leading-6 text-gray-900">
@@ -155,8 +201,11 @@ const GamingPreferences:React.FC<GamingPreferencesProps> = ({formData, handleCha
                             <div className="flex items-center gap-x-3">
                                 <input
                                     id="cooperative"
-                                    name="game-mode"
+                                    name="preferredGameMode"
                                     type="radio"
+                                    value="Cooperative"
+                                    checked={formData.preferredGameMode === "Cooperative"}
+                                    onChange={handleChange}
                                     className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                                 />
                                 <label htmlFor="cooperative"
@@ -180,14 +229,18 @@ const GamingPreferences:React.FC<GamingPreferencesProps> = ({formData, handleCha
                                     in-game</label>
                                 <div className="mt-2">
                                     <select
-                                        id="role"
-                                        name="role"
-                                        className="block bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        onChange={handleChange}
+                                        value={formData.preferredRole}
+                                        id="preferredRole"
+                                        name="preferredRole"
+                                        className="block bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     >
-                                        <option>Tank</option>
-                                        <option>Healer</option>
-                                        <option>Support</option>
-                                        <option>Damage Per Second (DPS)</option>
+                                        <option value="">Select...</option>
+                                        <option value="Tank">Tank</option>
+                                        <option value="Damage Per Second (DPS)">Damage Per Second (DPS)</option>
+                                        <option value="Support">Support</option>
+                                        <option value="Healer">Healer</option>
+                                        <option value="Utility">Utility</option>
                                     </select>
                                 </div>
                             </div>
@@ -197,10 +250,13 @@ const GamingPreferences:React.FC<GamingPreferencesProps> = ({formData, handleCha
                                     Style</label>
                                 <div className="mt-2">
                                     <select
-                                        id="play-style"
-                                        name="play-style"
-                                        className="block bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        onChange={handleChange}
+                                        value={formData.playStyle}
+                                        id="playStyle"
+                                        name="playStyle"
+                                        className="block bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     >
+                                        <option value="">Select...</option>
                                         <option value="Aggressive/Offensive">Aggressive/Offensive</option>
                                         <option value="Defensive/Tactical">Defensive/Tactical</option>
                                         <option value="Supportive/Team-oriented">Supportive/Team-oriented</option>
@@ -221,6 +277,9 @@ const GamingPreferences:React.FC<GamingPreferencesProps> = ({formData, handleCha
                                     id="yes"
                                     name="flexibility"
                                     type="radio"
+                                    value="Yes"
+                                    checked={formData.flexibility === "Yes"}
+                                    onChange={handleChange}
                                     className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                                 />
                                 <label htmlFor="yes" className="block text-sm font-medium leading-6 text-gray-900">
@@ -232,6 +291,9 @@ const GamingPreferences:React.FC<GamingPreferencesProps> = ({formData, handleCha
                                     id="no"
                                     name="flexibility"
                                     type="radio"
+                                    value="No"
+                                    checked={formData.flexibility === "No"}
+                                    onChange={handleChange}
                                     className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                                 />
                                 <label htmlFor="no" className="block text-sm font-medium leading-6 text-gray-900">
@@ -250,14 +312,17 @@ const GamingPreferences:React.FC<GamingPreferencesProps> = ({formData, handleCha
                     <div className="mt-6 space-y-6">
                         <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                             <div className="sm:col-span-4">
-                                <label htmlFor="role"
+                                <label htmlFor="behaviour"
                                        className="block text-sm font-medium leading-6 text-gray-900">Behavior</label>
                                 <div className="mt-2">
                                     <select
-                                        id="behavior"
-                                        name="behavior"
-                                        className="block bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        onChange={handleChange}
+                                        value={formData.behaviour}
+                                        id="behaviour"
+                                        name="behaviour"
+                                        className="block bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     >
+                                        <option value="">Select...</option>
                                         <option value="Friendly">Friendly</option>
                                         <option value="Competitive">Competitive</option>
                                         <option value="Team Player">Team Player</option>
@@ -273,8 +338,11 @@ const GamingPreferences:React.FC<GamingPreferencesProps> = ({formData, handleCha
                             <div className="flex items-center gap-x-3">
                                 <input
                                     id="voice"
-                                    name="communication"
+                                    name="communicationPreference"
                                     type="radio"
+                                    value="Voice chat"
+                                    checked={formData.communicationPreference === "Voice chat"}
+                                    onChange={handleChange}
                                     className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                                 />
                                 <label htmlFor="voice" className="block text-sm font-medium leading-6 text-gray-900">
@@ -284,8 +352,11 @@ const GamingPreferences:React.FC<GamingPreferencesProps> = ({formData, handleCha
                             <div className="flex items-center gap-x-3">
                                 <input
                                     id="text"
-                                    name="communication"
+                                    name="communicationPreference"
                                     type="radio"
+                                    value="Text chat"
+                                    checked={formData.communicationPreference === "Text chat"}
+                                    onChange={handleChange}
                                     className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                                 />
                                 <label htmlFor="text" className="block text-sm font-medium leading-6 text-gray-900">
@@ -295,8 +366,11 @@ const GamingPreferences:React.FC<GamingPreferencesProps> = ({formData, handleCha
                             <div className="flex items-center gap-x-3">
                                 <input
                                     id="none"
-                                    name="communication"
+                                    name="communicationPreference"
                                     type="radio"
+                                    value="No preference"
+                                    checked={formData.communicationPreference === "No preference"}
+                                    onChange={handleChange}
                                     className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                                 />
                                 <label htmlFor="none" className="block text-sm font-medium leading-6 text-gray-900">
@@ -304,77 +378,101 @@ const GamingPreferences:React.FC<GamingPreferencesProps> = ({formData, handleCha
                                 </label>
                             </div>
                         </div>
+
                         <p className="block text-sm font-medium leading-6 text-gray-900">Level of tolerance for
                             mistakes</p>
                         <div className="mt-6 flex gap-x-6">
                             <div className="flex items-center gap-x-3">
                                 <input
-                                    id="high"
-                                    name="tolerance-level"
+                                    id="highTolerance"
+                                    name="toleranceLevel"
+                                    value="High"
                                     type="radio"
+                                    checked={formData.toleranceLevel === "High"}
+                                    onChange={handleChange}
                                     className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                                 />
-                                <label htmlFor="high" className="block text-sm font-medium leading-6 text-gray-900">
+                                <label htmlFor="highTolerance"
+                                       className="block text-sm font-medium leading-6 text-gray-900">
                                     High
                                 </label>
                             </div>
                             <div className="flex items-center gap-x-3">
                                 <input
-                                    id="average"
-                                    name="tolerance-level"
+                                    id="averageTolerance"
+                                    name="toleranceLevel"
+                                    value="Average"
                                     type="radio"
+                                    checked={formData.toleranceLevel === "Average"}
+                                    onChange={handleChange}
                                     className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                                 />
-                                <label htmlFor="average" className="block text-sm font-medium leading-6 text-gray-900">
+                                <label htmlFor="averageTolerance"
+                                       className="block text-sm font-medium leading-6 text-gray-900">
                                     Average
                                 </label>
                             </div>
                             <div className="flex items-center gap-x-3">
                                 <input
-                                    id="low"
-                                    name="tolerance-level"
+                                    id="lowTolerance"
+                                    name="toleranceLevel"
+                                    value="Low"
                                     type="radio"
+                                    checked={formData.toleranceLevel === "Low"}
+                                    onChange={handleChange}
                                     className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                                 />
-                                <label htmlFor="low" className="block text-sm font-medium leading-6 text-gray-900">
+                                <label htmlFor="lowTolerance"
+                                       className="block text-sm font-medium leading-6 text-gray-900">
                                     Low
                                 </label>
                             </div>
                         </div>
-
                         <p className="block text-sm font-medium leading-6 text-gray-900">Level of teamwork and
                             collaboration</p>
                         <div className="mt-6 flex gap-x-6">
                             <div className="flex items-center gap-x-3">
                                 <input
-                                    id="high"
-                                    name="teamwork-level"
+                                    id="highTeamwork"
+                                    name="teamworkLevel"
+                                    value="High"
                                     type="radio"
+                                    checked={formData.teamworkLevel === "High"}
+                                    onChange={handleChange}
                                     className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                                 />
-                                <label htmlFor="high" className="block text-sm font-medium leading-6 text-gray-900">
+                                <label htmlFor="highTeamwork"
+                                       className="block text-sm font-medium leading-6 text-gray-900">
                                     High
                                 </label>
                             </div>
                             <div className="flex items-center gap-x-3">
                                 <input
-                                    id="average"
-                                    name="teamwork-level"
+                                    id="averageTeamwork"
+                                    name="teamworkLevel"
+                                    value="Average"
                                     type="radio"
+                                    checked={formData.teamworkLevel === "Average"}
+                                    onChange={handleChange}
                                     className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                                 />
-                                <label htmlFor="average" className="block text-sm font-medium leading-6 text-gray-900">
+                                <label htmlFor="averageTeamwork"
+                                       className="block text-sm font-medium leading-6 text-gray-900">
                                     Average
                                 </label>
                             </div>
                             <div className="flex items-center gap-x-3">
                                 <input
-                                    id="low"
-                                    name="teamwork-level"
+                                    id="lowTeamwork"
+                                    name="teamworkLevel"
+                                    value="Low"
                                     type="radio"
+                                    checked={formData.teamworkLevel === "Low"}
+                                    onChange={handleChange}
                                     className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                                 />
-                                <label htmlFor="low" className="block text-sm font-medium leading-6 text-gray-900">
+                                <label htmlFor="lowTeamwork"
+                                       className="block text-sm font-medium leading-6 text-gray-900">
                                     Low
                                 </label>
                             </div>
@@ -383,40 +481,54 @@ const GamingPreferences:React.FC<GamingPreferencesProps> = ({formData, handleCha
                         <div className="mt-6 flex gap-x-6">
                             <div className="flex items-center gap-x-3">
                                 <input
-                                    id="high"
-                                    name="competitiveness-level"
+                                    id="highCompetitiveness"
+                                    name="competitivenessLevel"
+                                    value="High"
                                     type="radio"
+                                    checked={formData.competitivenessLevel === "High"}
+                                    onChange={handleChange}
                                     className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                                 />
-                                <label htmlFor="high" className="block text-sm font-medium leading-6 text-gray-900">
+                                <label htmlFor="highCompetitiveness"
+                                       className="block text-sm font-medium leading-6 text-gray-900">
                                     High
                                 </label>
                             </div>
                             <div className="flex items-center gap-x-3">
                                 <input
-                                    id="average"
-                                    name="competitiveness-level"
+                                    id="averageCompetitiveness"
+                                    name="competitivenessLevel"
+                                    value="Average"
                                     type="radio"
+                                    checked={formData.competitivenessLevel === "Average"}
+                                    onChange={handleChange}
                                     className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                                 />
-                                <label htmlFor="average" className="block text-sm font-medium leading-6 text-gray-900">
+                                <label htmlFor="averageCompetitiveness"
+                                       className="block text-sm font-medium leading-6 text-gray-900">
                                     Average
                                 </label>
                             </div>
                             <div className="flex items-center gap-x-3">
                                 <input
-                                    id="low"
-                                    name="competitiveness-level"
+                                    id="lowCompetitiveness"
+                                    name="competitivenessLevel"
+                                    value="Low"
                                     type="radio"
+                                    checked={formData.competitivenessLevel === "Low"}
+                                    onChange={handleChange}
                                     className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                                 />
-                                <label htmlFor="low" className="block text-sm font-medium leading-6 text-gray-900">
+                                <label htmlFor="lowCompetitiveness"
+                                       className="block text-sm font-medium leading-6 text-gray-900">
                                     Low
                                 </label>
                             </div>
                         </div>
                     </div>
                 </fieldset>
+
+
             </div>
         </div>
     );
