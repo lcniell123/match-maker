@@ -4,7 +4,7 @@ enum FriendRequestStatus {
   REJECTED
 }
 
-type FriendRequest @model @auth(rules: [{allow: private}]) {
+type FriendRequest @model @auth(rules: [{ allow: private }]) {
   id: ID!
   status: FriendRequestStatus
   sender: Profile @hasOne
@@ -18,7 +18,7 @@ enum NotificationType {
   GROUP_MESSAGE
 }
 
-type Notification @model @auth(rules: [{allow: private}]) {
+type Notification @model @auth(rules: [{ allow: private }]) {
   id: ID!
   type: NotificationType
   content: String!
@@ -27,14 +27,14 @@ type Notification @model @auth(rules: [{allow: private}]) {
   originator: Profile @hasOne
 }
 
-type Memberships @model @auth(rules: [{allow: private}]) {
+type Memberships @model @auth(rules: [{ allow: private }]) {
   id: ID!
   group: Groups @hasOne
   user: Profile @hasOne
   status: RelationshipStatus
 }
 
-type Groups @model @auth(rules: [{allow: private}]) {
+type Groups @model @auth(rules: [{ allow: private }]) {
   id: ID!
   description: String
   name: String!
@@ -43,7 +43,7 @@ type Groups @model @auth(rules: [{allow: private}]) {
   members: [Profile] @hasMany(indexName: "byGroups", fields: ["id"])
 }
 
-type Matches @model @auth(rules: [{allow: private}]) {
+type Matches @model @auth(rules: [{ allow: private }]) {
   id: ID!
   user: Profile @hasOne
   matches: [Profile] @hasMany
@@ -57,7 +57,7 @@ enum RelationshipStatus {
   GROUP
 }
 
-type Friendships @model @auth(rules: [{allow: private}]) {
+type Friendships @model @auth(rules: [{ allow: private }]) {
   id: ID!
   friendshipStatus: RelationshipStatus
   updatedBy: ID
@@ -65,7 +65,7 @@ type Friendships @model @auth(rules: [{allow: private}]) {
   secondUser: Profile @hasOne
 }
 
-type Profile @model @auth(rules: [{allow: private}]) {
+type Profile @model @auth(rules: [{ allow: private }]) {
   id: ID!
   name: String!
   description: String
@@ -102,4 +102,3 @@ type Profile @model @auth(rules: [{allow: private}]) {
   competitivenessLevel: String
   groupsID: ID @index(name: "byGroups")
 }
- 

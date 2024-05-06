@@ -26,15 +26,11 @@ export declare type GroupsUpdateFormInputValues = {
     description?: string;
     name?: string;
     image?: string;
-    updatedAt?: string;
-    createdAt?: string;
 };
 export declare type GroupsUpdateFormValidationValues = {
     description?: ValidationFunction<string>;
     name?: ValidationFunction<string>;
     image?: ValidationFunction<string>;
-    updatedAt?: ValidationFunction<string>;
-    createdAt?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type GroupsUpdateFormOverridesProps = {
@@ -42,8 +38,6 @@ export declare type GroupsUpdateFormOverridesProps = {
     description?: PrimitiveOverrideProps<TextFieldProps>;
     name?: PrimitiveOverrideProps<TextFieldProps>;
     image?: PrimitiveOverrideProps<TextFieldProps>;
-    updatedAt?: PrimitiveOverrideProps<TextFieldProps>;
-    createdAt?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type GroupsUpdateFormProps = React.PropsWithChildren<{
     overrides?: GroupsUpdateFormOverridesProps | undefined | null;

@@ -1,0 +1,11 @@
+{
+  "resourceName": "mmFriedlyName",
+  "policyUUID": "64390d41",
+  "bucketName": "mm-bucket",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE"
+  ],
+  "groupAccess": {}
+}
