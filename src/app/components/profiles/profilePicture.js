@@ -8,26 +8,38 @@ const ProfilePicture = ({ userName }) => {
     "https://mm-bucket191228-dev.s3.us-east-2.amazonaws.com/public/default-profile-pic.jpg"
   );
 
-  async function checkFileExists() {
-    if (userName.length > 0) {
-      const url = await getUrl({
-        key: `${userName}-profile-pic.jpg`,
-        options: {
-          validateObjectExistence: true,
-        },
-      });
-      if (url.url.pathname) {
-        setImage(
-          `https://mm-bucket191228-dev.s3.us-east-2.amazonaws.com/public/${userName}-profile-pic.jpg`
-        );
+  async function currentAuthenticatedUser() {
+    try {
+      const { username, userId } = await getCurrentUser();
+
+      if (username) {
+        await getUrl({
+          key: `${username}-profile-pic.jpg`,
+          options: {
+            validateObjectExistence: true,
+          },
+        }).then((url) => {
+          if (url && url.url.pathname.includes(username)) {
+            console.log("testing again");
+            setImage(
+              `https://mm-bucket191228-dev.s3.us-east-2.amazonaws.com/public/${username}-profile-pic.jpg`
+            );
+          }
+        });
       }
+    } catch (err) {
+      console.log(err);
     }
   }
 
-  checkFileExists();
+  useEffect(() => {
+    currentAuthenticatedUser();
+  }, []);
 
+  // checkFileExists().then((url) => {
+  //   console.log("This is url: ", url);
+  // });
   async function handleImageChange(e) {
-    // alert("clicked");
     const file = e.target.files[0];
     const reader = new FileReader();
 
@@ -59,17 +71,19 @@ const ProfilePicture = ({ userName }) => {
     <div className="flex justify-center items-center h-full">
       <label htmlFor="profile-image" className="cursor-pointer">
         {image ? (
-          <img
-            src={image}
-            alt="Profile"
-            style={{
-              width: 100,
-              height: 100,
-              borderRadius: "50%",
-              objectFit: "cover",
-              marginTop: 10,
-            }}
-          />
+          <>
+            <img
+              src={image}
+              alt="Profile"
+              style={{
+                width: 100,
+                height: 100,
+                borderRadius: "50%",
+                objectFit: "cover",
+                marginTop: 10,
+              }}
+            />
+          </>
         ) : (
           <div
             style={{

@@ -25,15 +25,11 @@ export declare type GroupsCreateFormInputValues = {
     description?: string;
     name?: string;
     image?: string;
-    updatedAt?: string;
-    createdAt?: string;
 };
 export declare type GroupsCreateFormValidationValues = {
     description?: ValidationFunction<string>;
     name?: ValidationFunction<string>;
     image?: ValidationFunction<string>;
-    updatedAt?: ValidationFunction<string>;
-    createdAt?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type GroupsCreateFormOverridesProps = {
@@ -41,8 +37,6 @@ export declare type GroupsCreateFormOverridesProps = {
     description?: PrimitiveOverrideProps<TextFieldProps>;
     name?: PrimitiveOverrideProps<TextFieldProps>;
     image?: PrimitiveOverrideProps<TextFieldProps>;
-    updatedAt?: PrimitiveOverrideProps<TextFieldProps>;
-    createdAt?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type GroupsCreateFormProps = React.PropsWithChildren<{
     overrides?: GroupsCreateFormOverridesProps | undefined | null;

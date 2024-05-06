@@ -14,7 +14,8 @@
     "categories": {
       "auth": {
         "matchmakera431c571": {},
-        "userPoolGroups": {}
+        "userPoolGroups": {},
+        "matchmaker5007bbc6": {}
       },
       "storage": {
         "s3matchmakerstoragefb200466": {},

@@ -7,13 +7,14 @@
       "mode": "AMAZON_COGNITO_USER_POOLS",
       "cognitoUserPoolId": "authmatchmakera431c571"
     },
-    "conflictResolution": {},
+    "conflictResolution": {
+      "defaultResolutionStrategy": {
+        "type": "NONE"
+      }
+    },
     "additionalAuthTypes": [
       {
-        "mode": "API_KEY",
-        "expirationTime": 7,
-        "apiKeyExpirationDate": "2024-05-01T02:04:45.553Z",
-        "keyDescription": ""
+        "mode": "AWS_IAM"
       }
     ]
   }

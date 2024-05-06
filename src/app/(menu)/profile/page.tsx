@@ -3,13 +3,13 @@ import React, { useEffect, useState } from "react";
 import "@aws-amplify/ui-react/styles.css";
 import * as mutations from "@/graphql/mutations";
 import { getCurrentUser } from "aws-amplify/auth";
-import { useRouter } from "next/navigation";
 import { generateClient } from "aws-amplify/api";
 import * as queries from "@/graphql/queries";
 import ProfileDescription from "../../components/profiles/profileDescription";
 import EditProfile from "../../components/profiles/editProfile";
+import { redirect } from "next/navigation";
 
-import awsExports from "../../../../amplifyconfiguration.json";
+import awsExports from "../../../amplifyconfiguration.json";
 import { Amplify } from "aws-amplify";
 //const router = useRouter();
 const client = generateClient();
@@ -55,6 +55,7 @@ export interface Profile {
 function Profile() {
   const [userName, setUserName] = useState("");
   const [userId, setUserId] = useState("");
+  const [hasProfile, setHasProfile] = useState(true);
 
   async function currentAuthenticatedUser() {
     try {
@@ -79,12 +80,41 @@ function Profile() {
 
   useEffect(() => {
     // add profile list to profiles state
-    listProfile.then((d) => {
+    listProfile.then(async (d) => {
+      const { username } = await getCurrentUser();
+
       if (d.data.listProfiles.items) {
         setProfiles(d.data.listProfiles.items);
       }
+
+      if (d.data.listProfiles.items) {
+        console.log("items: ", d.data.listProfiles.items);
+        d.data.listProfiles.items.forEach((profile) => {
+          if (profile.name == username) {
+            //stop redirecting if these parameters are met
+            if (
+              !profile.name ||
+              !profile.age ||
+              !profile.languages ||
+              !profile.zipCode ||
+              !profile.country ||
+              !profile.preferredRole
+            ) {
+              setHasProfile(false);
+            }
+          }
+        });
+      }
     });
   }, []);
+
+  useEffect(() => {
+    console.log("hasProfile:", hasProfile);
+    if (!hasProfile) {
+      console.log("rediretct to profile");
+      redirect("/profile-form");
+    }
+  }, [hasProfile]);
 
   useEffect(() => {
     // if no profiles create a profile with name and id
@@ -145,6 +175,7 @@ function Profile() {
       )}
     </>
   );
+  // return <></>;
 }
 
 export default Profile;

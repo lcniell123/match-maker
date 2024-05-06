@@ -1,27 +1,24 @@
-import type {Metadata} from 'next';
-import {Inter} from 'next/font/google'
-import '../../styles/globals.css';
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "../../styles/globals.css";
 import React from "react";
-import {Navigation} from "@/app/components/Navigation";
+import { Navigation } from "@/app/components/Navigation";
 
-
-
-
-const inter = Inter({subsets: ['latin']})
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-    title: 'Matchmaker App',
-    description: 'Find like-minded team members for gaming',
-}
+  title: "Matchmaker App",
+  description: "Find like-minded team members for gaming",
+};
 
-export default function RootLayout({children}: {
-    children: React.ReactNode
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
 }) {
-    return (
-        <html lang="en">
-        <body className={inter.className}>
-        {children}
-        </body>
-        </html>
-    )
+  return (
+    <html lang="en">
+      <body className={inter.className}>{children}</body>
+    </html>
+  );
 }

@@ -1,5 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+
 import "@aws-amplify/ui-react/styles.css";
 import { getCurrentUser } from "aws-amplify/auth";
 import { generateClient } from "aws-amplify/api";
@@ -12,16 +14,29 @@ import Link from "next/link";
 import Image from "next/image";
 import { Container } from "@/app/components/Container";
 import * as mutations from "@/graphql/mutations";
-import {NotificationType, RelationshipStatus, FriendRequestStatus, Notification} from "@/API";
+// import { redirect } from "next/navigation";
+
+import {
+  NotificationType,
+  RelationshipStatus,
+  FriendRequestStatus,
+  Notification,
+} from "@/API";
 import { getUrl } from "aws-amplify/storage";
 import { fetchAuthSession } from "aws-amplify/auth";
+import { signOut } from "aws-amplify/auth";
 
 function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(" ");
 }
 
+async function handleSignOut() {
+  await signOut();
+}
+
 export const Navigation = () => {
-  const { signOut } = useAuthenticator();
+  const router = useRouter();
+
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [userId, setUserId] = useState("");
   const [userName, setUserName] = useState("");
@@ -36,12 +51,28 @@ export const Navigation = () => {
       const { username, userId } = await getCurrentUser();
       setUserName(username);
       setUserId(userId);
+      if (username) {
+        await getUrl({
+          key: `${username}-profile-pic.jpg`,
+          options: {
+            validateObjectExistence: true,
+          },
+        }).then((url) => {
+          if (url && url.url.pathname.includes(username)) {
+            setImage(
+              `https://mm-bucket191228-dev.s3.us-east-2.amazonaws.com/public/${username}-profile-pic.jpg`
+            );
+          }
+        });
+      }
     } catch (err) {
       console.log(err);
     }
   }
 
-  currentAuthenticatedUser();
+  useEffect(() => {
+    currentAuthenticatedUser();
+  }, []);
 
   async function currentSession() {
     try {
@@ -66,7 +97,7 @@ export const Navigation = () => {
                 eq: userId,
               },
               read: {
-                eq: false
+                eq: false,
               },
             },
           },
@@ -102,7 +133,7 @@ export const Navigation = () => {
 
   async function acceptFriendRequest(notificationID: any, friendId: any) {
     try {
-       await client.graphql({
+      await client.graphql({
         query: mutations.updateNotification,
         variables: {
           input: {
@@ -127,24 +158,47 @@ export const Navigation = () => {
       console.error("Error accepting friend request:", error);
     }
   }
-  async function checkFileExists() {
-    if (userName && userName.length > 0) {
-      const url = await getUrl({
-        key: `${userName}-profile-pic.jpg`,
-        options: {
-          validateObjectExistence: true,
-        },
-      });
-      if (url.url.pathname) {
-        setImage(`${userName}-profile-pic.jpg`);
-      }
-      //console.log(url);
-    }
-  }
+  //check to see if profile bg exists
+  //async function checkFileExists() {
+  // if (userName.length > 0) {
+  //   const url = await getUrl({
+  //     key: `${userName}-profile-pic.jpg`,
+  //     options: {
+  //       validateObjectExistence: true,
+  //     },
+  //   });
+  //   if (url && url.url) {
 
-  checkFileExists();
+  //   }
+  //   console.log(url);
+  // }
+  //}
+  //userName ??
+  //userName ??
+  // setImage(
+  //   `https://mm-bucket191228-dev.s3.us-east-2.amazonaws.com/public/lcn-profile-pic.jpg`
+  // );
 
+  //checkFileExists();
 
+  // async function checkFileExists() {
+  //   if (userName.length > 0) {
+  //     const url = await getUrl({
+  //       key: `mmm-background-pic.jpg`,
+  //       options: {
+  //         validateObjectExistence: true,
+  //       },
+  //     });
+  //     if (url && url.url) {
+  //       setImage(
+  //         `https://mm-bucket191228-dev.s3.us-east-2.amazonaws.com/public/${userName}-profile-pic.jpg`
+  //       );
+  //     }
+  //     console.log("URL: ", url);
+  //   }
+  // }
+
+  //checkFileExists();
 
   return (
     <div className="sticky top-0 backdrop-blur-xl z-50">
@@ -187,7 +241,10 @@ export const Navigation = () => {
                         <div className="space-x-2">
                           <button
                             onClick={() =>
-                              acceptFriendRequest(request.id, request.notificationOriginatorId)
+                              acceptFriendRequest(
+                                request.id,
+                                request.notificationOriginatorId
+                              )
                             }
                             className={classNames(
                               "px-2 py-1 text-sm font-semibold rounded-md focus:outline-none",
@@ -197,7 +254,11 @@ export const Navigation = () => {
                             Accept
                           </button>
                           <button
-                            onClick={() => rejectFriendRequest(request.notificationOriginatorId)}
+                            onClick={() =>
+                              rejectFriendRequest(
+                                request.notificationOriginatorId
+                              )
+                            }
                             className={classNames(
                               "px-2 py-1 text-sm font-semibold rounded-md focus:outline-none",
                               "text-white bg-red-500 hover:bg-red-600"
@@ -219,11 +280,7 @@ export const Navigation = () => {
               <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                 <span className="absolute -inset-1.5" />
                 <span className="sr-only">Open user menu</span>
-                <img
-                  className="h-8 w-8 rounded-full"
-                  src={`https://mm-bucket191228-dev.s3.us-east-2.amazonaws.com/public/${image}`}
-                  alt=""
-                />
+                <img className="h-8 w-8 rounded-full" src={image} alt="" />
               </Menu.Button>
             </div>
             <Transition
@@ -252,7 +309,13 @@ export const Navigation = () => {
                 <Menu.Item>
                   {({ active }) => (
                     <button
-                      onClick={signOut}
+                      onClick={() => {
+                        signOut();
+                        console.log("clicked");
+                        // redirect("/yuiu");
+                        router.push("/");
+                      }}
+                      //onClick={() => router.refresh()}
                       className={classNames(
                         active ? "bg-gray-100" : "",
                         "block px-4 py-2 text-sm text-gray-700"
