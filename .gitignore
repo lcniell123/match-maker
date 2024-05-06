@@ -1,3 +1,6 @@
+.idea
+install.cmd
+
 # amplify generated files
 .amplify
 amplifyconfiguration*
