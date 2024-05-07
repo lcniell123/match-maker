@@ -50,6 +50,7 @@ const GamingPreferences: React.FC<GamingPreferencesProps> = ({formData, handleCh
                                        className="block text-sm font-medium leading-6 text-gray-900">
                                     Games you would like to find team mates for</label>
                                 <div className="mt-2">
+                                    <GameList updateGames={updateGames} />
                                 </div>
                             </div>
                             <div className="sm:col-span-4">
@@ -277,8 +278,8 @@ const GamingPreferences: React.FC<GamingPreferencesProps> = ({formData, handleCh
                                     id="yes"
                                     name="flexibility"
                                     type="radio"
-                                    value="Yes"
-                                    checked={formData.flexibility === "Yes"}
+                                    value="true"
+                                    checked={formData.flexibility === "true"}
                                     onChange={handleChange}
                                     className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                                 />
@@ -291,8 +292,8 @@ const GamingPreferences: React.FC<GamingPreferencesProps> = ({formData, handleCh
                                     id="no"
                                     name="flexibility"
                                     type="radio"
-                                    value="No"
-                                    checked={formData.flexibility === "No"}
+                                    value="false"
+                                    checked={formData.flexibility === "false"}
                                     onChange={handleChange}
                                     className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                                 />

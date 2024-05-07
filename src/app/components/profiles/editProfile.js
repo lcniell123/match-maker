@@ -546,8 +546,8 @@ const EditProfile = ({ formData, handleCancelProfile }) => {
                     className="border-b border-gray-300 p-2 w-full focus:outline-none"
                   >
                     <option value="">Select...</option>
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
                   </select>
                 </div>
                 <div className="mb-6">
