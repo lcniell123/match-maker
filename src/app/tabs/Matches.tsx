@@ -75,7 +75,7 @@ export default function Matches() {
     useEffect(() => {
 
         async function fetchProfiles() {
-            const skillTiers = ['beginner', 'intermediate', 'advanced'];
+            const skillTiers = ['Beginner', 'Intermediate', 'Advanced'];
             try {
                 const allProfilesResponse = await client.graphql({query: queries.listProfiles});
                 const allProfiles = allProfilesResponse.data.listProfiles.items;
