@@ -9,7 +9,7 @@ import ProfileDescription from "../../components/profiles/profileDescription";
 import EditProfile from "../../components/profiles/editProfile";
 import { redirect } from "next/navigation";
 
-import awsExports from "../../../../amplifyconfiguration.json";
+import awsExports from "../../../amplifyconfiguration.json";
 import { Amplify } from "aws-amplify";
 //const router = useRouter();
 const client = generateClient();
