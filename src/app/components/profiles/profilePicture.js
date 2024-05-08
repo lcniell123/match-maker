@@ -62,8 +62,8 @@ const ProfilePicture = ({ userName }) => {
     if (file) {
       reader.readAsDataURL(file);
     } else {
-      setImage(null); // Reset image state if no file is chosen
-      localStorage.removeItem("profilePicture"); // Remove image URL from local storage
+      //setImage(null); // Reset image state if no file is chosen
+      //localStorage.removeItem("profilePicture"); // Remove image URL from local storage
     }
   }
 

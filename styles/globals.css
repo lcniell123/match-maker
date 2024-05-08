@@ -58,3 +58,10 @@ a {
     color-scheme: dark;
   }
 }
+
+[data-amplify-authenticator] {
+  display: grid;
+  background: lightgray;
+  height: 100vh;
+  position: relative;
+}
