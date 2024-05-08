@@ -108,13 +108,13 @@ function Profile() {
     });
   }, []);
 
-  useEffect(() => {
-    console.log("hasProfile:", hasProfile);
-    if (!hasProfile) {
-      console.log("rediretct to profile");
-      redirect("/profile-form");
-    }
-  }, [hasProfile]);
+  // useEffect(() => {
+  //   console.log("hasProfile:", hasProfile);
+  //   if (!hasProfile) {
+  //     console.log("rediretct to profile");
+  //     redirect("/profile-form");
+  //   }
+  // }, [hasProfile]);
 
   useEffect(() => {
     // if no profiles create a profile with name and id

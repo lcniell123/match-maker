@@ -168,12 +168,12 @@ const Dashboard: React.FC = () => {
     }
   }, [userId, userName]);
 
-  useEffect(() => {
-    if (completeProfile == false) {
-      console.log("rediretct to profile");
-      redirect("/profile-form");
-    }
-  }, [userId, userName, completeProfile]);
+  // useEffect(() => {
+  //   if (completeProfile == false) {
+  //     console.log("rediretct to profile");
+  //     redirect("/profile-form");
+  //   }
+  // }, [userId, userName, completeProfile]);
 
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);
