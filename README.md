@@ -1,4 +1,4 @@
-# match-maker
+# matchmaker
 ## Getting Started
   - Clone the repository to your machine and navigate to it in your CLI. Then navigate to matchmaker directory.
   - Run the following commands:
